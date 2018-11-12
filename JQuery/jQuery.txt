@@ -1,0 +1,155 @@
+* jQuery is the most popular Javascript Library. It is lightweight javascript library that has made writing javascript programs. 
+* jQuery provides the following features:
+	* Selection of DOM elements.
+	* Manipulating DOM elements.
+	* Creating elements.
+	* Listening to DOM events and handling events
+	* Animations and effects
+	* AJAX
+* Some of the reasons to use jQuery are:
+	* jQuery was introduced to fix the broken DOM APIs.
+	* He helps to write short and clean code
+	* It is feature rich and light weight
+	* Cross browser support.
+	* AJAX
+	* Lots of people use it so it has a wide community available.
+* Some of the reasons against using jQuery:
+	* DOM APIs are no longer considered broken with the introduction of document.querySelector and document.querySelectorAll
+	* It may be extra unnecessary overhead.
+	* Performance issues.
+	* Lots of people are moving away from jQuery
+* It is good to know jQuery and the choice to use it can be taken based on the project requirement.
+* Include jQuery in our project:
+	* Download jQuery or jQuery minified file ( minified is just version where white spaces are removed and variable names are replaced with single 
+	letters as this reduces size and hence makes loading faster). Add include it directly like any normal js script file.
+	* Directly point to jQuery CDN ( Content Distribution Network) in src attribute of the script tag.
+	* To ensure jQuery is properly included type jQuery or $ in console.
+* Selecting elemnets using jQuery:
+	* Selecting elemnts is very easy. We use $('<css_type_selctor>') eg: $("#id") , $('.class-name'), $("h1") etc. Either single quotes or double quotes 
+	  can be used. It is similar to document.querySelectorAll() DOM method. It returns a node list of all matching elements.
+	* A node list is returned even if there is only one element.
+* Manipulating elements using jQuery:
+	* Applying css styles to the selected object in jQuery.
+		* css styles are applied to elements in jQuery by first selecting the elements and then applying .css() method.
+		* Get the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for 
+		  every matched element.
+		* To get the current computed style using css method, we can
+			* pass the property name, it returns the value for first elemnt in the node list.eg: $('li').css("color") -> returns the color of the first li
+			* pass an array of properties, it return an object of property value pair of the first elemnt in node list eg: $("li").css(['color','background'])
+			-> returns an object with color and boackgroud property for the first li i.e {color:"red", background: "black"}
+		* To set a style using .css() -> This sets the style to all the selected elements
+			* .css(propertyName, value) -> Sets the given value to all the elements in the node list eg: $('li').css('color','red'); sets red color to all
+			  lis.
+			* .css(propertyName, function()) -> Sets the value returned by the function to all the elements in the node list 
+			 eg: $('li').css('height', function(){
+					return (100 * 2)px;
+				})
+			* css(obj) -> eg: $('li').css({color:"red",background:"blue"})-> sets color red and background blue to all lis.
+	* Adding and removing css classes using javascript
+		* addClass() -> Adds the space separated classes to all elemnts in the nodelist
+		* removeClass() -> Removes the space separated classes from all the elemnts in the nodelist
+		* toggleClass() -> Toggles the classes. Adds if not present and removes if present.
+	* Changing the content
+		* text() -> Gives the text without html of all the selected elements. It gets the text of all its decendents as well. It is sililar to textContent 
+		  DOM property. It can also be used to set textContent to all the selecting elements by passing a value in text() method.
+		  eg: $('li').text("Hello");-> Sets all li contents to Hello
+		* html() - Returns the text along with any html tags (if present) within the first elemsnt of the selected node list and sets the html of the all
+		  the elements selected. $('li').html() -> returns only the content of first li.
+	* Changing the attribute:
+		* attr() - This method is used to get and set the attributes of selected DOM elements. Get the value of an attribute for the first element in the 
+		 set of matched elements or set one or more attributes for every matched element.
+		* attr("<attribute_name>") - Returns the value of the given attribute for the first element selected.
+		* attr("attrib", "value") - Sets the given value for the given attribute for all the selected elements. eg: $('img').attr("src","dog.png") -> sets
+		 the source as dog.png for all img tag in the page.
+		* attr("attrib", function(){}) -> Sets the value returned by the function for the given attribute to all the elements.
+		* attr(<obj>) -> If an object of attribute/value pairs is sent, then all the attribute/values are set for all the matched elemnet.
+		  eg 
+	* Changing DOM structure:
+		* .remove() -> Remove the set of matched elements from the DOM.
+		* .append() ->  Insert content, specified by the parameter, to the end of each element in the set of matched elements. The .append() method inserts 
+		  the specified content as the last child of each element in the jQuery collection. The content can be html string, DOM object, jQuery object etc.
+		* .prepend() -> Insert content, specified by the parameter, to the beginning of each element in the set of matched elements. The .prepend() method 
+		  inserts the specified content as the first child of each element in the jQuery collection 
+		* .parent() -> Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
+	* Additional jQuery methods:
+		* .val() -> Get the current value of the first element in the set of matched elements or set the value of every matched element.
+		  It works on all elements that has a value attribute.
+			* $("input[type='text']").val() -> Returns the value of the first text input.
+			* $('input').val("name") ->Sets the value of all inputs to "name".
+			* $('input').val(function(){return 10;}) -> Sets the value of all inputs to 10.
+		* .first() -> Given a jQuery object that represents a set of DOM elements, the .first() method constructs a new jQuery object from the
+		  first element in that set.
+		* .last() -> Given a jQuery object that represents a set of DOM elements, the .last() method constructs a new jQuery object from the 
+		  last element in that set.
+* Events in jQuery:
+	* Some important points regarding events:
+		* More than one event listener can added for the same event for the same element. Thus we can have multiple listeners attached.
+		* Also, by default event are bubbled up to their parents. eg: a click event on li, will trigger a click on containing ul, which in turn may trigger
+		  click event on body etc. To stop this bubbling of events the jQuery method .stopPropagation can be used on th event object passed to the event handler.
+			event.stopPropagation() - Prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
+	* .click() -> This method adds a click event to every matched element. It takes a named function or anonymous function whick is when a mached element
+	  is clicked. eg: $('li').click(function(){
+		console.log("Clicked the button :" + $(this).text())
+	  }); this adds click listener to all lis, which calls the anonymous function on click of an li.
+			* $(this) (jQuery equivallent of this) should be used instead of this as we are using jQuery method text().
+	   * .click() -> This method without any parameters can be used to simulate or trigger a click.
+	* .keypress() -> This method adds a keyPress listener to every matched element. There are following mhods related pressing keyboard keys:
+		* .keydown() -> This can be used to both trigger (no parameters) or attach an event handler(when handler function is passed) on keyDown. This keyDown
+		  event occurs when a key is pressed down.
+		* .keyup() -> This can be used to both trigger (no parameters) or attach an event handler(when handler function is passed) on keyUp. This keyUp
+		  event occurs when a key which is pressed is released.
+		* .keypress() -> This occurs somewhere in between. One main difference is if we press a capital A (shift + a) -> It triggers two keydown and keyup events
+		  ( on efor shift key and one for a), but it triggers only one keypress with keyCode for 'A'.
+		eg: $('input').keypress(function(event){});
+			* An event object containg event related data is passed to all event handler functions. In this case this object can be used to get the key pressed
+				* event.which -> gives the code for the key pressed eg: event.which gives 13 for "Enter" key.
+	*.on() -> This is the most common event handler method of jQuery. It is similar to addEventListener() method of javascript. It takes two arguments:
+		* event to attach the event handler 
+		* function to call on the occurance of an event. The function can be both anonymous as well as named function.
+		eg: $('button').on('click', function(){
+			console.log("Button clicked");
+		})
+		It adds a listener to click event for all the buttons. click() method is a shortcut of this method.
+		* One of the main advantages of .on jquery method is delegated event handlers in addition to direct event handlers. Using delegated event handlers,
+		  we can attach event handlers created in future.
+			* Delegated event handlers have the advantage that they can process events from descendant elements that are added to the document at a later time.
+			By picking an element that is guaranteed to be present at the time the delegated event handler is attached, you can use delegated events to avoid 
+			the need to frequently attach and remove event handlers. This element could be the container element of a view in a Model-View-Controller design, 
+			for example, or document if the event handler wants to monitor all bubbling events in the document. The document element is available in the head 
+			of the document before loading any other HTML, so it is safe to attach events there without waiting for the document to be ready.
+			eg: $(ul).on('click', "li", function(){}) -> will call handler on click of any li inside the selected ul.
+			* In addition to their ability to handle events on descendant elements not yet created, another advantage of delegated events is their potential 
+			for much lower overhead when many elements must be monitored. On a data table with 1,000 rows in its tbody, this example attaches a handler to 
+			1,000 elements:
+				$( "#dataTable tbody tr" ).on( "click", function() {
+					console.log( $( this ).text() );
+				});
+			An event-delegation approach attaches an event handler to only one element, the tbody, and the event only needs to bubble up one level 
+			(from the clicked tr to tbody):
+				$( "#dataTable tbody" ).on( "click", "tr", function() {
+					console.log( $( this ).text() );
+				});
+	* .mouseenter() -> Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.
+	* .mouseleave() -> Bind an event handler to be fired when the mouse leaves an element, or trigger that handler on an element.
+	* .dbclick() -> Bind an event handler to the “dblclick” JavaScript event, or trigger that event on an element.
+	
+* Effects in jQuery:
+	* jQuery provides many methods to help is in getting effects and animations. Some of the commonly used jQuery methods for effects are:
+	* .fadeOut() -> It fades out an element from whatever opacity it is currently to full transparency and then add display:none to the selected element.
+	  It triggers the effect on all matched elements. It takes two parameters:
+		* duration for the fadeout transition: The default value is 400ms
+		* callback function - This function is called once the fadeout is complete.  
+		eg: $('div').fadeOut(1s, function(){
+			$(this).remove();
+		})
+	* .fadeIn() -> Display the matched elements by fading them to opaque. It triggers the effect on all matched elements. It takes two parameters:
+		* duration for the fadeIn transition: The default value is 400ms
+		* callback function - This function is called once the fadeIn is complete. 
+	* .fadeToggle() -> Display or hide the matched elements by animating their opacity.
+	* .slideUp() -> Hide the matched elements with a sliding motion.It does a transition. The .slideUp() method animates the height of the matched elements. 
+	  This causes lower parts of the page to slide up, appearing to conceal the items. Once the height reaches 0 (or, if set, to whatever the CSS min-height
+	  property is), the display style property is set to none to ensure that the element no longer affects the layout of the page. It also takes two parameters
+	  duration and callback function.
+	* .slideDown() -> Display the matched elements with a sliding motion. The .slideDown() method animates the height of the matched elements. This causes lower 
+	  parts of the page to slide down, making way for the revealed items.
+	* .slideToggle() -> Display or hide the matched elements with a sliding motion.

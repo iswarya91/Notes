@@ -1,0 +1,59 @@
+* Basics of internet
+	* When we give an url eg: http://www.google.com, the request is first sent to your ISP (Internet service provider)
+	* The DNS (Domain name service) in your ISP converts the URL to IP Address.
+	* Once the IP Address is obtained a new http request is to the IP Address.
+	* The request finds the fastest possible path to the given IP Address. To reach the desired server it is not a direct journey. It involves hop from 
+	  server to server.
+	* The HTTP request contains information such as your local IP Address, timestamp, the exact page requested etc.
+	* The requested server figures out exactly what we are asking for
+	* The server builds the right content often pulling content from databases.
+	* Then the server responds with any combination of HTML, CSS and JS.
+	* The response is sent back to our IP address and the HTML,CSS and JS is rendered by our browser as user readable format.
+* Static webpage vs dynamic webpage
+	* Static: Same html, css and javascript received from backend. eg: simple html file with css and js
+	* Dynamic: Different html, css and javascript may be sent everytime webpage loads. eg: news website, facebook etc . usually involves retriving content from
+	  database.
+* Full stack development
+	* Frontend - It involves the browser and html, css and js code sent by the server. The most commonly used frontend technologies are html, css and javascript.
+	* Backend - It is the code running at the server which creates out frontend visible content. It usually involves backend language, framework, server and 
+	 database. Thers are lot of options in backend technologies and languages. Some of commonly used options
+		* languages such as python, javascript(node js), ruby, java etc
+		* frameworks such as ruby over rails, express js framework etc
+		* databases as mongoDb, mySQL, progressSQL etc	
+	* Some of the common functionalities implemented in backend:
+		* determine if user is currently logged in or not
+		* create a new new user login
+		* add data to the database
+		* retrive and modify the data in the database
+		* determine and construct the html, js, and css to send to the frontend.
+	* The backend and frontend together is called full stack. Different webpages use different technologies in their stack.
+* HTTP request 
+	* Internet basically involves http request response model.
+	* When we type URL in web browser, http request is sent to the server. In addition to browsers http requests can be sent through apps like postman, 
+	  web applications, command line , ios application etc.
+	* Some of the major types of http request are:
+		* get -> Used to retreive imformation. The only type of request thet can be made from browser url or navigation bar are get requests. Some data 
+		  can be sent as part of get requests, but they are mostly information for quering the database. No database update happens during get request.
+		  The query string in get request starts with '?' mark and contains name , vale pair separated by '&'
+		* post -> Used to save data to the databse. Most of the type post request is sent through form submits.
+		* put -> Used to update data in the database
+		* patch -> Used to update data in the database
+		* delete -> Used to delete data from the database.
+	* The most important part of html response:
+		* body -> It conatins the actual payload. (HTML, css and javascript)
+		* header -> It conatins metadata. Some of the important content of the header are:
+			* type of response -> eg: text/html
+			* time of the response
+			* status code
+		* status code -> It is the code indicate whether the request for successful eg: 200 -> SUCCESS
+* Some of the major component of backend server code:
+	* Code to create the backend server (setup and initialization)
+	* Code for database 
+	* Code for routing -> different routes for different requests 
+		* We differentate between different http requests (get, post etc) and run diffent code for different types of requests
+	* Code to start the backend server
+* Cloud9 -> It is a integrated development environment that can is available on cloud. AWS Cloud9 is a cloud-based integrated development 
+  environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes 
+  prepackaged with essential tools for popular programming languages, including JavaScript, Python, PHP, and more, so you don’t need to install files or 
+  configure your development machine to start new projects. Since your Cloud9 IDE is cloud-based, you can work on your projects from your office, home, or
+  anywhere using an internet-connected machine. 

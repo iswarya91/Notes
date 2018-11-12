@@ -1,0 +1,11 @@
+* Visual Studio Code - Great text editor of web development
+* Extensions available for many features. Some useful extensions:
+	* Live server - 
+		* It starts the html code using http local server.
+		* When changes are made no need to reload as it gives autoload.
+	* Bracket PAir Colorizer
+		* It makes brackets certain color.
+* In VS Code , Emmet is installed by default. Emmet is a plugin for many popular text editors which greatly improves HTML & CSS workflow. It gives
+  autocompletion and shortcuts.
+* Live HTML Previewer:
+	It is useful extension to view preview of the site in the VS Code itself.

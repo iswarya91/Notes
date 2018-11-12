@@ -1,0 +1,1106 @@
+* CSS (Cascading style sheets) used to separate content from presentation and style in webpage. It can be used to style multiple webpages.
+* It determines how HTML element is displayed on a web page. It provides styles to markup elemnts. It is the adjective to html noun.
+* We can use CSS to define styles for our document including design, layout and variation based on device size etc.
+* CSS styles are applied to HTML using selectors and are property value pair. eq :-  //selector { //property:value}  , H1 { color: blue}
+* There are different ways for writing style rules:
+	1. Inline - Add style attribute to element and give semicolon separated css properties to any html element. eg:- <p style="color:red;font:arial"> 
+	2. Internal - Here css rules are adding within style tag mostly in head section. eg: <style> p {color:red;font:arial} </style>
+	3. External - Here css rules are written in a separate css files (.css file) and file is included in HTML using <link> tag.
+				  eg:- <link rel="stylesheet" href="main.css"/>
+	4. Import - To get css rules like additional fonts from google font . The stylesheet needs to be added as link in HTML and specific style rule included 
+				in css file.
+* There are different types of css selectors
+	1. tag or element selector : eg:- h1,p etc
+	2. class selector - created by adding class attribute to elements. In css they are used with ".". eg:- .blog, .my-header etc
+	3. id selector - It uses id of the element. In css they are used with "#". eg:- #header1, #mypara. Ids can occur only once in a page.
+	4. attribute - It is used to seclect elemnents by attributes. In css they are used with "[]" eg:- [disabled], [visible] etc
+	5. universal - Selects all elements. In css they are used with "*". It is not recommended to use.
+* In css an element can be specified by more than one style. Hence it called cascading style. To resolve conflict from multiple styles specifity is used.
+  The more specific a rule higher is its priority. The order of specificity in decreasing order is as follows
+	1. inline-styles - highest specificity
+	2. id 
+	3. class, attributes
+	4. tag or element selector
+	5. browser defaults
+	6. inherited from parents
+* The specificity of a property can be changed by using inherit keyword.
+https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+* CSS is case insensitive.
+* Two or more CSS styles can be combined using combinators. Commonly used combinators
+	1. '+' - Should be at same level and second element should come immediately after first. (This is also called as adjacent selector as this combinator
+	   is used to select an adjacent element)
+	2. '~' - Should be at same level and second element should come after first ( need not be adjacent)
+	3. '>' - Second element should be immediate child of first element.
+	4. ' ' - Second element should be descendent of first element. ( This is also known as descendent selector).
+* In css each element is taken as a box. They have 
+	1. content
+	2. padding - inside border and is part of the element.
+	3. border
+	4. margin - outside border and is not part of element.
+* Usually the content of a child element is child content + padding + border. But if padding is added to parent, then as padding and margin should not
+  overlap the padding is added after margin of the child element.
+* Margin collapsing - In case of two adjacent block elemnt both has margin then margin collapsing occurs.Margin collapses in the following cases
+	1. Adjacent sibling having margin. The margin is whichever is bigger.
+	2. A parent which has one or more child with first and/or last child has margin. Margin of child can come beyond parents.
+	3. Empty elements.
+	https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
+* Css property shorthand - Some CSS properties have shorthand format which combines more than one property. The order does not matter if the values 
+  are of different types eg: border : 5px solid black. In case same value order is important margin: 5px 4px 3px 1px. 
+* Width and height can be specified either as px or %. In HTML the box elements ( eg: section, body etc) take 100% width of the parent by default.
+* Height of the parent is calculated dynamically and depends on its content. Hence for % height to take effect it should be specified from HTML level.
+* When we set width and height by default we are setting only for content. We can change it using box-sizing property. The default is content-box.
+  This can be changed to border-box to include border and padding. (* margin cannot be included in height and width).
+* To set box-sizing of all elements to border-box universal selector (*) can be used as even if the property is set in body it is overridden by browser
+ defaults.
+* In HTML there are certain elemnents which are block level (eg: header, section, li etc) that take 100% width by default and can be styled as a box and  
+  certain elements that are inline (eg: <a>,<span>,<img> ) that take width based on content and are adding in line. The display css property can be 
+  used to change this.
+* The display property takes following values:
+	* block : default for block level elemnts. behaves as HTML block
+	* inline : default for inline elements. The next elemnt do not move up or down on applying padding top/bottom or margin top/bottom. Also height and width
+	  do not have desired effect and are usaully auto for inline elements.
+	* inline-block : this property takes only width based on content but otherwise behaves as a block i.e padding , margin etc can be added as a block.
+	* none: removes the element from visible document flow.
+* When we set display property to none, it is removed from document flow. Hence other elemnts move to take up its place. If you want to hide an element
+  but hold the space visibility property can be set to hidden.
+* margin collapsing does not happen for display inline block elements.
+* Specifying color in CSS: Color can be specified using one of the following approaches:
+	* default named colour values eg: color:red;
+	* hex code - six digit hexadecimal number where first 2 digit corresponds to red component, next 2 digits to green component and last two digits to blue
+	  component. It is based on light. eg: color:#FF8976
+	* rgb - rgb(<0-255>,<0-255>,<0-255>) can also be used. eg: color:rdg(10,200,38); 
+	* rgba - rgba(<0-255>, <0-255>, <0-255>,<0-1>), similar to rdg with addition alpha to specify tranparency with 0 being fully transparent and 1 fully 
+	opaque.
+* Some useful css helper functions
+	* calc - Used to do simple calculation eg: width : calc(100% - 49)
+	* url - Used to add an image. Can be used in background property. It takes a string as input which is the path to the image. It can also be hypertext.
+			url("http://freedom.png")
+	* rgb/rgba - color function used to specify a color eg: rgb(0,245, 265), rgba(67,234,0,0.5) - the fourth argument specifies transparency.
+	
+* Inline block adds white space in editor as extra inline character. We need to keep it in my mind while calculating width.
+* Pseudo elements: They can be used to style a part of an element. They are sepcified using "::" eg:- 
+	* ::first-letter - Can be used to style first letter of a paragraph
+	* ::first-line - Can be used to style first line
+	* ::after - Used to add content after the element. You can also style the content.
+* Pseudo classes : They can be used to style a specific state of an element or select a particular element. They are specified using ":".
+	* :hover - When you hover over an element
+	* :focus - focus on a particular element
+	* :active - click on an element
+	* :first-clild - select the first child element.
+	* :not(p) - To selects elements except paragraph.
+	* :invalid
+	* :valid
+	* :nth-of-type - To select the nth element of the given type. eg: If there are 10 lis in a ul, we can select third li using li:nth-of-type(3) {} (But it
+      will every 3rd li in a list.	
+	  To select every other li we can use :nth-of-type(2n)
+	  To select every 3rd li in the same list (3rd, 6th etc) :nth-of-type(3n)
+	* :nth-child - The :nth-child() CSS pseudo-class matches elements based on their position in a group of siblings.
+	  /* Selects every fourth element
+		among any group of siblings */
+		:nth-child(4n) {
+			color: lime;
+		}
+* More than one css rule can be grouped together using "," if they have same declaration.
+	eg: h1,h2 {
+			color:blue
+		}
+* A element can have more than one class applied to it. They are space separated values of class attribute of the element. If both classes have same attribute 
+ than style which comes later in css file is applied. eg :- <h1 class="header highlighted"/>
+* You can combine two or more selectors to select a specif element eg :- h1.highlighted {} - In this case h1 tags that have highlighted class are selected.
+* class selector is reusable and classes are add mostly only for css purpose and it is most used selector.
+* id has other html purposes like linking. Hence do not add id just for styling purpose. Id selector are used only when you want target a specific element
+  as id occurs only once.
+* !important : It is used to override the normal specificity and order of css and use that style instead. It should not be used unless very rare edge cases
+  as it is bad coding process.
+*:not() - This psuedo class allows us to select all element except the one passed to it. eg: :not(p) selects all elemnts except paragraph. Using more than one 
+  selector within :not() selector is not supported in all browsers. Also it should be used only very rarely due to lower performance.
+* Before using any advanced features need to check browser compatability available at MDN reference for that feature. Also you can check in the link]
+  https://caniuse.com/ to see where a feature is supported.
+* To get a circle in css the height and width should be set to equal value and border-radius set to 50%.
+* To center a block horizontally margin can also be used. By setting left and right margin to auto the element is centered.
+* All import the generic stylesheet before more specific ones as the order of css import is important to resolve conflicts.
+* float - The float CSS property specifies that an element should be placed along the left or right side of its container, allowing text and inline elements
+  to wrap around it. The element is removed from the normal flow of the web page, though still remaining a part of the flow (in contrast to absolute positioning).
+  As mentioned above, when an element is floated, it is taken out of the normal flow of the document (though still remaining part of it). It is shifted to the left, 
+  or right, until it touches the edge of its containing box, or another floated element.It is not used often nowadays due to the problems introduced by it. 
+  The text floats with the element with float but the other block level elements does not respond well.
+	* This issue is fixed with hack, by  adding a helper div with style "clear:both". This property clears float on both left and right. And hence element coming after this div will not respect
+	 previous floats.
+* Try to avoid float for elements. It should only be used for images.
+* It is important to note that id selectors have more specifity than classes and psuedo classes. Hence if some hover effect is set on an element and same
+  property is modified with id selector, the effect will be overridden. To overcome this hover effect should also be set using id selector in such cases.
+* position : property can be used to position  elements in the webpage. The default value for position property is static. The different values 
+  for position property:
+	* static: default value - normal document flow
+	* fixed : It changes the behaviour of the element to inline block and removes the element from the document flow. Also the positioning context
+			is now '<viewport>' i.e the visible screen. It can be useful for navigation bar and background images.
+	* absolute : It changes the behaviour of the element to inline block and removes the elemnet from the document flow . Also the positioning context
+        	is the nearest ancestor with position (non static) applied . If no position property is applied to any of its ancestors than the positioning
+			context is html element.
+	* relative : The element behaviour remains the same and it is not removed from the document flow. Also the positioning context is the element itself
+			If top,right etc properties are applied the element is moved with respect to its current position. It is posible to move an element outside 
+			of its parent or containing block itself. overflow property can be used on its parent to hide any child element if it moves outside the parent.
+	* sticky : It is combination of relative and fixed behaviour. It is relative in the sense that its behaviour is not changed and it is not removed from
+			document flow, but you can specify its distance from the viewport as fixed using top property. But it cannot be moved outside its parent 
+			container. But it is new value , hence broser support for sticky is limited and hence it cannot be used currently.
+* The following properties in combination with position property can be used to change the position of the element in the webpage. These take effect only if
+  position property is set to a value other than 'static' :
+	* top - Top margin of the element to the top of the containing block by specified distance in px or %
+	* bottom - Bottom margin of the element to the bottom of the containing block by specified distance in px or %.
+	* left
+	* right
+* positioning context is the context in reference to which the position of the element changes in the page. It varies based on the value of the position 
+  property. eg: "fixed" value positions an element in respect to the <viewport> i.e if 'top' is '0' when 'position' is set to 'fixed', the element sticks
+  to the top of the <viewport> even when we scroll.
+* position property can be applied to both block and inline elements.
+* z-index- Can be used to position elements along z-index. By default all elements have z-index value of auto (0). If z-index is more than 0 , the one 
+  the highest z-index is placed on top. And lowest is placed behind other elements. It can take negative value. This can be used to add background image
+  by giving negative z-index. Like top,bottom,left,right properties z-index can also be applied to only elements with position property set to value other
+  than static.
+* When overflow property is set to hidden, it hides any child element when it moved outside the parent with relative positioning. If the parent is <body>, 
+  then default css behaviour passes this overflow declaration to html tag. So in order to have it in bode, you need to add overflow declaration in html 
+  element as well.
+* When the position property is set non static value, the elements are arranged in z-axis based on there z-index.
+* A new stacking context is created when a element has position value as 'fixed/sticky' or when 'z-index' is added to element with position value as 
+ 'absolute/relative'.
+* Stacking context defines stacking behaviour of its children. The z-index property value of elements in different stacking context do not affect each 
+  other. i.e If the slibling of a div has higher z-index value than it will be placed above the div. Even if one of the child elements of the div had 
+  a higher z-index value than sibling then it will still be placed behind the sibling div as  children will placed in the new stacking context created 
+  while difing the z-index for the parent.
+* If two elements have the same z-index value in the same stacking context then, the one that appears later in HTML will be placed above.  
+* background is actually a shorthand property. In the expanded form, it can be used to size , position background images. 
+	* background-color: Sets the background color
+	* background-image: Used to specify the one or more background image using url() function. If both background-color and background image are specified , image is 
+	  applied on top of color.
+	* background-size: It can be used to size the background image. It can take one value in px or %, two values in px or %, or some default value i.e
+		* one-value in px or %. eg: background-size:100px; In this case width is set to the specified value and height is determined by aspect ratio to
+       	  avoid distorting the image
+		* two values in px or %. eg: background-size: 300px 100px; In this case the image is made to fit the specified height and width.
+		* cover : eg: background-size: cover; In this case the image is made to cover the entire container. Either the width or height is set 100% depending
+     	  on the nature of the image and screen (landscape or potrait). The property which is not 100% is cropped.
+		* contain: eh: background-size: contain; In this case the full image is displayed in best possibe way. But it does not cover the whole container
+		  White spaces are left in the container.
+	* background repeat : This properties determines whether the image is repeated along the x and y axis to fill the container. 
+		* repeat - Repeated along both x and y axis. This is thye default value.
+		* no-repeat - Image is not repeated.
+		* repeat-x - Repeated only along x axis.
+		* repeat-y - Repeated only along y axis.
+	* background-position - This is used to specify initial position of image after resizing relative to background position layer. It is shorthand for 
+	  background-position-x and background-position-y.
+		* one-value: If specified in px it is taken as distance from left end of container. If in % it is taken as where to place the image. 50% being 
+		  center. <50% image is shifted towards left and >50% image is shifted towards right. In case width 100%. Giving percentage value to background-position-x 
+		  does not have any effect as image fills the container. If only one value is specfied, the default value for background-position-y is taken as 50%(center)
+		* two-values - If specified in px, it is taken as distance from left and top respectively.
+		* If we need to specify distance from bottom and right instead of top and left, it can be done as background-position: bottom 30px right 40px;
+		* center - The image is centered.
+		* if width is 100% then background-position-x in % does not have effect. Similarly if height is 100% background-position-y in % does not have effect. In both cases
+		px value moves the image as specified.
+	* background-origin: It defines what the container is for background property. It takes the following property.
+		* content-box : The container is only the content ( border and padding is not included)
+		* padding-box : The container is content + padding ( border is not included). This is the default value;
+		* border-box : The container is content + padding + border
+	* background-clip : It defines how the image will be clipped within the container. This overrides background-origin property. It also takes the 
+	  following values
+		* content-box
+		* padding-box
+		* border-box
+	* background attachment : It is used to determine the scrolling effect on background when the container is scrolled. This property is not commonly used.
+     It takes the following values
+		* local:(default value) The background scrolls along with the other contents of the container.
+		* scroll : The background scrolls along with the elemnent and the other content scroll over it.
+		* fixed: The background is fixed with regard to the viewport.
+	* background-attachment is common to both background-image as well as background-color. All the other background related properties are specific to 
+	  background-color.
+	* All these properties can be specified in background shorthand. In the shorthand as both background position and size can have px and % values, the
+	  background position comes first followed by '/' and background size. Both background-origin and background-clip have same values but in this case
+      background oringin comes first followed by background clip. If only one value is specified it is applied to both background origin and clip.
+	  eg: background: url(freedom.png) top 10px left 20%/cover no-repeat border-box padding-box;
+	* Positioning background images is much easier than normal image in <img> tag.
+	* Shorthand should always be specified before any extended version as shorthand will override the specified extended with default value. Hence shorthand
+	  notation should always come first.
+* We can only set the width and height for the image. The image will not be affected by setting the height or width of the container. It will take the
+  default width and height of the original image. We need to specifically set height or width of the image.
+* For images inside inline element we need to specifically set the height/width in px as setting it in % will not have effect as it will be %of its original
+  height/width rather than % of the container. 
+* For images inside block/inline-block elements % value is effective. It takes % with respect to container.
+* If there is white inside the container with image ( it is inline bug caused by white space in editor), it can be solved by either making the img as 
+  inline-block element or setting vertical-align as top for the image.
+* Background image gives more flexibity for positioning but it should be used only for background due to accessibility as they do not have html img tag.
+* CSS gradients let you display smooth transitions between two or more specified colors.
+	* Linear gradient - It can be simply added as background-image property. The value is set using linear-gradient function.
+	  eg: background-image : linear-gradient(direction, color-stop1, color-stop2, ...)
+	  * direction is option - the default is from top to bottom, you can specify other directios using keyword 'to' eg: to bottom , to right top etc.
+		degree can also be specified for direction of transition eg: 30deg (the default is 180 deg where the transition from top to bottom).
+	  * more than one color can be specified for the gradient. If 4 colors are spcified the length is equally divided between them (25% each), this can
+	    be changed by adding % value after each color.
+      eg: background-image: linear-gradient(to bottom right, red , blue); :- Here the background is the smooth transition from red to blue from diagonaaly from 
+		 top left to bottom right.
+	* Radial gradient - Like linear-gradient they can be simply added as background-image. The value is set using radial-gradient function.
+		eg: background-image :  radial-gradient(shape size at position, start-color, ..., last-color);
+		* the shape can either be circle or ellipse. The default shape is ellipse.
+		* the size is the size of gradient circles and it can be set using pixel/s (one value for circle , two values for ellipses). It can also take some
+		  default values 
+			* farthest-side - This is difault value. It means the outer ellipse/circle of the gradient transition touches the farthest side.
+			* closest-side
+			* farthest-corner
+			* closest-corner
+		* 'at' keyword is used to specify position. The default position is center . It can also be top, bottom, top left, etc. We can also specify px or 
+		   % values to specify and x and y axis distances.
+		* Like linear gradient multiple colors including transparent can be specified.
+*  You can have multiple background images but only one background-color that is always placed at the bottom. The images if specified should be ',' separated
+   and properties applied to each image. Having multiple backgrounds only makes sense if there is some transparency in the background images and having background
+   color as fallback if images are not loaded.
+		eg: background: linear-gradient(to bottom right, red 10%, transparent), url(freedom.png) left 20px top 10px/cover border-box, red;
+* Filter : Allows us to change the visual appearance of an element and its contents by applying filter like blur,greyscale , contrast etc. There are predefined 
+  filter function and are set using filter property. You can apply more than one filter to an elemnet. IE does not support filters. Need to check browser 
+  compatability before using. The commonly used filter functions
+	* blur : It blurs an element. eg:- filter: blur(10px)
+	* grayscale - It gives a grayish look 
+	* opacity - Set the opacity of an element.
+	* brightness
+	* inverse
+* SVG - scalable vector graphics (popular image forms).It is defined by using <svg> tag. It allows to style parts of the image. It is very wide topic and 
+  separate cources for svg available.Some common svg styling properties are:
+	* fill 
+	* stroke
+	* stroke-width:
+* Dimensions, sizes and units 
+	* px value is not flexible and not very suitable for responsive design.
+	* The different units are:
+		* pixels - (px)
+		* pecentages - (%)
+		* root em - (rem) - This is related to font size
+		* em - (em) - This is aldo related to font size.
+		* viewport height - (vh)
+		* viewport width - (vw)
+	* The differnt properties where unit matter are:
+		* font-size
+		* border, padding, margin
+		* height, width
+		* top, bottom, left, right
+	* The size is calculated for different units as followes:
+		* Absolute lengths : User setting on the browser do not have an effect on these lengths. eg: px
+		* Viewport length: Adjust the size of the element in reference to viewport ( visible part of website in browser) eg: vh, vw, vmin, vmax
+		* Font relative units : Used to set the font size eg: rem, em
+		* Percentage (%) - In case of height or width is in %, then they depend on the containing element. As containing element depends on the position
+		  property, the following rules applies to determine the height and width.
+			* Position:fixed - In this case the % value is in reference to viewport. i.e. If width of fixed element is set as 50%, then it is 50% of the
+			  viewport.
+			* Position:absolute - In this case the % value is in refence to the closest ancestor with a non static position value. In calculating width,
+     		  height etc it is in reference to the (content + padding) of the closest not statically positioned ancestor.
+			* Position :relative or Position:static(no position ptoperty applied) - In this case the % value is in reference to the (content) of the  closest
+   			  block level ancestor. Padding , border and margin of the closest block level ancestor is not considered in the calculation.
+		* In case of height set in %, the behaviour is weird  for position static/relative if the reference element does not have a fixed height in px.
+ 		  As the height is calculated dynamically based on content. If position is relative or static height is set to 0. To solve this we need to set height as 100% all the way to the html element as html will
+		  then be 100% of viewport nad height of element can be calculated.
+    * If the font-size is not specified then browser default font-size is taken and it changes with any changes in browser settings.
+	* min-width and max-width defines the minimum and maximum width of an element. By defining min-width and max-width in px (fixed value) and width in %, 
+	  we can ensure that the element does not get get too big or too small when screen size changes but still is responsive to screen size changes.
+	* em and rem are units mostly used for font-size. 
+		* em - It is calculated relatively based on the inherited font-size. e.g if container has font-size of 20px and say it has two elemnts h1 with
+		       font-size of 2 and h2 with font-size of 1.5 em respectively. It is then calculated as followes
+					h1 - 2 em -> 2 * 20 -> 40px
+					h2 - 1.5 em -> 1.5 * 20 -> 30px
+			    * If no font-size is inherited from parent, then it takes the default font-size of the browser for calculation. The default font-size varies 
+			      based on user setting. Hence user can determine how the font is displayed in web page. The default font-size for chrome is 16px with medium
+				  setting.
+				* One thing to consider while using em is that the calculation is that it always in reference to the inherited font size. i.e say the container
+				  has font size 2em and h1 and h2 inside the container have font-size of 2 em and 1.5 em respectively, then
+					h1 -> 2 * 2 -> 4em -> 4* 16 ->64px
+					h2 ->1.5 * 2 -> 3 em -> 3 * 16 -> 48 pxx
+				  Hence using em becomes a bit confusing. This is resolved using rem.
+		* rem - It is always calculated with respect to root element (html element). If no font-size is specified for html element browser default is 
+		        taken. Hence there is no confusion introduced due inheritance. eg: say the 
+		        container has font size 2rem and h1 and h2 inside the container have font-size of 2 rem and 1.5 rem respectively, then
+					h1 -> 2 rem -> 2 * 16 ->32px
+					h2 ->1.5 rem -> 1.5 * 16 -> 24 px
+				* rem is relatively new feature and is supported only in later versions of the browser. It may not be supported for older browsers.
+	* Though rem and em are font-size related properties, it can also be used for margin, padding etc in place of px to make the website more dynamic and
+      responsive.
+	* There are some viewport relative units. They are:
+		* vh: viewport height -> It is % height with respect to viewport height eg: 50vh is 50% of viewport height. This is irrespective of position property.
+		* vw: viewport width -> It is % width with respect to viewport width. eg: 40vw is 40% of viewport width. 
+		* vmin: viewport minimum -> This is % width or height with respect to smaller viewport at that moment. eg: 50vmin is 50% of smaller viewport.
+		* vmax: viewport maximum -> This is % width or height with respect to larger viewport at the moment.
+	* viewport units can be used effectively to create overlay elements or backdrops.
+	* vw on Windows does not include the scrollbars - vw: 100  is  equal to 100% of the viewport width + the scrollbars. On the Mac this is not an issue, but 
+	  when using Windows it is as the scrollbars are displayed by default. To hide scrollbars, you can use one of these solutions:
+		* Use width: 100%  instead of vw: 100  
+		* Add overflow-x: hidden;  to the body selector to hide the horizontal scrollbar (or overflow-y: hidden  to hide the vertical scrollbar)
+		* Alternatively you could also use the ::-webkit-scrollbar pseudo element. 
+	* Recommended units for diiferent properties
+		* font-size(Root element) -> % ( If we want a different font to the browser default)
+		* font-size -> rem (em only for leaf level children)
+		* margin, padding -> rem
+		* border -> px
+		* width, height -> % (vw and vh if we want to size in relation to viewport)
+		* top, bottom, left, right -> %
+		* min-width, max-width -> px can be used.
+	* (margin:auto) can be used to center block level element with explicit width and some margin. The browser distributes the margin equally if margin:auto
+	   is specified.
+* Javascript can be used to change the style of the website at runtime. After loading javascript can be used to directly manipulate styles or add/removed
+  css classes.
+	* Javascript can be added to HTML
+		* inline - In either head or body section using <script> tag.
+		* import - It can be written in a separate js and file can be imported using script tag. eg: <script language="javascript" src="main.js"></script>
+	* To manipulate style we need to 
+		* Get access to DOM : Document object model, that is created by parsing HTML file.
+		* After getting access DOM, we can do various operations on DOM elements like listen to events, add/remove classes, change styles, also add new
+		  elements etc.
+	* The DOM can be accessed using document element provided by all browsers. A element can be selected from DOM using tag, id, class, attribute etc. 
+	  One of the default function to select elements is:
+		* document.querySelector('<selector>'); -> the selector is same as the one used in css file -> eg: document.querySelector('.backdrop') -> To select
+		  an element with backdrop class. This will select the first elemnt having the specified selector.
+		* document.querySelectorAll('<selector>'); -> Returns a NodeList having all the elements having that selector.
+	* The selected element can be stored in a variable (var) and this variable can be used to modify the css style using style attribute
+		eg var bdrop = document.querySelector('.backdrop'); bdrop.style.display = "block";
+	* All style set using style attribute is inline style, as it has higher specity compared to styles set by css classes, it will override the css style
+	  specified.
+	* Event listener can be added in javascript to listen to an event and perform some action on the occurance of that event. This can be done using
+	  addEventListener function. It has two parameters 
+		* Event name 
+		* function to be executed on event occurance eg:
+		buttonElem.addEventListener('click', function(){alert('clicked');});
+	* In addition to modifying inline styles directly, we can add and remove classes using javascript. This can be using following  properties of the
+	  DOM element. 
+		* className - className property list the value of class attribute as a String. It is name of all the classes applied to the element 
+					  separated by space. 
+		* classList - It contains the name of all the classes as list. It has helper functions such as add, remove, toggle , contains etc to add
+					a new class, remove an existing class from the list, toggle a class(add & remove alternately), check if the element contains the 
+					given class etc.
+	* Thus javascript can be used to directly modify the css style properties inline or add/remove classes. When accessing the properties inline using style
+	  property we can use the following notation:
+			* Using '.' operator - eg: elem.style.borderRadius -> In this case if the css property has more than on eword separated by '-' then they are
+			  written using camel case for the first letter of the part following '-' after removing '-' .i.e borderRadius for border-radius, backgrounImage 
+			  for background-image etc. This is because '-' is not allowed in DOM properties.
+			* Using '[]' operator - eg: elem.style['border-radius']; -> In this case property name is not changed as it is passed as a String.
+* For responsive design, we can add a side navigation bar, that opens on click of a button. This side navigation bar can be used for mobiles or small screens.
+* Responsive design: A design which adapts to the device used to view the website is called Responsive design
+	* Browser by default will not understand the device used to view the website. It does not know the difference between hardware and software pixels.
+	  Hence it tried to squeeze the entire website into the mobile device and hence non-responsive. 
+		* hardware-pixels -> It is the individual dot of light in display. The higher the pixel density of the device more the hardware pixels. Depends
+		  on physical size and pixel density. 
+		* software pixel or css pixel -> It is a unit of measurement. A CSS pixel, on the other hand, is designed to be roughly equivalent across devices. If you
+     	  load the same website on side-by-side devices with a similar physical dimensions, but different pixel ratios, the website will appear to be 
+		  roughly the same visual size. Depends on the physical size of the device.
+	* The relationship between hardware and software pixels is determined by device pixel ratio i.e With Apple’s Retina display, a single CSS pixel contained four 
+	  hardware pixels (2 pixels wide and 2 pixels tall), meaning that the device pixel ratio is 2. The Samsung Galaxy S4 pushed it a step further by introducing 
+	  a device pixel ratio of 3, meaning each CSS pixel contains 9 hardware pixels. 
+	* In order to make the browser consider the software or css pixel instead of the hardware pixel, we have to add viewport meta tag.
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	* Nowadaya, for responsive design the websites are designed first for mobile devices. Then are made suitable for desktop. This is called mobile first 
+	  approach.		
+	* To make webpage reponsive we have the following tools:
+		* viewport meta tag : 
+			* It is added in HTML
+			* It is used to adjust the viewport. If we only take actual pixels (due high pixel density), the website will not be displayed properly.
+			  Hence we need to consider device height and width as well. Hence we need to consider software pixel and viewport metatag is used to 
+			  do this.
+			* But it does not help in any design changes.
+			* The following properties can be added in the content of viewport metatag
+				* width-> It is set to device width, this tells the browser to take the width of the device in consideration. Without this parameter the 
+				  browser simply displays website based on haedware pixels and squeezes the entire content.
+				* initial-scale -> It is the inial zoom level of the website eg: initial-scale=1.0
+				* user-scalable -> It can be set to yes or no. It inidicates whether the user is allowed to zoom in and out in our website. The default value
+				  is yes.
+				* maximum-scale -> This is used to set the maximum zoom level of the website.
+				* minimum-scale -> This is used to set the minimum zoom level of the website. 
+		* Media queries
+			* It is added in css
+			* It lets us make design changes based on size. eg: We can have specific rules applied based on width etc
+			* It is specified using @media keyword. This is followed by a condition specified in parathesis. Inside the condition we can specify  css
+			  rules with selectors. Once the condition is met the css rules are applied. eg:
+					@media (min-width : 40rem) {
+						h1 {
+							font-size : 3rem;
+						}
+					}
+				i.e The font-size of 3 rem is applied to all h1 tag if the minimum width of 40rem is crossed.
+			* Thus in mobile first approach we design website to look good in mobiles first, then change the css style using @media query and minimum-width
+			  property so that a different design is shown on larger devices.
+			* We can have multiple selectors each with one or more properties inside media query.
+			* @media query can be thought of as an if statement, Just like if statement if the query condition is met, the css code specified inside is 
+			  applied.
+			* We can have multiple media queries for different devices just by changing the codition. eg: 
+				@media (min-width:40rem) {
+				}
+				@media (min-width:60rem) {
+				}
+			* When we have multiple media queries targetting same selctors ensure the correct order. i.e @media(min-width:60rem){} should come after 
+			  @media(min-width:40rem) {} as , min-width:40rem will always be true if min-width:60rem, so if the query for 40 rem is specified later then 
+			  it will always override media query for min-width 60 rem. Hence ensure correct ordering to get desired results.
+			* If we are adding multiple queries , we need appropriate breaking points for our design. This can be done by looking common mobile and tablets 
+			  css widths in https://www.mydevice.io/#compare-devices.
+			* We can combine two or more comditions in the media query using logical opeartors:
+				* and -> We can combine two or more conditions in media query using and operator. In this case, media query will be executed only if all
+				  the conditions are satisfied. eg: @media (min-width:40rem) and (min-height:60rem) {} -> In this the css rules within media query are applied
+				  only if minimum width is 40 rem and minimum height is 60 rem.
+				* , -> We can combine two or more condition in media query using ','. This acts as logical or operator and executes the css code if any of 
+				  the condition is true. eg: @media (min-width:40rem),(orientation:landscape){} -> In this case the css rules within media query are applied
+				  if either the minimum width is 40rem or orientation is landscape mode.
+			* max-width property can be used to ensure that the elements are not too big in large devices.
+	* There are two approaches to responsive design:
+		* Mobile first -> Design website for mobile devices. Then using @media query and min-width condition  specify design changes to make it suitable for 
+		  desktop. This is the most common approach.
+		* Desktop first -> Design website for desktop first. Then using @media query and max-width condition specify design changes to make it suitable for
+		  smaller mobile devices.
+* Styling forms using Css
+	* Form is used to get some input from the user and take action based on it. It usually consits of a pair, label for the input element followed by 
+	  input element.
+	* Normally label, select, input and other form elements are inline elements by default.
+	* There are multiple approaches to styling a form 
+		* One approach is to put the label and corresponding input element in a div and giving a class to the div and styling the div.
+		* Individual elements can also be targetted and styled separately.
+	* We use a lot of psuedo selectors while working with forms.
+	* Some form element like select, checkbox etc has broser default styles which get aaplied. Thebroser default for chrome starts with "-webkit", those 
+	  on firefox starts with "-moz". In order  to give a different style to browser default styles, we need to give set these to none eg: checkbox has 
+	  -webkit-appearance set to some value in chrome broser. This given the default checkbox look, i.e a tick mark appears on it being checked.
+	  In order to change it, we need to set -webkit-appearance to none, and set another style on :checked psedo selector.
+	* Usually, after validation either at the server or client side (using js), the invalid fields are given a new style (eg: red border). This can be 
+	  applying a new css class either dynamically using javascript or as part of html page returned from server side on validation failure.
+	* In addition to these validation, css also provides a psuedo selector :invalid that can be used. It can be applied to entire form including input 
+      elements. The :invalid selector on the entire form is not supported in IE. But :invalid selector on inputs are supported in all browsers.
+	* :invalid - This is applied if the input fails the basic html validation. eg: inputs elements with required attribute is empty, invalid email address for 
+	  input of type email ect.
+	* Some pseudo selectors have higher priority then other psedo classes. eg: :not() has higher priority than :invalid etc ..
+* Advanced Attribute selector: html element can be selected using attributes to specify css rules. There are different attribute selectors as listed below:
+	* [<attribute-name] - eg: [type] i.e This is a basic attribute selector which selects all elements with attribute type 
+	* [type="input"] - This is a more specific selector which selcts the elements having the specified attribute and corresponding value i.e In this case
+	  all elements of type input is selected.
+	* [lang~="en-us"] - Here "~=" is used to select if the lang attribute has a list of values and specified value is one of the list value.
+	* [lang|="en"] - Here "|=" is used to select elements whose lang attribute value is either en or starts with en immediately followed by '-' (has en as prefix)
+	   i.e elements with attribute lang = "en-us" is selected but lang = "enus" is not selected.
+	* [href^="#"] - Here "^=" is used to select elements whose href attributes whose value starts with "#".
+	* [href$="com"] - Here "$=" is uesd to select all elements whose href attribute value ends with .com
+	* [href*="sdf"] - Here "*=" is used to select all elements whose href attribute contains the string "sdf"
+	* [href*=sdf i] - Here 'i' is used to specify case insensitivity. Hence can be used to select all elements whose href attribute contains either "sdf"
+	   or "SDF.
+* ouline : It is similar to border, but it comes after border and not part of box model and does not affect box shadow. It is used to indicate focussed 
+  element. 
+* Texts and Fonts
+	* Generic families -> They have a specific core attribute of fonts defined. Each generic families have a number of font families associated with them.
+	* Common Generic families are: 
+		* serifs: 
+		* sans- serifs:
+		* monospace(Fixed-width): 
+		* cursive: 
+		* fantasy:
+	* Each browser gives us an option to customize fonts (Chrome: Setting->Appearance->Customize fonts). In the browser setting we have opyions to select a 
+	  specific font-family for the following
+		* standard -> This is the font that gets applied if no font-family is specified by css. In this case the browser displays the text by the font-family
+		  selected for standard in browser settings.
+		* Generic families -> User can select a specific font-family for each generic family in the browser setting. In this case if a generic family
+		  is specified in css file, then the corresponding font-family selected for the specified generic family is used by browser. 
+	* In addition to browser settings, user can also specify a particular font-family in the css file instead of generic family. In this case the font-family
+	  may not be available in the browser. Thus it can be retrieved through:
+		* User's computer - (Not recommended) - If we just specify the font-family without any imports, then we rely on the user to have the specified
+		  font-family installed in his/her machine or the browser supports the specified font.
+		* Server -> We can store the font in the server used to render the page.
+			* We can create custom font or download the desired font and store it along with webpage code. We can then import the font into our css
+			  using @font-face {}
+			  eg: @font-face {
+					  font-family:"AnnonymousPro"
+					  src:url("annonymousPro-Reg.ttf); -> file name is downloaded using ttf extension and name should start with small level 
+				  }
+			* If we want to use the bold version of the same font, then we need to download it separately and add another @font-face{}
+			* We need to ensure, if we import different font-weight and style of same font-family, then the corresponding property is specified 
+			  in @font-face {} import, otherwise the last @font-face{} variant will be taken.
+			  eg: @font-face {
+					font-family:"AnnonymousPro";
+					src:url("annonymousPro-bold.ttf");
+					font-weight: bold -> If not specified then we would not be able to use Regular font. 
+				  }
+		* Web fonts -> We can use web fonts eg: google fonts - For this we need to first import the desired web font and then specify the font-family name
+		  using font-family property.
+			Importing web font:
+				* In HTML file - Using link tag we can import the required font. We need to import individually in all HTML pages.
+				  eg: <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+				* In css file - Using @import tag. We can import the specified web font using @import in the common css file 
+				  eg: @import ('https://fonts.googleapis.com/css?family=Anton');
+	* If no font-family is added in the css code then the website is displayed using the default font set by the user in the browser. This is not recommended 
+	  as we have no control over the font-family and it is entirely based on user setting in his/her browser. 
+	* font-family property:
+		* We can define as many comman separated font-family values in the decreasing order of preference for this property. The browser looks at each and
+		  if the font-family specified is not found applied the next font-family.
+		  eg: font-family : "Monserrat", "Verdana", sans-serif;
+		  In this case browser tries to apply "Monserrat". If not found it tries to apply "Verdana". If that is also not found, it applies the the generic
+		  family sans-serif. The specific font-family selected by the user for sans-serif is then applied to webpage.
+	* font-faces -> font has other properties like font-weight and font-style. These are also defined for web-fonts. Hence while importing web fonts, we
+	  need select appropriate font-weight and font-style and import it as well. Otherwise the browser default may be applied if possible
+		* font-weight - It is the thickness of the font -> It has values like 100,200,..,900, light, bold,bolder etc . The normal font-weight is 400.
+		* font-style - It is the style of the font used. eg: Italics.
+	* There are different font formats. The most commonly used font formats are:
+		* ttf/otf - (true type format)/(open type format) -> Is supported by most browsers.
+		* woff - web open font format - It is compressed form of ttf/otf. This also has good browser support.
+		* woff2 - Advaced woff. Browser support is lower.
+		While importing fonts using @font-face , we can specify all the src in decreasing order of preference, so that we can use the latest format supported by
+        the browser
+			eg: @font-face {					
+					font-family:"AnnonymousPro";
+					src:url("annonymousPro-bold.woff2") format(woff2),
+					    url("annonymousPro-bold.woff") format(woff),
+						url("annonymousPro-bold.ttf") format(truetype);
+				}
+	* font-display -> This property can be used to optimize the performance while loading custom fonts using @font-face. Sometimes fonts become too large and
+	  affects loading performance. This can be specified using font-display in @font-face declaration. It is not supported in all browsers though.
+		eg: @font-face {					
+					font-family:"AnnonymousPro";
+					src:url("annonymousPro-bold.ttf") format(truetype);
+					font-display:swap;
+				}
+		It has the following values:
+			* swap : This has zero block time (This time space is reserved for font but nothing is displayed), after that fallback font is displayed and it
+			  infinite swap time where the browser loads the custom font and replaces the fallback font with it.
+			* block : This has short block time, followed by fallback font and infinite swap time.
+			* fallback: This has very short block time , followed by fallback and short time for swap. If browser is unable to swap , then fallback font 
+			  is displayed.
+			* optional: This has very short block time, after that browser chooses either the fallback font or the custom font depending on browser speed.
+	* The different font properties are:
+		* font-family
+		* font-size
+		* font-weight
+		* font-style
+		* font-variant -> It can be set to small caps, where all the small letters are changed to capital letter, but height is maintained same as small
+		  letters.
+		* font-strech -> It is used to strech or condense a letter. It is not supported by all font-families.
+		* letter-spacing -> It takes a value in px,rem etc and it is the space between two letters. eg: letter-spacing:5px; It allowes 5px space between two
+		  letters.
+		* white-space -> It determines the behaviour of white space.It has the following values:
+			* normal -> Sequences of whitespace will collapse into a single whitespace. Text will wrap when necessary. This is default	
+			* no-wrap -> Sequences of whitespace will collapse into a single whitespace and entire text is displayed in the same line.
+			* pre -> Whitespace is preserved by the browser. Text will only wrap on line breaks. Acts like the <pre> tag in HTML
+			* pre-wrap -> Whitespace is preserved by the browser. Text will wrap when necessary, and on line breaks.
+			* pre-line -> Sequences of whitespace will collapse into a single whitespace. Text will wrap when necessary, and on line breaks	
+		* line-height -> It is used to define height of single line of content. It can take the following values
+			* normal -> In this case the line height is dependent on the font-family used.
+			* Numbers without units -> 1,2,etc -> It is (font-size * specified number) -> the decimal is then ignored.
+				eg: font-size: 1.2rem; line-height:2; -> height of the content is 1.2 * 16 * 2 -> 38.4 -> 38px; (Recommended)
+			* px -> The height of the content is specified px value
+			* % -> It is again dependent on font-size. i.e line-height:200% is equal to line-height:2. (Not recommended)
+		* text-decoration -> It consists of following sub properties:
+			* text-decoration-line -> It has values like underline, overline, line-through, none(remove default decoration).
+			* text-decoration-style -> It has properties like wavy, dotted, dashed
+			* text-decoration-color -> color of the line
+			eg: text-docoration: underline wavy red;
+		* text-transform -> The text-transform CSS property specifies how to capitalize an element's text. It can be used to make text appear in 
+		  all-uppercase or all-lowercase, or with each word capitalized.
+		  eg: text-transform: capatilize; It takes values like capitalize, uppercase, lowercase etc.
+		* text-shadow - Adds a shadow. We can specify the distance of shadow from x-axis, yaxis, blur and also color. It is similar to box-shadow.
+		  We can have multiple text shadows for the same text. 
+			eg: text-shadow: 2px 2px 7px grey; 
+	* font shorthand
+		* It can either be used as a shorthand. In that case the order of the different font-properties specified in it is important.
+			font:<font-variant> <font-style> <font-weight> <font-size>/<line-height> <font-family>;
+		   while specifying the font shorthand font-size and font-family are mandatory and need to specified as last two ( line height is specified after 
+		   font-size but with a /).
+		* It can also be used to denote to system fonts i.e font: status-bar; font:menu; etc.
+* Flexbox - It is modern way to change the way our elements are displayed. It is a sepcial propeerty to display that gives us a lot of flexibility.
+	* When the flex value is applied to the display property of an element, the element is changed to flex container. The children of this element
+	  is called flex items. We can then apply different properties to flex container and flex items to get the desired display.
+	* Flex container - We can change our element to flex container by applying the following values to display property.
+		* display: flex; -> When window size is reduced the the width of the flexitems decreases till width needed for actual content. Thus some 
+		     flex items can have width less than their specified width.
+		* display: inline-flex; ->  If this property is applied, it behaves same as display:flex expect the width of flex items does not reduce 
+			 below specified width in corresponding flex item when viewport width is smaller, even if the content does not occupy the full width of the 
+			 flexitem and the width of the flex container if not specified is equal to the total width occupied by its children.
+	* When an element is changed to flex container, its children are called flex items and the way there are displayed is governed by properties of
+	  flex-container and individual flex-items.
+	* The flex-items are displayed based on the two main axis
+		* main-axis -> The axis along which the elements are displayed.
+		* cross-axis -> The axis along which elements are wrapped.
+	* Both main and cross axis have the same starting point.
+	* The main-axis and cross-axis is goverened by flex-direction property. flex-direction can taking following values
+		* row -> In this case the starting point is top left corner. The main axis is x-axis  from left to right and cross-axis is 
+		  y-axis from top to bottom. This is the default direction.
+		* row-reverse -> In this case the starting point is top right corner. The main axix is x-axis from right to left and y-axis is from
+		  top to bottom.
+		* column -> In this case the starting point is top left and main axis is y-axis from top to bottom and cross axis is x-axis from left 
+		  to right.
+		* column-reverse -> In this case the strting point is bottom left and main axis is y-axis from bottom to top and cross-axis is x-axis
+		  from left to right.
+	* flex-wrap -> This property determines if the flex items wrap along the cross axis or not. It can take the following values:
+		* no-wrap -> This is the default behaviour. In this case no wrapping occurs and the flex items  are displayed next to each other along the main axis.
+		* wrap -> Thie allows wrapping of flex item along the cross axis.
+		* wrap-reverse
+	* Flex container has following properties:
+		* flex-flow: The flex-direction and flex-wrap can be specified together using a shortcut flex-flow eg: flex-flow:row wrap;
+		* justify-contents: This property is used to align items along main axis. Some of the values it can take are
+			* center: center of the flex items are aligned along the center of the main axis.
+			* flex-end: end of the flex items aligned along the end of the main axis.
+			* flex-start: start of the flex items aligned along start of the main axis.
+			* space-between: Adds space between the flex items.
+			* space-around: Adds space before, between and after flex items. 
+		* align-items: This property is used to align elements along the cross axis
+			* strech : The elements are streched along the cross axis to fill the entire flex container. This is default value. This is reason why
+			  all element have the height of max flex item if not specified in case of flex-direction:row and streched to 100% width if flex-direction
+			  is column.
+			* center : The center of the elements are aligned along the center of the cross axis.
+			* flex-end: The end of the elements are aligned along the end of the cross axis.
+			* flex-start: The start of the elements are aligned along the start of the cross axis.
+			* baseline: Instead of the block, the content inside the box are aligned.
+		* align-content: The align-content property modifies the behavior of the flex-wrap property. It is similar to align-items, but instead of aligning 
+		  flex items, it aligns flex lines. There must be multiple lines of items for this property to have any effect.
+			* strech: Default value. Lines stretch to take up the remaining space	
+			* center: Lines are packed toward the center of the flex container	
+			* flex-start: Lines are packed toward the start of the flex container	
+			* flex-end:	Lines are packed toward the end of the flex container	
+            * space-between: Lines are evenly distributed in the flex container
+		* Flexbox and the Z-Index - z-index will have an effect on flex items inside flex container even without any position property.
+		* 
+	* Flex items has the following properties:
+		* order - This property is used to order the flex items along the main axis. By default all items items have order of 0. It can take positive and
+		  negative integers as value. The flex item with the lowest order is positioned as the starting element along the main axis and the flex item with
+		  the highest order value is placed as the last element along main axis.
+		* align-self - This property is used to align a single item along cross axis. The other flex items are not affected at all.
+		  Some of the values it can take are:
+		  * center:
+		  * flex-start
+		  * flex-end:
+		  * strech:
+		  * baseline:
+		* flex-grow : The flex-grow property specifies how much the item will grow relative to the rest of the flexible items inside the same container.
+		  It can take 0 or positive number as value. The default value is 0. If set to 0, the items do not grow beyond their specified width. The flex item 
+          with positive flex grow value grows to fill the container along main axis. The total free space available is distributed based on flex-grow
+          value of each flex item. Higher the flex-grow value of an item, more it grows.
+		* flex-shrink: The flex-shrink property specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+		  It can take 0 or positive number as value. The default value is 1. If set to 0, the items do not shrink beyond their specified width. The item with
+          higher flex-shrink value shrinks more compared to items with lower flex-shrink value. This is applicable only is wrap is set nowrap, otherwise 
+		  element is moved along the cross axis. Also flex items do not shrink beyond the space needed for their content.
+		* flex-basis : This property defines the size of the flex item along the main axis. The default value is auto. It can take % or px values.
+			* It overrides width if the main axis is left-right or right-left (row or row-reverse).
+			* It overrides height if the main axis is top-bottom or bottom-top (column or column-reverse)
+		* flex shorthand -> flex shorthand can be used to specify flex-grow, flex-shrink and flex-basis together. eg: flex: 0 1 auto i.e 0 for flex-grow,
+		  1 for flex-shrink and auto for flex-basis.
+* CSS Grid - It considers the page layout as grid made of rows and columns and helps in positioning elements along the page. It is not supported in older IE
+  versions.
+		* We can create a grid by setting display property to grid. eg: display:grid. By default it creates a grid with one column and as many rows as there
+		  are direct children.
+		* Grid is goverened by its roperties. Some of its properties are:
+			* grid-template-colums -> The grid-template-columns property specifies the number (and the widths) of columns in a grid layout. The values are a 
+			  space separated list, where each value specifies the size of the respective column. The column width can be specified in px, rem, % etc. 
+			  It can also be specified by special unit fr (fraction), which divides the remaining available space. If more than one column has unit in fr,
+			  then space is divided in ratio specified by fr. eg: grid-column-template: 100px 20% 2fr 1fr; In this case the remaining width of container after
+			  allocating 200px	and 20% is divided into 3 and 2 parts are given to column 3 and 1 part to column 4. Thus the grid has 4 columns. Another value
+			  to set to column is auto, it takes the remaining available space, if more than one column has auto, then the available space is equally divided between
+			  them.
+			* grid-template-rows -> The grid-template-rows property specifies the number (and the heights) of the rows in a grid layout.
+			  The values are a space-separated list, where each value specifies the height of the respective row. If there are more element than grid cells ,
+			  a new row is created for addition elements. If row is set to auto then it takes remaining in case height is set for the container, else it takes
+			  the default grid behaviour and has height equal to content.
+			
+		* There are some css helper css function that can be used while setting values using css
+			* repeat : It takes two values. The first is number of times a pattern is to repeated and second is the pattern itself. eg: repeat(4, 25%) -> In 
+			  this case 25% is repeated 4 times.
+			* minmax : It has two parameters minimum and maximum value. The minmax() CSS function defines a size range greater than or equal to min and less than 
+			  or equal to max. It is used with CSS Grids. eg: grid-template-rows: minmax(10px, 200px) 300px; In this case first row height varies between 10px 
+			  to 200px depending on space available.
+			* fit-content : This function takes one value ( the minimum width or height). eg: fit-content(8rem) . In this case 8rem is the default dimention, if 
+			  content is more than 8 rem, then dimension increases just enough to fit the content. If it is less than 8rem, then the dimension is 8rem.
+		* Thus the layout can by designed by changing properties at grid container like grid-template-rows and grid-template-columns. To define the
+          position of a sigle item inside grid, properties can be set to each item. Css understands grids as a series of horizontal and vertical line.
+		  i.e first row is between line 1 and line 2 etc..
+			* grid-column-start: start column line of the given element. eg: grid-column-start:1. 
+			* grid-column-end: end column line of the given element. eg: grid-column-end:5; We can also give a span and a number eg: grid-column-end: span 2; 
+			  It means it spans 2 columns. We can also use negative numbers. If we use negative numbers it counts from the other end of the grid. i.e -1 is the
+			  last column.
+			* grid-row-start: start row line of the given element.
+			* grid-row-end: end row line of the given element.
+		* The elements can overlap if they are explicitely positioned along the same cells. If the elements overlap, the one which comes later is on top.
+		But this can be changed using z-index. 
+		* We can use z-index for css grid without position property.
+		* We can also name rows and columns lines. To name a row line, we specify it in grid-template-column property before and after the height using [].
+		  eg: grid-template-rows: [row1-start] 100px [row1-end row2-start] 100px [row2-end]; 
+		  * We can give more than one name to a row/column line, we give it inside the same square bracket separated by white space.
+		  * We can name columns inside repeat function, but the name should be generic as the name is also repeated. To use it we can then use the name along
+		    with instance number eg: grid-template-columns: repeat(4,[col-start] 25% [col-end]); and while using it can be specified as
+			grid-column-start: col-start 1;
+			grid-column-end: col-end 1;
+		  * While using the name we do not use square brackets eg: grid-row-start: row1-end;
+		* Grid row and column shorthands:
+			* grid-row - The grid-row-start and grid-row-end can be specified together separated by "/" using grid-row shorthand. eg: grid-row: 2/3;
+			* grid-column - The grid-column-start and grid-column-end can be specified together separated by "/" using grid-column shorthand. 
+			  eg: grid-column: 1/2;
+			* grid-area - The grid-row and grid-column shorthands can be specified together using grid-area. 
+				Syntax: grid-area: grid-row-start/grid-column-start/grid-row-end/grid-column-end;
+		* A small gutter or gap can be introduced between rows and columns using following properties:
+			* grid-column-gap - Adds a specified gap between columns in a grid. eg: grid-column-gap: 10px;
+			* grid-row-gap - Adds a specified gap between rows in a grid. grid-row-gap: 12px;
+			* grid-gap: Shorthand. We specify row gap followed by column gap. eg: grid-gap: 12px 10px; If only one value is specified same is applied for 
+			  both rows and columns.
+		* Like name grid lines we can also name grid areas. This is done using the property:
+			* grid-template-areas: This takes string lists enclosed in single on double quotes one for each row. Each string list contains a string for each column.
+			  Thus there are as many strings as there are cells in the grid. If there is no need to name cell , we use . in its place.
+			  eg: grid-template-areas: "header header header header"
+									   ". . main main"
+									   "footer footer footer footer"
+				can be template areas definition for 12 cell grid with 3 rows and 4 columns. Once grid-template-areas is defined they can be used in grid-area
+				property as : grid-area: header.
+				Thus grid-template-areas and grid-area together can be used to position elements. Elements positioned using grid-area do not respect dom 
+				order specified.
+			* Default name areas are created if we name row and column lines appropriately using -start and -end. 
+				eg: grid-template-columns: [hd-start] repeat(4, 25%) [hd-end]
+				    grid-template-rows: [hd-start] 3.5rem [hd-end] auto 8rem;
+					Then an default area hd is created, this includes all the four columns of first row. If any one name specification is missed, then area is
+					not craeted. This area can then be assigned to our element as followes:
+					eg: grid-area: hd;
+		* Elements with position absolute and fixed that are removed from document flow are not part of the grid. Thus if container with display:grid has
+		  some children that have position set fixed or absolute , those children will not be part of the grid.
+		* Position elements inside their repective areas. Elements can be positioned inside their area by setting following properties on grid container.
+			* justify-items: It is used to align items horizontally or along x-axis in their respective areas along the rows. It takes the following values:
+				* strech: This is the default value. It streches the element alond the entire area horizontally.
+				* center: It positions the element along the center of its area.
+				* start: It position the element along the start of its area.
+				* end: It positions the element along the end of its area.
+			* align-item: It is used to align item vertically or along y-axis. It takes the following values:
+				* strech:  This is the default value. It streches the element alond the entire area vertically.
+				* center: It positions the element along the center of its area.
+				* start: It position the element along the start of its area.
+				* end: It positions the element along the end of its area.
+		* Position the entire grid: We have properties to position the entire grid if it does not completely fill the container. The following
+		  properties can be used to position the entire grid:
+			* justify-content: positions the entire grid along x-axis. Some of the value it takes are:
+				* start: positions the grid at the start of the container .
+				* end: positions the grid at the end of the container.
+				* center : position the grid at the center of the container.
+			* align-content: positions the entire grid alon y-axis or vertically. Some of the value it takes:
+				* start:
+				* end:
+				* center:	
+			* We can also position an individual grid element using the following properties:
+				* justify-self: position an element along x-axis
+				* align-self: position an element along y-axis 
+		* To make responsive grids we can use media queries. This becomes very simple task, if we use named areas using grid-template-areas, as we 
+		 just need to change grid templates within the media query to make our grid responsive.
+		* When new child elements are adding exceeding the specified grid cells in the grid container, new rows are automatically created. This grid is
+		  the implicit grid as its template is not pre defined by the user. We can control the auto grid(implicit grid) using the following properties:
+			* grid-auto-flow: The grid-auto-flow property controls how auto-placed items get inserted in the grid.. It can take following values:
+				* row - Default value. Insert auto-placed items by filling each row
+				* columns - Insert auto-placed items by filling each column.
+			* Another property that can be specified in grid-auto-flow in addition to row or column is dense. This makes the grid dense, by filling any holes.
+			Usually grid respects the dom order and hence elements do not jump to fill holes, unless element are explicitly positioned using grid-row,
+			grid-column or grid-area. But this is overriden by using dense. It should be used with care as changed elements only visually without changing
+			dom order can lead to errors in screen readers. Thus grid-auto-flow can take following additional values:
+				* grid-auto-flow: row dense;
+				* grid-auto-flow: column dense;
+			* grid-auto-rows: This can be used to specify the height of the automatic generated rows.
+			* grid-auto-columns: This can be used to specify the width of the automatic generated columns.
+		* Thus a grid can have an explicit part ( defined by user using grid-template-rows, grid-template-columns and grid-template-areas and an implicit
+          part that is auto generated and controlled using grid-auto-flow, grid-auto-rows and grid-auto-column)
+		* Instead of having fixed number of colums we can have columns filling the viewport width and automatically shifting to new row if viewport width 
+		  changes. This is acheived using following properties instaed of a number in repeat fuction, while defining grid-template-columns:
+			* auto-fill:FILLS the row with as many columns as it can fit. So it creates implicit columns whenever a new column can fit, because it's trying to
+			  FILL the row with as many columns as it can. The newly added columns can and may be empty, but they will still occupy a designated space in the 
+			  row. eg: grid-template-columns: repeat(auto-fill, 10rem); 
+			* auto-fit:FITS the CURRENTLY AVAILABLE columns into the space by expanding them so that they take up any available space. The browser does that 
+			  after FILLING that extra space with extra columns (as with auto-fill ) and then collapsing the empty ones. Thus our columns can expand later if
+			  needed. eg: grid-template-columns: repeat(auto-fit, 10rem);
+		* Grid vs Flexbox: 
+			* Grids can be used when we want to position elements in rows and columns i.e  2-dimension. Thus grids are best suited for multi dimensional 
+			  layouts.
+			* Flexbox can be used for one dimensional designs. Either position elements next to each other or on top of each other.
+*  CSS Transformation:
+	* This can be used to rotate, skew, move or scale an html element using css.
+	* This is done using transform css property. The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate,
+	  scale, move, skew, etc., elements. The property can take the following value:
+		* none - No transformation should be applied.
+		* transforamtion-function - A number of transformation function can be applied to transform an element and acheive desired result.
+	* transform-origin: The origin point based on which the transformation is applied. It can be changed using this property. It is center by default.
+	  It can also be changed to other points like transform-origin:left top etc ... It can also take pixel or rem value which change origin 
+	  eg: transform-origin: 100px 50%; It will change the origin 100px from left and 50% down. 
+	* Some of the the transformation function used are:
+		* Rotation:
+			* rotate(angle) -> 2D rotation of the element by specified angle.
+			* rotateX(angle)-> 3D Rotation of an element along x-axis.
+			* rotateY(angle) -> 3D Rotation of an element along y-axis.
+			* rotateZ(angle) -> 3D Rotation of an element along z-axis. The effect is same as that of rotate. eg: rotateZ(20deg);
+		* Skew: To make the element skewed (slanted)
+			* skew(X angle, Y angle) -> To make the element skewed along x and y axis. If only one value is specified. It is taken as x-axis angle.
+			* skewX(angle) - eg: SkewX(20deg);
+			* skewY(angle) 
+		* Scale - To grow /shrink an element 
+			* scale(x, y) ->  Scale an image along x and y axis. Only one value scales x and y axis. eg: scale(2,3) -> Twice as large as original along
+  			 x-axis. Thrice as large along y-axis.
+			* scaleX(x) -> scale along x-axix
+			* scaleY(y) -> scale along y-axis
+			* scaleZ(z) -> 3d scale along z-axis
+			* scale3d(x,y,z)
+		* Translate - Move an element
+			* translate(x,y) -> Value is measurement unit and moves along x and y axis by specified value. eg: translate(2.5rem, -0.5rem);
+			* translateX(x)
+			* translateY(y)
+			* translateZ(z) - Defines a 3D translation, using only the value for the Z-axis. Moves the object along z-axis.
+			* translate3d(x,y,z)  - Defines a 3D translation.
+	* We can apply multiple transformation function to transform property simultaneously
+		eg: transform: rotateZ(45deg) translate(2rem, 0.5rem)
+	* 3d transformation can be applied using the 3d transform functions such as rotateX(), rotateY(), translateZ(), scaleZ() etc ..
+	* We can also change the perspective of the viewer using following options: #d effect is more visible if the perspective is changed
+		* perspective() function value for transform property. It will take a px or rem value. lower the value, closer the viewer is to the object.
+		  perspective(1rem) very close to the object. We can apply different perspective to sibling objects in the same container. This will read to 
+		  strange unexpected effects. 
+		* perspective: This property can be applied on the container or parent element to which transformation is applied.
+		* perspective-origin: This property is used to change angle the user views the object. It also takes value in px or rem. It can also take values like center
+		  right and left. center is the default perspective-origin.
+	* Transform property can be applied to the container as well. By default when there is nested transformation, css automatically flattens the child 
+	  element. This is controlled using transform-style property:
+		transform-style: The transform-style property specifies how nested elements are rendered in 3D space.It takes the following values:
+			* flat -> Specifies that child elements will NOT preserve its 3D position. Flattens the child elements. This is the default value
+			* preserve-3d -> Preserve the 3d effect of the children.
+	* Sometimes element gets flipped when transformation is applied. If the object should not show the backface, then backface-visibility property can 
+	  be used to hide the image.
+		* backface-visibility - The backface-visibility property defines whether or not the back face of an element should be visible when facing the user.
+		  The back face of an element is a mirror image of the front face being displayed. This property is useful when an element is rotated. It lets you 
+		  choose if the user should see the back face or not. It takes following values:
+			* hidden
+			* visible
+* Transition and animation
+	* Transition is like built in animation. It is set using transition property to the element.
+	* Transition has four sub-properties. They are:
+		* transition-property: It is a list of properties to watch for transition( value change). It takes the following values:
+			* all -> watches all watchable properties
+			* none -> Does not watch any properties. No transition. This is default behaviour
+			* property -> Defines a comma separated list of CSS property names the transition effect is for
+			eg: transition-property: opacity, transform;
+		* transition-duration :The transition-duration property specifies how many seconds (s) or milliseconds (ms) a transition  effect takes to complete. 
+		  eg: transition-duration: 200ms;
+		* transition-delay: The transition-delay property specifies when the transition effect will start. The transition-delay value is defined 
+		  in seconds (s) or milliseconds (ms). eg: tansition-delay: 2s; i.e Transition starts after a delay of 2s.
+		* transition-timing-function: The transition-timing-function property specifies the speed curve of the transition effect. This property allows a 
+		  transition effect to change speed over its duration. Some of its values:
+			* ease-out : Starts fast ends slow
+			* ease-in : Starts slow and ends fast.
+			* linear: Same speed throughout.
+			* cubic-bezeir() - It can be used to define our own timing fuction. It has four parameter with values between 0 and 1. We can create this
+			  in chrome developer tools as well. 
+		* All transition property can be specified using transition shorthand. syntax: transition: property duration timing-function delay;
+		  eg: transition: opacity 200ms ease-in 1s, transform 300ms linear 1s;
+	* Transition property cannot be set on display property. If display changes from none to any other value or other value to none, transition does not
+	  starts even some other transitional property changes with it. If there is a requirement to have a transition effect along with display change, then 
+	  there is hacky way to acheive it. By changing the transition property after a timeout in case display is changed from none to some other value and 
+	  introduce a delay after property change in case display is changed to none. Timining delay can introduced using javascript function 
+	  setTimeout(function(){},delay); Executes the defined function after delay of specified ms.
+* Animation
+	* It gives us more control than transition.
+	* In css animation we define keyframes. keyframes are defined using @keyframes keyword. 
+	* @keyframes: The @keyframes rule specifies the animation code. The animation is created by gradually changing from one set of CSS styles to another.
+	  During the animation, you can change the set of CSS styles many times. Specify when the style change will happen in percent, or with the keywords 
+	  "from" and "to", which is the same as 0% and 100%. 0% is the beginning of the animation, 100% is when the animation is complete. For best browser support,
+	  you should always define both the 0% and the 100% selectors. Use the animation properties to control the appearance of the animation, and also to bind
+	  the animation to selectors. The !important rule is ignored in a keyframe.
+	  Syntax : @keyframes animationname {keyframes-selector {css-styles;}}
+	  eg: @keyframes wiggle {
+			from {
+				transform: rotateZ(0);
+			}
+			50% {
+				transform: rotateZ(30);
+			}
+			to {
+				transform: rotateZ(10);
+			}
+			}
+		  
+	* After defining keyframes they are associated with a particular element by using animation property. Animation property consists of many sub properties.
+	  They are:
+		* animation-name: The animation-name property specifies a name of the @keyframes animation. eg: animation-name: wiggle;
+		* animation-duration: The animation-duration property defines how long an animation should take to complete one cycle. eg: animation-duration:2s;
+		* animation-delay: The animation-delay property specifies a delay for the start of an animation. The animation-delay value is defined in seconds(s) or 
+		  milliseconds (ms).
+		* animation-iteration-count: The animation-iteration-count property specifies the number of times an animation should be played. It can be set to
+		  infinite when you need the animation to continue indefinitely. To add delay between iteration we may have to change our @keyframes animation, 
+		  to attain completion before 100% and stay the same time 100%. Eg if animation duration is 50s and we attain completion in 20%, then we stay idle
+		  for 40s, thus appearing to add a delay for the next iteration.
+		* animation-direction: The animation-direction property defines whether an animation should be played forwards, backwards or in alternate cycles. It
+		  takes the following value:
+			* normal - Default value. The animation is played as normal (forwards)	
+			* reverse - The animation is played in reverse direction (backwards)	
+			* alternate	- The animation is played forwards first, then backwards	
+			* alternate-reverse - The animation is played backwards first, then forwards
+		* animation-fill-mode: The animation-fill-mode property specifies a style for the element when the animation is not playing (before it starts, 
+		  after it ends, or both).CSS animations do not affect the element before the first keyframe is played or after the last keyframe is played. The
+ 		  animation-fill-mode property can override this behavior. It takes the following values:
+			* none - Default value. Animation will not apply any styles to the element before or after it is executing
+			* forwards - The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+			* backwards	- The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+			* both	- The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions
+		* animation-timing-function: The animation-timing-function specifies the speed curve of an animation. The speed curve defines the TIME an animation 
+		  uses to change from one set of CSS styles to another. The speed curve is used to make the changes smoothly. It defines the speed curve for transition from
+		  one keyframe to next.
+		  eg: animation-timing-function: ease-out;
+		* animation-play-state:The animation-play-state property specifies whether the animation is running or paused. Use this property in a JavaScript to 
+		  pause an animation in the middle of a cycle
+		* animation: This is a shorthand property and the properties can be specified in any order except duration should come before delay as they have same 
+		  unit.
+    * There are three important eventlisterners in javascript available with animation.
+		* animationstart - fired at the start of the animation 
+		* animationend - fired at the end of the animation
+		* animationiteration fired for each iteration of the animation.
+* Modern Css
+	* Css is continuously evolving. After css3 it is split into modules and new features are developed in each module by its working group. We can get an 
+	overview of differnet new features and their current state in https://www.w3.org/TR/#tr_Cascading_Style_Sheets__CSS__Working_Group. Once a feature reaches
+	recommended state it needs be implemented by all browsers. There are features that are working drafts and various states of development.
+	* One such new feature that is very useful is CSS variables. We can define a new variable using --<var_name>: <var-value>. Once defined they can be used
+	  using var() function. The variable is ususlly defined inside :root psuedo selector as it can be used in all elements. var() function takes the variable name 
+	  as the argument. It also has optional argumrnt which specifies the fall back value in case the variable is not defined. This var function is used as value
+	  for a property. eg: :root {
+							--title-color: blue
+						  }
+							
+						  .title {
+							color: var(--title-color)
+						  }
+	  Variables in CSS should be declared within a CSS selector that defines its scope. For a global scope you can use either the :root or the body selector.
+	  The variable name must begin with two dashes (--) and is case sensitive.
+	  https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+	* Browsers implement features at different speed. Some browsers use vendor prefixes to develop a new feature that is in working draft to give early
+	  adapters an advatage. They use prefixes, in case the standard is changed as the feature is not finalised yet. Hence if non-prefixed version is used, 
+	  the implementation may need to change and this will websites already using. vendor prefixes aldo has the advantage that it is implemented much before
+      actually feature and if we define both prefixed version before actual version, we can also support the feature in older browsers.
+	* The order of specifing is always the vendor prexises starting from earliest and defining the non-prefixed variant at the end.
+		eg: {
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				diaplay: flex;
+			}
+		display:flex should be last as if it is supported then vendor prefixes are overwritten.
+		https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix
+	* Adding the prefixes to all the featues may be difficult. http://shouldiprefix.com/ is a useful site that gives us which css properties have vendor 
+	  pefixes and what order to use them. They are also autoprefixer tool that can be downloaded and used to add vendor prefixes. There is also online
+	  tool available for this.
+	* There are older browser version in which the vendor prefixes aldo may not be supported. In order to have a work around for those browsers, we can use
+	  @support keyword.
+	  syntax: @support (<property>:<value>) {
+		<selector> {
+			//css rules
+		}
+	  }
+	  @support executes the code following if the property and value are supported by the browser, else it ignores and goes to next css rule. 
+	  eg: @support(display:grid) {} i.e if display:grid is supportec than css rules within braces following it are applied.
+	* In some cases we need to support a feature which does have vendor prefixes and we do not want to implement fallback using @support. In such cases
+	  polyfills can be used. Polyfills are javascript packages, that can be downloaded and added to our html page. But it takes additional processing 
+	  overhead and has a performance impact. They should be used only when absolutely necessary. Also polyfills are not available for all features. Only 
+	  some featiures have polyfiills. eg: rem
+	* Different browser apply different default values such element padding, font-size etc. Thi could lead to inconsistent behaviour. We can use css 
+	  package like normalise.css, to reset all browser defaults. or we can manually reset using * (universal) selector. Manually resetting is the recommended
+	  approach, as we can reset only when needed.
+	* Important points while naming css classes
+		* Use kebab-case as css is case insensitive. eg title-pane, main-title etc
+		* Use names based on features rather than style.
+		* Use standrads such as BEM (block element modifier) i.e <block-name>__<element-name>--nodifier eg : main-nav__items--cta. This will minimize 
+		  duplication.
+	* Css also has frameworks developed on top of it. There are:
+		* Componnent frameworks : eg: bootstrap . There already has pre defined css classes and users can include these framework and directly use the classes \
+		  to get desired effect. This has advantage of rpid development and no in-depth css knowledge. But user has little to no-contal and pages look 
+		  similar.
+		* Utility framework: eg:tailwind-css. They have some utility classes but all component styles are not defined. This leads to fast devlopment and 
+		  user has some control (very little).
+	* The choise between using vanilla css (plain css) or frameworks depends on the user requirement and time available for development.
+
+SASS
+	* SASS stands for Syntatically Awesome Style Sheets. It is developed on top of css. It is preproceesror. The browser do not understand SASS/SCSS directly
+	 and it needs to be converted to plain css before sending to browser. 
+	* Advantage of SASS is:
+		* They have many additional features like nesting rules and properties/ variables etc that helps us write neat maintable css code. 
+		* They help in css development.
+		* Easier to maintain as the size of css grows.
+	* SASS tool needs to installed to convert sass/scss file to normal css. The installation steps can be found at https://sass-lang.com/install
+	* The difference between SASS and SCSS is that .sass does not use {} and ;. It only uses identation.While .scss uses the normal css syntax 
+	  with {} and ;
+	* Some of the features provided by SASS:
+		* Nesting of css selectors: SASS allows css selectors to nested inside one another. Thus it helps in creating clearly readable blocks 
+		eg .document li { 					scss: .document {
+			}											li {
+			.document li a {								a {
+															}	
+			}											}
+													}
+		* It also allows nesting of properties. Thus are common properties can be nested together.
+		eg {								scss: {
+		flex-direstion: row; 					flex: {
+		flex-wrap: nowrap;							direction:row;
+		}  											wrap: no-wrap;
+												}
+											}
+		* It also supports variables. Variables should start with '$'. eg: $proj-color:red; and can be used using the name.eg h1{ color: $proj-color;}
+		* In addition to single value we can also store lists and map using variables. 
+			* lists: shorthand css property consists of space separated (box-shadow) or , separated(font-family) list of values. Each value can be stored in a separate
+			 variable or entire list can be stored in a single variable. eg: $border:1px solid black; elem1 {border: $border;}
+			* maps: In addition to lists SASS also supports a map as variable value. A set of related properties can be grouped as a set of name value pairs.
+			  e.g a website may use more than one color, they can be stored together using a map. In the syntax, the map values are defined as a comma separated 
+			  property value pair inside '()'. eg: $colors : (main: blue, secondary: red); 
+			  Built in function map-get() can be used to get a particular while using map variable.
+			  eg: h1 { color: map-get($colors, main);
+		* Other variables can also be part of a variable if they defined before it.
+		* Built in functions:
+			There a number of built in functions that support different features. 
+			https://sass-lang.com/documentation/Sass/Script/Functions.html
+			* lighten - one example of built-in function. It takes color and percentage as parameter. eg: lighten(map-get($colors, main), 70%) provides
+			  a color value that is 70% ligher than main color value.
+			* map-get - This function is used to get value from a map.
+		* SASS can do simple arithamatically like addition, multiplication, subtraction and division. eg: $default-size:1rem; h1{ font-size: $default-size * 2}
+		   h2 {font-size: 1rem * 1.2;}. Thus arithematic operators can be used with both variables and values directly.
+		* Imports and partials: If we import css file uising @import("package.css") then it is converted to @import url("package.css"). On the other hand if 
+		  we import scss file, the file is not imported but the content is directly added to generated css file. The advantage of this approach.
+			* Developer can still maintain many files but everything is compiled to one large file.
+			* Browser needs to fetch only one file from the server.
+			* The common code needed in all the files can be stored in separate scss file called partials. The partial file name must begin with "_".
+			  eg: _variable.scss and then can be imported and used in many scss files eg: @import("_variable.scss").
+			* If you have a SCSS or Sass file that you want to import but don't want to compile to a CSS file, you can add an underscore to the beginning of
+  			  the filename. This will tell Sass not to compile it to a normal CSS file. You can then import these files without using the underscore.
+			* For example, you might have _colors.scss. Then no _colors.css file would be created, and you can do @import "colors"; and _colors.scss would be
+ 			  imported. Note that you may not include a partial and a non-partial with the same name in the same directory. For example,
+			  _colors.scss may not exist alongside colors.scss.
+		* @media queries can be nested inside a particular selector in scss. In that case we do not need to add selector inside @media query. This is useful
+		  as we have media query at the same selctor we change using it. Thus it is easier to understand.	
+		* Inheritence: It is another major feature of SASS. If we have common block of code, then we can simply define a separate class and place the common
+		  code inside it. Then we can inherit this code in other places using special SASS keyword @extend <class_name>;
+			eg: .section {
+					display: flex;
+					width:100%;
+					height:75%;
+				}
+				
+				.section-container {
+					@extend .section;
+					font-size:1.2rem;
+				}
+		* Mixins: Mixins are reusable custom function. They are defined using @mixin directive. eg: @mixin <function_name>(<arg_list>) {}
+			* function_name -> name of our custom function
+			* arg_list -> list of variables 
+			eg: @mixin display-flex($direction) {
+					display: flex;
+					flex-direction: $direction;
+				}
+		* Mixins can be included in our classes using @include directive.
+			.container {
+				@include display_flex(row);
+			}
+		* Another useful feature with mixin is to pass content. This is done using @content directive. 
+			eg: @mixin media-query($width) {
+					@media(min-width:$width) {
+						@content;
+					}
+				}
+			The content can be passed or provided while using the mixin.
+			eg: .container {
+					@include media-query(40rem) {
+						width: 50%;
+					}
+				}
+		* & operator: This allows us to connect an element directly to the parent inside which it is nested instead of a descendent.
+			eg: .content {
+					color: red;
+					
+					&:hover,
+					&.active {
+						color: blue;
+					} 
+				} 
+			This is converted to .content:hover,.content.active {}
+
+* Semantic UI
+	* It is CSS and Javascript framework like bootstrap.
+	* Bootstrap class names seems random and do not a specific sematic meaning. Semantic UI was created to address this concern. The class names in 
+	  Sematic UI are more meaningful.
+	* Another advantage of using semantic UI is that we need not include the whole css file if we just need a specific sematic functionality like
+	  forms, menu(navbar) etc. In that case we can just include that particular component as semantic UI is modular and we have cdn's for each component.

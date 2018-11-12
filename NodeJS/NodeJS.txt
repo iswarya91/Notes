@@ -1,0 +1,47 @@
+* Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+	* V8 is Google's high performance, open source, JavaScript engine.
+* Before Node JS, javascript could be run only on browser, Node provided a means to run javascript outside the browser. Due to the JS could be used for frontend and
+  backend development. Node JS provides lightweight event driven non blocking IO which makes it one of the most preffered languages in the backend due to its 
+  high performance, and great librararies.
+* Once node is installed we get node and npm commands. To ensure the node is installed correctly, check if the following command works:
+	* node -v
+	* npm -v
+* Node has a console similar to the console in browser to run javascript code. But unlike browser console we do not have document object, alert etc as there are 
+  specific to browser and DOM. To go to node console we type "node" in command line with node installed.
+	* node -> Takes us to the node console.
+	* node <js_file> -> Executes the javascript file eg: node app.js - This command executes the app.js javascript file.
+* npm - Node package manager is the largest repository of open source packages in the world. It contains nearly 200000 packages and It is one of major reasons for 
+  the popularity of Node JS. npm is the package manager for javascript. 
+	* packages are libraries that someoen else wrote that can be included in our code and make our development easier. In frontend we used script tags to add
+	  external libarries such as jQuery, bootstrap, paperJs, howlerJs etc. In the backend we use npm to install libraries. '
+	* npm is an awesome tool that comes along with Node Js that make downloading and installing external packages very easy.
+* Some of the pacakge example that are very popular are:
+	* express -> Node JS framework
+	* mongoose -> Mongo DB
+	* body-parser -> parse body of request
+	* faker -> Generate fake random data for testing
+* npm install <package_name> -> This command can used to install any package using npm. This will just download all the files associated with package into 
+  a folder node_modules inside the current working directory from which the command is run. It is recommended to run the command from the page containg your 
+  aplication. node_moldules folder is created if not present and all package files are placed inside a directory with package_name inside node_modules. If
+  the folder is already present then an the package_name directory is created inside it and files are placed.
+  eg: npm install faker -> It will create node_modules if not present. Then creates faker directory inside node_modules and all package files are placed inside
+  it. npm also downloads any dependent packages.
+* npm install <package_name> will just download the package and its dependencies, but to include it within our application we use require('<package_name') ->
+  It returns a function which is usually stored in a variable and later the variable is used to access the package functionality based on docs.
+eg: var faker = require("faker") -> includes the faker package into our application.
+* The module.exports or exports is a special object which is included in every JS file in the Node.js application by default. module is a variable that represents 
+  current module and exports is an object that will be exposed as a module.
+  eg:
+  // seed.js
+  function seed() {
+	//function definition
+  }
+  
+  module.exports = seed //Exporting seed function
+* To import a module we can use require, where ever needed and use it. 
+  // main.js
+  var seed = require('seed')// use correct path to JS file to import it.
+  seed() -> executing seed method
+* Anytime, we make a change to our backend JS file , we need to restart the server using node <file_name> eg: node app.js
+	* We can alternately install a npm package nodemon(node demon), that listens to file changes and automatically restarts the server.
+	* Once installed we can run it as nodemon or nodemon <file_name> . When executed without file name, it looks up the file name from package.json

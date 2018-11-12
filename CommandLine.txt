@@ -1,0 +1,5 @@
+* ls -> list the files in current directory. Optionally we can specify the directory to list the files on.
+* cd -> change directory. It takes one argument , the directory to change to.
+* touch -> It is used to create a new file eg: touch new.txt
+* mkdir -> It is used to create a new directory.
+* rm -> remove file or directory. rm green.txt -> To recursively delete directory use rm -rf <directory_name>

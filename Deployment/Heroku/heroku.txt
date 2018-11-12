@@ -1,0 +1,67 @@
+* Deployment
+	* Once a web application is developed we may need to deploy it somewhere so that our users can access the web application from internet and use it.
+	* In the old days, this used to be a personal server which runs the server side logic and listens for client requests at a given port.
+	* With the recent advent of cloud, there are a lot of companies that offer  web application deployment as a service. Thus we need not worry about
+	  availability of our application, load sharing, disaster recovery. All these features are provided by those companies and we can just develop our 
+	  application and push it to their servers. 
+    * The cloud9 URL that is provided when we start our application is also publicly available. But it was not designed for deployment. And hence our application
+	  may be terminated when there is an issue. Also it is not good practice to have the same copy of repository for both development as well as deployment.
+	  As for any new feature , we may need to stop the server and new feature may be prone to errors. Thus we need a separate copy for deployment and 
+	  development. We usually deploy stable working copy of the application.
+	* Some of the companies that provide deployement as a service are:
+		* Heroku
+		* Amazon AWS
+		* Digital Ocean etc
+* Heroku -> 
+	* Provides a platform for apps, with app management & instant scaling, for development and production. It hepls us from code to running app in minutes. 
+	* It helps developers deploy, scale, and deliver your app to the world. Heroku can be thought of us servers for rent. We just need to push our application
+	  to Heroku server and start them.
+ 	* First we need to create an account in Heroku.
+	* (username: iswarya91 PS: isa@1991)
+	* Once an account is created and verified, We can start deploying our app from cloud 9 to Heroku.
+	* We first need to create a working application in Cloud9.
+	* The package.json file is very important, while deploying we do not push the entire node_modules folder to heroku, it reads our package.json and 
+	  heroku runs npm install to install our dependencies.
+	* Once we have a working application we need to ensure that git is installed and setup in the application.
+	* The Heroku CLI requires Git, the popular version control system. If you don’t already have Git installed, we need to install and commit our
+	  files.
+	* We need to ensure that heroku CLI is available. Else we need to download the tools. Heroku comes pre installed in c9.
+	* Once the changes are commited to git:
+		* Need to ensure that heroku is available in c9. Run the command 'heroku' in the terminal. If we get some output and not 'commont not found', then
+		it means heroku is installed.
+		* Then we need to run command 'heroku login', which will ask for email and password of our heroku account.
+		* Once login is successful, we need to run the command 'heroku create' in c9 terminal. This will create a remote connection to heroku. It will create
+		  space in heroku server, create URL where our app will deployed etc.
+			* If we visit our URL now, we will see an empty app
+			* It also adds a git remote with the name 'heroku'. This we can confirm using 'git remote' command.
+			* Thus we can use this remote connection to fetch and push code to heroku.
+		* Then we need to push our application to heroku using 'git push heroku master' -> This will push our current master to heroku server . This command may
+		  take some time, as part of the push this build our repo, install the required npm packages and runs 'npm start'.
+		* 'npm start' will run the start script specified in ackage.json.
+		* Hence for our deployment to work properly, we need to provide a start script. This can be by specifying the code we need to run to start of node application
+		(node app.js) to start property in scripts object in package.json. Ensure the package.json with start property present is commited to git.
+		* At the end of the command 'git push heroku master', we will get the URL at which our application is deployed. This URL will be available 24/7.
+		* If there is no issue in deploying our application, we will see an 'application error' in the URL. Then we can look at heroku los in c9 using
+		  command 'heroku logs'. Then we can look at logs to further debug the issue.
+		* Once deployed, we can make changes to our cloud9 repository. This does not affect our deployed code at all. If we want to send our changes to heroku 
+		  deployed application, we need to first commit changes to git then use 'git push heroku master'.
+		* We can remotely run code on our heroku workspace from cloud9 using 'heroku run <command>' eg: heroku run ls -> list all files in our heroku repository.
+		* This should work fine for small apllications but if our application, needs a database then we need to have a db as well in heroku. We can get mongo installed
+		  and running in heroku but it is not a simple step. Another approach is to use mounted database. There are some companies that provide database as
+		  a service. We can use one of such databases available on cloud and go ahead with the development.
+		* mlab (mongo lab) is one such company that provides database as a service.
+		* Create an Mlab account(username: iswarya91 password: isaMAR1991). Once account is created we need to create a database. Also we need to create a username
+		 and password for dbuser. dbuser is essential to connect to database. A link will be available through which we connect to mlab database from our yelpcamp.
+		* We set the mongodb to hosted mlab database, we can then commit the changes to git and push it to heroku server. It is not advisable to have 
+		  both the development and deployement on the same database. To resolve this issue, we use invironment variable. We need to set environment variable outside our
+		  application. In c9 which uses ubuntu we can environment variable using command 
+		  'export VARIABLE_NAME=VARIABLE_VALUE' eg: export DATABASEURL="mongodb://localhost/yelp_db" and use the environment variable in the application.
+		* To use environmental variable in node JS we use process.env.<VARIABLE_NAME> eg: process.env.DATABASEURL, process.env.IP etc
+		* To set environmental variable at heroku server, we can go to the server, open our app and add config variables in the setting
+		* Alternately we can run command 'heroku config:set VARIABLE_NAME=VARIABLE_VALUE'. This will set env variable in heroku and we can access it in our
+		 Node JS app using 'process.env.<VARIABLE_NAME>
+		* Environmental variable can also be used to hide sensitive information.
+		* It is better to create a app in heroku site as we can give proper name if we create in site and use cloud9 to push the app to heroku.
+* Deleting an App in Heroku:
+	* Go to the Heroku dashboard. Click on the APP. Select settings and scroll to the bottom of the page. Click on Delete App (red button). A pop-up window will
+ 	  appear. Enter the name of the APP and click delete. Go to command line and enter “heroku apps” to verify the APP is gone.

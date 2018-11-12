@@ -1,0 +1,74 @@
+GIT
+
+* Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+* Git is easy to learn and has a tiny footprint with lightning fast performance.
+* It is a Source Control Manager and manages our source code. It helps us create various checkpoints in our project development life cycle. 
+* We have simple commands to create a checkpoint, view previous checkpoints. We also have feature to revert to any previous checkpoint.
+* GIT is used by companies like Google, Facebook etc for version control in their codebase. Thus it is highly popular.
+* Version control becomes essential in order to manage large projects and also when developing along with other developers.
+* In order to use 'GIT', we need to install it. It comes pre-installed in cloud9. While using local setup, we need to follow installation steps mentioned.
+* Once installed, we can confirm that it is installed properly using command git -version
+	* git --version -> will give the version of git installed if it is installed correctly. If there was some issue during installation, it gives 
+	 'command not found' error.
+* Once it is installed correctly we can use git commands to start using it.
+* GIT commands:
+	* git init -> 
+		* We need to go to the root folder of our project for which we need to create a git repository.
+		* Usually we create one git repository per project.
+		* We can run git init from that folder.
+		* It will initialize git and git will start listening to changes made in the folder.
+		* A .git hidden folder is created which has all the metadata and configs needed for git
+		* If we accidentaly delete or modify the .git folder we loose the version control.
+	* git status ->
+		* It gives the current status.
+		* Whether there are any modification that are yet to added for commit
+		* Whether there are any added files yet to checked in etc
+		* If there are no modifications to be checked in, the git status command says so.
+	* git add <file> -> 
+		* This command is used to add a given file to be checked in.
+		* Git does not automatically check in all the modified files when we do a 'git commit'. It just checks in the added file. Thus if we have any env
+ 		  files that we do not want to be checked into git. It can be maintained separately.
+		* We need to use the command git add <filename> every time we want to add the file for check in after modification.
+		* Alternately 'git add . ' can be used to add all the modified files to checkin
+	* git commit -m "<commit_message>"
+		* This command actually does the commit to the repository.
+		* It takes a commit message, and adds the message to the commit. Thus the message needs to descriptive, so that the developer can identify what
+		  changes were checked in as part of the commit.
+	* git log 
+		* This command takes us to git shell and shows us history of all the commits done by us along with the comment added as part of the commit.
+		* This also contains an 'id' which is the unique identifier for each commit.
+	* git checkout <id>
+		* This command is used to check out the code at a particular check point. The id is the unique id associated with each commit. We can get a particular
+		  id using git log.
+		* Once we checkout the code at a particular check point, our repository will reflect our code at that checkpoint.
+		* Developers usually check out code only for the purposes of going through the code at that point.
+		* Before checkout we need to commit any uncommited changes.
+		* GIT has a HEAD which acts as a branch pointer. We are usually at the master branch, which is the current branch. When we checkout an older
+		  code , we go the older branch(this can be thought of as going back in time to that check point). Our branch is changed to from master to the 
+		  check point. When we run 'git status', it gives a warning that the HEAD is detached, as the HEAD is at a different point than current working 
+          branch.
+		*  You can look at files, compile the project, run tests, and even edit files without worrying about losing the current state of the project.
+   		   Nothing you do in here will be saved in your repository. To continue developing, you need to get back to the “current” state of your project:
+				git checkout master
+		* If we want to create a new branch from this check point then we can use git checkout -b <new_branch_name>. This will create a new branch from 
+		  this point that is currently checked out.
+    * git revert --no-commit first-bad-commit..last-bad-commit
+		eg: git revert --no-commit <id>..HEAD -> will revert to the commit ID
+		* After the revert the we need to commit this revert using git commit command.
+		* The git revert command can be considered an 'undo' type command, however, it is not a traditional undo operation. Instead of removing the commit 
+		  from the project history, it figures out how to invert the changes introduced by the commit and appends a new commit with the resulting inverse 
+		  content. This prevents Git from losing history, which is important for the integrity of your revision history and for reliable collaboration.
+
+GitHub:
+* GitHub brings together the world's largest community of developers to discover, share, and build better software.
+* It is a means by which we can our code public and also share code with other developers.
+* In order to use gitHub, we need to create an account in gitHub. 
+* Once we create an account, we can create a repo or a push a remote git repository to github.
+* To push our c9 git repo containing code to github, we need to first find the SSH key from c9 account. 
+* Then we need to edit our gitHub profile and add the SSH key from c9 to SSH and GPG section of our github profile.
+* Once SSH keys are added we can run following command in c9 git repository:
+	* git remote add origin <git_repo>
+	  eg: git remote add origin https://github.com/iswarya91/git_intro.git
+	  This will create a connection between the remote github and c9 git repository
+	* git push -u origin master
+	  * Push our changes from master branch in c9 repo to the github repo origin.

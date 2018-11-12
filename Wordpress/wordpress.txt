@@ -1,0 +1,95 @@
+* WordPress is a free and open-source content management system (CMS) based on PHP and MySQL.
+* Features include a plugin architecture and a template system. It is most associated with blogging, but supports other types of web content including more 
+  traditional mailing lists and forums, media galleries, and online stores. 
+* It is used by more than 60 million websites, including 30.6% of the top 10 million websites as of April 2018.
+* WordPress is the most popular website management system in use.
+* Plugins can be used to extend the functionality of the wordpress and custom themes can be installed to change the look and feel of the web site. It can be
+  changed anytime without losing any of our work.
+* Advantages of WordPress:
+	* It is free and open source and has a large community.
+	* It has a great WYSIWYG(What You See Is What You Get) Editor i.e a very powerful word processing editor.
+	* It can handle different types of media.
+	* It is very powerful and search engine friendly and makes managing your website very easy.
+	* It is safe, secure and flexible for any type of site and it is also mobile frendly.
+	* It is stable and mature as it has been around since early 2003.
+* We need to install wordpress on a web host to create website that will be available to all.
+* We use wordpress dashborad to design website in wordpress.
+* There are two different versions of wordpress:
+	* wordpress.com - It is service that allows us to crete website online. But it is cutdown version of wordpress and not a full version of wordpress.
+		* It has different plans free as well as paid versions. One of main disadvantage of free version of wordpress is that it has adds which cannot be
+		  turned off.Also it just gives only a subdomain not our own domain.	
+	* wordpress.org - This is the full version of wordpress that can be installed locally or on a web host. It does not have any limitation. Though
+	  the source code is same for all, if we intsall plugins or custom theme it changes the wordpress dashborad and available options. Screen options will
+	  also change based plugins installed.
+* WordPress Installation:
+	* Local: 
+		* Your site will not be visible to visitors, search engines or anyone else.  It will be 100% private on your computer
+		* Need to have local server for wordpress in lical system like ServerPress:
+			* ServerPress: DesktopServer software makes your local installation of WordPress as easy as simply giving your site a name and clicking 
+			 a few buttons. There is free as well as premium version of DesktopServer available in ServerPress.
+			* We need to download free DesktopServer suitable for system and unzip the file and install it. During installation you have an issue if
+			  some other software is using port 8080. In that case we need to free up the port and continue with our installation.
+			  (we can use ServerPress cports software to find the process running on different ports)
+			* Once the ServerPress is installed, we will have DesktopServer.exe file. To start ServerPress we need to run this exe with administrator 
+			  priviledge. During starting the server, we need to disable our antivirus as it may prevent us from writing to etc/host file.
+			* Then in the wizard, we need give appropriate details and create a new web site. We need to give few details and set username/password for the 
+			  wordpress site. Then wordpress will be installed. We can login to get the dashbord.
+		* To get login page we can use either /wp-admin or /wp-login in site url.
+		* To close the wordpress site, we need to log out of the site and also stop the server. We need to restart DesktopServer.exe(need to turn off antivirus
+		  while starting) and visit the site and login.
+	* Webhost:
+		* When creating website in web host, first thing we need to do is find an available domain. We can do that by coming up with some domain names for 
+		  our website and identifying which one is available using Domain Name Analyzer software. It saves time when Brainstorming Domain Names.
+		* It is recommended to register with a separate registrar to buy a domain name like goDaddy, nameCheap etc. After getting the domain which cost money
+		  and host the website using a web host like heroku, stable host etc. In the web hosting, we need not register the domain with host, but let it use
+		  registrar to manage the domain and hosting is managed by the web site.
+		* To deploy wordpress in heroku https://ksylvest.com/posts/2014-05-02/deploying-wordpress-to-heroku
+	* In cloud9
+		* Create wordpress project in cloud9
+		* 'mysql-ctl start' to start mysql-ctl
+		* select the index.php file and click on run
+		* click preview running application to start wordpress.
+* Wordpress site has three main areas:
+	* Top bar which contains:
+		* Workpress - Which contains links to wordpress.org, wordpress forums etc.
+		* Our site - which we can open in another tab.
+		* Updated
+		* comments
+		* new button - which can be used to create new post, page , media or user.
+		* User - It can be clicked to either edit user profile or logout. 
+		* Help - Which provides more detailed help
+		* Screen Options: which has various check boxes and it controls what is displayed on main screen, based on what is checked.
+	* Side Bar:
+		It contains many options and sub options which we can get by clicking/hovering over the options: Some of them are:
+		* Dashboard: Which takes to wordpress dashboard which contains the basic details of our webpage at a glance. It also has updates sub options
+		  to go updates page.
+		* Posts : Create new post, view all post etc
+		* Pages
+		* Media
+		* Users:
+		* Comments
+		* Appearance
+		* Plugins 
+	* Main area - which displays the content based on what is selected in the side bar and options checked in screen options.
+* Deleting any existing content:
+	* If you want to delete pages, posts or comments, we just need to select Pages, Post or Comments from the side bar which will list all Pages, Post and 
+	  Comments respectively. We can then remove an induvidual page, post or comment by hovering over them and moving them to trash or selecting all the posts
+	  to be deleted and selecting bulk action to move to trash. We can then select trash and empty it or permanantly delete selected item or restore the deleted 
+	  item.
+	* When a post is deleted all comments associated with it are also deleted.
+* WYSIWYG (What You See Is What You Get Editor)
+	* This is a great text editor that we get to edit posts/pages. Editing/Adding Posts and Pages are almost similar with WYSIWYG editor.
+	* We can click on Post -> Add Post or Select the Post and Edit to get to the editor. 
+	* The editor has two view 
+		* visual - which is normal view
+		* text - which is html view and we can edit the html as well
+	* In the visual view we have options make part of text bold, italic, add identation, create bullets or numbered list, add links etc. 
+	* We also have 'Add Media' Button on the top, which can be used to add audio, vedio or images. These first needs to uploaded in the media library 
+	  from the PC.
+	* We can directly add link to you tube vedio and vedio will be added to our page.
+* Media Library:
+	* Media option has 'library' and 'Add new' sub option. 
+	* When we click on Media-> Library we are taken to Media Library which contains list of all media files and we can edit thos files to add caption,
+	  alt text for visually impaired and description. For each media file uploaded, there is a separate attachment page is created by wordpress, this page is 
+	  also visible to search engines.
+	* Media -> Add New, will take us to upload page where we can upload images, audio or vedio by either selecting from our system or dragging and dropping.

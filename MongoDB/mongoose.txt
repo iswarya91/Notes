@@ -1,0 +1,116 @@
+mongoose -> writing MongoDB validation, casting and business logic boilerplate in our app is a drap. Hence we can use helper packages like mongoose.
+* mongoose is elegant mongodb object modeling for node.js. It is package we can intsall, that makes interacting with mongoDB very easy.
+* Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, 
+  query building, business logic hooks and more, out of the box.
+* Instead of having mongoDB collections without any structure, in partical applications for coding we need a general schema on which our collections
+  objects should be based. mongoose provides this functionality.
+* To install mongoose, use 'npm install mongoose --save' to install mongoose package.
+* To use mongoose package, we need to include it our node JS application using require
+	- var mongoose = require('mongoose');
+* Once mongoose is included in node JS application, we need to connect to our database, using command
+	mongoose.connect("mongodb://localhost/app_db"), where mongodb is a running in the localhost or same host where app is running.
+	* This connects to app_db if it exists, else it creates the database
+* Once connection is established we can create a schema for our collection.
+  Everything in Mongoose starts with a Schema. Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
+    var catSchema = new mongoose.Schema({
+						name: String,
+						age: Number
+					});
+	The schema is just a structure that each document (data unit) in our collection should follow. In the Schema we can specify more than the date type.
+	Example: We can specify default value. To specify more than one value for an item in schema, instead of just the type, we can specify an object
+	
+	eg: var catSchema = new mongoose.Schema({
+						name: String,
+						age: {type:Number, default:3}
+					});
+			In this case if no age is specified, it is taken as 3.
+* Once the schema is defined, we need to create a model using mongoose.model() method->
+  Models are fancy constructors compiled from Schema definitions. An instance of a model is called a document. Models are responsible for creating and reading 
+  documents from the underlying MongoDB database.
+  
+* The first argument is the singular name of the collection your model is for. Mongoose automatically looks for the plural version of your model name. Thus, 
+  for the example, the model Tank is for the tanks collection in the database. The .model() function makes a copy of schema. Make sure that you've added 
+  everything you want to schema before calling .model()
+	var Cat = mongoose.model("Cat", catSchema); -> where cats collection will be created in app_db database when we insert data.
+	The model returned will then be used to do database operations
+* Database operation using model:
+	* create  - create a new document object using new eg: var newCat = new Cat {name:"Tom", age: 15}; -> This will just create a new document object based on the model.
+	Once document object is created it needs to be saved to the database using newCat.save() function. This method has a callback function as parameter, that
+	is called on completion of save. A callback function is required as save() or any database operation will take time and may fail.
+	eg: var newCat = new Cat({name:"Tom", age: 15});
+	    newCat.save(function(err, cat){
+			// callback on completion of save
+		})
+	  Instead of having two steps, of creating document from model and then saving it to db, we can combine it into a single steps using <model>.
+	  Cat.create({name:"Tom", age: 15}, function(err, cat){
+		 // callback on completion of save
+	  });
+	* find - find all the documents in the model. syntax: <model>.find({<obj>}, <callback_function>);
+	  eg: Cat.find({name:"Tom"}, function(err, cats){
+				//callback function
+		  });
+	* findById - find the documnet corresponding to the given ID. It takes two parameters ID as a string and callback function.
+	* findByIdAndUpdate - find the document corresponding to the given ID and update to the new value. It takes three parameters:
+		* id
+		* object to be updated
+		* callback function
+		Cat.findByIdAndUpdate(req.params.id, updatedCatObj, function(err, updatedCat) {
+		})
+	* findByIdAndRemove() -> Find by Id and remove that entity
+	* findOne -> find one item matching the given condition -> 
+		Cat.findOne({name:"Tom"}, function(err, cat){
+				//Returns only one cat
+				//callback function
+		  });
+* Data Association in Mongoose
+	* Embedding data :(Subdocuments)
+		* Subdocuments are documents embedded in other documents. In Mongoose, this means you can nest schemas in other schemas. Mongoose has two distinct 
+		  notions of subdocuments: arrays of subdocuments and single nested subdocuments.
+		  eg: var childSchema = new mongoose.Schema({ name: 'string' });
+
+			  var parentSchema = new mongoose.Schema({
+			    name: String,
+					// Array of subdocuments
+				children: [childSchema],
+				// Single nested subdocuments. Caveat: single nested subdocs only work
+				// in mongoose >= 4.2.0
+				child: childSchema
+			  });
+			  
+		* Subdocuments are similar to normal documents. Nested schemas can have middleware, custom validation logic, and any other feature top-level schemas 
+		  can use. The major difference is that subdocuments are not saved individually, they are saved whenever their top-level parent 
+		  document is saved.
+
+			var Parent = mongoose.model('Parent', parentSchema);
+			var parent = new Parent({ children: [{ name: 'Matt' }, { name: 'Sarah' }] })
+			parent.save(callback);
+	 * Referencing data: 
+		* Data association through refrence is acheived in mongoose by having a array of objectId in schema. We also need to specify the that we are refrencing.
+		eg: var childSchema = new mongoose.Schema({ name: 'string' });
+		    var Child = mongoose.model("Child", childSchema);
+			var parentSchema = new mongoose.Schema({
+					// Array of Child refrenced
+					children: [
+							{
+							type: moongoose.Schema.Types.ObjectId, //Indicates that we refrencing some other model entity
+							ref: "Child" // The model we are refrencing.
+							}
+						]
+			}
+		* In this method, we create a Child separately and then push the created Child into Children array. 
+			eg: Parent.create({name:"Harry"}, function(err, parent) {
+					Child.create({name:"Tom"}, function(err, child){
+						parent.children.push(child);//It will merely push the child
+						parent.save();// we need to explicitly save to DB
+					})
+				});
+		* Thus in this we create each model separately and then push one into another and save.
+		* In  order to retreive data that is referenced, we have a method in mongoose called populate. It is chained to the find method and executed using exec.
+		The syntax looks like:
+			Parent.find({}).populate("children").exec(function(err, parents){
+				//callback - This contains children array populated by the objects correnponding to the references
+				
+			})
+		.populate() -> Takes the path to be populated.  
+* Instead of having all the model and Schemas defined in the same file, we can have separate js file for each model and then exprort it using module.exports. 
+  We need to export the model. Then we can require it, where ever needed and use it. 

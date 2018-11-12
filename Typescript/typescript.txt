@@ -1,0 +1,92 @@
+* TypeScript is an open-source programming language developed and maintained by Microsoft. 
+* It is a strict syntactical superset of JavaScript, and adds optional static typing to the language. 
+* It is a wrapper on top of JavaScript and needs to be compiled to Javascript before it can be executed in the browser.
+* TypeScript supports ES6 features like modules, classes etc. In addition to latest javascript features it also provides unique features not yet available in
+  Javascript. Some of the features supported by typescript are:
+	* Static typing - Thus we can specify data types in code and compiler throws error when one type is assigned a value of another type.
+	* Interfaces 
+	* Generics.
+	* easier module and class usage
+* TypeScript documentation can be found at:  https://www.typescriptlang.org/ . 
+* Also Typescript Playground: https://www.typescriptlang.org/play/index.html can be used to convert typescript code to javascript online, withoust installing 
+  typescript compiler.
+* Installing typescript:
+	* typescript can be installed using npm : 'npm install typescript -g'
+* Compiling typescript to javascript
+	* Once typescript is installed, we can use 'tsc'(typescript compiler) command to compile typescript to 'javascript'.
+	* We need to use '.ts' extension for typescript files. Then we need to compile .ts file to .js file using:
+		* tsc <filename.ts> -> eg: tsc app.ts -> This will create a corresponding .js file which can then be included in the html file using <script> tag.
+	* Putting the folder under typescript control using command 'tsc --init'. This will create tsconfig.json. And then we can convert all .ts files in the
+	  folder by running 'tsc' command. This will search for all .ts files and convert to .js files.
+* Static Typing:
+	* We can assign type to javascript variables. It is very helpful to avoid unintentional errors by wrong value assignment.
+	* The different types supported in typescript are string, number, boolean , generic type, enum , void and any.
+	* To assign a type to a variable , 
+		* we can specify the data type explicitly using ':' followed by the type 
+			syntax: let <varname> : <data_type>
+			eg: let name : string;
+			// name = 4 will give error
+		* we can implicitely assign types by initializing the variable during declaration. Then typescript interprets the type:
+			eg: let name = 'Iswarya'; // typescript interprets it to be string 
+	* It will throw a compiler error if we try to assign a value of different type to variable. eg: If we assign number to string variable we will get error.
+	* If type is not explicitly specified and no value is assigned during declaration, the variable is of type 'any'(i.e no typing)
+* Classes: 
+	* Typescript supports Class. It is also available in Javascript after es2015. But some of the advantages added by typeescript Classes are:
+		* They are compile javascript code without classes and hence supported by all browsers.
+		* They give private and public properties.
+	* Typecript class is defined using class keyword and can have private and public properties, constructor, method and static methods
+	eg: class Car {
+			engineType:string; //public property
+			private speed:number; // private property
+			
+			constructor(speed:number) {
+				this.speed = speed;
+			}
+			
+			accelerate() :void {
+				this.speed++;
+			}
+			
+			static noOfWheels() : number {
+				return 4;
+			}
+		}
+		
+		Car car = new Car(50); // Creating an instance of Car object using new operator
+		//car.speed++ will throw an error as speed is private property.
+		car.accelerate();
+		Car.noOfWheels(); // Access static methods using class name
+* Interfaces:
+	* Interface creates contracts other classes and objects need to implement. Interfaces are used to create custom types. They are just used for type 
+	  checking during compile time. They are not compiled to javascript.
+	* interface can contain mandatory properties, optional properties(they need not be present in variables of that type), they can also contain function
+	  declaration without an implementation. The var/objects of taht type needs to implement the methods
+	  eg:
+	  interface User {
+		username: string,
+		password: string,
+		address?: string // '?' is used to indicate optional properties
+		
+		calcAge(dob: string) :number; // defines a method
+	  }
+	
+	  let user : User;
+	  //user = {max: 10} gives error as it expects an object containing username, password and calcAge methods. It can optionally contain address
+	  user = {username: 'Max', password:'pass', 
+					calcAge(dob){
+						//calculate age
+						return age;
+					}}
+* Generics:
+	* Generics are types that can hold different type of data. eg: an Array type can have intergers, strings etc. In javascript Array can contain
+	  a mixture of number, string etc. Using typescript Generic we can specify an Array which hold only numbers 
+	  
+			eg: numArr : Array<number>;
+			
+			//numArr = ['test'] will give error
+			numArr = [1, 2, 3];
+* Typescript is modular, it allows us split the code into different files and then export classes, interface , variables etc using 'export' keyord. These
+  different modules can then be imported using import statements.
+  eg: export class mathOp {
+      }
+	

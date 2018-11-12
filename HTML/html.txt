@@ -1,0 +1,168 @@
+* HTML - Hyper Text Markup Language.
+* It defines the nouns of the webpage. It gives the bare skeleton or structure for a web page.
+* In was introduced in early 1990s to give structure to sceintific documents. Due to its simplicity, itdecame highl popular and became a standard for web 
+   development.
+* HTML standard is maintained by w3c (world wide web consortium)
+* HTML defines a structure to the content simply by ensclosing the content within the tag. An HTML tag begin with '<' and end with '>' eg: <h1>.
+* Though html tags work with both lower and uppercase, it recommended by w3c to use lowercase.
+* All HTML documents should have the following basic structure.
+	* <!DOCTYPE html> - This should be the first line of the html document and tells the broweser that the document is of type HTML5. Earlier (before HTML5
+	  we used to spevcify DTD (Document type definition) links in the <!DOCTYPE>
+	* <html> - This is the root element and all elements should be enclosed with the <html> starting and </html> closing tag. It is mandatory to have <head>
+	  and <body> element inside html.
+	* <head> - This is the metadata information for the document and the content in it is not displayed. It mainly contain <title> and links to stylesheet and 
+	  javascript. <head> tag is required to have a <title> tag.
+		* <title> - This is the title of the web page. Though it is not displayed on the web page, the title is
+			* displayed in tab in browser
+			* used and displayed by search engine eg: google search 
+	* <body> - This is the actual content of the webpage and displayed as part of web page.
+	* Thus a basic HTML doc should contain 
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>
+				</title>
+			</head>
+			<body>
+			</body>
+		</html>
+* HTML has many elements and a complete reference can be found in MDN element refrence. They can divided at a high level into two categories:
+	* block - block level elements take there own line eg: h1, p etc
+	* inline - inline elements are added as part of content and is added inline. eg: strong, em ,etc.
+* HTML comments - Comments are ignored by the browser. The are enclosed with <!--  add comment here -->	
+* Some common HTML elements are:
+	* Block level elements:
+		* Heading elements: HTML provides six levels of heading <h1>, <h2> ,..., <h6> , where <h1> is the most important heading and <h6> is the least 
+		important.
+		* <p> - Paragraph elements considers the ontent enclosed with as a pragraph and provides spacing identation etc.
+		* Lists - HTML provides two types of lists:
+			* ordered list - A numbered list is an example of ordered list. <ol> 
+			* underordered list - An unordred list is where each list item is specified using bullet points.<ul>
+			* Both <ol> and <ul> should contain list item . Each list item is enclosed within <li> tag.
+			* A list can be nested to have a list within a list
+		* <div> - It provides a container to group a set of elements together. There is no visible difference, but they are highly useful for styling
+		  a group of elements diffenently using css. 
+	* Inline elements:	
+		* <strong> - To make some content appear stronger. The browsers usually bolds the content enclosed by <strong> tag. Earlier there used to be <b>
+		  tag but it is deprecated .
+		* <em> - It is used to emphasis a text content. It is recommended to be used in place <i> which is also deprecated. HTML5 deprecated <b> and <i>
+		  tags as they wanted clear differentiation between sematics and styling as <b> and <i> are more to do with styling than sematics, these tags are
+		  deprecated.
+		* <span> - It is used to group a set of inline content or elements. There is no visible difference, but span is very useful along with
+		  css to style a group of inline content eg: style a part of para using different color.
+		* <img> - It is used to add an image to the web page. The imae source is provided using src attribute.eg: <img src="dog.png">
+		* <a> - It is used to add a link in the html document. The link can be internal, another part of the same page or external a different page in the
+		  system or web. eg: <a href="http://www.google.com">Google</a>
+* <div> and <span> are used to group elements, while <div> is used to group block level elements, <span> is used to group inline elements.
+* HTML attributes are used to specify addition information in tags. The html attributes are specified as name/value pair inside a html tag. eg: id="dev1"
+	* All attributes cannot be applied to all elements. Usually they can be applied to only a few elements or even single html elements. The entire list
+	  of HTML attributes and tags they can be applied to can be found in MDN attribute refrerence. 
+	* Some commonly used attribute:
+		* src - It can be used to provide a source to an image. It can content both http link to the image or local image. By default it looks at the current
+          location if only file name is provided (relative path). To point an image on net the complete path with http://-> protocol should be specified
+		  eg: <img src="dog.png">
+		* href - It is used to provide a link in <a> tag. It also can both point to another file / document in the system or external http
+		  link. It can also point to different part of the same document. eg: <a href="http://www.google.com">Google</a>
+* Some tags do not require a closing tag. These are called self closing tag. eg <img>, <input> etc
+* HTML Tables
+	* Tables are created in HTML using <table> element. The HTML <table> element represents tabular data — that is, information presented in a two-dimensional 
+	   table comprised of rows and columns of cells containing data.It can contain <thead> , <tbody> and <tfoot>. 
+	* <thead> - This is the header of the table. It is optional. It contains the header element. The header row <tr> is added here with <th>
+		<th> - Header element
+	* <tbody> - The main content of table. It contains one or more rows <tr>
+		<tr> - Table row
+		<td> Table data
+	* <tfoot> - The footer of the table.
+	* <thead> , <tbody> and <tfoot> were added to give more structure to the table. A table can be created by simply using <tr> , <th> and <td> elements, But
+	  it is good practice to divide table to <thead>, <tbody> and <tfoot> as it is the recommended approach.
+* HTML Forms:
+	* forms are added to html using form tag. It has two main attributes 
+		* action: It is the url where the form data is sent. By default if no action is given it is submitted to same page. 
+		* method: http method used to send data (get/post)
+			* get is used to query an retrive data (eg: google) i.e On click of search some data is retreived from backend
+			* post is used to send data to database eg: sign-up page - User data is added to database
+	* Forms contain <input> tags to get user input. The type attribute of the <input> tag determines the type of input. 
+	* Some of the common attributes of input tag are:
+		* type: Type of the input Some common example of input type attribute values are text, email, password, radio, checkbox, color, submit ... etc
+		  eg: <input type="text">
+		* placeholder : It is placeholder string displayed till user gives a value
+		* name: It is name of the input sent to the server. If name attribute is given we can see the query string sent in the URL on form submit.
+		* id: gives an id to the input element.
+		* value: Specify the value to be sent to the server
+		* pattern: The pattern attribute specifies a regular expression that the <input> element's value is checked against. Note: The pattern attribute works 
+		  with the following input types: text, date, search, url, tel, email, and password. Use the global title attribute to describe the pattern to
+		  help the user.
+	* A button as the last item of form can be used to submit the form. <input type="submit"> can be used alternately in place of the button.
+	* <label> - It is the caption to each of the input field. Lables are used to make form more accesible.  It is important for screen readers as they can 
+	  easily associate label with the input while reading the screen for blind people for example. There are two value to add table:
+		* <input> is nested inside the <label> tag.
+			<label>Username: <input type="text"></label>
+			This approach is useful when there is a single lable for more than 1 input.
+		* Another approach is to have <label> and <input> is given separately and they are connected using for attribute in label tag and id attribute in input tag.
+			<label for="username">Username</label>
+			<input id="username" type="text">
+	* Validation: We can do basic validation in HTML. For advanced validation we need JS and backend. Two types of validations that can be done in HTML
+		* Required - Makes the input mandatory. It is done using required boolean attribute to input. Boolean attribute are specified in HTML5 in one of
+		the three ways:
+			<input type="text" required>
+			<input type="text" required="">
+			<input type="text" required="required">
+		All the three indicate a true value and absence indicate a false value. It required attribute is present it does not allow as submit a form until 
+		the value is present for the input.
+		* Type validation- Validates the user given input corresponds to the type of the input. eg: validates that @ is present in type="email"
+	* Checkbox: Checkbox is added using type="checkbox" in input tag. Checkboxes are used to select multiple values. It can selected and unselected.
+	  <input tye="checkbox">. In order check a checkbox by default, the checked boolean attribute can be used.
+	* Radio Button: Radio button groups are added to select only one of many choices. eg: gender in a form. A single radio button is added using type="radio"
+	  in the input tag. <input type="radio">. Two or more radio buttons are added and are grouped together using the same name. In order to send proper value 
+	  to the backend value attribute needs to added.
+		eg: <input name="pet" id="cat" value="CAT" type="radio">
+		    <input name="pet" id="dog" value="DOG" type="radio">
+	   Now user is allowed to select only one radio and on form sumit the value is sent sent as pet=DOG or pet=CAT, if no value attribute is given. It is 
+	   sent as pet=on
+	* Drop down: Drop down menu is added using <select> tag. name attribute is used in select tag to give name to the dropdown menu. We can add options
+	  in the drop down menu using <option> tag. We can give value attribute to the option tag to specify the value to be send in http request if that option
+	  is selected in the dropdown.
+	  <select name="pet">
+		<option value="dog">Dog</option>
+		<option value="dog">Dog</option>
+	  </select>
+	 * Text area: It is used to give multi line input. <textarea>. The HTML <textarea> element represents a multi-line plain-text editing control, useful when you 
+	   want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. We can define the size of textarea using
+	   row and column attribute in textarea. <textarea rows="10" cols="50">Enter the desired feedback</textarea>. Default text is entered between tags.
+* style -> <style> tag can be used to include css styles in the html document. It encloses css content and is part of <head> section.
+  style attribute can be added to each element to give inline style eg: <h1 style="color:red">. Both are not recommended, css needs to be a separate sheet 
+  and a link needs to given in html using <link> tag.
+* <link> -> The HTML <link> element specifies relationships between the current document and an external resource. This element is most commonly used to link
+  to stylesheets. eg: <link href="main.css" rel="stylesheet"> . There are a number of other common types you'll come across. For example, a link to the site's favicon:
+  <link rel="icon" href="favicon.ico">
+* <nav> -> The <nav> tag defines a set of navigation links. Notice that NOT all links of a document should be inside a <nav> element. The <nav> element is 
+  intended only for major block of navigation links. Browsers, such as screen readers for disabled users, can use this element to determine whether to omit 
+  the initial rendering of this content. It is part of HTML5.
+* data-* attribute - HTML5 is designed with extensibility in mind for data that should be associated with a particular element but need not have any defined meaning.
+ data-* attributes allow us to store extra information on standard, semantic HTML elements without other hacks such as non-standard attributes, extra properties
+ on DOM, or Node.setUserData(). 
+	The syntax is simple. Any attribute on any element whose attribute name starts with data- is a data attribute. Say you have an article and you want to 
+	store some extra information that doesn’t have any visual representation. Just use data attributes for that:
+
+		<article
+			id="electriccars"
+			data-columns="3"
+			data-index-number="12314"
+			data-parent="cars">
+			...
+		</article>
+	* Reading the values of these attributes out in JavaScript is also very simple. You could use getAttribute() with their full HTML name to read them, 
+	  but the standard defines a simpler way: a DOMStringMap you can read out via a dataset property.
+	* To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are 
+	  converted to camelCase).
+	 
+	 var article = document.getElementById('electriccars');
+ 
+	article.dataset.columns // "3"
+	article.dataset.indexNumber // "12314"
+	article.dataset.parent // "cars"
+* <script> - This tag is used to add script such as javascript to html doc. When we use asyn attribute with the script tag, then it will load simulataneously 
+  along with other assets on the page.
+* <canvas> - <canvas> is an HTML element which can be used to draw graphics using scripting (usually JavaScript). This can, for instance, be used to draw graphs, make
+ photo composition or simple (and not so simple) animations. The images on this page show examples of <canvas> implementations which will be created in this
+ tutorial.

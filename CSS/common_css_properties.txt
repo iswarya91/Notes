@@ -1,0 +1,22 @@
+* color - color of text.
+* background - setting background color or image. To set a background image url function can be used.
+* display - position an elemnent eg: inline, block, inline-block.
+* padding - space after content before border.
+* border - Adding border to an element. It has border-color , border-style and border-width. All the three properties must be specified for border to be seen.
+  border-style can take values like solid, dashed, dotted etc.
+* margin - After a border and is not part of the element.
+* text-align - horizontally aligns the inline content (eg text) of the box to the specified value. inline blocks can also be aligned using it.
+* list-style - Setting the style for ordered/unordered list items eg: bullets
+* text-decoration - adds decoration to text eg: underline
+* vertical-align - aligns text and inline elements eg: middle. It should be set all the inline-block elements that needs to aligned.
+* font-weight - to make text bold
+* font-size - size of the font text used
+* height - height of the element
+* width - width of the element
+* border-radius - This will round the corners.
+* box-shadow - attaches drop shadows to bottom and right. You can specify the length of the shadow also color. eg: box-shadow : 2px 2px 2px 2px red;
+* outline - It is like border but outside the border-box. It is usally set by default by browsers on focus.
+* position - Position an element in the website. It takes values fixed, absolute, relative, static and sticky. Static is default value.
+* top,bottom,left,right - These properties are used to set values to position elements in case of non static postioning.
+* z-index - position element along z-axis in case of non static postioning.
+* overflow - It is used to hide content overflowing outside pareant container.

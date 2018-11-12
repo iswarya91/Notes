@@ -1,0 +1,2655 @@
+* Angular is a frontend javascript framework for reactive single page applications.
+* It helps us create awesome and high interactive applications with great user experience.
+* Single Page Application(SPA) - Single-Page Applications (SPAs) are Web apps that load a single HTML page and dynamically update that page as the user interacts 
+  with the app. SPAs use AJAX and HTML5 to create fluid and responsive Web apps, without constant page reloads. However, this means much of the work happens
+  on the client side, in JavaScript. 
+* Angular versions:
+	* Angular 1 - This is the first version of angular framework. But was completely re-written in Angular 2 due to many issues mainly performance related.
+	  No further developments are happening in this. This version is now known as AngularJS to differntiate from other versions.
+	* Angular 2 - It was complete rewrite of Angular 1 framework and uses TypeScript and other ES6 JS features. There are incremental updates on this version
+	  like Angular 4, Angular 5 and Angular 6. Angular 6 is the latest Angular version in 2+ series. 2+ is commonly called as Angular.
+* Angular CLI
+	* The Angular CLI is a tool to initialize, develop, scaffold and maintain Angular applications
+	Getting Started
+	* To install the Angular CLI:
+		* npm install -g @angular/cli
+	* Generating and serving an Angular project via a development server Create and run a new project:
+		* ng new <my-project> 
+			* The Angular CLI makes it easy to create an application that already works, right out of the box. It already follows Angular best practices.
+			* cd my-project
+		* ng serve - This compile and start a dev server which will serve the angular code in any available port.
+     		* Easily test your app locally while developing.
+			* In case of cloud9 use command:
+			ng serve --host $IP --port $PORT --public $C9_HOSTNAME
+		* ng generate
+			Generate components, routes, services and pipes with a simple command. The CLI will also create simple test shells for all of these.
+			* ng generate component <path>/<component_name> - to create a component. This will create component in the specified path.
+* Angular 2+ uses typescript. TypeScript is a superset of javascript which offers additional features to javascript like strong typing, generic, interfaces etc.
+  It also supports ES6 javascript features. But typescript needs to be compiled to javascript before it can be executed by the browser. This is done by the
+  project workflow provided by Angular CLI.
+* In order add any css framework like bootstrap,
+	* we need to download it using npm
+		* npm install bootstrap3 // Install bootstrap 3
+	* Include the css file of the framework in the styles array in angular.json config file. This will include the stylesheet in the project.
+* Angular CLI project workflow:
+	* Angular CLI builds the project and renders a single page (index.html) when we use ng serve command. index.html usually contains a <app-root></app-root>
+	  element which is the base component of our angular application. During bundling there are some script files added as part of index.html file.
+	* This includes main.ts file, which is the main typescript file that is built into main.bundle.js file which then gets executed on load. There the 
+	  platformBrowserDynamic().bootstrapModule(AppModule), specifies the module AppModule (created by default by angular CLI) as the module to be loaded during
+	  bootstrap. Hence the corresponding typescript file(app.module.ts) in the specified module(AppModule) is compiled.
+	* This defines the module AppModule, and secifies an array of components that angular needs to be aware of during bootstrap.
+	* bootstrap array inside the @NgModule decorator in the file app.module.ts specifies the component (AppComponent) that angular needs to be aware of. This
+	  in turn compiles the app.component.ts file which defines the AppComponent with selector (<app-root>). 
+	* Then the app-root is replaced by corresponding template defined for the component in app.component.ts file at runtime because angular is ultimately
+	  just a javascript framework that does DOM manipulation at runtime.
+* Angular Modules:
+	* Angular apps are modular and Angular has its own modularity system called NgModules. NgModules are containers for a cohesive block of code dedicated to an 
+	  application domain, a workflow, or a closely related set of capabilities. They can contain components, service providers, and other code files 
+	  whose scope is defined by the containing NgModule. They can import functionality that is exported from other NgModules, and export selected 
+	  functionality for use by other NgModules.
+	* Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule and resides in a file named app.module.ts. 
+	  You launch your app by bootstrapping the root NgModule.
+	* While a small application might have only one NgModule, most apps have many more feature modules. The root NgModule for an app is so named because it
+   	  can include child NgModules in a hierarchy of any depth.
+	* An NgModule is defined by a class decorated with @NgModule(). The @NgModule() decorator is a function that takes a single metadata object, whose properties 
+	  describe the module. The most important properties are as follows.
+		* declarations: The components, directives etc that belong to that module
+		* imports: Other modules whose exported classes are needed by component templates declared in this NgModule.
+		* bootstrap: The main application view, called the root component, which hosts all other app views. Only the root NgModule should set the bootstrap 
+		  property.
+		  eg:
+		  @NgModule({
+			declarations: [
+				AppComponent,
+				ServerComponent
+			],
+			imports: [
+				BrowserModule
+			],
+			bootstrap: [AppComponent]
+		})
+* Angular Components:
+	* Angular Application consists of components. It usually has a root component (App). All the other components are nested inside the app compoennt.
+	* Each component has its own template, styling and business logic. Thus we can divide the entire application into reusable components thus making 
+	   our code modular and maintainable.
+	* A Component is nothing but a simple TypeScript class where you can create your own methods and properties as per your requirement which is used 
+	  to bind with a UI (html or css page) of our application.
+	* Normal TypeScript class will become a Component class once it has been decorated with @Component decorator.
+	* @Component decorator provides an additional metadata that determines how the component should be processed, instantiated, and used at runtime.
+	* We can also say that Components are the most basic building blocks of a UI in an Angular application
+	* Finally, component must belong to an NgModule in order for it to be usable by another component or application. To specify that a component is a 
+	  member of an NgModule, you should list it in the declarations field of that NgModule.
+	* Instead of manually creating Component, we can use Angular CLI command 'ng generate component <component_name>', it will do the following
+		* create a folder inside <component_name> inside app folder.
+		* create the following files
+			* <component_name>.component.ts file -> typescript file with @Component decorator with basic properties 
+			* <component_name>.component.html file 
+			* <component_name>.component.css file
+		* Add the component to the declarations array of the AppModule.
+	* Component decorator consists of many metadata properties or attributes. Most frequently used properties are:
+		* selector
+			* It is used to replace the html at runtime in the index.html or template files of other component. The replacement is happening using the 
+			  directive name.
+			* selector is similar to css selector : Thus we can have :
+				* element selector -> selector:'app-server'. In order to use this component we can define custom element <app-server></app-server>
+				* attribute selector -> selector:'[app-server]'. In order to use this component we can define custom attribute <div app-server></div>
+				* class selector -> selector:'.app-server' . In order to use this component we can define custom className eg: <div class="app-server"></div>
+				* There is no ID selector. For components we mostly use element selector.
+			eg:
+				import { Component } from "@angular/core";  
+  
+				@Component({  
+					selector: 'app-server',       
+					template: '<div>This is a server component</div>'  
+				})  
+  
+				export class ServerComponent {  
+				}  
+			
+			* The ServerComponent should then be added to declarations array in the corresponding @NgModule 
+			* Then the component can be used in template files of app component or nested in other components. Usually we do not add custom components to
+			  index.html. It usually contains only the app component. And other components are added to AppComponent.
+		* template: It is used to specify the html which is shown as an output to the user
+		* templateUrl : URL to an external file containing a template for the view
+			eg:
+				@Component({  
+					selector: 'app-server',       
+					templateUrl: './server/server.component.html'  
+				})  
+			
+			* In the component we can define either template or templateUrl and cannot define both template and templateUrl property. In other words, only one 
+			  of templateUrl or template can be defined per Component.
+			* We use template if the template is just 1 or 2 lines. In case of more than one line we use ``(template Literals of ES6). If more than two line 
+			  we should use templateUrl to have cleaner code.
+		* styles - inline-defined styles to be applied to this component's view
+			eg: 
+			@Component({  
+  
+				selector: 'my-student',  
+				templateUrl: 'app/student/app.student.html',  
+				styles: ['table {color:blue}']
+			})
+      
+		* styleUrls : List of url style sheets to be applied to this component's view
+			* Both styles and styleUrls are arrays of strings
+* Data Binding in Angular:
+	* Data binding is one of the most powerful features of software development technologies. 
+	* Data binding is the connection bridge between View(templates that user sees and interacts) and the business logic(tyscript code). It is communication 
+	  between the view and controller.
+	* Data binding in Angular is the automatic synchronization between Model and the View. When the Model changes, the Views are automatically updated and 
+	  vice-versa.
+    * There are many ways to bind the data in Angular. Following are the types of data binding
+		* String Interolation:
+			* It is communication from the controlller(business logic) to the view
+			* In string interpolation, we need to supply property name/expression in the View template, enclosed in double curly braces, e.g. {{name}}. It is used 
+			  for one-way binding (Component class to View only).
+			* The content between {{<expression>}} can be a property name or expression that evaluates to  a string. It can even be a function call. The
+			  only restriction is that it cannot contain multiline conditionals or loops, though it can have a ternary expression and it should evaluate to
+			  a string or something that can be conversted to a string.
+			* It is mainly used to display data in template
+			  eg:
+			  
+			  import { Component } from '@angular/core';  
+			  @Component({  
+				selector: 'test-app',  
+				template: `<div>  
+							<h5>Interpolation Example</h5>  
+							Hello {{name}} !  
+						 </div>  `  
+				})  
+				export class AppComponent {   
+					name = 'John';  
+				}  
+			  
+		 * Property Binding 
+			* All browser parsers the HTML to create an object for each element (DOM - Document object model). In property binding, we enclose a DOM
+			  property in the template using [] to bind to an tyscript expression enclosed in double quotes "". This indicates to Angular that it is property
+			  binding. Thus it directly afftects the corresponding DOM property of the element.
+			  eg: <button [disabled] = "!allowClick"></button> i.e if allowClick is false, the disabled is true thus button will be disabled and when allowClick
+			   is true, disabled is false, and button can be clicked.It is important to note that here disabled is not HTML attribute but the property of 
+			   button element in DOM
+			   
+			   Syntax: [property] = "<expression>" -> expression can be any typescript expression that evalutes to the value for that DOM property.It can also
+			   be function call.
+			 * It is mainly used to bind a html property to the some value from our bussiness logic.
+		
+		* Event Binding
+			* This is used for communication from template to the controller. Mostly to respond to user events.
+			  Syntax: (event) = "<expression>" eg: (click) = "onClickHandler()"
+			* The round brackets (parentheses) are used with DOM event name for event binding. We can directly handle the events in the expression. But usually we 
+			  call the event handler function
+			* We can pass event object by passing $event to the handler function. Then we can use the event object in handler function. $event is the reserved
+			  keyword that gives us access to event data when used with event binding.
+			template:
+			<input type="text" (input)= "onServerCreate($event)">
+			ts file:
+			export class ServerComponent {
+			
+				function onServerCreate(event) {
+					val = (<HTMLInputElement>event.target).value;
+				}
+			}
+			
+		* Two way data binding
+			* Two-way data binding combines the event and property binding into a single notation using the ngModel directive.
+				Syntax: <input [(ngModel)]="username" >
+			* Without the ngModel directive, we could easily implement two-way data binding just like this:
+				<input [value]="username" (input)="username = $event.target.value">
+			* With two way data binding, when the value changes in the controller, it is updated in view, similarly any change in the view is updated in 
+			  the controller. Thus it is two way communication.
+			* For Two-Way-Binding to work, you need to enable the ngModel  directive. This is done by adding the FormsModule  to the imports[]  array in the
+ 			  AppModule. You then also need to add the import from @angular/forms  in the app.module.ts file:
+				import { FormsModule } from '@angular/forms';
+* Directives:
+	* Directives on instruction in a DOM.
+	* Components are also directives. They are directives with templates. There are also directives without templates.
+	* Directive can be broadly classified as :
+		* Components
+		* Attribute Directives:
+			* There are added to HTML element or components as attributes and just affect the element properties on which the attribute is added
+			* They are just used like HTML attributes. We can use property and event binding on these.
+			eg: ngStyle, ngClass etc
+		* Structural Directive
+			* They have '*' sign in front of them.
+			* An element can have only one structural directive.
+			* It modifies the structure of the DOM 
+			* The structural directives are transformed by angular behind the scenes. eg: *ngIf, *ngFor
+			 eg: <p *ngIf="val === 10"> Current val is 10 <p> is changed to following format:
+			 <ng-template [ngIf]="val === 10">
+				<p>Current val is 10</p>
+			 </ng-template>
+			And the template is rendered only if the condition evaluates to true.
+	* There are many built in directives in angular. Most built in directives are added as attribute. Some of most common built-in directives are:
+		* ngIf -
+			* It is a structural directive. All structural directives must have a '*' in beginning.  
+			* It is added to an element witch will be added or removed based on condition in ngIf. 
+			Syntax: *ngIf = "<expression>" - The element containing the attribute is displayed if the expression of ngIf evaluates to true, else it is 
+			        not displayed. eg:<div *ngIf="isServerCreated">Server was created</div>
+			* ngIf evaluates the expression and then renders the then or else template in its place when expression is truthy or falsy respectively. 
+			 Typically the:
+				* then template is the inline template of ngIf - template containing the directive
+				* else template is blank unless it is bound.
+			* If it is necessary to display a template when the expression is falsy use the else template binding as shown. Note that the else binding points
+ 			  to a <ng-template> labeled #elseBlock. The template can be defined anywhere in the component view but is typically placed right after ngIf for 
+			  readability.
+			  eg:
+				<div *ngIf="show; else elseBlock">Text to show</div>
+				<ng-template #elseBlock>Alternate text while primary text is hidden</ng-template>
+		* ngStyle
+			* The styles are updated according to the value of the expression evaluation:
+			* It is an attribute directive 
+			* We use property binding to dynamically set the style of the element having the directive.
+			Syntax [ngStyle] = "{<css_prop>:<css_val>}" eg: [ngStyle] = "{backgroundColor:getColor()}"
+		* ngClass
+			* Adds and removes CSS classes on an HTML element.
+			* The CSS classes are updated as follows, depending on the type of the expression evaluation:
+				* string - the CSS classes listed in the string (space delimited) are added:
+					<some-element [ngClass]="'first second'">...</some-element>		
+				* Array - the CSS classes declared as Array elements are added:
+					<some-element [ngClass]="['first', 'second']">...</some-element>
+				* Object - keys are CSS classes that get added when the expression given in the value evaluates to a truthy value, otherwise they are removed.
+					<some-element [ngClass]="{'first': true, 'second': true, 'third': false}">...</some-element>
+		* ngFor
+			* NgFor is a structural directive, meaning that it changes the structure of the DOM.(Hence we need to use *)
+			* The NgFor directive instantiates a template once per item from an iterable. 
+			* It’s point is to repeat a given HTML template once for each value in an array, each time passing it the array value as context for string 
+			  interpolation or binding.
+			* The syntax is *ngFor="let <value> of <collection>". where <value> is a variable name of your choosing, <collection> is a property on your
+			  component which holds a collection, usually an array but anything that can be iterated over in a for-of loop.
+			* Sometimes we also want to get the index of the item in the array we are iterating over. We can do this by adding another variable to our ngFor 
+			  expression and making it equal to index
+				*ngFor="let <value> of <collection>; let i = index".
+			eg: <ul>
+					<li *ngFor="let person of people; let i = index"> 
+						{{i}} = {{ person.name }}
+					</li>
+				</ul> 
+				Creates a li for each person in the people iterable.
+		* ngSwitch
+			* Adds / removes DOM sub-trees when the nest match expressions matches the switch expression.
+			* To use ngSwitch directive:
+				* define a container element (where you place the directive with a switch expression on the [ngSwitch]="..." attribute)
+				* define inner views inside the NgSwitch and place *ngSwitchCase/*ngSwitchDefault attribute on the view root elements
+				* The ngSwitchCase directive informs the parent NgSwitch of which view to display when the expression is evaluated. The *ngSwitchCase view 
+				  containing expression matching ngSwitch will be displayed. When no matching expression is found on a ngSwitchCase view, the *ngSwitchDefault
+				  view is stamped out.
+				  eg:
+				  <div [ngSwitch]="value">
+				  <p *ngSwitchCase="5">value is 5</p>
+				  <p *ngSwitchCase="10">value is 10</p>
+				  <p *ngSwitchDefault>This is default value</p>
+				  </div>
+	* Custom Directive:
+		* We can create custom directives.
+		* We create a typescript file and convention is to name the file <name>.directive.ts.  We add the decorator @Directive() to the exported typescript
+		  class. Directive decorator needs to be imported from '@angular/core'
+		* The following property needs to passed to the directive decorator to create a directive.
+			* selector - It is the selector by which we can use the directive. Usually directives are created as attribute selector. It should be a 
+			  unique selector. It is convention to use camelCase to name the directive.
+			eg: @Decorator({
+					selector:'[appHighlight]'
+				})
+				export class HighlightDirective {
+				
+				}
+			   Usage :
+			   In our component template:
+			   <p appHighlight>We use our highlight directive</p>
+		* In order to use our directive we need to include it in app.module.ts file in the declaration array of @ngModule decorator similar to components.
+		* We can modify the property of elements inside the directive. In order to modify the element properties we use following angular features to
+		  get the element on which the directive was placed:
+			* ElementRef - 
+				* We can get a reference to the element by getting ElementRef parameter in the constructor of our directive and setting a property of the 
+				  directive equal to that
+				  eg:
+				  @Directive({
+					selector:'[appHighlight]'
+				  })
+				  export class HighlightDirective {     (or)     export class HighlightDirective {
+					private elRef:ElementRef;
+					constructor(elRef:ElementRef){                    constructor(private elRef:ElementRef){} // TypeScript shorthand which creates private  
+						this.elRef = elRef;                       }											  // elRef property and assigns the value passed						
+					}                                                                                         // using the constructor to it
+				  }
+				  * We can get the properties using elRef.nativeElement.<property>
+			* Renderer -
+				* Though we can modify the property using ElementRef, it is recommended. We can use another property passed to the Directive constructor called
+				  Renderer. It is of type 'Renderer2'.
+				*  In a normal browser context Renderer2 is a simple default wrapper around DOM manipulation browser API. 
+				* For example, here is the implementation of just a few of its methods:
+					class DefaultDomRenderer2 implements Renderer2 {
+						addClass(el: any, name: string): void { el.classList.add(name); }
+						createComment(value: string): any { return document.createComment(value); }
+						...
+					}
+				* It's been introduced to abstract rendering operations away from pure DOM elements. For example, if you need to add a class you would 
+				  do it like this:
+
+					constructor(el: ElementRef, renderer: Renderer2) {
+						renderer.addClass(el.nativeElement, 'some');
+					}
+				* The code with a renderer has a benefit of being able to run on platforms other than DOM if you provide different implementation of a renderer 
+				  specific to that other platform. For example, Angular provides an implementation of Renderer2 for a webworker WebWorkerRenderer2
+				* The different DOM manipulation methods supported by Renderer2 can be found at https://angular.io/api/core/Renderer2.
+			* Getting data through @Input
+				* We can set data using property binding and @Input decorator inside our custom directive. We need to create the properties and use @Input
+				  decorator if we need to get data from outside.
+				* Then we can use property binding on the element to which the directive is applied.
+				eg:
+				@Directive({
+					// this directive will work only if the DOM el has the appHighlight class
+					selector: 'appHighlight'
+				})
+				export class HostDirective {
+					@Input() highlightColor;
+					@Input() defaultColor;
+			
+				}
+				Usage:
+				<p appHighlight [highlightColor]="'red'" [defaultColor]="'transparent'"> This is highlighted para</p>
+				* In case of property binding angular first checks the custom directives then native element. 
+				* In case a single property that needs to set, we can use an alias with the same name as the directive name. In that case we can combine both:
+				eg: @Input('appHighlight') highlightColor;
+					<p [appHighlight]="yellow" ></p>
+			* Custom structural directive
+				* Structural directives are responsible for changing HTML layout. We can add and remove elements in DOM layout dynamically. 
+				* The HTML element using directive is called host element for that directive. The effect of directive is only on host element and its 
+				  descendants. To add and remove host elements from DOM layout we can use TemplateRef and ViewContainerRef classes in our structural directive.
+				* TemplateRef provides a reference to the ng-template containg our host element and ViewContainerRef is refence to the view where this 
+				  template needs to placed based on our criteria. Both needs to injected in the contructor. 
+					constructor( private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) { }
+				* We also need a bound property(@Input) which get our condition. This bound property should have same alias  or name as our directive.
+				* We can then modify the ViewContainerRef by adding/removing our templateRef based on the criteria. As this need to done every time the 
+				  the bound property changes. We can bind the setter method using keyword 'set'
+				  eg: @Input() set appUnless (condition) {
+						// Code to modify HTML based on condition
+					}
+				* TemplateRef : It represents an embedded template that can be used to instantiate embedded views. 
+				* ViewContainerRef: It represents a container where one or more views can be attached. 
+				* To add host element in DOM layout, we need to call createEmbeddedView() method of ViewContainerRef. 
+						this.viewContainerRef.createEmbeddedView(this.templateRef); 
+				* If we want to clear view container, call clear() method of ViewContainerRef as given below.
+						this.viewContainerRef.clear(); 
+	* @HostListener() Decorator
+		* In Angular, the @HostListener() function decorator allows you to handle events of the host element in the directive class.
+		* Angular will invoke the decorated method when the host element emits the specified event. 
+		* @HostListener is the way to go when you don't have anything on the DOM for typical event binding as directives do not have template associated 
+		  with them. 
+		  eg: 
+		  @HostListener('click') onClick() {
+			// click handler
+		  }
+	* @HostBinding Decorator
+		* @HostBinding -Declares a host property binding.Angular automatically checks host property bindings during change detection.  If a binding changes, it 
+		  will update the host element of the directive. 
+		*  HostBinding - will bind property to host element, If a binding changes, HostBinding will update the host element.
+		  @HostBinding('style.backgroundColor') bgColor = "red";  (This is similar to [prop]="value" . Hence the value is required and not optional.
+		* We can use the bgColor property to then update the background color of the element.
+		eg:
+		
+		@Directive({
+			// this directive will work only if the DOM el has the appHighlight class
+			selector: 'appHighlight'
+		})
+		export class HostDirective {
+
+			// we could pass lots of thing to the HostBinding function. 
+			// like class.valid or attr.required etc.
+
+			@HostBinding('style.backgroundColor') bgColor = "red"; 
+
+			@HostListener('mouseenter') onMouseEnter() {
+				this.bgColor= "blue" ;
+			}
+		}
+* Debugging and Error Detection Tools:
+	* Console: Error messages displayed in developer console.
+	* Debugger : If we add breakpoints in our main.bundle.js, it takes us to the typescript code. We can get the typescript code in the development mode due
+	  to source mapping and we can find the code under webpack.
+	* Angular Augury: Augury is the most used Developer Tool extension for debugging and profiling Angular applications inside the Google Chrome and Mozilla 
+	  Firefox browsers. It helps in angular development and gives runtime view of our application. It can be opened in developer tool and analyse our 
+	  application.
+* Angular Components:
+	* Property and Event binding can not only be used to communicate between view and controller but also between our componnets. Property and event binding
+	  can be used to bind:
+		* native properties and events of HTML elements.
+		* custom properties and event of directives. eg: [ngStyle] & [ngClass] uses property binding.
+		* custom properties and events of our own components. This can be used to pass data to and get events from components.
+	* Property Binding to pass data to components
+		* To bind data to Angular components, we need to create a custom property bind, which is done via “input” binding to pass data from one component 
+		  to another (typically parent to child).
+		* This custom input binding is created via the @Input() decorator.
+		eg:
+			<app-server *ngFor="let serverElem of serverList" [server]="serverElem"></app-server>
+			* In order to pass the serverElem data to ServerComponent we need to create a property server in that component and make it visible for 
+			  property binding
+			 @Component(..) 
+			 export class ServerComponent {
+				@Input() server:{name:string};
+			 }
+		* It may be that you’d want your “public” property names to differ from the internal input names. eg: we may want to expose server property as 
+		  'srvElement' for outside components. This can be done by passing the public name as parameter to @Input decorator
+		  eg: @Input('srvElement') server:{name:string}; We need to bind 'srvElement' in the parent:
+			<app-server *ngFor="let serverElem of serverList" [srvElement]="serverElem"></app-server>
+	* Event Binding to create and emit custom events:
+		* Angular components have a far better way of notifying parent components that something has changed, via events.
+		* In Angular, a component can emit an event using @Output and EventEmitter. Both are parts of the @angular/core.
+		* In order to emit custom events we need to create a property in the Component that needs to emit the event. The property should be initialized 
+		  to an EventEmitter object. EventEmitter is a generic class and while creating an instance we can specify the type, which is actually the 
+		  type of the data emitted along with the event. We also need to use @Output() decorator on the property so that other Components can bind to that event.
+		* Just like @Input decorator, @Output decorator also can optionally take a public event name to expose to other components.
+		* Then we can emit event using emit() method which is present in EventEmitter. 
+		eg:
+		<app-server (nameChange)="onNameChange($event)"></app-server>// $event will contain the object emitted.
+		export class ServerComponent {
+			@Output() nameChange = new EventEmitter<{prevName:string, newName:string}>();
+			
+			triggerNameChange(..) {
+				nameChange.emit({prevName:<old_name>,newName:<newName>})
+			}
+		}
+		* We can also subscribe to events using subscribe method of the EventEmitter. But we need to use the same instance of EventEmitter obj that emits
+		  the event. subscribe method takes a function as parameter which is called when the event occurs. This is mostly used when we have EventEmitter
+		  in a service. In this case we emit in one component and subscribe to the event in another component. Thus services along with EventEmitter
+		  emitter provides an efficient means of inter component communication.
+			nameChange.subscribe((eventData)=>{//logic})
+		
+	* ng-content directive:(Content Projection)
+		* It is very useful for content projection .This helps us to create reusable components. 
+		* If we want to provide some html template to added to our component. We can add our template between the tags of our component. Usually the content 
+		  between the tags of angular Component is ignored, unless we have ng-content directive inside our component. In this case the content replaces the
+		  ng-content directive.
+		* If we add the tag <ng-content></ng-content> anywhere in our template HTML for our component. The inner content of the tags that define our component 
+		  are then projected into this space.
+		  eg:
+		  <app-server><div>This is app server data</div></app-server>
+		  
+		  server template:
+		  <div class=row>
+		  ...
+		  <ng-content></ng-content>// This will be replaced by the content between app-server.
+		  ...
+		  </div>
+* View Encapsulation in Angular:
+	* Shadow DOM: Shadow DOM is part of the Web Components standard and enables DOM tree and style encapsulation. it basically means that Shadow DOM allows us 
+	  to hide DOM logic behind other elements. Addition to that, it enables us to apply scoped styles to elements without them bleeding out to the outer world.
+	  We can build components that expose a single (custom) element with hidden DOM logic under the hood, and styles that only apply to that element - a web 
+	  component. Just think of an <input type="date"> element. Isn’t it nice that we can just use a single tag and the browser renders a whole date picker 
+	  for us? 
+	* In Angular we build components. A component is a controller class with a template and styles that belong to it. This is great usecase for Shadow DOM,
+	  but most browsers do not support shadow DOM yet. So it emulates this behaviour with View Encapsulation.
+	* Angular comes with view encapsulation built in, which enables us to use Shadow DOM or even emulate it. There are three view encapsulation types:
+		* ViewEncapsulation.None - No Shadow DOM at all. Therefore, also no style encapsulation. This also means that all the styles apply to the entire document. Or
+		  in other words, a component could overwrite styles from another component because its styles are applied to the document head later.
+		* ViewEncapsulation.Emulated - No Shadow DOM but style encapsulation emulation. In order to style encapsulation without shadow DOM, it extends the CSS 
+		  selectors, so they have a higher specificity and don’t collide with other selectors defined before at the same. And of course, to make those selectors
+		  actually match, the elements in the template need to be extended as well. That’s why we see all those _ngcontent-* and _nghost-* attributes.angular
+		  adds unique _ngcontent-* attributes to each element.
+		* ViewEncapsulation.Native - Native Shadow DOM with all it’s goodness. But this works only on browsers supporting shadow DOM.
+	* By default, Angular uses, ViewEncapsulation.Emulated. In order to change it we need to set encapsulation property of @Component decorator.
+		eg:
+		@Component({
+			template:...
+			encapsulation. ViewEncapsulation.Native;
+			
+		})
+* Local Reference:
+	* A template reference variable is often a reference to a DOM element within a template. It can also be a reference to an Angular component or 
+	  directive or a web component (Read more at Angular.io). That means you can easily access the variable anywhere in the template(but only inside template).
+	* You declare a reference variable by using the hash symbol (#). The #firstNameInput declares a firstNameInput variable on an <input> element.
+	  eg: <input type="text" #firstNameInput>. It refers to the whole element.
+	* After that you can access the variable anywhere inside the template. For example, I pass the variable as an parameter on an event.
+	 <button (click)="show(firstNameInput)">Show</button>
+	* Usually, the reference variable can only be accessed inside the template. However, you can use ViewChild decorator to reference it inside 
+	  your component.When using @ViewChild(<refName>) to use the reference in the Component, we get ElementRef. It has 'nativeElement' property which 
+	  gives the HTMLElement.
+	  // Reference firstNameInput variable inside Component
+		@ViewChild('firstNameInput') nameInputRef: ElementRef;
+		val = nameInputRef.nativeElement.value;
+	* If the local reference is present in the parent Component within the content that will be passed to <ng-content>, then we can use 
+	  @ContentChild('<refName>') to get the ElementRef.
+	* It is not recommended to change DOM using localReference.
+* Component Lifecycle:
+	* When a new component is created, (when a selector is present in the template) and added to DOM, Angular goes through instantiation phases. Angular gives
+	  us hooks to implement some code during the lifecycle. The most common Lifecycle hook methods are:
+		* ngOnChanges: It is called during init (after constructor) and also if the value of any bound input( properties with @Input() decorator) property
+		  changes. If the @Input refers to a property which points to an reference type eg: object and the value mutates, this function is not called as 
+          the value(reference to that object) remains unchanged. Also this function takes a parameter changes, which an object of type SimpleChanges which 
+		  contains 'currentValue' and 'previousValue' of the changed property.
+		* ngOnInit: It is called when the Component is initialized. It is called after constructor and ngOnChanges.
+		* ngDoCheck: This is called every time when ChangeDetection runs in angular. ChangeDetection is triggered multiple times eg: On events, timer functions
+		  etc.
+		* ngAfterContentInit : When the Content projected using ng-content in added to the Component View, this method is triggerd
+		* ngAfterContentChecked: When the Content projected using ng-content is checked during Change detection.
+		* ngAfterViewInit: When the template or View of the Component is initialized. The LocalRefences on the View will be available only after this state.
+		* ngAfterViewChecked: When the template or View of the Component is checked  during Change detection.
+		* ngOnDestroy: When the component is destroyed. Cleanup can done in this method.
+* Services 
+	* Service is a broad category encompassing any value, function, or feature that an app needs. A service is typically a class with a narrow, well-defined 
+	  purpose. It should do something specific and do it well.
+	* It is simply a typescript class providing some functionality.
+	* Ideally, a component's job is to enable the user experience and nothing more. A component should present properties and methods for data binding, in 
+	  order to mediate between the view (rendered by the template) and the application logic (which often includes some notion of a model).
+	* A component can delegate certain tasks to services, such as fetching data from the server, validating user input, or logging directly to the console. 
+	  By defining such processing tasks in an injectable service class, you make those tasks available to any component. 
+	* Creating a service:
+		* It is simply a typescript file. No decorator is needed. It is convention to name the service file as <functionality>.service.ts eg:
+		logging.service.ts.
+			export class LoggingService {
+				log(msg) {console.log(msg)}
+				warn(msg) {console.warn(msg)}
+				...
+			}
+	* Using a service:
+		* We use dependency injection to use a service in our component. In order to use a service we do the following:
+			* Inject the service in the constructor of the component that needs to use the service. This lets angular know that we are using the specified
+			  service
+			* We also need to add the service in the providers[] of our @Component decorator if we need a new instance of Logging Service. Dependency
+			  injection in angular is heirarcial i.e If we add a Service in the providers[] of a component then it is also available to all child components.
+			  Then the same instance of the service is available to all the components and child components. If a particular child component needs a 
+			  separate instance of the service or none of the parent components uses the service then we need to add the service to providers array.
+			 eg:
+				@Component(
+					selector: 'app-server',
+					...,
+					providers: [LoggingService]
+				)
+				export class ServerComponent {
+					constructor(private logSrv: LoggingService){}//This is dependency injection. This lets angular know we are using logging service
+				}
+			* A service can be used by another service. In this case we need to add @Injectable() decorator to the service which uses or is dependent on
+			  other services. We can set providers array in @Injectable() decorator if we want to inject other services into this service.
+			  *  Angular 6+ Instead of adding a service class to the providers[]  array in AppModule , you can set the following config in @Injectable() :
+					@Injectable({providedIn: 'root'})
+					export class MyService { ... }
+				* Using this new syntax is completely optional, the traditional syntax (using providers[] ) will still work. The "new syntax" does offer one advantage 
+				  though: Services can be loaded lazily by Angular (behind the scenes) and redundant code can be removed automatically. This can lead to a better 
+				  performance and loading speed - though this really only kicks in for bigger services and apps in general.
+	* Angular Hierarcial Dependency Injection
+		* The highest level where we can add a service is at providers array in  @NgModules decorator of AppModule in app.modules.ts file. When added in  
+		 appModule a single instance of the service is available to whole application including all the services.
+		* The next level in AppComponent. If added to providers array in AppComponent it is available to all compoennts but not service.
+		* Any other component, it is available only to child compoennts.
+* Routing:
+	* The browser is a familiar model of application navigation:
+		* Enter a URL in the address bar and the browser navigates to a corresponding page.
+		* Click links on the page and the browser navigates to a new page.
+		This usually involves a communication to server and page load. 
+	* The Angular Router ("the router") borrows from this model. It can interpret a browser URL as an instruction to navigate to a client-generated view. It can 
+	  pass optional parameters along to the supporting view component that help it decide what specific content to present. You can bind the router to links
+	  on a page and it will navigate to the appropriate application view when the user clicks a link. Though user "sees" different page, angular is still in 
+      the same page and imitates this behaviour for the user using DOM Manipulation. This is the basis of angular Routing.
+	* Configurins Routes in Angular App
+		* The Angular Router is an optional service that presents a particular component view for a given URL. It is not part of the Angular core. It is in its 
+		  own library package, @angular/router. A routed Angular application has one singleton instance of the Router service. When the browser's URL changes,
+		  that router looks for a corresponding Route from which it can determine the component to display. A router has no routes until you configure it.
+		* To configure a route we need to add constant to Routes( which needs to imported from @angular/router), which is an array of  objects, which 
+		  contains the following properties:
+			* path: It is the path the router needs to look for, to render the provided component. 
+			  eg: path: 'users' -> /users, path:'servers/server'-> /servers/server
+			* component: this property gives the component that will initialized and rendered everytime the user visits the corresponding path. The component
+			  is destroyed when he navigates away. eg: component: UserComponent
+			* redirectTo: This can be provided instead of a component, this will direct to the specified path. Note that this should containg the full
+			  absolute path i.e to redirect to users path we need to specify redirectTo: '/users'
+			* pathMatch: This property  determines whether to match full path or just prefix. By default the pathMatching in angular is prefix.
+				* pathMatch:'full' means, that the whole URL path needs to match and is consumed by the route matching algorithm. It does not check
+				  child paths and if whole path does not match, it will give error. This is useful when we want to redirect to another path. In 
+				  case of redirectTo, it is good practice to use pathMatch: full to ensure it only redirects on complete match. Otherwise default
+				  value is sufficient.
+				* pathMatch: 'prefix' means, the first route where the path matches the start of the URL is choosen, but then the route matching algorithm 
+				  is continuing searching for matching child routes where the rest of the URL matches.
+			* data: This property is used to pass static data to the component. The value of the property is an object (key/value pair). The data can
+			  be retreived at the componentusing similar approach as params, queryParams etc.
+				* this.route.snapshot.data['<key>'] // To get data if it does not change after component load
+				* this.route.data.subscribe((data:Data)=>{
+						// HAndle data passed
+				  })
+			* children: This is an array of objects of child routes. i.e For the route /servers/server we can add this as a child route. Then we need to 
+			  place this route in the children array and path should be just 'server' as '/servers/' is automatically added by angular.
+			  eg:
+			  const appRoutes: Routes = [
+				{path:"", component:HomeComponent},
+				{path:"servers", component:ServersComponent},
+				{path:"users", component:UsersComponent, children:[
+					{path:":id", component:UserComponent},
+					{path:":id/edit", component:UserEditComponent}
+				]},
+				{path:"not-found", data:{messages:"Page not found"}, redirectTo:"/"}
+			  ]. 
+				* It is important to note that children(nested) reuire a <router-outlet></router-outlet> directive in there parent template to display
+				  the component that will loaded. 
+			* Once the routes are configured, we need to inform angular about the routes. This is done by configuring RouterModule.forRoot() method witch takes
+			  the Routes as input. The RouterModule needs to added to the imports array of appModule.
+				
+				@ngModule({
+				imports:[RouterModule.forRoot(appRoutes)]
+				})
+			* Finally in order to get the component properly displayed on visiting the route, we need to use the directive RouterOutlet. The RouterOutlet is a 
+			  directive from the router library that is used like a component. It acts as a placeholder that marks the spot in the template where the router
+			  should display the components for that outlet.
+
+				<router-outlet></router-outlet>
+				<!-- Routed components go here -->
+				Thus when we visit the url "/servers", the angular router servers looks for the path "servers" and then renders the corresponding component
+				as the sibling of the host component at the placeholder <router-outlet>
+		
+	* RouterLink:
+		* RouterLink is used to navigate to as a result of some user action such as the click of an anchor tag. 
+		* The RouterLink directives can be used of anchor tags/buttons etc and it give the router control over those elements. With property binding on 
+          the routerlink directive, we pass the route to navigate to. The value can either be :
+				* string -> representing the route eg: [routerLink]="'/users/10/edit'" -> will navigate to /users/10/edit. This can also be specified as 
+				  routerLink = "/users/10/edit"
+				* array -> This is useful when the route is dynamic eg: [routerlink]="['/users', 10, 'edit]" -> will navigate to /users/10/edit
+		  eg: <a routerLink="/users">Users</a>
+	* Relative vs Absolute Paths:
+		* Absolute Path: They start with "/" is the absolute route from the root route. 
+		  eg: [routerLink] = "/users" -> will always load /users irrespective of the component in which the link is placed.
+		* Relative Path: The Path is determined relative to the path of the currently loaded component. This can be used without a "/" or using "./"(current path), 
+		  "../"(parent path) etc.
+		  eg: [routerLink] = "users" will try to  load /users if link is placed in AppComponent, /users/users if the link is in users component etc.
+	* RouterLinkActive:
+		* This directive lets you add a CSS class to an element when the link's route becomes active. The directive can be added directly to the link
+		  or a wrapping parent element. 
+		  eg: <a routerLink="/user/bob" routerLinkActive="active-link">Bob</a> i.e When the url is either '/','/user' or '/user/bob', the active-link class
+		  will be added to the a tag. If the url changes, the class will be removed.
+		* routerLinkActiveOptions: You can configure RouterLinkActive by passing exact: true to the property. This will add the classes only when the url
+		  matches the link exactly.
+			eg: <li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/user/bob" >Bob</a></li>. In this case the
+			class active-link will be added to li only if the url is exactly '/users/bob'.
+	* Navigate to a Link Programatically:
+		* Using routerLink directive, we can navigate to a link from the template. If we want to navigate to a link from the typescript code, we need
+		  to use the 'navigate' method of the router server.
+			* We first need to inject the router in our component constructor. We need to import Router from '@angular/router'
+			* Then we need to call this.router.navigate(['/servers']), whose first parameter is an array from which router path is contructed.
+			* The second parameter of the navigate method is an object. It has many properties. Most commonly used properties are:
+				* relativeTo: When we want to specify a relative path in navigate method, we need to specify to angular relative to which path we need 
+				 to navigate. We can do using by setting relativeTo property. This can be set to current route by injecting ActivatedRoute instance in
+				 our constructor
+					* ActivatedRoute: It is the object containing lot of metadata about currently active route.
+			eg:
+			import { Router } from '@angular/router';
+			@Component(..) 
+			export class UserComponent {
+				constructor(private router:Router, private route: ActivatedRoute) {}
+				onUserEdit() {
+					this.router.navigate(['edit'], {relativeTo: this.route});
+				}
+			} i.e If the current route is /users/10 then it onUserEdit it will navigate to /users/10/edit since we use relative paths here.
+	* Route Params:
+		* Route params are used to pass dynamic data into a route. eg: /users/1 is the route for UserComponent with id 1, /users/2 is the route for
+		UserComponent with id 2. To set up a dynamic route we ':' followed by a route parameter.
+		eg: {path:'users/:id', component:UserComponent}. It is dynamic route which catches anything in the format /user/<any_data> and the data is available
+		within the parameter 'id'.
+		* We can retrive the route params which are part of the current route in our typescript code. In order to retrive it:
+			* We need to inject the ActivatedRoute into our component constructor.
+			* Then we can get the data contained in the params using shapshot.params['<id>'] property of the ActivatedRoute object.
+			* Another approach to retrive the params is to use params property of ActivatedRoute object. The params property is an observable which emits
+			  events if the route parameter changes. We can subscribe to these events and handle them on change. This is the approach to follow if the 
+			  route params will change dynamically from within the component because the component is recreated if router params changes when we 
+			  already inside the component and snapshot approach may not work. The event emits the updated params object, which we can use.
+				eg: export class UserComponent {
+						userId:number;
+						constructor(private route:ActivatedRoute) {}
+						
+						ngOnInit(){
+							this.userId = this.route.snapshot.params['id'];
+							this.route.params.subsrcibe((params:Params)=>{
+								this.userId = param['id']
+							})
+						}
+					}
+			* Angular heavily uses Observables, which is a third party feature implemented in RxJs. In case to routes params observable, angular will clean 
+			  up the subscription when the component is destroyed(when we navigate away). Ideally for any other Observable, if we subscribe to events, we 
+			  need to unsubscribe on OnDestroy method.
+	* Query Params:
+		* We can pass query parameters in our URL. They are key, value pairs starting with '?' after the url and each key value pair is separated by '&' 
+		  sign. URL also can contain fragment , usually preceded by '#'. The general functionality of # is to act as a internal link and take us to that part
+		  of the page. eg: http://localhost:4200/server/2/edit?allowEdit=true&allowClick=false#loading	i.e Here allowClick and allowEdit are queryParams
+		  and loading is a fragment ( There can many queryParams but only one fragment)
+		* We can pass and retrive both queryParams and fragment in angular both using routerLink and programatically using navigate method:
+			* Passing queryParams & fragment
+				* routerLink:
+					* RouterLink directive has property queryParams which takes an object of key-value pairs and fragment which takes a string. These 
+					  properties can be set by using property binding in the same element where we use routerLink directive.
+					  eg: <a [routerLink]="['/servers', 5, 'edit']" [queryParams]="{allowClick:false, allowEdit:true}" fragment="loading"> Prod Server</a>
+				* navigate Method
+					* Programatically we can pass using navigate method. The second parameter of navigate which is an object has properties queryParams and fragment
+						eg:
+						this.route.navigate(['/servers', 5, 'edit'], {queryParams:{allowEdit:true}, fragment:'loading'})
+			* Retriving queryParams * fragment
+				* Link Params we can retrive the data using either the snapshot or subscribing to the Observable.
+				* Need to inject ActivatedRoute in the component where we need to use queryParams or fragment. Then we can retrive it in ngOnInit 
+				eg:
+					constructor(private route:ActivatedRoute) {}
+						
+					ngOnInit(){
+						const queryParams = this.route.snapshot.queryParams;
+						const fragment = this.route.snapshot.fragment;
+						this.route.queryParams.subscribe((queryParams: Params)=>{...});// Subscription to queryParams observable
+						this.route.fragment.subscribe(()=>{...})
+					}
+				
+			* Preserving and passing the queryParams to other routes:
+				* We can sue the property 'queryParamsHandling'(which is another property of object passed as part of navigate method) can be passed.
+				  It can take the following values:
+					* 'merge' -> Merge the queryParams passed to this route + any additional queryParams
+					* 'preserve' -> Preserve the queryParams passed to this and pass it on to the navigated route.
+					By default the queryParams are dropped when navigating to a new link. 
+	* Wildcard Route(**) - We may need a catch all routes to display proper error page. The wildcard path "**" is used for this. This should be the last path
+	  in the list of paths, because paths are parsed in order and if this is defined in the beginning it will match all routes and no other route will be checked.
+	 eg:
+		 const appRoutes: Routes = [
+				{path:"", component:HomeComponent},
+				{path:"servers", component:ServersComponent},
+				{path:"users", component:UsersComponent, children:[
+					{path:":id", component:UserComponent},
+					{path:":id/edit", component:UserEditComponent}
+				]},
+				{path:"not-found", component:ErrorComponent},
+				{path="**" , redirectTo:"/not-found"}
+			  ]
+	* It is good practice to define routes, in a separate module. We can create our own routing module by using @NgModule decorator on the typescript class.
+	  In case of our router module, we can define our paths in this module. We can then import RouterModule and configure it using forRoot and export it in 
+	  exports array of @NgModule. We need to export it to ensure any module importing our router module, we get configured RouterModule.
+	  eg:
+	  
+	  const appRoutes:Routes = [...
+	  // configure all routing paths
+	  ];
+	  
+	  @NgModule({
+		imports:[RouterModule.forRoot(appRoutes)],
+		exports:[RouterModule]
+	  
+	  })
+	  
+	  export class AppRouterModule {
+	  }
+* Router Gaurds:
+	* In traditional server side applications the application would check permissions on the server and return a 403(Permission Denied) error page if the user 
+	  didn’t have permissions, or perhaps redirect them to a login/register page if they were not signed up.
+	* We can have the same functionality in our client side SPA, and with Router Guards. With Router Guards we can prevent users from accessing areas that 
+	  they’re not allowed to access, or, we can ask them for confirmation when leaving a certain area.
+	* Guards are implemented as services that need to be provided so we typically create them as @Injectable classes.
+	* There are four different types of Guards: For a given route we can implement zero or any number of Guards.
+		* CanActivate
+			* Checks to see if a user can visit a route.
+			* CanActivate Guards return either true if the user can access a route or false if they can’t. They can also return an Observable or Promise that 
+			  later on resolves to a boolean in case the guard can’t answer the question straight away, for example it might need to call an API. Angular 
+			  will keep the user waiting until the guard returns true or false.
+			* In order to implement CanActivate Guards, we do the following:
+				* Create a service and add it to providers array in AppModule so it is available to whole application. 
+				* Add canActivate property to router path. The value of this property is an array containing CanActivate services.
+				* The main requirement of the CanActivate service is that it should implement CanActivate interface of '@angular/router' module. This
+				  forces us to implement canActivate method inside our service. This method takes route(ActivatedRouteSnapshot) and state(RouterStateSnapshot)
+				  as parameters and returns a boolean or an Observable/Promise which resolves to a boolean.
+				* Every time we try to access a path contain canActivate property, the canActivate method of the Service is called and access is allowed 
+				  based on the value returned.
+				  eg:
+				  
+				  Service:
+				  import {CanActivate, CanActivateChild} from "@angular/router";
+				  class AuthGuard implements CanActivate, CanActivateChild {
+					canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Boolean| Observable<Boolean> | Promise<Boolean> {
+						if(this.authenticated) {
+							return true
+						} else {
+							return false;
+						}
+					}
+					CanActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Boolean| Observable<Boolean> | Promise<Boolean> {
+						retutn this.canActivate();
+					}
+				  }
+				
+				Usage:
+				const appRoutes:Routes = [...
+					{path:'servers', component:ServersComponent , canActivate:[AuthGuard]}
+				];
+				* This prevents access to URL to the route and all child routes if canActivate method of AuthGuard returns false. 
+		* CanActivateChild
+			* Checks to see if a user can visit a routes children.
+			* It is similar to canActivate Gaurd, but only protects the child routes. In order to implement CanActivateChild Gaurd, we need to:
+				* Create a service that implement CanActivateChild interface from '@angular/router' module. This then forces as to implement canActivateChild
+				  method which exactly similar to canActivate method of CanActivate interface. 
+				* This service is then added to AppModule and also to the canActivateChild property of out route.
+				eg:
+				const appRoutes:Routes = [...
+					{path:'servers', component:ServersComponent , canActivateChild:[AuthGuard], children:[
+							//child routes
+					]}
+				];
+				* We can noe access /servers route, but child routes are accessible only if the canActivateChild method returns true.
+		* CanDeactivate
+			* Checks to see if a user can exit a route.
+			* CanDeactivate guard is usually used to warn people if they are navigating away from a page where they have some unsaved changes.
+			* In order to use CanDeactivate guard we do the following steps:
+				 * Create a service which implement CanDeactivate interface from '@angular/router'. CanDeactivate is a generic interface so needs for us to 
+				   additionally provide it the type of our the component in-between some angle brackets CanDeactivate<our_component>. This is so it knows the 
+				   type of the component to pass into the canDeactivate function itself. This service also needs to be added in the providers array of @NgModule.
+				 * CanDeactivate interface forces us to implement canDeactivate function in our service. 
+					* This function takes the following parameters:
+						* Component: The component to which the CanDeactivate guard is added.
+						* current ActivatedRouteSnapshot: Snapshot of Current route (We can get params, queryParams etc from this)
+						* current RouterStateSnapshot: Snapshot of Current Router State
+						* next RouterStateSnapshot: This is optional parameter and contains details of the next state we are navigating to. 
+					* Inside the function we can have access to the component having canDeactivate guard and we can call the a method of our component which in
+					  turn checks if we can navigate away from the component (i.e if changes made is saved, get confirmation from the user etc. Usually the main 
+					  logic is the function implemented in the component) and return a boolean or a promise/Observable that can be resolved to a boolean.
+					* The value returned by compoennt function is then returned by the canDeactivate method of our service. 
+				* Add canDeactivate property to router path. The value of this property is an array containing CanDectivate services(Services implementing 
+				  CanDeactivate interface)
+				  eg:
+				Service:  
+				interface CanDeactivateComp {
+					canDeactivate () : boolean | Promise<boolean> | Observable<boolean>; 
+				}
+				export class CanDeactivateGuard implements CanDeactivate<CanDeactivateComp> {
+					canDeactivate(component: CanDeactivateComp, route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+					: boolean | Promise<boolean> | Observable<boolean> {
+						return component.canDeactivate();
+					}
+				}
+				
+				Component:
+				
+				export class EditServerComponent implements CanDeactivateComp{
+					...
+					canDeactivate() {
+						//logic to determine whether we can deactivate
+						if (canDeactivate) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+				
+				Usage:
+				const appRoutes:Routes = [...
+					{path:'servers/:id/edit', component:EditServerComponent , canDeactivate:[CanDeactivateGuard]}
+				];
+				
+		* canLoad: This guard is used to check if a lazily loaded component needs to loaded. For this guard it should implement 'CanLoad' interface,
+          which forces us to implement canLoad method which return boolean synchronously or asynchronously.	eg: If we use a AuthGuard(implementing CanLoad 
+		  interface), that returns true only when the user is logged in, then we can add AuthGuard to canLoad property. This ensures that components of
+		  the lazily loaded feature module loads only if canLoad method return true.		  
+		* Resolve
+			* Performs route data retrieval before route activation.
+			* This approach is used to pass dynamic data to a route before a route is rendered. We can use 'data' property to pass static data.
+			* In order to pass dynamic data we do the following:
+				* Create a service that implements Resolve interface which forces us to implement resolve method. Resolve interface is a generic interface 
+				  and needs for us to additionally provide the type of data that will returned by particular service. This service needs to added to providers 
+				  array of @NgModule in AppModule.
+				* resolve method of our service takes RouterStateSnapshot and ActivatedRouteSnapshot as parameters and return data of type specified in
+				  Resolve interface or Observable/Promise that can be resolved to that type.
+				* resolve property is added to the route, we need to pass data to. The value of this is an object. We can have any key and provide our service
+				  which implements Resolve as value.
+				* In the component we can then retreive the value using:
+					* this.route.snapshot.data['<key>'] (or)
+					* this.route.data.subscribe((data:Data) => {
+						data['<key'>]
+						//handle the data 
+					  })
+				eg:
+				Service
+				
+				export class ServerResolver implements Resolve<string> {
+				
+					resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): string | Observable<string> | Promise <string> {
+						//Get data
+						return data;
+					}
+				}
+				
+				Usage:
+					const appRoutes:Routes = [...
+						{path:'servers/:id', component:ServerComponent , resolve:{server: ServerResolver}}
+					];
+
+		* CanLoad
+			* Checks to see if a user can route to a module that lazy loaded.
+	* Routing Deployement issues:
+		* The url is always first parsed by the server and sence we use client side routing in angular, we mostly would not have routing in server. Server would
+		  then return "404: Error". For angular routing to work properly we can follow one of  two approaches listed below:
+			* Configure the server to return index.html file if route is not found. Then angular will take over the routing. This config is already present
+			  in angular dev server. This is the preferred approach
+			* We can set 'useHash' property to true, in the forRoot method of the RouterModule. This will force angular route to use '#' and the real server
+			 will care only about part before the '#'
+			 eg: RouterModule.forRoot(appRoutes, {useHash: true}) 
+			 Url with '#' -> http://localhost:3000/#/servers ,  http://localhost:3000/#/users/2 etc
+* Observables:
+	* Observable is one way for handling asynchronous event like callbacks and promises. It follows observer design pattern. Observable is just a data source
+	  which emits data packet on event, http request, different code triggers etc. A set of Observers listen/subscribe to these data packets and handle them.
+	  The different type of data emitted by observers are:
+		* data 
+		* error 
+		* completion (Not all observables complete eg: events on button click do not have any completion while other events like http request have a completion)
+	* Angular heavily uses Observables from third party library RxJS(Reactive Extentions Library for Javascript) RxJS is a library for reactive programming using 
+	  Observables, to make it easier to compose asynchronous or callback-based code.
+	* To install rxjs we use command 'npm install rxjs'. but it is already pre installed by Angular CLI as it is  dependency of angular.
+		* rxjs-compat - There was some syntax changes with the latest rxjs version. rxjs-compat helps to provide background compatability if we 
+		  use older syntax.
+	* Built in Observables in Angular:
+		* In Angular, it mostly creates the observers and emit data and we subscribe to these observables and handle the data sent. eg: params, queryParams etc
+		  i.e if the params, queryParams etc of a route changes angular does not re-render the component, instead it add the changed data as asynchrous 
+		  data packet and emit it. We as observsers subscribe to this data using the subscribe method provided by rxjs Observable. The subscribe method takes
+		  three anonymous functions as parameters to handle data, error and completion.
+		  eg:
+		  this.route.params.suscribe(       
+		  (params:Params) => {
+			//handle data
+		  },
+		  (error) => {
+			//handle error
+		  },
+		  ()=> {
+			//handle completion
+		  })
+	* Creating Observable using RxJS
+		* interval -> Creates an Observable that emits sequential numbers every specified interval of time. interval returns an Observable that emits an infinite
+ 		  sequence of ascending integers, with a constant interval of time of your choosing between those emissions. The first emission is not sent immediately,
+		  but only after the first period has passed
+		  
+		  eg:
+		  import { interval } from 'rxjs';
+		  
+		  const numbers = interval(1000); // numbers is an observable
+		  
+		  numbers.subscribe((num: number)=> {
+			console.log(num);
+		  })
+	
+		* Observable.create
+			* Observables can be considered as function returning multiple values. This function is defined when we create an Observable. It can either be 
+			  anonymous or named function with a single Observer parameter.
+			* Observable.create is an alias for the Observable constructor, and it takes one argument: the subscribe function with the Observer as a paramater.
+			  Observer is just wrapper object around our subscribe. It just provides three properties that are actually callback functions to be called by 
+			  Observable.
+				next -> To pass next set of data
+				error -> To pass error message/exception
+				complete -> To stop the execution of the observable function.
+			* Inside the function we make calles to observer.next(<data>), observer.error(<error>), observer.complete().
+			* This function is executed when we subscribe on the Observable. Thus by using subscribe we are just synchronously executing the  function
+			  registered with the Observable. As it requires a Observer parameter, we pass the functions for next, error and complete which is then 
+			  contructed as an Observer object by rxJS and passed to the function registered with the Observable:
+			  eg:
+			  import {Observable, Observer} from 'rxjs';
+			  const myObservable = Observable.create((observer:Observer) => {
+			  try {
+				observer.next(100);
+				observer.next(200); // Pass synchronous data to observer
+				setTimeout((observer)=>{observer.next(300)}, 1000) // Pass data asynchronously
+				setTimeout((observer)=>{observer.complete()}, 2000) //Pass completion
+				setTimeout((observer)=>{observer.next(400)}, 3000) // This will not be executed as we complete the function
+			  } catch(err) {
+				observer.error(err); // Pass error
+			  }
+			  
+			  myObservable.subscribe((data: number) => {console.log(data)}, (err: string) => {console.log(err)}, ()=>{console.log(complete);})
+				
+			  })
+			* There are other methods of creating Observable like converting Promise/Event to a Observable etc. We can check RxJs documentation to learn more.
+		* unsubscribe:
+			* A Subscription is an object that represents a disposable resource, usually the execution of an Observable. A Subscription has one important
+			  method, unsubscribe, that takes no argument and just disposes the resource held by the subscription. We need to unsubscribe to an Observable
+			  when we do not the observable any more to prevent memory leak.
+			  eg:
+			  import { interval } from 'rxjs';
+
+			  const observable = interval(1000);
+			  const subscription = observable.subscribe(x => console.log(x));
+				// Later:
+				// This cancels the ongoing Observable execution which
+				// was started by calling subscribe with an Observer.
+			  subscription.unsubscribe();
+			* In Angular we usually call unsubscribe on ngOnDestroy Lifecycle hook.
+	* Subject in RxJS:
+		* An RxJS Subject is a special type of Observable that allows values to be multicasted to many Observers. While plain Observables are unicast 
+		 (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast.
+		* Every Subject is an Observable. Given a Subject, you can subscribe to it, providing an Observer, which will start receiving values normally. 
+		  From the perspective of the Observer, it cannot tell whether the Observable execution is coming from a plain unicast Observable or a Subject.
+		* Internally to the Subject, subscribe does not invoke a new execution that delivers values. It simply registers the given Observer in a list of 
+		  Observers, similarly to how addListener usually works in other libraries and languages.
+		* Every Subject is also an Observer. It is an object with the methods next(v), error(e), and complete(). To feed a new value to the Subject, just call 
+		  next(theValue), and it will be multicasted to the Observers registered to listen to the Subject.
+		* Thus a Subject is both an Observable and Observer. It is similar to EventEmitter in Angular. We can emit data using subject.next() and subscribe
+		  to the data using subject.subscribe() method. Thus it can be used for inter component communication.
+		eg:
+			import { Subject } from 'rxjs';
+ 
+			const subject = new Subject<number>();
+ 
+			subject.subscribe(
+				(val:number) => console.log(`observerA: ${val}`)
+			);
+			subject.subscribe(
+				(val:number) => console.log(`observerB: ${v}`)
+			);
+ 
+			subject.next(1);
+			subject.next(2);
+ 
+			// Logs:
+			// observerA: 1
+			// observerB: 1
+			// observerA: 2
+			// observerB: 2
+	* Operators in RxJS	
+		* Operators transform items that are emitted by an Observable.
+		* Most operators operate on an Observable and return an Observable. This allows you to apply these operators one after the other, in a chain. Each 
+		  operator in the chain modifies the Observable that results from the operation of the previous operator.
+		* Operators are very useful and widely used feature of RxJS. Operators are functions that build on the observables foundation to enable sophisticated 
+		  manipulation of collections. For example, RxJS defines operators such as map(), filter(), concat(), and flatMap().
+		  
+		  eg:
+		  import { map } from 'rxjs/operators';
+		  import { interval } from 'rxjs';
+		  
+		  const myObservable = interval(1000);
+		  const squareObservable = myObservable.pipe(map((val) => {
+			return val * val;
+		  }))
+		  
+		  
+		* You can use pipes to link operators together. Pipes let you combine multiple functions into a single function. The pipe() function takes as its 
+		  arguments the functions you want to combine, and returns a new function that, when executed, runs the composed functions in sequence.
+		  
+		  
+		  eg:
+		  const squareOddVals = pipe(
+				filter((n: number) => {return n % 2 !== 0}),
+				map(n => {return n * n})
+			);
+		* Some useful rxjs operators:
+			* map : 
+				This operator is used to modify the data in the observable. We return the modified data which is automatically wrapped in an Observable by rxjs.
+			* switchMap:
+				This is similar to map, expect the returned data is not mapped in an observable. This is very useful in case the modified data itself is 
+				an Observable.
+			* take:
+				When you are interested in only the first set number of emission, you want to use take. Maybe you want to see what the user first clicked 
+				on when he/she first entered the page, you would want to subscribe to the click event and just take the first emission. There is a race 
+				and you want to observe the race, but you're only interested in the first who crosses the finish line. 
+				* take operator takes an integer and after the specified number of emissions it unsubscribes to the Observable.
+				eg: myObservable.pipe(take(2), map((n)=>{n*n}) // This only subscribes two first two value
+			* from:
+				Convert other type of data to Observable. It is used convert Array,Collection,Promise etc as Observable.
+			* withLatestFrom :
+				Combines the source Observable with other Observables to create an Observable whose values are calculated from the latest values of each, 
+				only when the source emits. 
+		* The list of all documentation can be found at https://rxjs-dev.firebaseapp.com/
+
+
+Forms:
+	* Usually we submit the form directly to the server using 'POST' method. But Angular is a SPA hence we cannot directly submit the form. We need to handle
+	  it in Angular and later use HttpService of Angular to send data to the backend. 
+	* Angular provides really powerful tools to work with forms. Angular helps in converting our form template to a javascript object that we can work with
+	  in the typescript code.
+	* There are two different approaches that we can use while working with forms: They are:
+		* template driven approach - In this angular parses the DOM and create a object for us to work with. Form is created in the template(html)
+		* reactive approach - In this approach we create the form programatically and synchronous it with the template. We have finer control over each form
+		  field approach.
+	* Template driven approach:
+		* In order to use template driven approach of handling forms in angular we need to import 'FormsModule' from '@angular/forms' module.
+		* Then we need to create a form in out template. A form object representation is automatically created when angular parses the <form></form>
+		  template in HTML file. * As soon as you import the FormsModule, ngForm directive becomes active by default on all <form> tags. You don't 
+		  need to add a special selector.But the object will be empty. Angular does not automatically add input, select and other control and their value to
+		  the form. 
+		* In order to add input/select etc to the form object we need to:
+			* Ensure the input, select etc has the html 'name' attribute set.
+			* Add 'ngModel' directive to the input/select etc. This automatically adds these form control to the form object. 
+		* In order get access to this object created we can add a local refrence variable in the form tag and set it to the directive ngForm 
+		  (ex: #myForm="ngForm"). We can then access this local ref using either @ViewChild in the component or pass it to the typescript code using a 
+		  function on button click or form submit.
+		* (ngSubmit) -> event which is part of ngForm directive is triggered as part of form submit. We can call a typescript function during submit and 
+		  pass the local reference to it. The type of the local ref is 'NgForm' as we set it equal to ngForm directive.
+		eg:
+			Template:
+				<form #myForm="ngForm" (ngSubmit)= "onSubmit(myForm)">
+					<input type="text" name="username" ngModel>
+					<input type="text" name="email" ngModel>
+					<button tye="submit">submit</button>
+				</form>
+		
+			Typescript code:
+			
+			export class AppComponent {
+				@ViewChild('myForm') signupForm: NgForm; // access form using @ViewChild approach
+			
+				onSubmit(form:NgForm) {
+					console.log(form);
+					console.log(signupForm); // This is exactly same object as form (signupForm === form return true)
+				}
+			}
+		* Some of the properties of NgForm object are:
+			* value : -> This contains an object containing key-value pairs of the name of the control as key and the value user inputed as value for each
+			  control having ngModel directive on it.
+			* valid : This is boolean property with true/false based on whether the validation on each input passed or failed.
+			* invalid
+			* touched: This is boolean representing whether user click on the input or not
+			* dirty: This is boolean representing if the user input is changed or not
+			* form -> It the underlying FormGroup object
+			* controls -> It provides access to individual FormControl object and each FormControl has its own properties.
+			* errors -> It gives an object containing errors
+			* enabled -> Form is enabled or not
+			* disabled 
+			etc
+		* We can add validators to the input field. Angular has many directives which provide validation functionality. We can use these directive selectors
+  		  as attributes to include the validation for that control: Some of the validator available with angular are:
+			* required - Validates whether value is present for the field
+			* email - Validates whether the given email address is valid or not.
+			* maxlength - Checks that maximum length does not exceed the given value
+			* minlength - 
+			* pattern - Checks the given input matches the given regex pattern
+		  eg: <input name="fullName" pattern="[a-zA-Z ]*" required ngModel>
+		    This adds required and pattern validator to the input field. The valid/invalid property values of the control and whole ngForm object is set based
+		    on these validators. valid is set as false till proper value is provided. 
+		* Additionally, to enable HTML5 validation (by default, Angular disables it). add the ngNativeValidate attribute to a control in your template.  
+		* Angular also adds certain classes, which can be used to better style the form. These are:
+			* ng-dirty - Added if the control is modified.
+			* ng-valid - Added if the all validators succeed
+			* ng-touched - Added if input is modified
+			* ng-invalid - If the validators fail for that input
+		 * Similar classes are added to form tag as well. The valid property of ngForm is true only if all the controls are valid.
+		 * Similar to adding a local ref and setting it equal to "ngForm" to get access to NgForm object, to get get access to individual control, we 
+		  can set a local ref on the input and set it equal of "ngModel". This gives us access to the individual control object. Then we use that
+          reference properties like valid, touched etc 		  
+		 * We can make use of the classes added and properties of ngForm such valid, touched etc to improve user experience such as:
+			* Disable the submit button till form is valid
+			* Add red border around invalid inputs using css classes ng-invalid,ng-touched etc.
+			eg:
+				<form #myForm="ngForm">
+					<label>
+						<input type="radio" name="gender" value="male" ngModel required>// any one radio button should be selected.
+						Male
+					</label>
+					<label>
+						<input type="radio" name="gender" value="female" ngModel required>
+						Female
+					</label>
+					..
+					<button type="submit" [disabled]="!myForm.valid">
+				</form>
+				css
+				input.ng-touched.ng-invalid {
+					border: 1px solid red;
+				}
+			* Conditonally display helper message using *ngIf directive and the properties of the form control obtained using local reference.
+			eg:
+				<form #myForm="ngForm">
+					<input type="text" name="username" ngModel #userInput = "ngModel">
+					<span *ngIf="!userInput.valid && userInput.touched">Please enter valid username</span> //Helper text for individual fields
+					...
+					<span *ngIf="!myForm.valid && myForm.touched">Please enter valid Data</span> // Helper text for whole form
+				</form>
+			
+		* ngModel
+			* ngModel can be used with any binding to add it as control in the ngForm for template driven approach
+			* [ngModel] with property binding is used to set default value to the input/select field. 
+				eg: <input type="text" name="username" [ngModel]="defaultUsername>
+				
+				Typescript:
+				export class AppComponent{
+					defaultUsername = 'admin';
+				}
+			* ([ngModel]) - Two way data binding. (Both property and event binding). Keeps both the input and property in sync thus allowing changes in 
+			  one to be reflected in the other
+				eg: <input type="text" name="username" ([ngModel])="uname>
+					{{ uname}} // Dynamically reflect changes
+		* ngModelGroup
+			* This directive is used to create a sub-group within a form. This directive can only be used as a child of NgForm (or in other words, 
+			  within <form> tags)
+			* This can come in handy if you want to validate a sub-group of your form separately from the rest of your form
+			* This directive needs to be set equal to a string. This is required to set the key in the 'value' object of the ngForm object.
+			* It can also be exposed using local reference eg: (#myGroup="ngModelGroup").
+			eg:
+				<form>
+					<div ngModelGroup="userData" #myGroup="ngModelGroup">
+						<input type="text" name="username" ngModel>
+						<input type="text" name="email" ngModel>
+					</div>
+				</form>
+				eg:
+				
+				Typescript:
+					signupForm.value -> {
+											userData: {
+												username: <value>
+												email: <value>
+											}
+										}
+		* In order to set the value of forms programatically we have some method available:
+			* setValue: setValue() sets the value in each and every form control of FormGroup. We cannot omit any form control in setValue(). This method
+			  is part of FormGroup ( <ngForm>.form ) but also made available as part of ngForm
+				 eg: this.signUpForm.setValue({
+					userData:{
+						username:'Isa',
+						email:'test@test.com'
+					}
+				  })
+			* patchValue: When we want to assign only few form controls of FormGroup then we need to use patchValue(). It is available only as part of
+			  <ngForm>.form
+				eg: this.signUpForm.form.patchValue({
+						userData:{
+							username:'Isa'
+						}
+					})
+		* We can use the value property of the form to get the data.
+		  eg: username = signUpForm.value.userData.username;
+		* Reseting a form
+			* We can use the reset() function available in ngForm to reset the form. The form now resets, all the input fields go back to their initial state 
+			  and any valid, touched or dirty properties are also reset to their starting values.
+			  eg: this.signUpForm.reset();
+	* Reactive approach:
+		* For reactive forms module to work we need to import ReactiveFormModule from '@angular/forms' and add it to the imports array of our AppModule.
+		* We need to create the form programatically and synchronise with our template in the code.
+		* In order to create a form in our typescript we do the following:
+			* Create a property of type FormGroup, which needs to be imported from '@angular/forms'.
+			* Initialize the property. This is usually done on ngOnInit Lifecycle Hook. Initialise it using 'new' operator. The FormGroup constructor 
+			  takes an object of name/value pairs where 
+				* name is a string used to synchronise the particular FormControl/FormGroup/FormArray with the template. 
+				* value is either:
+					* FormControl - An object for an individual control like an input/select etc.
+					* FormGroup - An object containg one or more FormControls
+					* FormArray - An array of FormControls
+				eg:
+				ngOnInit() {
+					this.signUpForm = new FormGroup({
+						'userData':new FormGroup({
+							'username': new FormControl(null),
+							'email': new FormControl('test@test.com')
+						})
+						'plan': new FormControl(null),
+						'hobbies': new FormArray([])
+					})
+				}
+			* Synchronise the created form with the template. This is done using the following directives:
+				* Use formGroup directive in the form tag with property binding to bind it the FormGroup we created in out Component.
+				* Use formContolName directive with property binding to bind to the name of the FormControl in our typescript code.
+					* This directive ensures that any values written to the FormControl instance programmatically will be written to the DOM element
+						(model -> view). Conversely, any values written to the DOM element through user input will be reflected in the 
+						FormControl instance (view -> model).
+					* This directive is designed to be used with a parent FormGroupDirective (selector: [formGroup]).
+				* Use formGroupName directive with property binding to bind the name of any nested form group within the main form eg:(UserData)
+				* Use formArrayName directive with property binding to bind the name of any array div with FormArray in our typescript.
+					* A FormArray aggregates the values of each child FormControl into an array. It calculates its status by reducing the status 
+					  values of its children. For example, if one of the controls in a FormArray is invalid, the entire array becomes invalid.
+					* FormArray is one of the three fundamental building blocks used to define forms in Angular, along with FormControl and FormGroup
+					* We can dynamically create FormControls and push it FormArray. eg: Add an input each time a button each time button is 
+					  clicked. We can acess the FormControl from the array using '<formArray>.controls'	
+					* To synchronise the FormArray with the template we need to formArrayName to the containing div and formControlName to the 
+					  individual control. The name of the individual control is equal to the index of that control in ForrmArray
+					  To add FormControl Dynamically to our form:
+						Typescript:
+						onAddHobies() {
+							const control = new FormControl(null, Validators.required);
+							(<FormArray>this.signUpForm.get('hobbies')).push(control); // TypeScript requires us to cast it correct datatype to use push 
+																					// method
+						}
+						Template:
+						<div formArrayName="hobbies">
+							<input type="text" *ngFor="let hobbyControl of signUpForm.get('hobbies').controls; let i = index" [formContolName]="i">
+						</div>
+						// In a FormArray, the formContolName of the FormControl is set to the index and needed to bound using property binding for synchronising
+						// with template and our typescript form
+						
+				<form  (ngSubmit)= "onSubmit()" [formGroup]="signUpForm">
+					<div formGroupName="userData">
+						<input type="text" name="username" formContolName="username">
+						<input type="email" name="email" formContolName="email">
+					</div>
+					<input type="text" name="plan" formContolName="plan">
+					<button tye="submit">submit</button>
+				</form>
+			* Now the form is created in programatically and synchronised with the template. Any changes in the template will also reflect in the 
+			  FormGroup property we created in our Component and can be used both in our typescript code and used with property binding in our template.
+			* To get access to the individual element we can use 'get' method on the FormGroup. The 'get' method takes the path of the control as the 
+			  input and returns the individual control. 
+			  eg: <input type="email" name="email" formContolName="email">
+				  <span *ngId="!signUpForm.get('userData.email').valid && signUpForm.get('userData.email').touched">Enter valid email field</span>
+				  i.e We use path 'userData.email' because email is nested inside FormGroup 'userData'
+		* We can use ngSubmit directive with event binding to handle form submit.
+		* Validators:
+			* Validators are added as second parameter of the FormControl. It can either be a single validator or array containing Validators.
+			  Validators in turn are just methods in a specific form. Each Validator takes 'FormControl' as parameter and returns
+				* null or nothing in case of successful validation.
+				* An object with key as any string indicating our error and value as boolean for validation failure. This error object is added to the
+				  errors property of the individual control and can be used by us to enhance the quality of the weeor message we display to the user. 
+				  We can map these error objects to messages and display appropriate message to the user.
+			* In reactive Form approach we use Built in Validators, Which are available as part of Validators which needs to be imported from 
+			  '@angular/forms'. Some of the built in Validators are:
+				* Validators.required
+				* Validators.email
+				* Validators.maxLength
+				List of all validators are available at https://angular.io/api/forms/Validators
+			* We can create our custom validators in the correct format taking FormControl as parameter and returning null or Object (with name and boolean).
+				eg:
+				forbiddenUsernameValidator (formControl:FormControl) : {[s:string]:boolean} | null {
+					const forbiddenName = ['Anna','Chris'];
+					if(forbiddenName.indexOf(formControl.value) !== -1) {
+						return {'forbiddenName': true} // validator fails
+					} 
+					return null;//validator successful
+				}
+			   We can then the custom validator to FormControl
+			   eg:
+				this.signUpForm = new FormGroup({
+					...
+					'username': new FormControl(null, [Validators.required, forbiddenUsernameValidator]),// We just pass function reference
+					...
+				* We just pass the function reference. Function will called by angular.
+			* We can also have async validators. Asynchronous validators return a Promise or Observable that is resolved to null(on success) and error 
+			  object(on failure). The state of the control changes from invalid to pending and then gets resolved to valid/invalid based on the
+			  what Promise/Observable resolves to.
+			  * Asynchronous validators are specified as the third parameter of FormControl. Thus the parameters of the FormControl constructor
+				* default value or null (no defaul value) as the first parameter
+				* Single or Array of synchronous validators which can be both built in as well as custom as second parameter.
+				* Single or Array of Asynchronous validators as third parameter.
+		* statusChanges: This is an observable on the formGroup object as well as individual formControl object. We can subscribe to this observable and 
+		  get notified on any change in form/ form control status like VALID,INVALID,PENDING etc. We get the new status as part of the subscription.
+		* valueChanges: This is an observable on the formGroup object as well as individual formControl object. We can subscribe to this observable and 
+		  get notified on any change in value of form/form control. We get the value object as part of subscription. 
+		  eg: this.signupForm.valueChanges.subscribe((value)=>{console.log(value);})
+		* Like template driven approach we have function like setValue, patchValue and reset on the form group eg: this.signUpForm.setValue(...),
+		  this.signUpForm.patchValue(...), this.signupForm.reset()
+* Pipes
+	* Pipes allows us to transform output in our template. The main purpose of pipes is to transform output displayed to the user in the template. A pipe 
+	  takes in data as input and transforms it to a desired output. 
+	* There are different built in pipes for both synchronous and asynchronous data. We can also create custom pipes.
+	* We use the following to use pipe in our template
+		Syntax: data | <pipe> eg: {{ username | uppercase}}, where uppercase is a built in pipe that transforms the data to uppercase
+		<div *ngFor="let server of servers | myfilter "> , where myfilter is custom pipe that changes the servers array
+	* We can parameters to the pipe. We do this by addiding ':' after pipe name and passing the parameter. If the pipe takes multiple parameters then
+	  each parameter is separated by ':'
+	  Syntax: data | <pipeName> : <param1> : <param2> ...
+	  eg: {{ currDate | date : 'fullDate'}}, where fullDate is parameter to built in date phases
+	* We can chain pipes to apply more that one pipe. But the order is very important as the pipes are applied from left to right in the order in which they are
+	  specified. eg: {{ currDate | date : 'fullDate' | uppercase }} , here the currDate is first transformed to desired format by 'date' pipe, then the result
+	  is changed to uppercase by 'uppercase' pipe.
+	* Some of the most common built in pipes are:
+		* DatePipe - Formats a date value according to locale rules. It takes string as parameter and formats the date according to string. Some of the 
+		  parameters taht can be passed to date pipe are 'short', 'medium', 'long','fullDate' etc. eg: {{ currDate | date : 'fullDate'}}
+		* UpperCasePipe - Changes the data to uppercase eg: {{ user | uppercase}}
+		* LowerCasePipe - Changes the data to lowercase eg: {{ user | lowercase}}
+		* SlicePipe - Creates a new Array or String containing a subset (slice) of the elements. eg: <li *ngFor="let i of collection | slice:1:4">{{i}}</li>
+		 i.e this creates an array containing elements of index 1(start) to 3(end - 1)
+		* AsyncPipe - The async pipe subscribes to an Observable or Promise and returns the latest value it has emitted. When a new value is emitted, the async
+ 		 pipe marks the component to be checked for changes. When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential 
+		 memory leaks.
+			 eg:
+			    template:
+				{{ appStatus | async }} // Without asyn pipe this just displays Object. With async it marks the property and when it resolves it returns the result i.e 
+										// Displays 'stable' after 2 seconds
+				typescript:
+				export class AppComponent {
+					appStatus = new Promise((resolve,reject) => {
+						setTimeout(()=>{resolve('stable')},2000)
+					}) // This is a promise that resolves to 'stable' after 2 seconds
+				}
+		* More info on built-in pipes: https://angular.io/api?type=pipe
+	* Custom Pipes:
+		* To create custom pipe we do the following:
+			* Create a typescript file. It is convention to name the file <pipeName>.pipe.ts. 
+			* Inside the file export a typescript class. Add the @Pipe decorator imported from '@angular/core'. The @Pipe takes an object with following 
+			  properties:
+				* name: This is mandatory and it should have the name of our custom pipe.
+				* pure: It is boolean and it is true by default. When 'pure' is true then pipe is recalculated every time the data to which the pipe is 
+				  applied changes. (though it is recalculated on any change in the parameter passed to pipe). This is so due to performance cost that
+				  can occur if the pipe is applied each time the data changes (This is mostly applicable only if the data to which the pipe is applied
+				  is of reference type)
+					* This is also the reason why there is buil in pipe for filter, sort etc as default behaviour is not recalculate the pipe if data 
+					  changes. This was concious call to avoid performance issues.
+					* We can override the default behaviour by setting 'pure' property in the @Pipe decorator to false. This will recalculate the pipe each
+					time data changes. This will have a performance impact though.
+			* This class should be added to declaration array of AppModule just like normal components.
+			* The typescript class should have transform method. The transform method should take as least one parameter. The first parameter is the value/data
+			  that has to transformed by the pipe. It can take additional parameters if required. These parameters are passed by adding ':' separated
+			  values in the template. In the 'transform' method we transform the data and return the changed output.
+			* It is good pratice for the pipe class to implement PipeTransform interface (which is imported from '@angular/core'). This interface forces us 
+			  to implement transform method and will give compilation error if the class is not implemented.
+			 
+			  
+			  @Pipe({
+				name:'shorten'
+			  })
+			   export class ShortenPipe implements PipeTransform{
+					transform(value:string, limit:number) {
+						return value.substr(0,limit); //Returns first limit number of charaters
+					}
+			   }
+		
+				Usage:
+				{{ name | shorten:15}}// We can chain this with built in or other custom pipes
+			* We can also create a custom pipe using Angular CLI command -> 'ng generate pipe <pipeName>' eg: ng generate pipe filter
+* Angular HTTP Request
+	* Usually a front end makes Http request to the server and server responds with a new html page. 
+	* But Angular is SPA. Hence it needs to get response to the same page. It uses AJAX (Asynchronous JavaScript and XML) to communicate with the server
+	(eg: store or fetch value to/from database) and server responds with JSON data which is then handled by angular application.
+	* HTTP Service:
+		* Built in Http service is used in older versions of Angular to send http request. It is deprecated in latest Angular 6+.
+		* To use angular Http service in our angular application:
+			* Need to import HttpModule from '@angular/http' in the imports array of our AppModule.
+			* This module contains the 'Http' service, which can be injected either directly in our component or into our own service file(This is preferred 
+			  approach, we need to use @Injectable if we inject it into our own service and add our service in the providers array)
+			* After injecting, we can use the methods provided by Http service to create http request. This just creates an observable and configures it.
+			  We need to subscribe to this observable to actually send the http request.
+				* post -> This is used to post data 
+					* It takes the following parameters:
+						* URL to post data to (which can be extertal server like firebase, JSONPlaceHolder or our backend)
+						* data to send to backend
+						* An object to spcecify other options (this is optional). This object can contain information like headers:
+							* headers: We may need to send Headers information along with our request in some cases. We create a Header using the
+							'Headers' type provide '@angular/http'. We need to import 'Headers' from '@angular/http' and create a headers object using 
+							Headers constructor, which takes an object of key value pairs
+								eg:
+								const headerInfo = new Headers({'Content-type':'application/json'});
+					eg: this.http.post(<url>, servers, {headers:headerInfo})
+				* get -> This is used to get data
+					* It takes the following parameters:
+						* URL to get the data from
+						* An object to spcecify other options like headers
+					* It returns response of type 'Response', which contains data as JSON string in the body.
+				* put -> It is used to edit/overwrite existing data
+					* It takes the following parameters:
+						* URL to get the data from
+						* data
+						* An object to specify other options like headers
+			* We should subscribe to the observable created using post, get and other methods. Request is sent only when we subscribe.
+			* We get the response back , which can be handled in the subscribe method(we can also handle error and  complete in it). The response
+			  is of type 'Response'(which is a type in '@angular/http'). The Response returned contains a body which contains the actual data 
+			  returned from the server. It is in the form of json string. We can use the 'json()' method on the response to convert the json string
+			  in the Response body to JavaScript objects.
+			  eg:
+			  import {Http, Headers} from '@angular/http'
+				export class AppComponent {
+					constructor(private http:Http){}
+					
+					onSendData(servers) {
+						const headerInfo = new Headers({'Content-type':'application/json'});
+						const observable = this.http.post(<url>, servers, {headers:headerInfo});
+						observable.subscribe(
+							(data:Response)=> {
+								const obj = data.json()
+								console.log(obj)
+							}, 
+							(error)=>{console.log(data)}
+						);// This actually sends http request.
+					}
+				}
+			* It is good practice to have a separate service for making http request to backend and transform the data to required format and return the 
+			  observable. We can then subscribe to the observable by injecting our service in the component. 
+			* We can use the operators like map, catchError of the Observable of 'rxjs' to transform the data we receive from the backend.
+			* Sometimes, our http reuests may result in errors, we can catch any errors using catchError operator of 'rxjs'. This operator provides 
+			 functionality similar to try/catch block in synchronous programming for asynchronous operation like http requests. We can call a handler to 
+			  handle error and generate different error messages and use 'throwError()' to throw the error message to our subscrition.				
+			  eg:
+				import {map, catchError} from 'rxjs/operators'
+				this.http.get(<url>).pipe( map((reaponse:Response)=>{
+					const data = response.json();
+					// Code to Transform data object as reuired
+					return data; // This is automatically wrapped in a Observable and returned
+				}), catchError((error:Response)=>{
+					//call error handler gto get error message
+					throwError('<errMsg>') // throwError wraps our message in an Observable and returns it.
+				}))
+			* If we get a string value from backend say 'AppName', we can store the Observable directly in a property and resolve it is template using async 
+			  Pipe.
+	* HttpClient Service:
+		* This is new and recommended approach for making Http Requests. It uses more modern features to make http request and provide additional functionalities
+		  like interceptors. https://angular.io/guide/http
+		* The HttpClient in @angular/common/http offers a simplified client HTTP API for Angular applications that rests on the XMLHttpRequest interface 
+		  exposed by browsers. Additional benefits of HttpClient include testability features, typed request and response objects, request and response 
+		  interception, Observable apis, and streamlined error handling.
+		* To use the new HttpClient we need to do the following:
+			* Add the HttpClientModule , which needs to be imported from '@angular/common/http' to the imports array in the AppModule.
+			* This module contains the 'HttpClient' service(imported from '@angular/common/http'), which can be injected either directly in our component or 
+			  into our own service file(This is preferred approach, we need to use @Injectable if we inject it into our own service and add our service in the 
+			  providers array)
+			* We can then use the methods given by HttpClient to create Http Request:
+				* put -> This method is similar to the put of http service. It takes three parameters:
+					* URL to get the data from
+					* data
+					* An object to spcecify options
+				* get -> This is similar to get method of http service and takes URL and Options object as parameter.
+				* It also has methods for other http verbs like post etc
+			* One difference between the get,put methods of Http and HttpClient service, is that in case of HttpClient, the default behaviour is to extract the 
+			  body from the response and the default responseType is considered as JSON. Hence the JavaScript Object is extracted from response body. Thus when we 
+			  subscribe to a get request unlike Http ( where we get Response object from which we need to get the JavaScript object) we directly receive JavaScript
+			  Object. The 'get' request is generic type and we can pass actual data type of JavaScript Object we expect.
+				eg:
+				this.httpClient.get<Recipe []>(<url>).subscribe((recipes: Recipe[])=>{
+					// Handle the data
+				})
+			* HttpRequest - We can create a Http Request using HttpRequest object which needs to be imported from '@angular/common/http'. The constructor
+			  takes the following parameters:
+					* Http verb eg: 'POST', 'GET' etc
+					* URL to send the request to
+					* An optional data parameter
+					* An object to spcecify options
+			    * Once we create HttpRequest Object. We can configure the http request using resquest() method of the HttpClient service. It takes HttpRequest
+				  object and returns an observable that we can subscribe to in order to send the http request
+				  eg:
+				  const httpRequest = new HttpRequest('GET', <url>, {params: new HttpParams().set('auth', token), reportProgress: true});
+			* The options object that can be passed as part of Http Request can take the following properties:
+				* body: We can pass the body to put and post request using this property.
+				* headers: We can pass any header info as part of this property. It takes as value an object of type HttpHeaders(which needs to imported 
+				  from '@angular/common/http'). We can create a HttpHeaders object using 'new' keyword. Then we can use set and append methods to set or append
+				  header info as key/value pair.
+				  eg: const headerInfo = new HttpHeaders().set('Authorisation', '<token>');
+					  this.httpClient.get(<url>, {headers: headerInfo})
+				* params: We can pass query params using this property. It takes as value an object of type HttpParams which needs to be imported from
+				  '@angular/common/http'). We can create a HttpParams object using 'new' keyword. Then we can use set and append methods to set or append
+				  query params as key/value pair.
+				  eg:
+					this.httpClient.get(<url>, {headers: headerInfo, params: new HttpParams().set('auth': token)})
+					
+				* observe: This property takes a string value, which can be one of the following:
+					* 'body' - This is default value and extracts the body from the response received.
+					* 'response' - When observe property is set to 'response' then we recive the complete response instaed of just the extracted body.
+					* 'events' - When we set the observe property to 'events; then we observe for all http events that occur when we send the request
+					  not just the response. Response is one of the event. When we subscribe to an hhtpClient.get(<url>) observerable with observe set 
+					  to events. Then we get data of HttpEvent<Object>. The diffent HttpEvent types are:
+						* Sent	- The request was sent out over the wire.
+						* UploadProgress - An upload progress event was received.
+						* ResponseHeader - The response status code and headers were received.
+						* DownloadProgress	- A download progress event was received.
+						* Response - The full response including the body was received.
+						* User - A custom event from an interceptor or a backend.
+						eg:
+						this.httpClient.put(<url>, data , {observe: 'events'}). subscribe((event: HttpEvent<Object>)=>{
+							console.log(event + " Type: " + event.type); // event.type is an integer corresponding to HttpEventType
+																		// 0 -> HttpEventType.Sent, 1 -> HttpEventType.UploadProgress etc
+						})
+						* Both HttpEvent and HttpEventType are part of '@angular/common/http'
+						It can be useful to observe 'events' if we want to do some operation during http request. eg: Show progress bar etc.
+				* responseType : It is string containing the type of response we expect. the default is 'json'. It can take the following values:
+					* 'text' - When we expect the text as response body
+					* 'json' - javascript object notation
+					* 'blob' - Used when we upload or download files
+					* 'arraybuffer' 
+					
+				* reportProgress: 
+					* Sometimes applications transfer large amounts of data and those transfers can take a long time. File uploads are a typical example. Give 
+					  the users a better experience by providing feedback on the progress of such transfers.
+					* To make a request with progress events enabled, you can create an instance of HttpRequest with the reportProgress option set true to 
+					  enable tracking of progress events.We can set this property to true to get the actual progress of the Http requet. But this can be set
+					  only as HttpRequest object.
+					eg:
+					const req = new HttpRequest('POST', '/upload/file', file, {reportProgress: true});
+					* Next, pass this request object to the HttpClient.request() method, 
+					this.httpClient.request(req); // Return an observable that observes the progress event 
+					* Every progress event triggers change detection, so only turn them on if you truly intend to report progress in the UI.
+			* Interceptors:
+				* HTTP Interception is a major feature of @angular/common/http. With interception, you declare interceptors that inspect and transform HTTP requests from 
+				  your application to the server. The same interceptors may also inspect and transform the server's responses on their way back to the application. 
+				  Multiple interceptors form a forward-and-backward chain of request/response handlers.
+				* Interceptors can perform a variety of implicit tasks, from authentication to logging, in a routine, standard way, for every HTTP 
+				  request/response. Without interception, developers would have to implement these tasks explicitly for each HttpClient method call.
+				* To implement an interceptor:
+					* Create a service that implements HttpInceptor interface, which needs to be imported from '@angular/common/http'. The interface 
+					  mandates the implementation of interface() method. 
+					* interface() method takes two parameters
+						* req - It is of type HttpRequest<any>
+						* next - It is of type HttpHandler, which implement handle method, that returns the req passes to the next interceptor
+					  and returns an Observable of type HttpEvents<any> 
+					* We can then modify the request eg: Add headers or queryParams etc and send the reuqest for further processing. We can directly
+					  modify the request as it read only. In order to add additional info to the request, we need to clone() method on the HttpRequest.
+					  clone() also craetes read only request, but we can pass an options object to the clone method of HttpRequest to modify
+					  cloned copy of the request. This modified request is then sent for further processing using next.handle(<clonedReq>);
+						* The intercept method transforms a request into an Observable that eventually returns the HTTP response. 
+						* Most interceptors inspect the request on the way in and forward the (perhaps altered) request to the handle() method of the
+						  next object which implements the HttpHandler interface.
+						* The next object represents the next interceptor in the chain of interceptors. The final next in the chain is the HttpClient 
+						  backend handler that sends the request to the server and receives the server's response.
+						* Most interceptors call next.handle() so that the request flows through to the next interceptor and, eventually, the backend handler
+					eg:
+					
+					import { Injectable } from '@angular/core';
+					import {
+						HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
+					} from '@angular/common/http';
+
+					import { Observable } from 'rxjs';
+
+
+					@Injectable()
+					export class AuthInterceptor implements HttpInterceptor {
+
+						intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+						    cont copiedReq = req.clone({params: req.params.set('auth', token)})
+							return next.handle(copiedReq);
+						}
+				}
+				* Once the interceptor is implemented it needs to be provided in the AppModule/ Core Module. Providing an interceptor is bit different than 
+				  other services. Instead of just adding the name of the interceptor service in the array, we add an objectw ith following properties:
+					* provide: It is set to HTTP_INTERCEPTORS, which needs to imported from @angular/common/http
+					* useClass : It tell the intercept class to use. We add the name of our interceptor service here
+					* multi : true (This is set to true so we can use multiple interceptors)
+					eg:
+					{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+				* Inceprtors in Response:
+					* It is very similar to intercepting Request. We can create a file with class implementing interceptor interface. The class forces us
+					   to implement intercept method which takes two parameter the request and next(HttpHandler). It returns an Observable which resolve to 
+					   HttpEvents<any>
+					* As we do not want to intercept request we can pass the request to the next handler using (return next.handle(req)) This next.handle(req) 
+					  gives an observable and hence we can use rxjs operators on it to intercept response. For example, we can use 'tap' operator to log
+					  the response.
+					* tap - Intercepts each emission on the source and runs a function, but returns an output which is identical to the source as long as errors don't 
+					  occur. tap operator is very useful for logging.
+					  
+					  eg:
+					  export class LoogingIntercept implements Intercept {
+							intercept(req: HttpRequest<any>, next: HttpHandler) : Obervable<HttpEvents<any>> {
+								return next.handle(req).pipe(tap((event)=>{console.log(event);}))
+							}
+					  }
+					 * This also need to provided in AppModule like request inetrceptor using object notation with provide, useClass and multi properties.
+					 * The interceptors are executed in the order by which they are defined in the providers array.
+* Authentication in Angular:
+	* Authentication allows to register/signIn users and ensure that the user that is trying to log in is has correct credentials. It also ensures that user
+	  is allowed to access certain pages only if he is logged in. The bulk of the authentication logic is usually present in the backend but the frontend
+	  do have a small part to play.
+	* In tranditional fullstack web application, there is a close link between server and client as for each request, the client reaches to the server 
+	  which inturn uses templating engine to dynamically render pages which are displayed by the client. For authentication in traditional Web APP,
+	  the authentication information(username/password) is sent to the server when user signsIn. The server, verifies the detail from the database and 
+	  if the credentials match creates a session. After creating a session , it returns a session cookie(containing info like session Id) to the 
+	  client and the session created is stored in the server. Each time , the client needs to access any protected resource they send the session
+	  cookie along with request. The server verifies it and allows access. Thus authentication happens through session cookie.
+	* Unlike traditional web App Angular is a SPA and most of routing and rendering happens in the client. The connection between client and server is not
+	  so tight and frequent. Hence session info is not stored in this case. In SPA, when user signsIn, the authentication information(username/password) is sent 
+	  to the server. But instead of session a token(usually JWT-JSON Web Token) is created. JWT consist of encoded header, encoded payload and signasure
+	  which hashed for of encoded header and payload with a secret. JWT is a JSON string in the format of header.payload.signature. This JWT token is sent
+	  to client when he logs In. This JWT token needs to sent with any request that access any protected resource and server then validats the token 
+	  and allows access to the resource. Thus authentication happens through JWT Web Token.
+	* We ususlly send hhtp request to the backend when the user SignsIn and recive the token as response. We need to store this token in the localStorage then 
+	  use it for further communication with server.
+	* Firebase: If we firebase, which is backend provided by google as our backend for authentication. Then we need to enable authentication, once enabled
+	  we register new user and sign In existing user. Firebase does not provide any good rest APIs for authentication, hence we need to use 
+	  Firebase SDK(Software Development Kit). We can install it in our angular project using 'npm install firebase --save'. 
+		* Once installed, we can import all the classes from firebase (import * as firebase from 'firebase/app';). We need to initialize it using intializeApp
+		  method. firebase.initializeApp takes a javascript object with authDomain, APIKey etc. This object can be otained from firebase server (WebSetup).
+			eg: firebase.initializeApp({
+				authDomain: dnlbwkqncwkqn,
+				apiKey:djdwnlwkdnlwkdn;wdkmw;lm
+			})
+		* Once firebase SDK is initialized, we can use auth() module of firebase to register and signin Users.
+			* Import appropriate modules from firebase : 
+				import * as firebase from 'firebase/app'
+				import 'firebase/auth';
+			* For creating a new user, use createUserWithEmailAndPassword method of firebase.auth(). It takes email and password and creates a new user 
+			  in firebase. As it communicates firebase server, it is async operation and returns a promise.
+			* For logging in an existing user , use signInWithEmailAndPassword method of firebase.auth(). It takes email and password and checks the 
+			  credentials with the firebase, if the authentication is successful it creates the token, which we need to store and use for any further
+			  communication with the server. To get the token we use the firebase.auth().currentUser.getIdToken() method. firebase.auth().currentUser
+			  exists only when we signIn. firebase.auth().currentUser.getIdToken() returns a promise which resolves to the token, it is a promise
+			  because when we getIdToken(), it reaches out to firebase and retrives the token.
+			  (Note: We need to ensure the authentication is required for DB access in firebase. We can do this by setting read and write rules to 
+			  (auth != null)
+			* The token needs to stored and sent with any future request as queryParameter. Firebase URLs expect token as the value of 'auth' 
+			  queryParam. Hence we add it to the end of all our future http REST call.
+				this.http.get(<url>?auth=<token>).then ((response) => {//handle response})
+			* To signOut an user in firebase, we use the function firebase.auth().signOut();. We also needs to destroy the token on log out of the application.
+* Angular Modules:
+	* Module are very useful as they allow following advantages:
+		* Restructure code in modular and maintainable way.
+		* Optimize code to increase performance
+		* Decrease the file size.
+	* Angular application consists of Components, Directives, Pipes, Services etc. These needs to part of a modules. Modules bundle certain functionality 
+	  that can be imported.
+	* A module is a typescript class with @NgModule decorator. @NgModule takes an object with following properties:
+		* declarations: It is list of all components, directives and pipes used by this module. A component/diective/pipe should be part of exactly one module.
+		   We cannot declare same component in more than one module.
+		* imports: It is an array of modules that are imported 
+		* exports : It is the array of all features (components and directives and modules) exported by this module
+		* services: It is an array of services provided by that module.
+		* bootstrap: It is the root component taht contains all other compoennts that angular should know at the tiem of loading.
+	* Feature Module: It is a module containing components/directives used by a single feature. It gives us ease of maintainence and better code structure.
+		* Feature module should contain caontain all components and directives that are exclusively used in that feature.
+		* It can also contain services that are used exclusively in that module. Do not add services which are used in more than module as part of feature
+		  module
+		* After moving the components and directives, we need to import any other module that we are using in the feature  module ie. HttpModule if make 
+		  http service, FormsModule/ ReactiveFormsModule if we use forms etc. We also need to import CommonModule, which is the module containing 
+		  common Angular directive like ngFor, ngIf etc. In the AppModule we import BrowserModule which is superset of CommonModule and contains all
+		  the features of CommonModule and also additional directives and components for loading the App in the browser.
+		* A module can use only what is declared and imported within that module. Even for routing, the routes need to be either declared or imported into
+		  that module. Only services are an exception to this rule. Services declared in AppModule is available to whole application including other modules.
+		* When we create a new feature the routing related to that module needs to be moved to the feature module or we need to create a separate module
+		  for routing in the feature module and import it. We need to use forChild method of RouterModule to register the Routes of this feature.
+			* The general rule is that we can use forRoot only once in the Root module (AppModule). If we register routes in any other module we need to use
+			  forChild method.
+		* This feature module then needs to be imported in the AppModule.
+	* Shared Module: It is module containing any shared directive/c\pipes/components
+		* If any directive or component is used in more than one feature module or a feature module and app module. Then we can place these in a separate
+		  shared module. 
+		* We need to export the directives and components that we need to use in other modules. 
+		* This module can then be imported in all other modules using shared components.
+	* If we use a component/directive using selector then we need to have the component/directive declared in the module or import a module that exports
+	  the directive/component. That is not the case with Routing. We use components with routing, but the only requirement is that we need the component
+	  declared anywhere (not necessary in the same module as the routing module) before the route is accessed.
+	* Lazy Loading - This functionality is used to improve the performance of our application. We have onr root router (registered using forRoot method)
+	  and may have feature modules with their own child Router( registered using forChild method). The components of this feature modules are used only
+	  when user visits this route. But by default all the components are downloaded during initial app setup itself. (this is also known as eagerly loaded).
+	  Instead of eagerly loading all feature module, we can download the compoennts related to a feature only when the route is visited. This is called
+	  lazy loading. We need to do following to enable lazy loading for a feature module:
+		* Remove the import of the feature module from AppModule. (If the feature module is present in the imports array of the AppModule it will loaded
+		  eagerly)
+		* Add the top-most route of the feature module in the Root Router. Instead of using component in the Routes Object, we need to use the property
+		  loadChildren. The loadChildren property taks a string as value. It the path to the feature , followed by '#' and name of the feature module.
+		  eg:
+		  const appRoutes:Routes = [
+			{path:'', component:HomeComponent},
+			{path:'recipes', loadChildren:'./recipes/recipes.module#RecipesModule'}
+		  ]
+		* As we have spcecified 'recipes' in the root router , we need to remove the 'recipes' from the child router as recipes is automatically
+		  prepended to the child routes of the feature module.
+			eg:
+			const recipeRoutes: Routes = [
+			{ path:'', component:RecipesComponent, children:[
+				path:'', component:RecipeStartComponent 
+				...
+				]
+			}]
+		* Lazy is a great feature and makes the initial load of our app very fast but we may still see a small delay when we visit the rote, that trigger
+		  lazy loading. We can avoid this by using  preloadingStrategy property as  part of the object that is passed as second argument in forRoot() method
+		  of the RouterModule. This will cause the lazy loaded module to be pre loaded after application starts in the backgroud. This gives the advantage of 
+		  both lazy loading without the delay.
+		  RouterModule.forRoot(appRoutes, {preloadingStrategy:PreloadAllModules}); // PreloadAllModules needs to be imported from @angiular/router and it preloads all
+																				   // lazy loaded modules
+	* Sevice injection:
+		* By default, there is root injector created at the time application launch and a single instance of service is provided, if the services are 
+		  declared in the providers array of AppModule, or any eagerly loaded module. Even if the service is provided in both the eagerly loaded feature
+		  module and AppModule, same instance is used in both modules due to root injector.
+		* If the service is provided in the providers array of the lazyly loaded module, then child injector is created at the time lazy loaded module loads.
+		  Thus if the same service is provided in both AppModule and lazy loaded module, we have two instance of the service.(one for lazy loaded module,
+		  another for rest of the application)
+		* If a service is provided in a shared module, which is shared by both eagerly loaded feature module as well as lazily loaded feature module, then
+		 a child injector is created at the time when lazy loaded module loads. This may not be the expected behaviour. Henc we must never provide a
+		 service in shared module.
+		* It is good practice to always provide services that are used application wide in core or app module. And provide services exclusively used in the
+		module in the feature module.
+	* Core Module:
+		* If there are directives and components thar are only used in the App Module, but form the core of the application. Then we can create a new
+		  module for these directives and components. 
+		* The Core module is mainly for the purpose of better code structuring and having a leaner AppModule.
+		* We can have the services in the Core module as this will be imported in AppModule and will be injected only by Root Injector as Core module is 
+		  not shared by other modules.
+	* Angular Compilation:
+		In angular, the html templates need to be compiled to javascript. This is done by compiler in angular. This is required because the DOM is modified at
+		run time. There are two types of compilations in angular:
+		
+		* Just In Time Compilation - This is default Compilation used in Angular Apps. In this after development, the angular is deployed in the server,
+		  And the deployed files are downloded by browser. After that angiular parses our template and does the compilation. This will increase the load
+		  time of the application.
+		* Ahead of Time Compilation - In this approach we can do compilation after  development. And tehn we deploy the compiled app for production and then it 
+		  downloaded by the browser for execution. Ahead of Time Compilation gives the following advantages:
+			* Faster Application load
+			* All the compiler errors will be caught earlier before deployment.
+			* Smaller file size as the compiler itself need not be shipped and also unused features are not shipped.
+		* To use AOT(Ahead Of Time) compilation we need to use 'ng build --prod --aot' command before deploying the application. This builds the application
+		  for production with AOT enabled. It also does minification of the files. It creates dist folder, which contains all the files that need to be 
+		  deployed.
+* Deploying Angular Application:
+	* To deploy angular applications following points need to be considered:
+		* we need to build the angular application for production. In angiular CLI project this is acheived using ;ng build --prod --aot'. This creates 
+		  dist folders with all the files required for deployed with minificationa and AOT.
+		* Ensure that the href property of the base element in the index.html is correct. By default the value of 'href' is emnpty string which will 
+		  deploy the app in your domain root path. If you need it to be deployed in sub path then this needs to be proper eg: If we need the app
+		  at http://example.com/my-app where 'http://example.com' is our element then base element should be <base href="/my-app"></base>
+		* Ensure that the server alwayes returns index.html. The deployment server should be configured in such a way that it return index.html both 
+		  during initial load but also if we get 404(Page not found). This is required in angular we do the routing in the angular application rather than
+		  the server.
+	* For deploying in Heroku:
+		https://medium.com/@ryanchenkie_40935/angular-cli-deployment-host-your-angular-2-app-on-heroku-3f266f13f352s
+* NgRx State management
+	* In Angular we manage the state of the application using services to maintain the state and rxjs Subjects to notify the other components about the 
+	  change in the state. But in this approach the application state is maintained in multiple services and managing them may become difficult in a complex
+	  application having more states. 
+	* NgRx is one of the good options that developers choose to use in their Angular applications whenever the application grows a bit and something is needed
+	  to manage the state. It is not part of angular and need to install as separate dependency in the angular application.
+	* Application State: It is the state of running application.  An application's state is roughly the entire contents of its memory. It contains info like if
+	  the user is logged in? What is current data of the application etc. It is usually lost when application is restarted. Some state info is stored persistently
+	  stored in database server. It is difficult to keep track of application state in complex application using services and Subject. NgRx helps maintain this 
+	  state.
+	* Redux is a predictable state container for JavaScript apps. It is popular with React framework . NgRx is redux like implementation for Angular. In the Redux
+	  approach for State management we have:
+		* Store: A central store where the state of the application is stored. Application state is stored in a central store instead of multiple services.
+			* The application still contains components and services but state is always only stored in the store and the components and services have access 
+			  to the store to get the state.
+		* Actions: Components , Directives and  Services dispatch Actions to change the state of the store. This Action has a type and optional payload.
+		* Reducers: They are user defined function that recive the Action and create a new state based on current state and payload of the actiona and 
+		  its type. The new is created immutably. 
+		This approach of state management with Action, Reducers and Store is the Redux approach to manage application state.
+	* To use the Redux state approach in angular we need to do the following:
+		* Install @ngrx/store using npm command 'npm install --save @ngrx/store'
+		* Create the actions that need to dispatched. It can part of reducers file or separate file.
+			* The action should be class the implements Action interface of '@ngrx/store'. The class should contain a readonly type property whole value should
+			be string. It can optionally contain payload.
+			import {Action} from '@ngrx/store';
+			
+			export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+			export const UPDATE_INGREDIENT='UPDATE_INGREDIENT'
+			export class AddIngredient implements Action {
+				readonly type = ADD_INGREDIENT;
+				constructor(public payload:Ingredient){}
+			}
+			
+			export class UpdateIngredient implements Action {
+				readonly type = UPDATE_INGREDIENT;
+				constructor(public payload:{index:number, ingredient:Ingredient}){}
+			}
+			export type slActions = AddIngredient | UpdateIngredient // A type variable to export all actions. The differnet classes to be exported under this
+																	// type are '|' separated.
+		* Create reducer function:
+			* Create a file for reducers and we can name it <elem>.reducers.ts. The file should export a function. The function takes two arguments.
+			The parameters are passed to the function by ngRx. They are:
+				* state: Current aplication state - We can set default value which will initial application state
+				* action - Which is of type Action which imported from '@ngrx/store'. The action has 'type' property and can optionally have a payload 
+				  which needs to added by this. 
+			* The function should return the updated state. This should be synchronous. Reducers cannot have asynchronous operation as they need to return
+			  the state synchronously.
+			eg:
+			import * shoppingListActions from '<path>'
+			const initialState = {
+				// initial application state
+				ingredients: {//list of ingredients}
+			}
+			export function shoppingListReducers(state = initialState, action:shoppingListActions.slActions) {
+				switch(action.type) {
+					// Create appropriate new state based of action type and payload and return updated state.
+					case ADD_INGREDIENT: return {...state, ingredients:[...state.ingredients, action.payload]}
+					default :
+						return state;
+				}
+			
+			}
+		* Register the reducers with angular Application. This is usually done AppModule. In the AppModule we need to add StoreModule to the imports array.
+		 (StoreModule needs to imported from '@ngrx/store') We also need to configure the StoreModule using forRoot method. The forRoot() method of StoreModule
+		  takes an object as parameter. The object contain reducer name as property and exported Reducer functiona as value:
+			eg:
+			
+			@NgModule({
+				...
+				imports:[
+					StoreModule.forRoot(shoppingList: shoppingListReducers)
+				]
+			})
+			export class AppModule {}
+		* Access Data from store:
+			* Now we created actions and reducers and also registered these with the store. Now to access data from the store in our components and services
+			* We need to inject the Store service in component or service we need to access the store (which needs to be imported  from '@ngrx/store')
+			* We can then use this.store.select(<name>) method to get the desired part of our state, where name is the name of the reducer registered with 
+			  storeModule eg:  this.store.select('shoppingList') // This will select the shoppingList slice of the state. This is an Observable which we 
+			  can store and subscribe to. We can also use async pipe to directly use the Observable in the template.
+			  
+			  eg: 
+			  shoppingListState : Observable<{ingredients:Ingredient[]}>;
+			  constructor(private store: Store<{shoppingList:{ingredients:Ingredient[]}}>)
+			  
+			  ngOnInit(){
+				shoppingListState = this.store.select('shoppingList');
+			  }
+			 * The value returned by select is part of the Application State and it is an Observable. To get the value we can either use sync pipe in template
+			   or use subscribe or any operator provided by rxjs to use the value state value as required.
+			 * We we add operators or subscribe to the Observable returned using this.store.select(<key>) then we get event for every state change. If we 
+			   are only interested in current state, We need to unsubscribe after receiving first state. We can use take(1) operator to unsubscribe after
+			   getting the currentValue.
+			 * We may need to use operators like map (modify and extract the value in state Observable), switchMap, take(if we want to unsubscribe after a 
+			   fixed number of emissions eg: We are only interested in first state change then we can use operator take(1)) etc to get teh desired
+			   behaviour while handling state:
+			   eg:
+			   export class AuthInterceptor implements HttpInterceptor {
+				constructor(private store: Store<fromApp.AppState>) // inject the Store service 
+				intercept(req: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvents<any>>{
+					return this.store.select('auth').pipe(
+						take(1),  // We need to use 'take' operator because we are only interested in getting the token from currentState. Otherwise we
+								  // send http request for every state change. 
+						switchMap((authState: fromAuth.State)=>{ 
+							const copiedReq = req.clone({params: req.params.set('auth', authState.token)}) // Get token from AuthState and add it queryParams
+							return next.handle(copiedReq); // This is an Observable. Hence we need to use switchMap operator instaed of map
+						})
+					)
+				}
+			   }
+		* Dispatching Actions
+			* In order to dispatch action we can inject Store service in our component or Service. 
+			* We can use this.store.dispatch(<action>) method to dispatch an action. The dispatch method takes an object of class implementing Action interface.
+			 eg:
+			  constructor(private store: Store<{shoppingList:{ingredients:Ingredient[]}}>)
+			  
+			  addIngredients(ingredient:Ingredient) {
+				this.store.dispatch(new AddIngredient(ingredient));
+			  }
+		* Clearly defining the appState and reducers:
+			* We can create and expose an interface containing the type definition for the AppState. This can be used then we inject the store service:
+				export interface AppState {
+					shoppingList:ShoppingListState,
+					auth : AuthState,
+					...
+				}
+			
+				export inteface ShoppingListState {
+					ingredients: Ingredient[],
+					editedIngredient: Ingredient,
+					editedIngredientIndex: number
+				}
+				...
+			
+			Usage:
+				import * as fromApp from '<path>'
+				constructor(private store:Store<fromApp.AppState>) {}
+			
+			* Also when we register reducers with StoreModule forRoot we can use a const containing the mapping. The const is of type ActionReducerMap
+			  which is a generic type that needs to be imported from '@ngrx/store'
+				eg:
+				
+				export const reducers:ActionsReducerMap<AppState> = {
+					shoppingList: ShoppingListReducers,
+					auth: AuthReducers,
+					...
+				}
+			
+				StoreModule.forRoot(reducers)
+	* Effects: There are situations in which we may need to dispatch actions but we do not want to change the state in our Store. Effects (also known as Side Effects)
+ 	  are used in ngrx to handle scenarios in which we need to handle the dispatched action without changing the state. eg: When user tries to signIn,
+	  we need to send signIn request to backend but only change the state on succesful signin. We can this using NgRx Effects and dispatch another action on 
+	  succeesful signin that changes the state.
+		* Ngrx/effects is middleware for handling side effects in ngrx/store. It listens for dispatched actions in an observable stream, performs side effects, 
+		 and returns new actions either immediately or asynchronously. The returned actions get passed along to the reducer.
+		* In order to use effects we do the following:
+			* install @ngrx/effect package using npm in our application eg: npm install --save @ngrx/effects
+			* @ngrx/effect provides us an Observable 'Actions' which is basically a stream of all the dispatched actions, for every dispatched action it 
+			  emits a new value (after every reducer has been called). It also has a RxJS operator 'ofType', which is used to filter actions based on their
+			  action type.
+			* export a class that contains all the effects.( It is good practice to create this class in a separate file <name>.effects.ts)
+			* inject 'Actions' observable into our class (which needs to be imported from @ngrx/effect). 
+				eg: constructor(private actions$: Actions){} // It is convention to use '$' at the end of property names holding Observable
+			* define property that is decorated with @Effect() decorator that changes the property to an Effect and we need to assign the 'Actions' observable 
+			  filtered for the specific dispatched action (that needs to trigger the effect) to it using 'ofType' rxjs operator with is part of @ngrx/effects.
+			* We can then use rxjs operators to handle the action and get the desired effect. And at the end we can optionally dispatch one or more actions
+			  using 'map' in case of single action or mergeMap in case of multiple actions. 
+				* If we need to dispatch a single action, then we return an object conating type and payload of the action to be dispatched using map rxjs operator.
+				* If we need to dispatch multiple actions, then we need to an array of objects containg type and payload of a each action that needs to dispatched
+				  using mergeMap rxjs operator
+			* If no action needs to dispatched at the end of handling the side effect, then we can set configuration data to effect decorator of the property
+			  with dispatch as false. i.e @Effect({dispatch: false}). It is very important to setthis property if no action is returned. Otherwise it will
+			  lead to unexpected behaviour.
+			  
+			  eg:
+			  import * as AuthActions from '<path>';
+			  import {Effect, Actions} from '@ngrx/effects'
+			  export class AuthEffects {
+			  
+				constructor(private actions$: Actions)
+				
+				@Effect()
+				signUp = this.actions$.pipe(
+						ofType(AuthActions.TRY_SIGNUP),
+						switchMap((authData)=>{
+							from(this.firebase.auth().createUserWithEmailAndPassword(email, password));// Convert promise to Observable
+						}),
+						map((data)=>{
+							return {
+								type: AuthActions.SIGNUP
+							}
+						})
+					) 
+			  }
+			* Need to register the effect in AppModule. This is done by adding EffectsModule in the imports Array of the AppModule and configure it
+			  using forRoot() method. It takes a array of all Effects
+			  eg:
+			  [
+				EffectsModule.forRoot([AuthEffects]);
+			  ]
+		* We can use ngrx only when it makes sense. There is no need to use ngrx if the state change affect only  one component. we can maintain the state 
+		  locally. We should not over use ngrx
+			* If using this module, it automatically dispatches ROUTER_NAVIGATION action for any route change.
+		* Useful ngrx tools:
+			* @ngrx/router-store:
+				* This is used to monitor state changes due to routing. In order to use this module we need to import StoreRouterConnectingModule in
+				  the imports array in AppModule.
+			* @ngrx/store-devtools
+				* This package is very useful for debugging purpose. In order to use it we need to add StoreDevtoolsModule to the imports array of 
+				  the AppModule. 
+				* We also need to configure it using instrument() method of the StoreDevtoolsModule
+					eg: StoreDevtoolsModule.instrument() // It can optionally take cofig parameters
+				* We also need to install Redux devtools chrome extension to use the dev tools in the browser.
+		* Adding NgRx state management to Lazy loaded module.
+			* In case of Lazy Loaded module, we need to create actions and reducers similar to normal module. But as the mosule is not available at
+			  application startup, we cannot register the reducer in the StoreModule.forRoot() method in the AppModule.
+			* In order to register the reducer with StoreModule, we need to add StoreModule to <feature>.module.ts file of our lazy loaded module.
+			  Then we can use forFeature method of StoreModule to register the given feature to StoreModule. forFeature method takes module-name,
+			  reducer and optional config as parameters eg: StoreModule.forFeature('recipes', RecipesReducers);
+			* We can extend the AppState interface to include the state of our feature 
+				eg: export interface featureState extends AppState {
+						recipes: State; // This conatins AppState + recipes
+					}
+			* If we add effects for a lazily loaded feature module, then we cannot add the Effects class to the array in forRoot method of EffectsModule
+			  Instead we need to add EffectsModule as part of the imports array in the feature module and use forFeature() method of EffectsModule to 
+			  register all the Effects related to that feature. forFeature method takes an array ([]) of all the Effects class of that feature.
+			  eg: imports:[
+					EffectsModule.forFeature([RecipesEffects]);
+				]
+Angular Universal:
+	* Using angular Universal, we can see the page source corresponding to the front end displayed.
+	* It is a tool provided by angular team that helps to pre-render the angular application in the server. In a normal single page application, we usually
+	  bring the data to the client and then build the HTML that represents that data last second on the client side. But in certain situations and by good 
+	  reasons, we might want to instead do that rendering ahead of time, for example on the server or at application build time: and that is exactly what 
+	  Angular Universal allows us to do.
+	* When we use Angular Universal, we will render the initial HTML and CSS shown to the user ahead of time. We can do it for example at build time, or 
+	  on-the-fly on the server when the user requests the page. This HTML and CSS will be served initially to the user, so the user can see something on the 
+	  screen quickly. But server-side rendering is only half the story! This is because together with the server-side rendered HTML, we will also ship to the
+	  browser a normal client-side Angular Application. This Angular client application will then take over the page, and from there on everything is working
+	  like a normal single page application, meaning that all the runtime rendering will occur directly on the client as usual.
+	* Main advantages of using Angular Universal server side rendering:
+		* Performance: a single page when initially loaded is essentially an empty index.html file with almost no HTML. This means that when this HTML file 
+		  gets initially rendered by the browser, all that the user will see is a completely blank screen! With Angular Universal, instead of a blank 
+		  index.html page we will be able to quickly show something to the user, by rendering the HTML on the server and sending that on the first request.
+		* Search Engine Optimization: Another reason for doing server-side rendering is to make our application more search engine friendly. Most search 
+		  engines (unlike google) and social media crawlers will index only the content that comes back from the server directly, and not what get's loaded 
+		  using Javascript. So having our page server-side render those metadata tags is essential for ranking correctly in a lot of search engines.
+		  The user can then see some initial content much faster, which improves a lot the user experience 
+	* Using Angular application using Angular Universal: Any web server technology can serve a Universal app as long as it can call Universal's 
+	  renderModuleFactory() function. The principles and decision points discussed here apply to any web server technology. Following steps are followed to
+	  use : https://angular.io/guide/universal#step-1-install-dependencies
+		1. Install dependencies: 
+		   Install @angular/platform-server into your project. You also need ts-loader for your webpack build and @nguniversal/module-map-ngfactory-loader to 
+		   handle lazy-loading in the context of a server-render.
+		 
+		   $ npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader ts-loader
+		* Prepare your app: To prepare your app for Universal rendering, take the following steps:
+			* Add Universal support to your app : Make your AppModule compatible with Universal by adding .withServerTransition() and an application ID to your 
+			  BrowserModule import  eg: BrowserModule.withServerTransition({appId: 'my-app'}), // appId can be any unique identifier
+			* Create a server root module.: Create a app.server.module.ts file with AppServerModule.
+				* This imports ServerModule(part of @angular/platform-server) and also our AppModule(Angular application) and other dependent modules
+				  like (ModuleMapLoaderModule for lazy loading etc)
+			* Create a main file to export the server root module: Create a main file for your Universal bundle in the app src/ folder to export your 
+			  AppServerModule instance. main.server.ts parallel to main.ts file.
+			* Configure the server root module: Create tsconfig.server.json for typescript compilation of AppServerModule
+		* Create a new build target and build the bundle: In angular.json file for your project, and add a new target in the "architect" section for the server 
+		  build
+			eg: "server": {
+					"builder": "@angular-devkit/build-angular:server",
+					"options": {
+						"outputPath": "dist/server", // The built files are placed in server folder inside dist folder
+						"main": "src/main.server.ts",
+						"tsConfig": "src/tsconfig.server.json"
+					}
+			* Build the project using 'ng run <my-project>:server' , which builds the project for server rendering.
+		* Set up a server to run Universal bundles : 
+			* At the root level of your project, next to package.json, create a file named server.ts which contains the server rendering logic. For server 
+			  side we need to call the renderModuleFactory() which is part of @angiular/platform module which takes two parameters and returns a promise that
+			  can be resolved to html file containing pre-rendered html data
+				* moduleFactory : Which compiled AppServerModule
+				* Options - which contains the index.html template, url options (url for which we need to render), optional additional provider eg: lazy loading etc
+					eg:
+					renderModuleFactory(AppServerModuleNgFactory, {
+						// Our index.html
+						document: template,
+						url: options.req.url,
+						
+					}).then(html => {
+						// html to be sent back to client
+					});
+		* Pack and run the app on the server
+			* Set up a webpack configuration to handle the Node Express server.ts file and serve your application. In your app root directory, create a webpack
+			  configuration file (webpack.server.config.js) that compiles the server.ts file and its dependencies into dist/server.js.
+				* To run webpack use 'webpack --config webpack.server.config.js --progress --colors' command . This compiles server.ts to dist/server.js file.
+			* The project's dist/ folder now contains both browser and server folders.
+			* To run the app on the server, type the following in a command shell 'node dist/server.js'
+	* You typically use Angular Universal to pre-render Angular pages on the server. Once the app then runs on the client, it's a normal SPA again. Server-side 
+	  rendering (SSR) can make sense because of SEO considerations (crawler should see what your users see) or because you want to deliver a finished page 
+	  to your users (rather than creating the page in the browser).
+	* But that also has one important implication: You MUST NOT use any browser-only APIs like document.querySelector()  in your Angular code! 
+	  Simply because it will execute on the server and there, such APIs are not available. Thus it is good practice to use Angular features only: These 
+	  features are safe to use because Angular will check if a certain API can be used before it uses it.
+Angular Animations:
+	* Animation provides the illusion of motion: HTML elements change styling over time. Well-designed animations can make your application more fun and easier 
+	  to use, but they aren't just cosmetic. Animations can improve your app and user experience in a number of ways:
+	* Typically, animations involve multiple style transformations over time. An HTML element can move, change color, grow or shrink, fade, or slide off the page.
+	* The normal CSS transitions and animations is not sufficient as it is a bit difficult to acheive animations on dynamically constructed DOM. Angular's animation
+	  system is built on CSS functionality, which means you can animate any property that the browser considers animatable.
+	* To apply Angular Animation:
+		* Install @angular/animations package that is needed for animation. The main Angular modules for animations are @angular/animations and 
+		  @angular/platform-browser (comes by default with Angular CLI)
+			npm install --save @angular/animations
+		* Add the BrowserAnimationsModule  to your imports[]  array in AppModule which needs to be imported from @angular/browser/animations
+		* Importing animation functions into component files from '@angular/animation'
+			import { trigger, state, style, animate, transition,// ...} from '@angular/animations';
+		* In the component file, add a metadata property called animations: within the @Component() decorator. animation property takes an array of triggers
+		 methods.
+			* trigger() - An animation requires a trigger, so that it knows when to start. The trigger() function collects the states and transitions, and 
+			  gives the animation a name, so that you can attach it to the triggering element in the HTML template. It takes two parameters:
+				* name of the trigger - The trigger name should be then bound to the template element 
+				* Animation metadata - This is an array containing animation metadata. This contains the different states the element can take and transition
+				  and animation between states. Animation metadata contains the following:
+					* state() - Use Angular's state() function to define different states to call at the end of each transition. This function takes two arguments:
+						* a unique name 
+						* style() function -  style() function defines a set of styles to associate with a given state name. Note that the style attributes 
+						  must be in camelCase. It takes a javascript object containing css for a given state.
+					 * With multiple state , we can switch between states by the changeing the value of the expression to the trigger name is bound in the template.
+					   But this will be abrupt switch. In Angular, you can set multiple styles without any animation. 
+					 * To make the change less abrupt, we need to define an animation transition to specify the changes that occur between one state and another over
+ 					   a period of time. 
+					 * For proper animation, a trigger should have at least two state() and should also define transition between the states. The transition between
+					   the states is defined using transition() function.
+					* transition() -  The transition() function accepts two arguments: 
+						* the first argument accepts an expression that defines the direction between two transition states, and 
+							* Unidirectional - '<state1> => <state2>' - From state1 to state2
+							* Bidirectional - '<state1> <=> <state2>' - Bidirection from state1 to state2 and state2 to state1
+							* Wildcard - '<state1> => *' - where is '*' is a wildcard and this indicates a trnsition from 'state1' to any state.
+							* Attaching Elements  - 'void => *' - where 'void' is special state of angular before element is present in the DOM. This 
+							  transition occurs when an element is added to the DOM as the state changes from 'void' (not attached) to any state.
+							* Detaching Elements - '* => void' - Here when element is removed from DOM the state changes from any state to void.
+						* the second argument accepts on of the folllowing either animate function or an array containing a optional catch-all state,
+						  one or more animate functions
+							* animate() - Use the animate() function to define the length, delay, and easing of a transition etc. animate() function 
+							  can take the two parameters:
+								* timing - which is either a number indication duration is ms or a string containg duration, delay and easing function.
+								eg: animate(500) : Duration is 500 milliseconds, animate("1s") : Duration is 1000 milliseconds,
+								    animate("5s 10ms cubic-bezier(.17,.67,.88,.1)") : Duration is 5000 milliseconds, delay is 10 milliseconds, easing according 
+									to a bezier curve.
+								* style function or keyframes function -
+									* style() - We can specify a style with the animate function. This will be an in between style and timing will define the 
+									  transition to this in-between style.
+									* keyframes() - It takes an array of styles, if there are multiple in-between states during the single animation. The
+									  animation duration is evenly divided between the styles. Alternately you can use the 'offset' property in the object
+									  passed to styles() function to define the split in the duration:
+										eg: animate(1000, keyframes([
+											style({backgroundColor:red, offset: 0.3}),
+											style({backgroundColor:green, offset:0.7})
+										]))) // In this animation transition the bgColor is red  for 300 ms and green for 700 ms
+							* [] containing a catch all styles (mandatory if we move from void state) and one or more animate() function. Allows us to define
+							 different states:
+								eg:
+								transition("void => *", [
+									style({ opacity: 0 }), // Starting phase - Mandatory if starting state is void
+ 									animate(1000, style({
+										backgroundColor: green; // In-between phase
+									}))
+									animate(500) // Ending phase
+								])
+								* A style() with last animate() function is needed if the ending state is void.
+							* group() method - Defines a list of animation steps to be run in parallel. Grouped animations are useful when a series of styles 
+							  must be animated at different starting times and closed off at different ending times.
+								group([
+									animate("1s", { background: "black" })
+									animate("2s", { color: "white" })
+								])
+							eg: @Component({
+									selector: 'app-open-close',
+									animations: [
+										trigger('openClose', [
+											// ...
+											state('open', style({
+												height: '200px',
+												opacity: 1,
+												backgroundColor: 'yellow'
+											})),
+											state('closed', style({
+												height: '100px',
+												opacity: 0.5,
+												backgroundColor: 'green'
+											})),
+											transition('open => closed', [
+												animate('1s')
+											]),
+											transition('closed => open', [
+												animate('0.5s')
+											]),
+										]),
+									],
+									templateUrl: 'open-close.component.html',
+									styleUrls: ['open-close.component.css']
+								})
+		* Bind triggers to Html Element:
+			When you've defined an animation trigger for a component, you can attach it to an element in that component's template by wrapping the trigger
+			name in brackets and preceding it with an @ symbol. Then, you can bind the trigger to a template expression using standard Angular property 
+			binding syntax as shown below, where triggerName is the name of the trigger, and expression evaluates to a defined animation state.
+
+			<div [@triggerName]="state">...</div>; // where state is a property holding the vlue of curr state
+		* Animation callbacks:
+			* We can listen to couple of events triggered by animation and perform some operation on those triggers. We listen to them using event binding 
+			  and '@' with the event name. There are mainly two events that are emitted start and done events
+			 eg:
+			 <div (@triggerName.start)="startAnimation($event)" (@triggerName.done)="endAnimation($event)" [@triggerName]="state">...</div>;
+				* As part of $event object we get an object conatining start state , end state and total time taken by the animation.
+* Adding Offline capabilities to Angular App
+	* If there is network, our angular application usually breaks. This is the case with most web applications. In such cases we get 'No internet connection'
+	  error. But we can add offline capabilities to our angular application so that it caches the data from server and serves the cached data if no
+	  network is present.We can acheive the offline availability using Service workers
+	* Service Workers:
+		* Any Wep app consists of one (SPA) or more HTML pages and javascript to make these pages interactive. Javascript is single threaded though javascript 
+		  supports asynchronous operations to avoid blocking.
+		* A service worker is a script that your browser runs in the background, separate from a web page, opening the door to features that don't need a web
+		  page or user interaction. It runs a separate thread which is different from my thread. Service workers can be used for:
+			* Push notification: Push notifications allow your users to opt-in to timely updates from sites they love and allow you to effectively re-engage 
+			  them with customized, engaging content.
+			* background sync: 
+			* Intercept and handle network requests, including programmatically managing a cache of responses - In short service workers can act as proxies 
+			  and intercept and manage our network requests.
+		* Things to note about a service worker:
+			* It's a JavaScript Worker, so it can't access the DOM directly. Instead, a service worker can communicate with the pages it controls by responding
+  			  to messages sent via the postMessage interface, and those pages can manipulate the DOM if needed.
+			* Service worker is a programmable network proxy, allowing you to control how network requests from your page are handled.
+			* It's terminated when not in use, and restarted when it's next needed.
+			* It makes extensive use of Promises.
+		* Service worker Life cycle: A service worker has a lifecycle that is completely separate from your web page.
+			* To install a service worker for your site, you need to register it, which you do in your page's JavaScript. Registering a service worker will 
+			  cause the browser to start the service worker install step in the background. 
+			* Typically during the install step, you'll want to cache some static assets. If all the files are cached successfully, then the service worker 
+			  becomes installed.
+			* When installed, the activation step will follow and this is a great opportunity for handling any management of old caches.
+			* After the activation step, the service worker will control all pages that fall under its scope,
+			* Once a service worker is in control, it will be in one of two states: either the service worker will be terminated to save memory, or it will 
+			  handle fetch and message events that occur when a network request or message is made from your page.
+	* Add service worker for offline capabilities in Angular: https://angular.io/guide/service-worker-intro
+		* We can use the command 'ng add @angular/pwa' which is a command which is supported by the package '@angular/pwa' and it installs the required
+		  packages (@angular/pwa, @angular/service-worker etc) and confires the angular application to use service worker and also provides a default 
+		  configuration. Some of changes made by the command ' ng add @angular/pwa' are:
+			* index.html -> Adds a noscript tag to provide warning in case javascript is turned off and adds a link to manifest file
+			* adds manifest.json file which comtains starter icon for our web application.
+			* app.module.ts - It adds ServiceWorkerModule from (@angular/service-worker) in the imports array and registers a service worker file
+			  (ngsw-worker.js) during production.
+			  ngsw-worker.js file will be added in dist folder during build process and is auto-generated.
+			* package.json - Adds dependent packages linke @angular/pwa and @angular/service-worker
+			* angular.json - Adds serviceworker : true property to the angular build config for production. This is required because the service worker hash
+			  needs to updated with each build and service worker checks this hash and reloads the resources if there is a change (i.e project is rebuilt)
+			* ngsw-config.json - This is the configuration file to configure the service and how it handles the http request from the application.
+			  It contains the following configurable information:
+				* index- Specifies the file that serves as the index page to satisfy navigation requests. Usually this is /index.html.
+				* assetGroups - Assets are resources that are part of the app version that update along with the app. They can include resources loaded 
+				  from the page's origin as well as third-party resources loaded from CDNs and other external URLs.  It is an array of assetGroup, where
+				  each assetGroup is an object containing following data:
+					* name - A name is mandatory. It identifies this particular group of assets
+					* installMode: The installMode determines how these resources are initially cached. The installMode can be either of two values:
+						* prefetch - It tells the Angular service worker to fetch every single listed resource while it's caching the current version of the
+						  app. This is bandwidth-intensive but ensures resources are available whenever they're requested, even if the browser is currently 
+						  offline.
+						* lazy - It does not cache any of the resources up front. Instead, the Angular service worker only caches resources for which it 
+						  receives requests. This is an on-demand caching mode
+					* updateMode: For resources already in the cache, the updateMode determines the caching behavior when a new version of the app is discovered. 
+					  Any resources in the group that have changed since the previous version are updated in accordance with updateMode. It can be either
+					  'prefetch' or 'lazy' 
+					* resources: This section describes the resources to cache, broken up into two groups:
+						* files - It lists patterns that match files in the distribution directory. These can be single files or glob-like patterns that match 
+						  a number of files.
+						* urls - It includes both URLs and URL patterns that will be matched at runtime. These resources are not fetched directly and do not 
+						  have content hashes, but they will be cached according to their HTTP headers. This is most useful for CDNs such as the Google Fonts 
+						  service.
+				* dataGroups - Unlike asset resources, data requests are not versioned along with the app. They're cached according to manually-configured 
+				  policies that are more useful for situations such as API requests and other data dependencies. It ia an array of dataGroup, where each dataGroup
+				  is an object containg following info:
+					* name - Similar to assetGroups, every data group has a name which uniquely identifies it.
+					* urls - A list of URL patterns. URLs that match these patterns will be cached according to this data group's policy.
+					* version - version is an integer field and defaults to 0
+						* Occasionally APIs change formats in a way that is not backward-compatible. A new version of the app may not be compatible with the 
+						  old API format and thus may not be compatible with existing cached resources from that API.
+						* version provides a mechanism to indicate that the resources being cached have been updated in a backwards-incompatible way, and that
+  						 the old cache entries—those from previous versions—should be discarded.
+					* cacheConfig - This section defines the policy by which matching requests will be cached. It ia object containing following properties:
+						* maxSize - (required) The maximum number of entries, or responses, in the cache. Open-ended caches can grow in unbounded ways and 
+						  eventually exceed storage quotas, calling for eviction.
+						* maxAge - (required) The maxAge parameter indicates how long responses are allowed to remain in the cache before being considered 
+						  invalid and evicted. maxAge is a duration string, using the following unit suffixes: d: days, h: hours, m: minutes etc.
+						* timeout - This duration string specifies the network timeout. The network timeout is how long the Angular service worker will wait 
+						  for the network to respond before using a cached response, if configured to do so. timeout is a duration string eg: 5s30u 
+						* strategy - The Angular service worker can use either of two caching strategies for data resources.
+							* performance - The default stategy, optimizes for responses that are as fast as possible. If a resource exists in the cache, the 
+							  cached version is used. This allows for some staleness, depending on the maxAge, in exchange for better performance. This is 
+							  suitable for resources that don't change often; for example, user avatar images.
+							* freshness - It optimizes for currency of data, preferentially fetching requested data from the network. Only if the network 
+							  times out, according to timeout, does the request fall back to the cache. This is useful for resources that change frequently;
+							  for example, account balances.
+				eg:
+				{	"index": "/index.html",
+					"assetGroups": [{
+						"name": "app",
+						"installMode": "prefetch",
+						"resources": {
+							"files": [
+								"/favicon.ico",
+								"/index.html",
+								"/*.js",
+								"/*.css"
+							]}
+					}],
+					"dataGroups": [{
+						"name": "lessons-api",
+						"urls": [
+							"/api/lessons"
+						],
+						"cacheConfig": {
+							"strategy": "freshness",
+							"timeout":"10s",
+							"maxAge": "1d",
+							"maxSize": 100
+					}}]}
+		* In order to see the service worker in action we need build and run angular application in production mode. In order to run in production servier,
+		  we cannot use 'ng serve' as it will be development service. We can use other packages like 'http-serve' which gives a simple production server.
+			* http-server - It is a simple, zero-configuration command-line http server. It is powerful enough for production usage, but it's simple and 
+			  hackable enough to be used for testing, local development, and learning.
+				Install: npm install http-server -g
+				Run: http-server [path] [options] (Path defaults to ./)
+					Options:
+					-p Port to use (defaults to 8080)
+					-a Address to use (defaults to 0.0.0.0)
+Angular Testing:
+	* Advantages of Unit Testing
+		* Testing individual components and catching design mistake early
+		* It helps us guard against breaking changes during upgrade
+	* The Angular CLI downloads and install everything you need to test an Angular application with the Jasmine test framework which uses Karma test runner. 
+	  Karma is essentially a tool which spawns a web server that executes source code against test code for each of the
+ 	  browsers connected. The results of each test against each browser are examined and displayed via the command line to the developer such that they can 
+	  see which browsers and tests passed or failed.
+	* Angular CLI by default creates a .spec.ts file for unit testing. It uses Karma test setup and testing package @angular/core/testing for testing.
+	* Jasmine Testing Framework :
+		* Jasmine is one of the most popular tools for a JavaScript developer to deal with hectic testing process. It is an open source technology. It is a 
+		  simple API to test different components of JavaScript.
+		* Suite Block: Suite is the basic building block of Jasmine framework. The collection of similar type test cases written for a specific file or 
+		  function is known as one suite. It contains two other blocks, one is “describe()” and another one is “it()”. One Suite block can have only two
+		  parameters, one “name of that suite” and another “Function declaration” that actually makes a call to our unit functionality that is to be tested.
+			 * describe('<test_desc>', ()=>{}) - It takes two params name and function and contains one or more 'it' blcks
+			 * it('<test_desc>', ()=>{}) - Each 'it' correspnds to a single test case and each 'it' block should contain one r more 'expect' statement which 
+			   evaluates to a bolean. If the value of 'expect' statement of the 'it' block is true, the test case passe. All the 'it' block within the
+			   describe() suite	are executed in parallel
+			 * expect block - Jasmine Expect allows you to write your expectation from the required function or JavaScript file. It comes under 'it' block. 
+			   One 'it' block can have more than one Expect block. This expect block provides a wide variety of methods to unit test your JavaScript function 
+			   or JavaScript file. Some of the built in methods of expect bloack are:
+					* toEqual() - Checks for equality between expected and actual value eg: expect(Calculator.currentVal).toEqual(0);
+					* not.toEqual() - not.toEqual() works exactly opposite to toEqual().
+					* toBe() - toBe() matcher works in a similar way as toEqual(), however toBe() (similar to ===) matcher matches with the type of the object whereas 
+					  toEqual() matches with the equivalency of the result.
+					* toBeTruthy() - This Boolean matcher is used in Jasmine to check whether the result is equal to true or false.
+					* toBeFalsy() - toBeFalsy() also works the same way as toBeTruthy() method. It matches the output to be false whereas toBeTruthy matches 
+					  the output to be true.
+					* toContain() - toContain() matchers provide us the facility to check whether any element is a part of the same array or some other 
+					  sequential objects.
+					* toBedefined() - This matcher is used to check whether any variable in the code is predefined or not.
+					* toBeGreaterThan() - As the name suggests this matcher helps to check greater than condition.
+			 * beforeEach() and afterEach() - Another notable feature of Jasmine is before and after each function. Using these two functionalities, we can execute 
+			  some pieces of code before and after execution of each spec. 
+			 * spyOn() - Jasmine spy is another functionality which does the exact same as its name specifies. It will allow you to spy on your application function 
+			   calls. spyOn() is inbuilt into the Jasmine library which allows you to spy on a definite piece of code. It takes two parameters, 
+					* Object containing the function to spy on
+					* The name of the function to spy on as string.
+					eg: spyOn(dictionary, "hello"); // It creates a spy on hello function dictionary object.
+			   eg: 
+			   describe("calculator",function(){ 
+					beforeEach(function(){ 
+						Calculator.currentVal = 0; 
+					});  
+   
+					//test case: 1  
+					it("Should retain the current value of all time", function (){
+						expect(Calculator.currentVal).toBeDefined();
+						expect(Calculator.currentVal).toEqual(0);  
+					}); 
+   
+					//test case: 2  
+					it("should add numbers",function(){
+						expect(Calculator.add(5)).toEqual(5); 
+						expect(Calculator.add(5)).toEqual(10);  
+					});
+				});
+	* Angular Testing Utilities
+		* Angular testing utilities are present in '@angular/core/testing'
+		* Testbed: 
+			* The TestBed is the most important of the Angular testing utilities. The TestBed creates a dynamically-constructed Angular test module that 
+			  emulates an Angular @NgModule. 
+			* TestBed.configureTestingModule() - The TestBed.configureTestingModule() method takes a metadata object that can have most of the properties of an 
+			  @NgModule. We can use TestBed.configureTestingModule({}) in beforeEach() of the Test Suite so that Testbed is available for all the test cases
+			  in the suite.
+			  eg:
+			   TestBed.configureTestingModule({
+				declarations: [ AppComponent ]
+			  }).compileComponents(); 
+				* compileComponents() - This function is needed to compile components. This is needed because angular compiler to compile the template to
+				  javascript is not present and we need to call compileComponents to compile it. This is not needed when using webpack and angular CLI
+			* TestBed.createComponent(<compName>) -> This will create a component for testing and return ComponentFixture
+				const fixture = TestBed.createComponent(BannerComponent);		
+			* ComponentFixture - The ComponentFixture is a test harness for interacting with the created component. It is created using 
+			  TestBed.createComponent(<compName>). Some of the properties of component fixture are:
+				* componentInstance - It gives an intance of the component and we can use properties and methods of the component on this instance
+				* nativeElement - The value of ComponentFixture.nativeElement has the any type. It gives access to the template of the component. it is an 
+				  HTMLElement of some sort, you can use the standard HTML querySelector to dive deeper into the element tree. But The properties of the 
+				  nativeElement depend upon the runtime environment. Hence it is safer to debugElement.nativeElement instead of using it directly.
+				* debugElement:  Angular creates a DebugElement tree that wraps the native elements for the runtime platform. The nativeElement property unwraps
+				  the DebugElement and returns the platform-specific element object. 
+				  eg: 
+					const bannerElement: HTMLElement = fixture.debugElement.nativeElement;
+					expect(bannerElement.querySelector('p').textContent).toEqual('banner works!');
+				* detectChanges() - The TestBed.createComponent does not trigger change detection. You must tell the TestBed to perform data binding by calling 
+				  fixture.detectChanges(), where fixture is the component created using  TestBed.createComponent()
+				* dispatchEvent() - To simulate user input, you can find the input element and set its value property. Angular doesn't know that you set the 
+				  input element's value property. It won't read that property until you raise the element's input event by calling dispatchEvent(). 
+				  Then you call detectChanges()
+				  
+				  eg:
+					const hostElement = fixture.nativeElement;
+					const nameInput: HTMLInputElement = hostElement.querySelector('input'); 
+					// simulate user entering a new name into the input box
+					nameInput.value = 'quick BROWN  fOx'; 
+					// dispatch a DOM event so that Angular learns of input value change.
+					nameInput.dispatchEvent(newEvent('input')); 
+					// Tell Angular to update the display binding through the title pipe
+					fixture.detectChanges();
+		* Component Testing:
+			* A component, unlike all other parts of an Angular application, combines an HTML template and a TypeScript class. The component truly is the 
+			  template and the class working together. and to adequately test a component, you should test that they work together as intended.
+			* We can TestBed.configureTestingModule({declarations: [<compName>]}) to configure the component for testing.
+			* In the test case, we can then create component using TestBed.createComponent(<compName>), which return ComponentFixture. Then we can
+			  use the properties of ComponentFixture to test the Component.
+		* Service Injection Testing
+			* To test service individually we can use provide the service in the providers array and TestBed.configureTestingModule() function. Then 
+			  we can get the TestBed.get(<serviceName>) to get the service. We canthen test the sevice.
+			* If we need to test if injection of service in our component works, then we createComponent and from ComponentFixure get the service using,
+			  fixture.debugElement.injector.get(<serviceName>).
+			* In order to test the changes that is made by the injected service, we need to run fixture.detectChanges() before testing the content.
+		* Asynchronous testing:
+			* Some services/Components can have asynchronous methods that return an Observable or Promise. In order to test asynchronous code we use
+			  async(), async() will the second param of 'it' block and it takes an function as parameter.
+			* Inside the async method we can use spyOn() of Jasmine testing framework to fake the asynchronous functionality.
+				eg:
+					spyOn(DataService, "getDetails").and.returnValue(Promise.resolve('Data'));
+			* When using asynchronous method , the result will not be available imediately. Hence we need to use fixture.whenStable() which takes a function
+			  which will be executed after asynchronous operation completes.
+			  eg:
+				const fixture = TestBed.createComponent(AppComponent);
+				const app = fixture.debugElement.componentInstance;
+				const DataService = fixture.debugElement.injector.get(DataService);
+				spyOn(DataService, "getDetails").and.returnValue(Promise.resolve('Data'));
+				fixture.detectChanges();
+				fixture.whenStable(()=>{expect(app.data).toBe('data')})
+			 * Alternately, instead of async() and fixture.withStable(), we can use fakeAsync() method, which fakes the async. With this we can use tick()
+			   function, which we should call after all async operation. This approach is useful because we are anyway faking async function. When tick()
+			   is called all async operation are complete we can then test the component value.
+		* Isolated vs non-Isolated tests:
+			* Isolated tests : Sometimes in case of pipes or services we may want to test the basic functionality. And we don't even need Angular testing
+			  functionalities like Testbed for it. In suce cases we can directly create the pipe/service using new operator and call the required function
+			  and test the result.
+			* Non- Isolated : This is for testing component which are dependent on other services , componsnts etc. In this case we can use TestBed, async, fakeAsync
+			  etc provided by angular to write unit tests.
+	* 'ng test' - This command is used to trigger the angular test suites and at the end of execution it tells the number of passed/failed test cases.
+* Angular 6 - Changes nad New Features:
+	* Angular 6 uses RxJS 6 which changed the internal package structure from RxJs 5. It also has rxjs-compat package which can be installed to get backward
+	  compatability with older angular code using RxJS 5 or earlier versions.
+	* <template> html element is removed and is now replaced with <ng-template>
+	* @angular/http is deprecated and we need to HttpClient from @angular/common/http instead.
+	* Services: With Angular 6, if we need to provide a service Application wide, there is another syntax that can be used other than adding it to providers 
+	  array at root module. We can add @Injectable() decorator and pass it a object containing providedIn:'root' property.
+		eg: @Injectable({providedIn: 'root'})
+			export class UserService {
+			}
+	* Ivy Renderer : It is renderer that drastically reducess bundle size. But it is in very early stages and not even feature complete.
+	* New CLI command 'ng update' to update to new angular version.
+	* Angular Elements:
+		* It is a feature of Angular framework that allows us the components used in Angular App into native Web Components. Web Components is a javascript
+		  feature that allows us to create custom HTML elements that can be used in other application. These are totally encapsulated and self bootstraping 
+		  custom elements that can be used as html elements.
+		* But Angular 6 still supports Angular Elements only in Angular application.
+		* The main advantage offered by Angular elements is that, we can add dynamic html content containing Angular Elements which App is running.
+		  This is not possible in Angular Components as the Angular Components are compiled to JavaScript by the Angular Compiler and we cannot use 
+		  dynamic Angular components during runtime.
+		* Creating Angular Elements:
+			* we need to install @angular/elements using 'ng add @angular/elements'. This installs @angular/elements and sets up the required polyfills
+			* We may need to use rxjs-compat package because it is a dependency for @angular/elements in Angular 6
+			* We can import createCustomElement from @angular/elements in the place where we need to create custom element. Then we can call 
+			  createCustomElement. It takes an two parameters:
+					* AngularComponent as argument, we can pass the component that we want to create as custom element to the function. 
+					* config object: It contains a injector property that requires the injector we using. We need to pass Angular injector to it.
+				It returns Angular element.
+			* We then need to use customElements.define() method( which is javascript method not angular) to register the WebCompoennt/Sustom Element 
+			  created. It takes two parameters:
+				* name - which the name of seletor we will use
+				* The Angular Element created.
+			* We need to add the component that is used to create Angular Element to entryComponents array in the @NgModule decorator of the AppModule.
+				eg:
+				@NgModule({
+					entryComponents: [AlertComponent]
+				})
+				
+				export class AppComponent {
+					constructor(injector:Injector, domSanitizer: DomSanitizer) {
+						const AlertElement = createCustomElement(AlertComponent);
+						customElements.define('my-alert', AlertComponent);
+						this.content = domSanitizer.bypassSecurityTrustHtml('<my-alert message="dynamic content"></my-alert>')
+							// domSanitizer.bypassSecurityTrustHtml as we adding innerHtml in AlertComponent and need to tell browser that we trust the Html
+							// to cross browser scripting attacks
+					}
+				
+				}
+	* Creating angular project without Angular CLI:
+		* Create a new folder and use npm init to create a new project with package json.
+		* Create a folder struction with src and src/app folder.
+		* Install all the angular depencies using npm install like @angular/core, @angular/common, @angular/compiler, @angiular/compiler-cli(needed for
+		  Ahead of time compilation), @angular/forms etc. In addition to angular packages angular also need to install the following third packages 
+		  using npm:
+			* rxjs -> Angular extensively makes use of rxjs Observables
+			* core-js -> This is needed to provide polyfill so that angular works in all browsers.
+			* zone.js -> This is used by angular for change detection.
+		* Create the angular application with app.module and app.compoennt and any other components needed in src/app folder
+		* Add main.ts, index.html and polyfill.ts files in src folder:
+			* index.html: This is the main page of our SPA
+				* Create a normal template html and change the title to reflect the project.
+				* Add <base href="/"></base> in head part of the index.html.
+				* In the body add the selector of the root component <app-root>Loading .. </app-root>
+			* polyfill.ts : This fill is needed to provide polyfills for all browser if we use latest es6 and es7 features:
+				eg:
+					import "core-js/es6"
+					import "core-js/es7/reflect"
+					require(zone.js/dist/zone);
+			* main.ts : This is the main script file which will be executed to start our application.
+				* Include the polyfill.ts file at the top-most
+				* import the platformBrowserDynamic from @angular/platform-browser-dynamic and our root module AppModule file.
+				* Call platformBrowserDynamic().bootstrapModule(AppModule) to bootstrap the angular application.
+				eg:
+					
+					import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+					import { AppModule } from './app/app.module';
+					platformBrowserDynamic().bootstrapModule(AppModule)
+				* Need to create a separate file for prod main.aot.ts which uses platformBrowser from @angular/browser rather than platformBrowserDynamic
+				  and we need to use platformBrowser.bootstrapModuleFactory(AppModuleNgFactory) where AppModuleNgFactory will be generated during build.
+				  We also need to import enableProd from @angular/core and call enableProd() method to enable production mode.
+		* We can use webpack for compiling and bundling our aplication. For that we need to intstal some dev dependencies to compile, build and run our 
+		  application using npm install --dev-save <package> command:
+			* webpack and webpack-dev-server (needed to run development server), webpack-merge (to merge webpack config files), webpack-cli
+			* webpack-html-plugin (to copy index.html into our dist folder)
+			* @ngtools/webpack  for angular
+			* del-cli (to delete unneeded temp files after build)
+			* typescript
+			* @types/core-js and @types/node // These are additional types used by polyfill and node js code we may use
+			* html-loader(for compileing html), raw-loader(for css), awesome-typescript-loader(for typescript), angular-router-loader(for Angular routing)
+			  and angular2-template-loader(for compiling html templates)
+		* We need to create tsconfig.json for configuration how the typescript code is compiled to javascript. Sample tsconfig.json:
+		  https://angular.io/guide/typescript-configuration
+			{
+				"compilerOptions":{
+					"target": "es5",
+					"module":"es2015"
+					"moduleResolution": "node",
+					"sourceMap": true, // For getting source mapping in development
+					"emitDecoratorMetadata": true, // Since we use decorators in typescript code
+					"experimentalDecorators": true,
+					"typeRoots":[ // This is needed to tell typescript compiler that we are using additional types and to compile also those types.
+						"node_modules/@types"
+					]
+					"lib": [ "es2015", "dom" ],
+				}
+				
+				angularCompilerOptions: { // Needed only in production for aot
+					skipMetadataEmit: true
+				}
+			}
+		* Configuring webpack:
+			* We need to add webpack.config.js file. Alternately we can add webpack.config.common.js, webpack.config.dev.js and webpack.config.prod.js to
+			  have separate configuration for development and production. If we are use different prod and dev config, then we need to import 
+			  webpack-merge package to merge the common config with dev/prod config: https://webpack.js.org/configuration/
+					eg:
+					var webpackMerge = require('webpack-merge');
+					var commonConfig = require('./webpack.config.common');
+					module.exports = webpackMerge(commonConfig, {//new configuration})
+					
+					// configuration
+					var ngw = require('@ngtools/webpack')
+					module.exports = {
+						entry: './src/main.ts', // starting point
+						//Automatically resolve certain extensions
+						resolve: {
+						   extensions: ['.ts', '.js'] //which is what enables users to leave off the extension when importing
+						},
+						output: {
+							path: path(__dirname, 'dist'),
+							fileName: "bundle.js",
+							chunkFileName: "[id].chunk.js"
+							
+						},
+						mode: developemnt //change it to prodction when needed
+						module: {
+							rules: [
+								{
+									test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+									loader: '@ngtools/webpack'
+								},
+								{
+									test: /.html$/,
+									loader: html-loader
+								},
+								{
+									test: /.css$/,
+									loader: raw-loader
+								},
+								{
+									test: /.ts$/,
+									use : {
+										{loader: 'awesome-typescript-loader'},
+										{loader: 'angular2-template-loader'},
+										{loader: 'angular-router-loader?aot=true'} // aot =true option is needed to aot compiling in prod
+									}
+								}
+							]
+						}
+						plugins: [
+							new HtmlWebpackPlugin({
+								template: './src/index.html'
+							})
+							new ngw.AngularCompilerPlugin({
+								tsConfigPath: './tsconfig.aot.json',
+								entryModule: './src/app/app.module#AppModule'
+							})
+						]
+					}
+					
+		* After completing configuration , to run dev server we can use run using the command
+			* webpack-dev-server --config webpack.dev.config.js --port <port> --progress --inline 
+			This will start the development server
+		* After configuring the build for production, run the following commands:
+			* del-cli dist -> delete dist folder
+			* ngc -p tsconfig.json -> run this commond twice, it uses angular cli compiler to compile the code offline
+			* webpack-dev-server --config webpack.prod.config.js --port <port> --progress 
+			* del-cli <files_to_deleted> -> delete all temp files
+		* Now the production code is compiled and built, we can use any http server like lite server (which needs to be installed using 
+		  'npm install --save-dev lite-server' . We can set configuration for lite-server in bs-config.js file.
+			* lite-server - Lightweight development only node server that serves a web app, opens it in the browser, refreshes when html or javascript 
+			 change, injects CSS changes using sockets, and has a fallback page when a route is not found.
+			* Start light server using command 'lite-server -c bs-config.js'

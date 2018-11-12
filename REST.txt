@@ -1,0 +1,75 @@
+* REST -> Representational State Transfer 
+* REST is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. 
+* REST-compliant systems, often called RESTful systems, are characterized by how they are stateless and separate the concerns of client and server.
+* In the REST architectural style, the implementation of the client and the implementation of the server can be done independently without each knowing about
+  the other. This means that the code on the client side can be changed at any time without affecting the operation of the server, and the code on the server 
+  side can be changed without affecting the operation of the client.
+* By using a REST interface, different clients hit the same REST endpoints, perform the same actions, and receive the same responses.
+* Systems that follow the REST paradigm are stateless, meaning that the server does not need to know anything about what state the client is in and vice versa.
+  In this way, both the server and the client can understand any message received, even without seeing previous messages. 
+* This constraint of statelessness is enforced through the use of resources, rather than commands. Resources are the nouns of the Web - they describe any
+  object, document, or thing that you may need to store or send to other services.
+* In the REST architecture, clients send requests to retrieve or modify resources, and servers send responses to these requests. 
+* REST requires that a client make a request to the server in order to retrieve or modify data on the server. A request generally consists of:
+	* an HTTP verb, which defines what kind of operation to perform
+		* There are 4 basic HTTP verbs we use in requests to interact with resources in a REST system:
+			1. GET — retrieve a specific resource (by id) or a collection of resources
+			2. POST — create a new resource
+			3. PUT — update a specific resource (by id)
+			4. DELETE — remove a specific resource by id
+	* a header, which allows the client to pass along information about the request
+		* In the header of the request, the client sends the type of content that it is able to receive from the server. This is called the Accept field, and 
+		  it ensures that the server does not send data that cannot be understood or processed by the client. The options for types of content are 
+		  MIME Types (or Multipurpose Internet Mail Extensions)
+		  eg: text/html, text/css, application/json
+	* a path to a resource
+		* Requests must contain a path to a resource that the operation should be performed on. In RESTful APIs, paths should be designed to help the client
+ 		  know what is going on. This is acheived by following the standard pattern for RESTful Routing
+		* If we are trying to access a single resource, we would need to append an id to the path. For example: 
+			GET fashionboutique.com/customers/:id — retrieves the item in the customers resource with the id specified. 
+			DELETE fashionboutique.com/customers/:id — deletes the item in the customers resource with the id specified
+	* an optional message body containing data
+* The server responds to the client request. A server response must contain.
+	* CONTENT TYPES
+		* In cases where the server is sending a data payload to the client, the server must include a content-type in the header of the response. 
+		  This content-type header field alerts the client to the type of data it is sending in the response body. These content types are MIME Types, 
+		  just as they are in the accept field of the request header. The content-type that the server sends back in the response should be one of the 
+		  options that the client specified in the accept field of the request.
+	* RESPONSE CODES
+		* Responses from the server contain status codes to alert the client to information about the success of the operation. 
+		* Some common response codes and their meaning are:
+			* 200 (OK) - This is the standard response for successful HTTP requests.
+			* 201 (CREATED)	- This is the standard response for an HTTP request that resulted in an item being successfully created.
+			* 204 (NO CONTENT) - This is the standard response for successful HTTP requests, where nothing is being returned in the response body.
+			* 400 (BAD REQUEST) - The request cannot be processed because of bad request syntax, excessive size, or another client error.
+			* 403 (FORBIDDEN) - The client does not have permission to access this resource.
+			* 404 (NOT FOUND) - The resource could not be found at this time. It is possible it was deleted, or does not exist yet.
+			* 500 (INTERNAL SERVER ERROR) - The generic answer for an unexpected failure if there is no more specific information available.
+		* For each HTTP verb, there are expected status codes a server should return upon success:
+			* GET — return 200 (OK)
+			* POST — return 201 (CREATED)
+			* PUT — return 200 (OK)
+			* DELETE — return 204 (NO CONTENT) 
+			* If the operation fails, return the most specific status code possible corresponding to the problem that was encountered.
+* RESTful Routing is a pattern for naming http routes for different database CRUD operation. It is just convention for naming urls and routes, but it is a
+  good practice to follow it. As if our APP is RESTful i.e It follows the convention for RESTful routing, then it becomes easier for other developers to 
+  understand the APP
+* There are seven RESTful routes. Let us consider an example of blogs
+	
+	Name of the Route    Route            http verb	   Purpose 
+	=========================================================
+	* Index				/blogs            GET           lists all the blogs
+	* New               /blogs/new        GET           show the form to create new blogs
+	* Create            /blogs            POST          create a new blog and add to database
+	* Show              /blogs/:id        GET           show details about a single blog of the given id
+	* Edit              /blogs/:id/edit   GET           show the form to edit the given blog
+	* Update            /blogs/:id        PUT           update the changes of the given blog to the database
+	* delete            /blogs/:id        DELETE        delete the given blog
+	
+* In Restful Route, if there is no Home page "/" route, we can redirect to index page.
+* If there are other embeded entities, i.e comments for each blog, then we will use nested routes. Consider the following nested routes
+	* New            /blogs/:id/comments/new   GET       show the form to a add a new comment for the blog
+	* Create         /blogs/:id/comments       POST      create a new comment and add to the blog in the database
+	
+* JSONPlaceholder -> https://jsonplaceholder.typicode.com/
+	* Fake Online REST API for Testing and Prototyping - This is very useful for testing.

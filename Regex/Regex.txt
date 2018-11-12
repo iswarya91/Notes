@@ -1,0 +1,49 @@
+Regular Expression: 
+* A regular expression is a special text string for describing a search pattern. It is also called as regex.
+* Basically, a regular expression is a pattern describing a certain amount of text. That makes them ideally suited for searching, text processing and data 
+  validation.
+* Searching with regular expressions enables you to get results with just one search instead of many searches.
+* Regular expression literal, which consists of a pattern enclosed between slashes, as follows:
+	var re = /ab+c/;
+* A regular expression pattern is composed of simple characters, such as /abc/, or a combination of simple and special characters, such as /ab*c/ or 
+  /Chapter (\d+)\.\d*/.
+* Metacharaters in Regular expression:
+	* /^/ -> Here the metacharater '^' begin with. eg: /^Hello/ -> i.e Strings beginning with 'Hello'
+	* /$/ -> Here the metacharater '$' ends with. eg: /over$/-> String that end with 'over' 
+	* /^$/ -> Both beginning and end eg: /^Hello$/ -> String must both begin and end with 'Hello'
+	* /./ -> '.' is used to represent any one character eg: /h.llo/ will match hello, hillo, hpllo etc
+	* /*/ -> '*' is wildcard and represent any character 0 or more times. /so*/ - o can occur 0 or more times
+	* /+/ -> '+' represent any character 1 or more times /so+/ - o should occur 1 or more times. 
+	* /?/ -> '?' is used to specify optional character /^gre?a?y$/ will match gray, grey or gry as both 'a' and 'e' are optional.
+* Brackets in Regex
+	* [] -> USed to represent character sets.
+		* /[GF]ray/ -> This matches the word Grsy or Fray
+		* /[^GF]ray/ -> '^' inside the [] is used for negation. Thus this regex will match if the first char is anything other than G and F. example: Mray, 
+		  Qray etc 
+		* /[A-Z]ray/ -> A-Z specifies a range. Here the first character can be any capital letter
+		* /[a-z]ray/ -> In this regex first char is small letter
+		* /[A-Za-z]ray/ -> Here first char can be any letter
+		* /[0-9]ray/ -> Here the first char is a digit
+	* {} -> Quatifiers . They are used to specify number of times a literal, character set or group should occur. It is specified after the character or character set
+		* {2} -> Should occur exactly 2 times eg: /Hel{2}o/
+		* {2, 4} -> Can occur a minimum of 2 and max of 4 eg: /Hel{2,4}o/ will match Hello, Helllo, Hellllo
+		* {2,} -> Should occur at least at least 2 times
+		* {0,2} -> Should occur at most 2 times {,2) does not work.
+	* () -> It is used to group a set of character. It can be very powerful when used in comination with quantifiers.
+		* eg: /([0-9]x){3}/ -> This matches 0x0x0x, 3x3x3x etc 
+* Shorthand character classes
+	* \w -> It is called as word. Any alphanumeric character or _ eg: a-z, A-Z, 0-9, _
+	* \W -> Non word characters . Would match special symols, spaces etc
+	* \d -> Any digit character
+	* \D -> Non digit character
+	* \s -> white space character
+	* \S -> Non white space character
+	* \b -> word boundary. This will create word boundary eg: /Hell\b/ will match Hell and not Hello.
+* Assertions:
+	* Lookarounds are also called as assertions. It is that at the end of a lookahead or a lookbehind, the regex engine hasn't moved on the string. You can 
+	  chain three more lookaheads after the first, and the regex engine still won't move.
+		* (?=foo) - Lookahead - Asserts that what immediately follows the current position in the string is foo eg: /x(?=y)/ looks for x followed by y$/
+		* (?!foo) - Negative Lookahead - Asserts that what immediately follows the current position in the string is not foo eg: /x(?!y) looks for x not followed by y
+	
+* In order to have metacharaters as literal charaters i.e to have a literal ? or $ we need to escape it with backslash eg: /grey\?/ ->this will match 'grey?'
+

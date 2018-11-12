@@ -1,0 +1,31 @@
+Modernizr
+	* All web developers come up against differences between browsers and devices. That’s largely due to different feature sets: the latest versions of the 
+	  popular browsers can do some awesome things which older browsers can’t – but we still have to support the older ones.
+	* Modernizr makes it easy to deliver tiered experiences: make use of the latest and greatest features in browsers which support them, without leaving 
+	  less fortunate users high and dry.
+	* It’s a collection of superfast tests – or “detects”  which run as your web page loads, then you can use the results to tailor the 
+	  experience to the user.
+	* Modernizr tells the developer what HTML, CSS and JavaScript features the user’s browser has to offer.
+Using modernizr with css:
+	* By default, Modernizr sets classes for all of your tests on the root element (<html> for websites). This means adding the class for each feature when it
+	  is supported, and adding it with a no- prefix when it is not (e.g. .feature or .no-feature). This makes it super simple to add features in via progressive
+	  enhancement!
+	* Say you include Modernizr's detection for CSS gradients. Depending on the browser, it will result in either <html class="cssgradients"> or 
+	<html class="no-cssgradients">. Now that you know those two states, you can write CSS to cover both cases
+
+		.no-cssgradients .header {
+			background: url("images/glossybutton.png");
+		}
+
+		.cssgradients .header {
+			background-image: linear-gradient(cornflowerblue, rebeccapurple);
+		}
+Using modernizr with JS:
+	* Modernizr keeps track of the results of all of it's feature detections via the Modernizr object. That means that for each test, a corresponding 
+	  property will be added. You just have to test for truthiness in your code to figure out what you want to do
+
+      if (Modernizr.awesomeNewFeature) {
+              showOffAwesomeNewFeature();
+      } else {
+             getTheOldLameExperience();
+      }

@@ -1,0 +1,105 @@
+* Bootstrap is a css, javascript and HTML framework used to design responsive mobile first website really fast.
+* It has built in classes which help us build good looking websites and it is highly popular.
+* Though lot of websites use bootstrap, they have their own css on top of bootstrap to customize the bootstrap to their liking
+* Bootstrap is highly popular due to some of their great features like navbar and grid layout and responsive design.
+* It also has very good documentation and extremely simple to get strated. https://getbootstrap.com/
+* It is component library as it gives fully developed components.
+* Include bootstrap in our project:
+	* Download the compiled bootstrap files (css and js) and use them in our project.
+	* Use the cdn link for bootsrap and include the links directly in html. CDN contains link to compiled css and js bootraps files. No need to download it 
+	locally.
+	* We can also download the bootstrap source and compile it locally, but bootstrap uses SASS. Hence SASS compiler is needed to get compiled bootstrap.
+* Current bootstrap 4 is the latest major version.
+* Some of the commonly used bootstrap components:
+	* Buttons: Bootstrap has built in classes to make the button really good looking. These classes can be added to desired button look and feel to
+	  button, input and <a> tags.Some of the classes provided for button are:
+		* btn - Default bootstrap button class. It needs to added to all buttons to get bootstrap effect.
+		Additional classes to control button look and color:
+		* btn-primary
+		* btn-info
+		* btn-secondary
+		* btn-danger
+		* btn-success
+		Button size can be controlled using:
+		* btn-lg -large button
+		* btn-sm -small button
+		* btn-xs - extra small buttons
+		There are also some classes that helps us design some button state like:
+		* active - This calls adds a eefect as if the button is active
+		* disabled - This effect is applied is button is disabled.
+	* Form design - Bootstrap provides easy classes to design good looking forms. Some of the important form related classes
+		* form-control - This is added to input and select elemnets to get the look and feel provided by bootstrap.
+		* form-group - This used to group the label and input together and give some spacing to get better look. This is applied to div 
+		  surrounding each label and input.
+		* form-inline - This class creates an inline forn rather than block level form.
+		* Can provide feedback to user as a div inside form group. The feedback can have following classes
+			* valid-feedback -> displayed in green if 'is-valid' class is set on the form input
+			* invalid-feedback -> displayed in red if 'is-invalid' class is set on the form input.
+	* container - This class is used to create a container and this class is added to a div to give it proper padding and margin to create a 
+	  container div.
+	* jumbotron - A lightweight, flexible component that can optionally extend the entire viewport to showcase key marketing messages on your site. It
+	  is created by adding class jumbotron. It occupies the full width of its parent.
+	* Navigation bar: One of the most popular and widely used component of bootstrap is navigation bar. Bootstrap provides simple and highly responsive 
+	  easy to design navigation bar. Various components can be added as part of navigation bar. Brand , Link on th eleft, Links on the right (like SignIn ,
+	  LogIn etc), inline form (serach bar) , dropdowns etc.
+		* To add a default nav bar we apply classes 'navbar' and 'navbar-default' to the nav html component.
+		* Once navbar is added we can add brand name or image using 'navbar-brand' . This can be done inside a div with 'navbar-header' class.
+		* To create navigation link 'nav navbar-nav' classes are applied to <div> or <ul> containing list of links.
+		* To create navigation links on the right 'nav navbar-nav navbar-right' classes are applied to the <ul>
+		* To make navbar responsive, for mobile and tablet views we may have to hide the links and create hamburger button, on click of which links 
+		  should be displayed). As this involves interactivity bootstrap.js file needs to included using <script> tag in our html.
+		* boostrap.js require jquery. Hence link to jquery also needs to be added to html befor adding link to bootstrap.js.
+		* To hide the links, the content that needs to added is placed inside a div with classes 'collapse navbar-collapse' and an id.
+		* To get the hidden div on click of hamburger, we first need to add the hamburger button on the navbar-header. It actually consists of three 
+		 spans with class 'icon-bar' applied ( One for each bar in the hamburger icon). In bootstrap 4 we have a single span with 'navbar-toggler-icon'
+		 to create the hamburger button. Thus we need to refer to bootstrap docs to get the required classes to create a navbar.
+		 The button has some important attribute:
+			* data-target -'#<id>' - It should point to the id of the div containing the elements that need to collapsed.
+		* Thus we can have a simple responsive navbar with few classes. We need not memorise all the classes but simply use them after looking at example in 
+		  https://getbootstrap.com/docs/4.0/components/navbar/
+	* Bootstrap grid Layout: It is the most popular feature as it gives us a simple way to layout responsive webapges in the grid. It is mobile-first flexbox 
+	  grid to build layouts of all shapes and sizes thanks to a twelve column system, five default responsive tiers, Sass variables and mixins, and dozens of 
+	  predefined classes.
+		* We can create a great grid structure using rows and columns. A row should always wrap a column. The following bootstrap classes can be applied to the 
+		  grid.
+			* row -> This creates a row that can be divided into 12 columns. To create two columns we can create two divs inside row with col-lg-6. 
+			* There are five different sizes available for columns, these are applied for different devices
+				* extra large - col-xl
+				* large - col-lg
+				* medium - col-md
+				* small - col-sm
+				* extra small -> col(bootstrap 4), col-xs( bootstrap 3)
+			* Thus a highly responsive grid can be obtained by using diffent layout for different sizes. Consider the case where the divs need to stack one 
+			  after another in mobiles, but take 50% in md devices and 25% in large and extra large devices.
+				eg: <div class="row">
+						<div class="col-md-3 col-sm-6 blue">FUN1</div>
+						<div class="col-md-3 col-sm-6 blue">FUN2</div>
+						<div class="col-md-3 col-sm-6 blue">FUN3</div>
+						<div class="col-md-3 col-sm-6 blue">FUN4</div>
+					</div>
+					Thus it will take 25% in  md and larger devices and 50% in sm to medium and 100% in extra samll devices.
+			* Grid can be nested within one another. To do that another row is added as a child of column. This can further be divided into 12 columns. Button
+			 the columns must always be child to row divs.
+	* Adding Icons: Before bootstrap4 , glyphicons was part of bootstrap. Bootstrap includes 260 glyphs from the Glyphicon Halflings set. Glyphicons Halflings are 
+	  normally not available for free, but their creator has made them available for Bootstrap free of cost. As a thank you, you should include a link back to 
+	  Glyphicons whenever possible.It gives a set of icons that can easily be added to boostrap corresponding glyphicon classes.
+		* <p>Envelope icon: <span class="glyphicon glyphicon-envelope"></span></p> 
+		* <p>Search icon: <span class="glyphicon glyphicon-search"></span></p>
+	  From Bootstrap4 , Glyphicons are no longer part of bootstrap and need to be separately bought and used. Alternately other free icons like Font Awesome,
+	  which has a very good collection of free icons can be used. Font Awesome can be used by getting a corresponding css class and using appropriate
+	  classes in <i> tag.
+	* Thumbnail: It is used to create thumbnail containers before bootstrap 4. After bootstrap4 this is deprecated and replaced  by flexbox implementation 
+	 container called 'card'
+	* margin: In bootstrap we can add margins using following:
+		mt -> margin-top. We have values like mt-1, mt-2, mt-3 etc which adds a fixed value in rem(mt-1 is 0.25rem, mt-2 is 0.5 etc) to the top margin 
+		ml -> margin left
+		mr -> margin-right
+		mb -> margin-bootom
+		mx-auto -> adds auto margin to left and right margin thus centering the element.
+	* padding & border
+		* pt, pb, pl, pr are for padding top, bottom, left and right. px for left and right padding & py for top & bottom padding.
+		* bt, bb, bl, br are for border top, bottom, left and right.
+	* card - Used to create a card in bootstrap
+	* badge - Used to create badges in bootstrap
+	 
+* Bootswatch - Free themes for Bootstrap

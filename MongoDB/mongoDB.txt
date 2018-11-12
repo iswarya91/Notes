@@ -1,0 +1,99 @@
+* Database in simple terms is a collection of data/imformation.
+* Database also provides interface to access the data, add new data, modify or update date or delete existing data. The basic operation that is to be provided
+  by all databases is called CRUD ( Create, Read, Update and Destroy)
+* Databases provides an approach for data persistence.
+* Databases can broadly be classified into two
+	* SQL or relational database ->This is the most common database that has been there for a long time. It is widely used type and structures data in table 
+	  schema. First the table schema needs to defined and data is then added based on the schema. If data from two diffenent tables need to be linked then we 
+	  create a third table usually called join join table to join the two tables. If any property has be added to single item in the table, then table schema has
+	  to be modified and the property needs to be set as empty for all other entries. Thus relational databases are not very flexible.
+	  eg: mySQL
+	* No SQL or non relational databases -> Here the data is not stored as tables. This is newer database and is very flexible. A non-relational database is any 
+	  database that does not follow the relational model provided by traditional relational database management systems. This category of databases, also referred 
+	  to as NoSQL databases, has seen steady adoption growth in recent years with the rise of Big Data applications. Non-relational databases have grown in 
+	  popularity because they were designed to overcome the limitations of relational databases in dealing with Big Data demands. Big Data refers to data that
+	  is growing and moving too fast, and is too diverse in structure for conventional technologies to handle. They usually store data in JSON documents
+	  eg: MongoDB
+* Both relational and non-relational databases have their own advantages and disadvantages and choice is depending on the project requirement.
+* MongoDB -> It is the most popular non relational database. It is part of the MEAN stack (Mongo Express Angular Node).
+	* MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling.
+	* A record in MongoDB is a document, which is a data structure composed of field and value pairs. MongoDB documents are similar 
+	  to JSON objects. The values of fields may include other documents, arrays, and arrays of documents.
+* MongoDB need to installed and MongoDB 
+	* Install MondoDB in the local machine or cloud9 depending on the OS follow the installation procedure.
+		https://community.c9.io/t/setting-up-mongodb/1717
+		https://www.youtube.com/watch?v=b089GmAvUyQ&feature=youtu.be
+	* After installing start mongoDB deamon 'mongod'
+	* Once deamon is started it will start listening on a port and start serving Database queries and updates.
+	* The deamon should always be running if we need to connect to mongoDB and access the database.
+* Once MongoDB is installed and Mongo deamon started, we can use mondoDB. Some of the common commands to be used in mongoDB are:
+	* mongod -> This is used to start mongoDB
+	* mongo -> This takes us to mongo shell or mongo console. We can execute mongoDB commands here and check the functionality. 
+	* help -> This command list common mongoDB commands and simple help for each command.
+	* show dbs -> Shows the dbs that are present in the database
+	* use <db_name> -> This command servers dual purpose. It is used both to create and connect to a db. If db is present, it switches to that db. If
+	  not present, the db is created and connection is established to it.
+	* show collections -> list all collections in the connected db
+	* insert -> This command inserts data into a collection within a db. If the collection specified is present data is inserted into it. If not present,
+	  collection is created and data is inserted into it. eg: insert db.<collect_name>.insert({<object>}); eg: db.dogs.insert({name:"Rusty", breed:"Mutt"}) ->
+	  creates dogs collection in our db and adds a dob object into it.
+	* find -> This is used to find or read all the items in a collection. An object can be passed optionally. If an object is passed, it used to filter and
+	  matching items are displayed.
+	* update -> This is used to update one or more items in a database. It takes selection object to identify the item to be updated and the second parameter
+   	  is the new object to be set. eg: db.<collect_name>.update({<objects_to_update>}, {<new_object>}) -> By default the new objects will replace all existing
+	  objects. In order to update a particular field, we need to use $set in new_object eg: db.<collect_name>.update({<objects_to_update>}, 
+	  {$set: {<new_object>}}).
+	* remove -> This will delete all the matching elements eg: db.<collect_name>.remove({<object_Selection>}) eg: db.dogs.remove({breed:"Mutt"}) -> will 
+	  delete all dogs with breed= "Mutt" by default.
+	* drop -> This will remove the entire collection eg: db.<collection_name>.drop() -> Dropping a collection requires freeing up some large data structures
+	  inside the database of data files. Dropping collection is vastly faster than removing one by one until collection is empty. Meta data like indexes will 
+	  exists if the collection is removed rather than when its dropped
+* When we add an object to mongoDB using insert, an '_id' field is automatically created by mongo. It is unique long hexadecimal number to identify our
+  object.
+* Data Association or relationships:
+	Data Association defines relationship between different entities or collections in database. The types of association can be broadly classified into:
+		* one-to-one -> In this association, the collections have one-to-one relationship. Consider the example of employee and employeeIDCard. In this each employee is associated
+		with a single card and each card is associated with single employee
+		* one-to-many -> In this association, the collection have one-to-many relationship. Consider post and comments. One post can have many comments, but
+		 each comment must belong to a single post.
+		* many-to-many -> In this association, there is many to many relationship both ways. The classic example is students and courses where each student can
+		  take many courses and each course in turn can have many students.
+* MondoDB provides two approches to represent data association:
+	* Embedding data: In this case one collection is embeded inside the other. They do not exit independently. This is acheived through creating nested 
+	  documents. This is ideal scenario for one-to-one association and also one-to-many associations in some cases 
+	  example: patron = {
+					name: "John",
+					age: "10",
+					address: {
+						door_no: 10,
+						street: 1
+						city: Chennai
+					}
+			   }
+	  In the above case the address is nested inside patron. Thus we are associating address and patron by embedding data and storing in a single document. This
+	  is a great usecase for embedding data because address will always be retrived along with person details.
+	  
+	 * Referencing Data: In this case instead of embedding data inside one another, they are stored in separate collection and referenced using id. Thus
+	 data is stored in different documents and associated through refrences eg:
+	 
+		book1 = {
+			name :"Harry Potter",
+			authour : "JK Rowling",
+			publisher :[10101]
+		}
+		
+		book2 = {
+			name = "Harry Potter 2"
+			author = "JK Rowling"
+			publisher :[10101]
+		}
+		
+		publisher1 = {
+			name: "De Publisher",
+			id: 10101,
+			phone: ..
+		}
+		
+	Thus in this case we are storing the data in different documents and referencing using id. This is another approach for data association in mongoDB.
+* Note: Usually in mongoDB, an operation to a single document is atomic. This needs to be considered for data consistency, usually data association by 
+  referencing data involves multiple documents.

@@ -1,0 +1,433 @@
+* Express is a node JS Framework. The main difference between library and framework is that  The key difference between a library and a framework is 
+ "Inversion of Control". When you call a method from a library, you are in control. But with a framework, the control is inverted: the framework calls you.
+* A library is just a collection of class definitions. The reason behind is simply code reuse, i.e. get the code that has already been written by other 
+  developers. The classes and methods normally define specific operations in a domain specific area. For example, there are some libraries of mathematics 
+  which can let developer just call the function without redo the implementation of how an algorithm works.
+* In framework, all the control flow is already there, and there's a bunch of predefined white spots that you should fill out with your code. A framework 
+  is normally more complex. It defines a skeleton where the application defines its own features to fill out the skeleton. In this way, your code will be
+  called by the framework when appropriately. The benefit is that developers do not need to worry about if a design is good or not, but just about implementing 
+  domain specific functions.
+* Express JS is the most popular and widely used lightweight NodeJS framework for web development. It has a large community and very lightweight. It is 
+  transparent framework.
+* To download express, we need to use 'npm install express', which will download all the required files and dependencies needed for express and place them in
+  node_modules folder. We include in into our app using 'require("express")' in our app.js(root server javascript file) file.
+* Once express in included in our application, we can use it. To use express we create a app variable by executing express.
+	eg: var express= require("express");
+		var app = express();
+* We can start the server to listen to http requests using app.listen method. It takes the following parameters:
+	* port to listen to -> Any port on the server. In cloud9 we can use process.env.PORT
+	* hostname or I of the server -> In cloud9 we can use process.env.IP
+	* callback function -> It is optional and can be used to print a message to console that server is started
+* Once server is started it can receive http requests. To serve http get request we have app.get method. It takes the following parameters
+	* route or path ->
+		* "/" -> root path
+		* "/search" -> another path
+	* callback function -> This has request and response objects and parameters and we can use this function to write server side logic for this route
+      and return response
+    eg: app.get("/", function(req, res){
+			res.sent("First app");
+		})
+		app.get("/dog", function(req, res) {
+			res.send("This is dogs page!!!");
+		})
+* res.send() -> This function is used to send text or html as response back to the browser or any other application like postman that makes a request to server.
+  [* Note: To get browser url in cloud9 we should preview optional]
+* package.json -> JSON stands for Javascript object notation. package.json contains metadat information about the package like name of the package, version, 
+  autor, description, starting file etc. It also has a dependencies property ehich contains a list of the packages and version which this package uses. 
+  The package.json file is used to manage dependencies in Node JS. We can manully create a package.json file but the most common approch is to create is
+  through command "npm init"
+* "npm init" -> This command is used to create package.json and asks a buch of parameters. Once appropriate values are given it creates package.json. It
+  should be in the same folder as our app.js.
+* Once we create package.json, we should use npm install <package_name> --save to download and install packages. If this option is used, then the installed
+  package is automatically added as a dependency in our package.json.
+* Universal route -> "*" . This route parameter matches all routes. It is very useful to provide defaultr error message or html. But this should be the last
+  route definition because the order in which we define matters as once a matching route is found and function executed and it returns a response, no other
+  is evaluated for that particular reqest. Thus universal route should be the last route.
+  eg: app.get("*", function(req, res) {res.send("Page not found");})
+* It is not necessary to always hardcode the full routepath, soemtimes we can have variables as part of route. eg: reddit has hundreds of subreddit so it 
+  is not practical to have hardcode all route paths like app.get('/reddit/posts/scoccer', function(req,res){}), 
+  app.get('/reddit/posts/weather',function(req,res){}); etc . Instead they use somthing called routing parameters. They use patterns in route paths
+  and execute a bunch of code when the route matches the path. The pattern conatins routing params which can then be used to get the exact route
+* Routing param starts with a ":" followed by parameter/variable name eg: To match reddir;s subreddit we can use app.get('/reddit/posts/:subTopic', function(req,res){}).
+  This route matches all subreddits of the format reddit/posts/<subreddit_name>. To get the value of the parameter (i.e exact subreddit) we can use
+  'req.params.<varName_used'' eg: ;req.params.subTopic.
+  eg: app.get('/reddit/posts/:subTopic', function(req,res){
+	res.send("The route called is /reddit/posts/" + req.params.subTopic);
+  })
+* Though we can send simple contents using res.send(), it is more common to send html pages. HTML pages are sent back using res.render() API. Instead of
+  plain html pages which can only lead to static websites most of the websites in real world are dynamic. Dynamic we bsites are created by using something called
+  templates. Templates provide skeleton HTML where value and logic can be inserted which creates different content each time user requests something
+  eg: new website returns different articles everytime user visit them- But they have the same general layout. This is possible because content and image
+  from database is inserted into html templates.
+* EJS -> Embeded Javascript is one of the many templating languages available.  EJS is a simple templating language that lets you generate HTML markup with 
+  plain JavaScript. With EJS we can insert javascript code into our HTML tenmplate and create files to  be returned to browser. 
+* To use EJS we need to install EJS using 'npm install ejs --save'. This installs ejs and adds it as dependency. We can insert javascript inside EJS file along
+  with HTML. But javascript code must be surrounded by unique syntax, that lets ejs identify that the conent inside is javascript. The ejs special syntax is:
+	* <%= javascript_code %> -> This syntax is used when the javascript returns a value to add to HTML. This outputs the value into the template 
+	(HTML escaped). That if HTML content is present inside this tag, that will treated as text as html is escaped. It is most commonly used to insert 
+	a variable eg: <h1> You have entered the route for <strong><%=animal%><strong></h1> -> where animal may be route parameter that is passed to the ejs template and
+	changes depending on the route user entered
+	* <% javascript_code %> -> This syntax is used when javascript is used for the purpose of plain control logic, eg if statement , for loops etc. 
+	eg: <% for(var i =0; i<10; i++) { %>
+			<li> hello <li>
+		<% } %>
+	* <%- javascript_code %> -> This syntax is used to add value returned by javascript to the template. This outputs the unescaped value into the 
+	  template. The difference between <%= and <%- is that <%= escapes HTML i.e if HTML content is present inside <%= %> tag it is treated as plain text.
+	  <%- %> does not escape HTML. If HTML is present it is trated as HTML and added to template.
+	This code snippet create li's with data hello, here javascript is for pure control.
+* The ejs file containing HTML tags and javascript embeded should end with .ejs extension and all the template ejs files need to be placed inside views
+  directory. inside our project location. This because 'views' is the folder that express app looks for when we render a page using res.render() method.
+  eg: res.render('home.ejs'); -> This methods looks for home.ejs file inside views folder and if found returns it as response to the http request.
+* res.render() -> This command is used to return html file (template files) asresponse to htt request. It takes two parameters
+	* The name of the template file to render eg: home.ejs
+	* An object containing data to pass to the template. The object contains key-value pairs where key is the variableName used in the template and value 
+	contains the value for that variable. Value is obtained either from database or routing parameter.
+	eg: res.render('home.ejs',{animal:"dog"}) if it calls home.ejs which contains <h1> You have entered the route for <strong><%=animal%><strong></h1>, 
+	then template engine or view engine (ejs) generates <h1> You have entered the route for <strong>dog<strong></h1>, which is then returned to express which
+	then send it to the client(browser).
+* The "view engine" (template engine .. eg:ejs) can be set for the express aplication using app.set method. eg: app.set("view engine", "ejs") -> Once 
+  view engine is set we can omit the ejs extension in res.render eg: res.render("home", {animal:"dog"}); -> express automatically takes it as ejs as the
+  view engine is set to ejs.
+* We can also include client side javascript files and css files as part of our response. This is done by adding link and script tags inside our template 
+ ejs files. But these files need to available as part of browser. We use express.static to render static assets.
+* express.static() -> To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function in Express.
+  The function signature is: express.static(root, [options]) The root argument specifies the root directory from which to serve static assets. The middleware
+  express.static(<dir>) needs to called everytime any request is made to the server. Hence usually all the required assets like css, javascript and images
+  are placed insde a common path eg: public folder and serve these static files for all http request using app.use(express.static(public)). This command 
+  makes all the assets in public folder available whenever express is running and any http request is made.  
+* Once the css and js files are placed inside public folder and  made availble using command 'app.use(express.static(public))', then can be included to
+  our templates using script and link tags and used as we did before.
+* Partials : Another major advantage offered by ejs template engine is partials. Partials are ejs files that contains templates that are needed in more 
+  than one file and instaed of repeating the same content in all files we can use partials to dry up our code. eg: header, navigation-bar, footer etc
+  These content may be needed in all web pages of the application. Instead of repeating our code in all pages, we can create an ejs file just for header 
+  and include this file in all the files. Partials are included using <% include header %> where header.ejs is the file containing header template. 
+* It is good practice to place the Partials into a separate folder inside views called patials. In this case the appropriate path should be mentioned 
+  while including eg: <% include partials/header %>
+* Post request -> To handle post request which are usually updating data to the database, we need to app.post method in express app.js 
+  eg: app.post('<route>', function(req,res) {
+  })
+* Post requests cannot be made from browser URL, they are most commonly made on form submit or through postman(for testing). The data on form submit
+  is sent as name, value pair inside the body of the request. 
+* The content inside request body cannot be directly parsed by express. We can use a separate package to parse the contents of the request body. 
+  body-parser package is used to parse request body and once the body-parser is installed and used, we can obtain the value sent through post (eg: form 
+  content and take appropriate action)
+* body-parser package is installed using 'npm install body-parser --save' command and once installed , we can import it using 
+ var bodyParser = require('body-parser'). We need this to parse the request body every time any http request is made, hence we can use app.use() and call
+ appropriate method in body-parser
+ eg: app.use(bodyParser.urlencoded({extended: true})); -> This parses the request body. Now we can access the avle of form input using req.body.friendName,
+ where friendName is the value for "name" parameter in form input tag in html eg: <input type="text" name="friendName">
+* res.redirect("<url/path>") -> Redirects to the URL derived from the specified path. 
+* API -> Application programming interface. It is the means by which other programs communicate to the application. Just as UI (User Interface) is the interface
+  for the user, API is the interface through which a program interacts with other applications. TheAPIs are predefined and provided by the developer of the
+  application. API is a common term and is not restricted to web development. There are APIs to communicate with device driver, hard drive etc ..
+* Web API -> It is special where the program communicates to the application through internet or web. Web APIs provide a wide variety of features for web 
+ development. There are lot of APIs provided by different application and can be combined to build a powerful tool. Examples of web APIs:
+	* facebook API to get data about a particular user
+	* twiteer API to get all tweets regarding a particular topic etc
+* Programmable web -> (https://www.programmableweb.com/) has a directory of a large number of APIs available.
+* Web APIs respond with data in either xml or json format when used. Web APIs are invoked by making http request to API url (also known as endpoint). We 
+  can go through the API documentation for a particular web API to get the endpoint URL. Once URL is obtained we can simply use the URL in the browser to 
+  look at data returned. The data is returned either as:
+	* XML - Extended Markup Language
+	* JSON - Javascript Object Notation
+  We can specify the type of response data in the request itself. The request can be made through:
+	* browser
+	* postman
+	* command line using command 'curl <url>'
+	* Our Node JS application
+* To make an API request from Node JS, we need to install a package called request using 'npm install request --save'. Once installed, we can include it in our
+  application using var request = require('request');
+* request() method can then be used to make a request to a url. It takes two parameters:
+	* request url to which a http request should be sent
+	* callback function with parameters of error, response and body -> the body contains the response data, whichis html when request is made to normal url
+	  and json/xml when request is made to API endpoint
+	 eg: var request = require('request');\
+         request("www.google.com", function(error, response, body){
+			if(!error && response.statusCode == 200) {
+				console.log(body);
+			}
+		 })	 
+     * In the above example , google html source is returned. If instead of google, the url of API with format json provided we get JSON response, but the body 
+	   content is returned as a string of JSON response and need to be converted to JavaScript object before it can be used. It is converted to Javascript
+	   object using JSON.parse() method. This method parses string representation and creates javascript object.
+* We have plugins to view formatted json on browser like json view 
+* To get the value of query string in express we can use req.query.<name>
+  eg: http://www.reddit.com/?q=soccer -> To get the value of q we need to access req.query.q
+* We can obtain following data from request:
+	* req.params.<routeVariable> -> This will give the route parameter 
+	* req.body.<name> -> This is used to access values of form input in post. But we need to use body-parser package for this.
+	* req.query.<name> -> This is used to access values of form input in get and query string value.
+* In the form making post request if the name of the form input is given as 'blog[title]', 'blog[image]' and 'blog[content]' instead of title, image and content
+  , then when we extra the content from  req.body, we need to use req.body.blog.title, req.body.blog.image etc instead of req.body.title. The advantage of this
+  is the object blog is automatically created by body parser. Thus req.body.blog will give us the blog object and we need not construct it by reading
+  individual values.
+* To make PUT, DELETE and other http requests from HTML
+	* There is no simple clean way to implement put, delete etc requests from HTML forms. Currently HTML forms only support GET and POST requests. It 
+	does not support any other request. If method of PUT,DELETE etc is given in HTML form it will default it to get request. To oevrcome this limitation
+	many server frameworks have there own solution to workaround this issue.
+	* In express, we can use a package called method-override
+* method-override - Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+	* Install the package using npm install mothod-override --save
+	* Once installed it needs to included in our application using var methodOverride = require('method-override')
+	* Then we need to use it in app.use() -> app.use(methodOverride("_method")) -> where _method is the query parameter that should contain the actual 
+	  http verb to override to. By default only POST request are overriden by method-override. Thus if our query parameter contains "_method=PUT", then
+	  the POST method is changed to PUT in the express app. Then we can use the route using app.put()
+* Sometimes during user input to form, we may want to allow user to style it using HTML. But one huge disadvantage of this is the user can write <script>
+  tags and mess up our site. To prevent this we need to remove script tags from user code. One way of doing this in express using express-sanitizer package.
+  This package then removes any script tag from the body.
+	* we need to install it using npm install express-sanitizer --save
+	* Once installed we need to include it in our APP using var expressSanitizer = require('express-sanitizer')
+	* To sanitize the content, we then need to use it as app.use(expressSanitizer()) -> This should come after we parse the req using body Parser as this
+	  has a dependency on body-parser.
+	* This adds a .sanitize method to our req. Hence during processing the request route, we can add  
+	  req.body.sanitized = req.sanitize(req.body.propertyToSanitize); to sanitize the content of required property.
+* Authentication
+	* It is a means of user registration, login/logout and also displaying data based on user.
+	* Sessions are important part of user authentication. Sessions are implemented in express using express-session package. First we need to install the
+   	  package using 'npm install express-session'.
+		* Once installed we need to include them in our application using require('express-session'). Once included we use it using app.use
+		  eg: var expressSession = require(express-session);
+		* app.use(expressSession({
+			secret: "This is secrect msg",
+			resave: false,
+			saveUnitialized: false
+		  }))
+			* secret : This is the secret used to sign the session ID cookie. This can be either a string for a single secret, or an array of multiple secrets. 
+			  If an array of secrets is provided, only the first element will be used to sign the session ID cookie, while all the elements will be considered 
+			  when verifying the signature in requests.
+			* resave : Forces the session to be saved back to the session store, even if the session was never modified during the request. Depending 
+			  on your store this may be necessary. It needs to be set to false
+			* saveUnitialized : Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified. 
+			  Choosing false is useful for implementing login sessions, reducing server storage usage, or complying with laws that require permission before 
+			  setting a cookie. Hence this needs to be false. 
+	* For authentication in addition to express-session we use the following npm packages:
+		* passport
+		* passport-local
+		* passport-local-mongoose
+	* passport - Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based 
+	  web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.
+		* There are 500+ stategies that passport support 
+			eg: passport.authenticate('local') -> Using username and password in local database
+			    passport.authenticate('facebook') -> Using facebook username password etc
+		* We can have more than one passport starategy in our application. Thus in addition to local db, we can use facebook ,twitter , google etc to
+		  log in.
+		* There are three main parts in using passport.js:
+			* Requiring the module and using its passport.initialize() and passport.session() middleware with express.
+			* Configuring passport with at least one Strategy and setting up passport's serializeUser and deserializeUser methods.
+			* Specifying a route which uses the passport.authenticate middleware to actually authenticate a user.			
+		* AUTHENTICATION REQUEST FLOW
+			* With the three parts configured as mentioned above, the following happens when a user tries the authenticate via the /login route:
+			* When the user submits the login form, a POST request to /login is made resulting in the execution of the passport.authenticate 
+			  middleware we've set up.
+			* If the authenticate middleware for that route is configured to handle the local strategy, passport will invoke our implementation of the
+			  local strategy.
+			* Passport takes the req.body.username and req.body.password and passes it to our verification function in the local strategy.
+			* Now we do our thing: loading the user from the database and checking if the password given matches the one in the database.
+			* In case of an Error interacting with our database, we need to invoke done(err). When we cannot find the user or the passwords do not match, 
+			  we invoke done(null, false). If everything went fine and we want the user to login we invoke done(null, user).
+			* Calling done(callback method) will make the flow jump back into passport.authenticate. It's passed the error, user and additional info object
+   			  (if defined).
+			* If the user was passed, the middleware will call req.login (a passport function attached to the request).
+			* This will call our passport.serializeUser method we've defined earlier. This method can access the user object we passed back to the middleware. 
+			  It's its job to determine what data from the user object should be stored in the session. The result of the serializeUser method is attached 
+			  to the session as req.session.passport.user = { // our serialised user object // }.
+			* The result is also attached to the request as req.user.
+			* Once done, our requestHandler is invoked. Usually, the user is redirected to the homepage.
+		* On subsequent request, the following occurs:
+			* Express loads the session data and attaches it to the req. As passport stores the serialised user in the session, the serialised user 
+			 object can be found at req.session.passport.user.
+			* The general passport middleware we setup (passport.initialize) is invoked on the request, it finds the passport.user attached to the 
+			  session. If is doesn't (user is not yet authenticated) it creates it like req.passport.user = {}.
+			* Next, passport.session is invoked. This middleware is a Passport Strategy invoked on every request. If it finds a serialised user object in 
+			  the session, it will consider this request authenticated.
+			* The passport.session middleware calls passport.deserializeUser we've setup. Attaching the loaded user object to the request as req.user.
+			
+		* Summary:
+			* passport.initialize middleware is invoked on every request. It ensures the session contains a passport.user object, which may be empty.(if
+			  user is not logged in)
+			* passport.session middleware is a Passport Strategy which will load the user object onto req.user if a serialised user object was found in 
+			  the session.
+			* passport.deserializeUser is invoked on every request by passport.session. It enables us to load additional user information on every request.
+			  This user object is attached to the request as req.user(This is deserialised version of req.session.passport.user making it accessible in our 
+			  request handling.
+            * Our Local Strategy is only invoked on the route which uses the passport.authenticate middleware.
+			* Only during this authentication passport.serializeUser is invoked allowing us the specify what user information should be stored in the session.
+		* To finish an overview of passport methods accessible within request handlers:
+			req.login()
+			req.logout()
+			req.isAuthenticated()
+			req.isUnAuthenticated()
+		* We need to first install passport using 'npm install passport'. Then we need to import is into our application using require('passport'). Then we 
+		  can initialize it and and do basic config
+				var passport = require('passport');
+				app.use(passport.initialize());
+				app.use(passport.session());
+		
+		* We also need to sepcify the stategy that the passport needs to use, i.e whether it needs to authenticate using local db, facebook etc. This is done 
+		  using passport.use() ->
+				passport.use() eg: passport.use(new LocalStategy(<function>)) -> where 
+					* LocalStategy is var LocalStategy = require(passport-local)
+					* <function> is our function to authenticate the user/passpord detail.
+					* If we use passport-local-mongoose, then the method is availbel to us in User.authentica() which is added to User model when 
+					  passport-local-mongoose is added as plugin to UserSchema. Then our stategy will be as followes:
+					  passport.use(new LocalStategy(User.authenticate()));
+		* We need to specify our method for serializeUser and deserializeUser to passport
+			i.e passport.serializeUser(<function>) & passport.deserializeUser(<function>)
+			* passport-local-mongoose alos provides methods for these i.each
+			    passport.serializeUser(User.serializeUser());
+				passport.deserializeUser(User.deserializeUser());
+		
+		* Registering new user:
+			* /register get route should render a form to fill user and password details. The form usually submits to /register post route. During which
+			a user is created and added to database and also logged in.
+				* app.post("/register", function(req,res){
+					User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+						if(err) {
+							console.log(err);
+						} else {
+							passport.authenticate('local')(req, res ,function(){
+								res.redirect("/secret");
+							})
+						}
+					})					
+				})
+					passport-local-mongoose provides User.register() method to register a new user and add to the database. Passport is given separately as 
+					second parameter because we do not want to store the password directly in the database. Instead a hash and a salt value is stored and this
+					taken care by passport-local-mongoose package.
+		* logging in an already registered user
+			* /login get route should render a form to fill user and password details. The form usually submits to /login post rote. The post need to get
+			the user from database and verify that the username and password matches with the pre registered user, then login the user , thus creating a session
+			for the user through which he can do secure operations.
+				* app.post("/login", passport.authenticate('local', {successRedirect:"/secret", failueRedirect:"/login"}), function(req, res){});
+				* passport.authenticate -> will call our LocalStategy as we specoified local, to do user authetication. If the user verification succeeds,
+				then req.login is called and the current user is logged in, It also calls passport.serializeUser to serialize the user info that need to
+				be stored in the session. It is middleware, hence it then passes control to our request handler.
+				* Additionally we can also specify, an object as second parameter in passport.authentical. It has many properties like:
+					* successRedirect -> URL to redirect to on successful authentication
+					* failueRedirect -> URL to redirect to on failure
+					* failureFlash -> It can be set to true. Then a message is flashed on failure. Alternate we can also set to a custom message.
+					* successFlash -> Custom message to be flashed on successful authentication.
+		* logout
+			* It is very simple. We use req.logout -> To logout the current user. After logout we may need to redirect the user to home page.
+		
+		* Secure access -> Restrict access to some routes unless user is logged in. We may need to prevent the user from accessing certain routes unless he is
+		 logged in. We can acheive that using our own custom middleware in those route. A middleware, is  a feature that does some operation on req/res
+		 and passes control to the next middleware or request handler.
+			eg: app.get("/secret", isLoggedIn, function(req, res){
+				res.render(secret);
+			}), where isLoggedIn is our custom middleware function.It can be defined as followes:
+				function isLoggedIn (req, res, next) {
+					if (req.authenticated()) {
+						return next();  
+					}
+					res.redirect("/login");
+				}
+	* When authentication is used, after login. the user info is available in req.user for all request hander after passport.initialize() and passport.session()
+	  middleware, hence if user info is needed for any for views we can pass it through req.user. Alternately we can write our own middleware to set req.user to
+	  res.locals(res local variables), so that it is available to all views
+	  
+	* res.locals
+		An object that contains response local variables scoped to the request, and therefore available only to the view(s) rendered during that 
+		request / response cycle (if any). Otherwise, this property is identical to app.locals.
+		This property is useful for exposing request-level information such as the request path name, authenticated user, user settings, and so on.
+
+		app.use(function(req, res, next){
+			res.locals.currUser = req.user;
+			next();
+		});
+
+* Refactoring Routes:
+	* Routes for different entities can be separated into separate files. 
+	* Routes can be added to express.Router() instead of to app
+	 e.g var router = express.Router();
+	 router.get("/campground",function(req, res){})
+	* When routes are defined in separate files, then they need to added to express router and router needs to be exported using module.exports.
+	* Once exported, they can be imported in app.js, using require.
+	* We also need to use the routes corrctly once imported using app.use() . We can clean up our routes further, when we specify it in app.use().
+	  We can specify the repeating part of the routes as the first parameter. Then it is automatically added to all the routes defined in that file.
+	  eg: app.use("/campgrounds", campgroundRoute) -> where campgroundRoute is the import from new file containing RESTful routes for campground and the
+      routes are exported from the file. As we specified "/campgrounds" in app.use(), we need secify it while defining routes in the campgroun route file.
+      Hence the route definition will be router.get("/", function(req, res)); -> Route to /campgrounds
+	* express.Router class is used create modular, mountable route handlers. A Router instance is a complete middleware and routing system; for this reason, 
+	  it is often referred to as a “mini-app”. The following example creates a router as a module, loads a middleware function in it, defines some routes, 
+	  and mounts the router module on a path in the main app.
+
+	  Create a router file named birds.js in the app directory, with the following content:
+
+		var express = require('express')
+		var router = express.Router()
+
+		
+		// define the home page route
+		router.get('/', function (req, res) {
+			res.send('Birds home page')
+		})
+		// define the about route
+		router.get('/about', function (req, res) {
+			res.send('About birds')
+		})
+
+		module.exports = router
+		Then, load the router module in the app:
+
+		var birds = require('./birds')
+
+		// ...
+
+		app.use('/birds', birds)
+	  * If the route has parameters and the parameters need to merged between app.js and the route file then, we using express.Router({mergeParams: true}) option
+	    is used.
+* Authorisation:
+	* Authorisation determines the security clearance of an user in an application.
+	* While authentication confirms the user is who he says he is by matching password, authorisation determines the permissions of the user. What an user
+	  is allowed to do. eg: In YelpCamp, only authors of a campgroud are allowed to edit/delete a campground.
+	* We can create our own middleware to check whether the user has authorisation for a particular operation.
+	* In authorisation we need to check the current logged user id with the user id stored in db which has permission for the given operation. In such a,
+	  case we can use .equals method on ObjectId in database for comparison as === will not work as the data (req.user) sent over session is in string.
+* res.redirect("back") -> redirects to the previous page the user was on. It takes the user to the page from wich request was fired.
+* index -> Index is a special name in express. It is considered the root file in any directory. Thus if we require the directory, the index.js file 
+  it automatically imported.
+* If we need to create a module and separate certain function eg: middleware function we can create an object say middleware and add the functions in the
+  middleware obj namespace and export the object.
+* Flash Messages:
+	* It is means by which error/success messages are flashed on the screen. Flash messages are displayed when error occurs or on successful operation.
+	  But flash messages are displayed only once and messages go away when the page refreshes.
+	* The flash is a special area of the session used for storing messages. Messages are written to the flash and cleared after being displayed to the user. 
+	  The flash is typically used in combination with redirects, ensuring that the message is available to the next page that is to be rendered.
+	* The flash is a special area of the session used for storing messages. Messages are written to the flash and cleared after being displayed to the user. The 
+	   flash is typically used in combination with redirects, ensuring that the message is available to the next page that is to be rendered.
+	* To use flash messages, first we need to install express-session and import and use it in our application. Then we need to install connect-flash using
+	  command 'npm install connect-flash --save'. Once installed we need to import it in our application and set it up by using app.use()
+			var flash = require('connect-flash')
+			app.use(flash())
+	  Once flash() is configured using app.use(), With the flash middleware in place, all requests will have a req.flash() function that can be used for 
+	  flash messages.
+	*  We can use req.flash() to store messages and dispaly it user. req.flash() takes two parameter
+		* key -> It is key through which message can be accessed and we can store more than one message with same key. Thus it helps in grouping the message
+		  into info, success, error etc. Thus it is usual practice to have keys as success, info, warning , error etc . Though it is not enforced.
+		* message -> The message to be displayed to the user.
+		eg: req.flash("error", "user name already present. Please give a different name");
+	* Once the message is added to req.flash, we can access it using req.flash("<key>")
+		eg: res.render("index", {message: req.flash("error"});
+	eg:	
+		app.get('/login', function(req, res){
+			// Set a flash message by passing the key, followed by the value, to req.flash().
+			req.flash('info', 'Logged in successfully!')
+			res.redirect('/');
+		});
+ 
+		app.get('/', function(req, res){
+			// Get an array of flash messages by passing the key to req.flash()
+			res.render('index', { messages: req.flash('info') });
+		});
+	* It is important to set the req.flash() message before redirecting to next page, If we want flash the  message on that page.
+	* Instead of getting the flash value and displaying it individually in each page. We can have a container in commmon header to display the messages
+	  and we can store the message in each route in res.locals thus making it available to all pages.
+	* To display err returned from database, we can use the mongoose err object returned. The err obj has a message property.
+	  Thus if we get err during mongoose operation we can flash the error msg using err.message
+	  
+	  eg: User.save(function(err, cat){
+			if(err) {
+				req.flash("error", err.message);
+			}	// callback on completion of save
+		})

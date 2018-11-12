@@ -1,0 +1,16 @@
+* Authentication is the means by which 
+	* we verify sign in a new user, 
+	* login a user to his account, 
+	* prevent users who are not logged in from accessing their account
+	* logout a user 
+* Thus authentication is basic requirement for any commercial web application.
+* User and password details cannot be directly stored in database. HEnce comes the need for authentication.
+* HTTP is a stateless protocol i.e it does not remember its stateless or store any information about previous requests.. Sessions are a way to introduce a state
+  to our http request. In a session some secret information is shared along with each http request part of a session. This secret info is decoded by the 
+  server and used to identify that the request is part of the session. This secret info is not sent once the session is expired.
+* HTTP is stateless; in order to associate a request to any other request, you need a way to store user data between HTTP requests. Cookies and URL 
+  parameters are both suitable ways to transport data between the client and the server. But they are both readable and on the client side. Sessions
+  solve exactly this problem. You assign the client an ID and it makes all further requests using that ID. Information associated with the client is 
+  stored on the server linked to this ID.
+* Thus a new session is created everytime a user logs in and destroyed when a user logs out.
+* Also, sometimes when user is inactive for a  log time session may time out and user may have login again to create another session.
