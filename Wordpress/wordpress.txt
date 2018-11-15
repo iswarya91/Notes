@@ -93,3 +93,225 @@
 	  alt text for visually impaired and description. For each media file uploaded, there is a separate attachment page is created by wordpress, this page is 
 	  also visible to search engines.
 	* Media -> Add New, will take us to upload page where we can upload images, audio or vedio by either selecting from our system or dragging and dropping.
+* Gravatar: Globally Recognised Avatar
+	* Your Gravatar is an image that follows you from site to site appearing beside your name when you do things like comment or post on a blog. Avatars help 
+	  identify your posts on blogs and web forums.
+	* An "avatar" is an image that represents you online—a little picture that appears next to your name when you interact with websites.
+	* A Gravatar is a Globally Recognized Avatar. You upload it and create your profile just once, and then when you participate in any Gravatar-enabled site,
+  	  your Gravatar image will automatically follow you there.
+	* Gravatar is a free service for site owners, developers, and users. It is automatically included in every WordPress.com
+	* We can create a gravatar for the email id associated with wordpress in th Gravatar site and rate it. The differnt ratings are:
+		* g - global, pg- possibly offensive , r - adult rated and x - offensive.
+	* After setting up your own gravitar we can also edit how our site handles gravatar. We can do this in Setting -> Discussion Setting. There we can select
+	  the checkbox to show avatar if present. This will show avatar images of people commenting in our website. We can also select to show only images with 
+	  particular rating. It is safe to always choose 'G'. This ensure no offensive image is shown. We can also provide a default icon, if the person commenting 
+	  does not have a Gravatar image, but this will take some bandwidth.
+* Users :
+	* By default when you create a wordpress site, you are added as administator of the site.
+	* Edit User Profile:
+		* You can go to user profile, either on clicking 'Users->Your Profile' or the username in the top bar. Once in the profile, you can edit the following 
+		  info:
+			* Disable visual editor. This will disable the 'Visual' mode in WYSIWYG editor.
+			* Select the color scheme which you like.
+			* Enable keyborad shortcuts
+			* Enable Toolbar when we visit the site. This helps to quickly edit the site. But the user needs to logged in to show toolbar.
+			* We can also provide FirstName, LastName, email, nickname etc. We can also provide website address and biography which will be displayed in 
+			  some themes as about us info.
+		* Once the profile is edited, we can click update profile, to save changes and update profile info.
+	* New users can added using 'Users -> Add New' from sidebar. We need to provide required info like email and username. We can fill optional info about the
+	  user like FirstName, LastName and any website they own. We can also change their password and check the checkbox to send a notification to the user on 
+      his account. By default the user is given role of subscriber. We can change this role, by selecting appropriate role from the dropdown. The different
+	  roles are:
+		* Subscriber: He cannot change content. Just leave comment.
+		* Contributer: He can add posts but they are published only after approval.
+		* Author : He can add and publish new posts.
+		* Editor:
+		* Administrator - This role gives all permission and should be given only when absolutely necessary.
+* Update Service:
+	* Update Services are tools you can use to let other people know you've updated your blog. WordPress automatically notifies popular Update Services that 
+	  you've updated your blog by sending a XML-RPC ping each time you create or update a post. In turn, Update Services process the ping and updates their 
+	  proprietary indices with your update. Now people browsing sites like Technorati or Sphere can find your most recent posts!
+	* Most people use Ping-o-Matic which, with just one "ping" from you, will let many other services know that you've updated.
+	* WordPress makes this easy for you by listing Ping-O-Matic's server (rpc.pingomatic.com) by default.If you do not want the update services to be pinged, 
+	  remove all the update service URIs listed under "Update Services" on the Settings->Writing administration screen of your WordPress installation.
+	  Alternately, you can add list all update services that needs to notified. (https://codex.wordpress.org/Update_Services)
+* Reading Settings:
+	* Front Page Display: This can be either post or static page. If you select static page, then you can show posts under /Blog path of your site by creating
+	  a blank page and setting Post Page to it. Thus in case of static site, we can have Home Page and Posts Page.
+	* We can also set the maximum numgber of blogs shown (i.e if set to 10 it will show the latest 10 pages)or maximum of Syndication Feeds.
+	* For each article we can either show full text or summary in feed. It is advisable to just show summaries in a feed.
+	* We can also discourage search to show our page when it is being developed.
+* Discussion Setting:
+	* Default article setting - We can notify the sites/articles we link to taht we are referring to their site. This is good practice as they might link back 
+	  to you in return. We should turn off our own notification from other sites, as we may get many spams. We can also allow users to comment on our posts.
+	* Other Comment Setting like whether user needs to be logged in to leave a comment, and whether user should provide email/username while leaving comment
+	  etc can also be set. Also we can the level of nested comment, as well as if we need to split comments across pages. We can also prevent users from
+	  commenting on old articles or display newer or older comments on top, based on preference.
+	* We can either set all comments for moderation before publishing(this is recommended) or allow user with approved user to publish comments without moderation.
+	  We can also set specific comments containing links for moderation. As we set all comments for moderation, we can click on the comments link on the side
+	  bar. and look at all pending comment, we can then either aprove comment, move it to trash or spam.
+	* We can also add comment blacklist , where we can blacklist certain Ip address, email or cetain words etc.
+	* We also have gravatar setting for discussions on this page.
+* Permalinks:
+	* Permalinks are the permanent URLs to your individual weblog posts, as well as categories and other lists of weblog postings. A permalink is what another 
+	  weblogger will use to link to your article (or section), or how you might send a link to your story in an e-mail message. The URL to each post should be
+	  permanent, and never change — hence permalink. The default permalink for the weblog post is <url>?p=<page_number>. This is not very informative and we 
+	  change the permalink of the post. 
+	* Setting-> Permalinks to change the permalink setting, we select from one of the availble like Month/Post Name, Post Name, Post Id etc or create our own 
+	  custom link. A number of tags are available to create custom permalink like %year%,  %category%, %author%. A good permalink will be %category%/%postname%
+	* We have tag and category pages which lists all the post in the category or tagged with that tag. Those url permalink are <url>/category/<category_name>
+	  and <url>/tag/<tag_name>. We can custom structures for your category and tag URLs. For example, using topics as your category base would make your 
+	  category links like <url>/topics/<category_name> instead of <url>/category/<category_name>
+* Privacy Settings:
+	* As a website owner, we  need to follow national or international privacy laws. For example, you may need to create and display a Privacy Policy.	
+	  If you already have a Privacy Policy page, please select in Setting -> Privacy. If not, please create one.
+	* The new page will include help and suggestions for your Privacy Policy.	However, it is your responsibility to use those resources correctly, to provide 
+	  the information that your Privacy Policy requires, and to keep that information current and accurate.
+	* After your Privacy Policy page is set, we suggest that you edit it. 
+	* We would also review your Privacy Policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new 
+	  suggested information for you to consider adding to your policy.
+	* The latest version of wordpress adds a link to the privacy policy in the login page.
+* Plugins: 
+	* Wordpress was built so other developers can create code that can be extend the features of wordpress. This is done through a wordpress feature 
+	  called plugins. eg: Contact Form 7( just another contact form plugin. Simple but flexible) , yoast SEO(Yoast SEO does everything in its power to 
+	  please both visitors and search engine spiders) etc. There are 1000s of plugins available. There are both free and premium plugins.
+	* To install a new plugin we need to go "Plugins -> Add New" and select a plugin from the panel and click on install to install it and activate to activate
+	  that plugin. Once Activated the plugin may change the Appearance of the side bar, dashborad etc. eg: On install of 'Yoast SEO' plugin for SEO, some 
+      options are added as part of sidebar. 
+		* SEO Plugin: On installing and activating 'Yoast SEO', SEO is added to side bar, on click of 'SEO', we get many sub options. 
+			* SEO-> General -> Opens SEO dashbord which gives any problems in our site at a glance. It also has features tab that lists various SEO features
+			  that can be turned on/off. One such feature of SEO is XML sitemap, which acts as a roadmap of your website which leads Google to all your important 
+			  pages. XML sitemaps can be good for SEO, as they allow Google to quickly find your essential website pages, even if your internal linking isn’t 
+			  perfect.
+			* SEO->Search Apperance -> we can modify configuration if we do not want posts/pages to be visible to search engine by default. If we disable
+			  SE visibility, then a meta tag '<meta name="robots" content="noindex,follow"/>' is added so that this page is not shown in search engines. We
+			  can set the default SE visibility as well on per page/post basis.
+	* We can also buy some plugins. When we buy a plugin we get .zip file. To install this custom premium plugin, we to 'Plugins-> Add New' and click on 
+	  'Upload Plugin' button and choose the zip file from local syatem and click on install. Once installed we can activate and use the plugin.
+* Widgets:
+	* Widgets are independent sections of content that can be placed into widgetised areas provided by your theme (commonly called sidebars). widgetised 
+	  areas differ based on the theme. eg: categories, meta info, calender, search bar, text etc.
+	* Appearance -> Widgets, takes us to widget dashborad.
+	* Wordpress comes pre-installed with a number of widgets.
+	* In the widget dashboard, we have preinstalled widgets in the left and widgetised areas or sidebars/footers etc which can contain widgets on right.
+	  We can add widgets by dragging and dropping widgets into sidebars, footer etc. We can remove widgets by dragging already placed widgets out of the
+	  widgetised area.
+	* Widgetised areas on the screen that can contain widgets changes with any change in the wordpress theme.
+	* Widgets can be expanded to edit them and customize them.
+* Themes:
+	* They are the quickest way of changing the look and feel of the website.
+	* Appearance-> Themes will take us theme dashborad that contains pre installed themes. We can activate any theme that we need.
+	* We can add any new theme from repository using 'Appearance->Themes' -> Add New, select the theme from repository. If we like the theme we can install and 
+	  activate the theme.
+	* We can buy custom themes, In that case we will get zip file. which we can upload by 'Appearance->Themes' -> Add New -> Upload and selecting the zip
+	  file. Then we can install and activate. Once a theme is installed, we can customize it using 'Appearance -> Customize' to change the different
+	  parts of theme config, like backgroud images etc. We can look at support doc for each theme to better understand the options available.
+	* Once we finalise a theme, we can delete other themes we do not need.
+* Posts and Pages:
+	When you want to add content to your website, you have two options:
+		* Posts:
+			* Wordpress was originally designed as a blogging platform. On a traditional blog, there are a lot of posts which are then displayed (often on the
+			  homepage) in chronological order with the latest post first. Visitors can see new posts because they are at the top of the page, with
+			  older posts lower down. Typical blogs also have a time stamp so you can see the date and time each post was published. Posts are date-dependent 
+			  and therefore chronological
+			 * Posts were originally designed to be ordered by date, with a post you create today appearing logically above the post you created yesterday.
+			   So chronology is one difference between posts and pages.
+			 * Posts can be put into category, while pages cannot. Categories help to group related content into a “silo”. If you had a website about body 
+			   building, you might write reviews of all the different types of exercise equipment. Doesn’t it make sense to put all of the multi-gyms reviews 
+			   into a single multi-gym category? This not only makes sense for a visitor, but it also makes sense for the search engines
+			 * Posts can tagged but pages require a plugin to be tagges. Tags are another way to link different pieces of content together. Tags can be used to 
+			   further categorise your content to help your visitors and the search engines make sense of your project. 
+			 * Posts can have excerpts. Another great feature of posts is that they can have Excerpts. Excerpts are short summaries of a post that you can 
+			   create as you add a post to your site. These can be used by the Wordpress theme (and plugins) for a variety of purposes.
+			 * Another important feature of posts is that they appear in your site’s RSS feed. 
+			 * Posts are designed for the main content of the web site, important pages of the website.
+			 * To add a new post we go to 'Posts -> Add New'. We can select all the options from screen options to get all section. We can add post title. As
+			   soon as we add title, we get a permalink for that post. We can edit the link if needed. Then we can provide post content using WYSIWYG editor.
+			 * On the right side, we have panel containing Publish, where we can save the post as draft or pending review, change the visibility to public or 
+			   private, publish it immediately or schedule it to be published on a particular. when we set the date the publish button changes to schedule. 
+			   Wordpress will automatically, publish it on the given date. A post is not visible until it is published. 
+			 * Below publish section, we have category section where we can select the category for the post. We can add new category or sub category.
+			 * We can also add tags to the post. We can add more that one tags to a post.
+			 * Some themes allow featured images to be added, when we add an image it appears in the post.
+			 * Below WYSIWYG editor, we can SEO config of Yoast SEO for that post.
+			 * We can also use excerpts(summary), which are used by some themes which only displays excerpts on the home page. They are also added in meta tag and 
+			   read by search engine.
+			 * We can enable or diable comment/ping backs for this post. Finally we can publish or schedule the post.
+			 * Post Categories:
+				* Categories are the main way you organize posts on your Wordpress site. There are very good reasons for organizing posts into categories, both 
+				  for your visitors and the search engines.
+				* It is good practictice to associate each post to exactly one category.
+				* We can edit the category by going to Posts-> Categories. And click on edit button near the category and give name and slug(what appears in url).
+				* When you are setting your site up, don’t be afraid to add all of the categories you want to use at the same time. Category pages will only be 
+				  created when posts are assigned to the category, so visitors will be totally unaware of any “empty” categories, and search engines won’t see 
+				  them either.
+			 * Post Tags:
+				* We saw that posts can (or should) only be in one category. However, a post can have several tags. Tags are simply words or short phrases that
+  				  describe a particular post. Tags are used to describe main feature rather than classify. 
+				* Wordpress will create a tag page for EVERY tag you create. 
+		* Pages:
+			* A page is date-independent and not really related to any other piece of content on the site. 
+			* Pages are not dependent on each other and canoot be catogarised.
+			* It is possible to create tags for pages as well, but once again, only with plugins. We try not to use plugins unless they are absolutely essential
+			  as they do slow down the loading time of a website
+			* Pages cannot have excerpts.
+			* Pages do not appear in RSS feeds.
+			* It is mainly used for legal pages, cotact page, privacy page etc that are really actual content. There are standalone. 
+			* Creating a new page is similar to post except there is no tag, category or excerpts in pages.Based on the theme we may have page attributes that
+			  we can set.
+* Resizing images for adding to web:
+	* We need to use graphic designer like photoshop elements, painshop pro etc 
+	* First we need to decide where we need to image and whether the picture will full width or half the page size. etc. The we need to use Chrome f12 console
+	  to get the actual width in pixel of the image that we need.
+	* In the graphic designer, we first crop the image, then resize the image to the required piel width. Then we can save the image for weba nd optimize it 
+	  by changing quality etc to lower size to be few kbs.
+* Adding social media links to your post:
+	* This allows the post to be shared in social media. There are different plugins available for this like 'Social Pug' which is useful plugin.
+* Design Home Page:
+	* The homepage is the web page that someone visits if they type your domain name into their web browser. Once they get there, the homepage needs to do the 
+	  heavy lifting and direct your visitor to the part of the site they want to see. The homepage is arguably the most important page on the site, so you need
+	  to get it right.
+	* Your homepage needs to be inviting, intuitive and most of all, helpful to someone landing on it. It should allow visitors to easily find what they are 
+	  looking for. The homepage is also important for a number of other reasons:
+		* It establishes an identity.
+		* It helps establish and build trust.
+		* It makes a first impression.
+		* It’s the place most people go back to on a site to restart a search for something (if the site navigation does not provide them what they want).
+		* It shows the visitor the latest content.
+	* To create a static home in wordpress. We first need to design a home page. Once designed we can then add that page as home as going to 
+	  'Settings->Reading' and changing from page display from posts to a static page and select the home page designed as the front page.
+* Contact Forms:
+	* Contact forms is good way to let website visitors to contact you. We can have plugins to add contact forms in our page and it will do most the work.
+	* Contact Form 7 is good plugin for contact forms. We can install and activate the plugin. It by default creates a sample contact form, And adds a Contact
+	  option in the sidebar. We can get a list of all contact forms by clicking on it. Contact form has a shortcode, which we can add on our where we want the
+	  contact. It is good preactive to reCaptchas(stating I am not robot checkbox) to avoid spams. We can add by editing the contact form. It requires us
+	  to register with google recatcha admin and once we register our site, we get site key and secret key which we may need to provide in 'Contact -> Integration'
+	  option. Once the keys are provided we can edit the contact form to add reCaptcha.
+	* We can also configure the address where the main will be sent. If we have issues withs ending mail outside the domain, we can use another plugin. This
+	  can configured by editing the contact form and on mail tab.
+* About Us Page:
+	* People are curious by nature and will quite often click onto the “About Us” page to find out more about the site, or person behind the site. On many 
+	   sites, the About Us page is one of the top 10
+	* The about us can include calls to action, e.g. a newsletter/autoresponder sign up form. You can even recommend a certain page on your site that you think
+	  your visitors should visit. It should contain name, photo, website purpose, links to social media etc. Most important of all, About Us pages should not be
+	  boring biographies.
+	* The other good reason to have an about us page is to “humanize” your blog. Some sites can be very dry, though we are using a Gravatar, so that does help
+ 	  put a face to the site.
+* Legal Pages:
+	* We need some legal pages on the site like , terms and condition, privacy page, disclaimer , copywrite notice. These pages can be created by us or we can
+	  use a plugin wp-insert, that will craete bare minimum legal pages for us. We can install and activate the wp-insert plugin, it add wp-insert option
+	  in the side bar, we can click on it. In the setting we can click on legal page we need to add, it generates page which we edit. We can then assign it 
+	  to pre-existing page or let it generate a new page. Once we assign a page, it list in our Pages.
+* Custom Menus:
+	* We can create custom menus by going to 'Appearance -> MEnus', there we can delete any pre existing menus. We can then create a custom menu conatining
+	  links to pages, posts, tags, categories or custom link. We can configure the menu structure, by selecting what pages, posts or links should be part off
+	  the menu. We can then edit the title of the link, rearrange the order by dragging and dropping, We can also indent the menu, which will creat sub menus.
+	  Once we get the desired menu structure we need to add to a location on a page.
+	* The location we can add custom menu to, will depend on the theme and vary from theme to theme. We can go Menu Setting and select the location on the page
+	  where the menu should be. We can alternately go to Manage Locations and select from the combo box the location and menu. In the MEnu Setting, we can
+	  also auto add new pages to the menu, though it is not recommend.
+	* We can edit indivial menu item properties. To get all properties, we can go to 'Screen Option' and display all advanced menu setting. Some of the settings
+	  are 'link target'(which lets us open menu in separate tab), link relation(we can make in nofollow so this does come up in SE)
+	* If the theme does not provide menu location as our desired location, we can then use 'Cutom menu' widget to add the created menu to desired widgetized 
+	  area on the screen. We first need to create the menu from 'Appearance-> Menu' but not select any display location. Then we can to 'Appearance -> widgets'
+	  and drag and drop the 'Navigation Menu' widget to the desired widgetised location like footer, sidebar etc.
