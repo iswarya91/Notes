@@ -1,0 +1,1533 @@
+* JDK - Java Development Kit is needed to develop and run java programs. JDK versions are released every six month and support usually expires after 6 months. Some JDK versions are LTS(Long Term Support) which may be support for many years. Companies usually prefer to upgrade to LTS version. JDK 11 is the latest LTS Java version.
+* There are many companies that provide both paid and free (openJDK) JDK. Some of good free OpenJDK vendors are Amazon Correto, IBM, AdoptOpenJDK etc.
+* Benifits of Java
+    * Object-orineted programming
+    * Encapsulation - It provides access modifier to provide features of data hiding and encapsulation.
+    * Platform independent - JAva can compiled to byte code and run on any platform.
+    * Robust - It is much more robust then c++ due to garbage collection.
+    * Simple - It does not have pointers and operato overloading thus making the language simple
+    * Secure - It also runs inside Java Virtual Machines (JVMS) sandbox and does not harm the host computer in any way.
+* Keywords: In the Java programming language, a keyword is any one of 57 reserved words that have a predefined meaning in the language; because of this, programmers cannot use keywords as names for variables, methods, classes, or as any other identifier eg: int, float, if etc. Keywords are case sensitive.
+* Data Types: Java has 8 primitive data type: They are:
+    * boolean - It can contain only two value - true/false
+    * byte - It is a numeric type and can contain whole numbers. It is 8-bit long.
+    * short - It is numeric type and can contain whole numbers. It is 16 bit long.
+    * int - It is a numeric type and contain whole numbers. It is 32 bit long. Any whole number specified is by default an int.
+    * long - It is numeric type and contain whole numbers. It is 64 bit long. We need to suffix 'L' or 'l'to the end of the whole number literal to indicate it
+      is long number. As by default all whole numbers are integers. While trying to store a very large number greater than integer size without 'L' at the end 
+      will give compilation error. eg: long sum = 324567890156L; 
+    * char - It is 16 bit and can contain single charater. It can also contain unicode eg: char first = 'a', char uni = '\u0345'
+    * float - It is decimal numberand it is 32 bit long. We need to specify float number with an f at end. eg: 34.5f. float num = 34.5 is invalid and will
+      give compiler error, we need to specify float num = 34.5f; This is because by default decimal number are double.
+    * double - It is decimal number and it is 64 bit long. By default any decimal number is double. eg: 34.5. If we assign a floating point number to a 
+      double variable it is automatically converted to double. eg double num = 34.5f is valid and does not give error. Decimal numbers can be represented in 
+      scientific notation with e or E eg: double num = 1.345E2 is valid and equals 134.5.  
+* For better readability we can use underscore(_) to separate digits in a number but '_' should not be used at the beginning or end or before or after decimal point.
+  eg: int num = 23_654 is valid integer value. 
+* Octal,Hexa and Binary
+    * By default all whole numbers are decimal(base 10)
+    * Octal - Octal numbers start with 0 amd can contain only digits from 0 to 7. eg int octNum = 07. ( int oct = 08 will give compilation error as it is
+      not valid octal number,
+    * HexaDecimal - Hex numbers start with 0x and can contain (0-9A-F) eg int hexNum = 0x1E;
+    * Binary - Binary number start with 0b and can contain only 0 and 1 eg: int binNum = 0b01011;
+    * We can perform all arithemetic operations using octal , hex and binary number.
+    * When try to print these number to console it is automatically converted to decimal and the corresponding decimal value is printed.
+    * In order to print octal, hex or binary as such we need to use Integer.toOctalString(), Integer.toHexString(), Integer.toBinaryString() etc. 
+    * Starting with Java 6, it is possible to express floating point literals in hexadecimal. 
+        * Every hexadecimal floating point literal starts with a zero (0) and then an x or X.
+        * The digits of the number (but not the exponent part!) also include the hexadecimal digits a through f and their uppercase equivalents.
+        * The exponent is mandatory, and is introduced by the letter p (or P) instead of an e or E. The exponent represents a scaling factor that is a power
+          of 2 instead of a power of 10.
+      Here are some examples:
+      0x0.0p0f    // this is zero expressed in hexadecimal form (`float`)
+      0xff.0p19   // this is 255.0 x 2^19 (`double`)
+* Java has wrapper classes for all primitive types like Integer for int, Float, float, Boolean for boolean etc. These classes have useful function to 
+   manipulate primitive tyes. We use autoboxing and unboxing to convert primitive types to wrapper objects and vise versa.
+* AutoBoxing and Unboxing
+    * Java provides wrapper classes for all primitive types. These classes provide additional helper methods.
+    * Auto-Boxing -> This is converting a primitive value to a wrapper class object. eg: int i = 5; Interger intVal = Integer.valueOf(i) . In latest Java compilers
+      we can directly assign primive value to wrapper classes and compiler internally handle autoboxing eg: Integer intVal = 5;
+    * Auto-Unboxing -> This is getting the primitive value from the wrapper class. Earlier we need to unbox using helper methods like intValue(), double/value(),
+      Interger.parseInt() etc.
+      Now with modern compiler it happens automatically
+        eg: Interger intVal = new Integer(10);
+            int val = intVal.intValue(); // Unboxing earlier approach
+            int val = intVal; // Unboxing latest approach
+*  Variables - Variables are a way to store information in our computer.Variable content can vary and can be accessed using variable name. Java we can declare 
+   a variable with using the data_type and the name of the variable.
+    Syntax: <data_type> <variable_name> = <value>; // assigning value to a variable in declaration is optional
+         eg: int firstNum = 5; 
+    * Variables can be declared and initialized in the same line or can be declared first and initialized later.
+    * Class variables are intialized to default values. All whole number primitive types are initialized to 0, float and double to 0.0, boolean to false and char
+ to an ''(empty character).
+    * Local variables are not initialized by default and cannot be used without initializing.
+    * Variable name can contain letters, numbers, $ and _ and variable name must not begin with number. It should not contain any other special character.
+    * Also variable name should not be java keywords.
+    * Variable name/identifiers are case sensitive.
+* Null in Java:
+    * By default all objects that are not initialized explicitely are set to null. We will get Null pointer exceptions if we try to use the Object without
+      initializing it.
+    * In case of Local Objects,like local primitives thay are not initialized to any default value and we will get compile time errors if we try to use them.
+* Operators in Java: 
+    * Operators in Java operate on one(unary) operand, two(binary) operands or ternary operands.
+    * In Java, unless there are brackets the operators follow operator precedence. The opertor precendence is as followes:
+        * ++ , -- (Increment and decrement unary operators)
+        * !, + , - (unary operators)
+        * /, *, % (multiplication, division and modulo) binary operators
+        * + - (addition subtraction) binary operators
+        * >, < , >=, <= Relational operators
+        * ==, != relational operators
+        * &, |,! logical operators
+        * &&, ||  short circuit logical operators
+        * assigment operator(=, +=, -= etc)
+    * Unary operator (-, +, !, ++, --) have more precedence than binary operators. There two types of ++ and -- operator
+        * Pre-increment - ++x -> Here we increment x first and then use it
+        * Post-increment - x++ -> Here we use x first and then increment it
+        int a = 5; a = a++;// In this case a value remains as 5 as it is used first and increment value is lost. It is equivalent to a = a;
+        Need to be careful while evaluating expressions with ++ and -- operator
+        * ! is used only on boolean operands and (-,+) unary operators work on numeric operands.
+    * Arithmetic operators: Java supports basic arithematic operators like +(addition), -(substraction), * (multiplication), /(division) and %(modulo or remainder).
+      Among arithematic operator (*, /, %) have more precedence than (+, -). 
+    * Numeric promotions - While evaluating numeric expressions the following rules of numeric promotions should be kept in mind
+        * If one of the operand in higher size eg: double all the other operands will be converted automatically to the higher operand and result will also
+          be in bigger data type.
+        * If one of the operands is float or double the integral data type(int, long etc) will be converted to float or double.
+        * When short, byte or char is used with arithmetic operators they are automatically converted to int even if none of the operands is int. The 
+          result will also be type int. i.e short a = 10, short b = 20, short c = a * b; will give compiler error as a and b will be promoted to int and result
+          will be int. Hence we need to explicitly cast the result to short.
+    * Type cast - casting is used to explicitly convert one data type to another. When a bigger size data type is cast into smaller data type we will lost precision
+      eg: int x = (int) 5.3; -> x=5
+    * Overflow and underflow - when we try to assign a bigger number than the data type can hold it will result in overflow and if we try to assign a smaller number
+      then the data type can hold it will result in underflow. eg: byte can hole from -128 to 127.
+        byte a = 127;
+        byte b = -128;
+        a++ // This will result in overflow and result will be -128
+        b-- // This will result in underflow and result will be 127
+    * Assignment operators: 
+        * = is used to assign the value of expression on the RHS to the variable on the LHS.
+        * Compound assignment - *=, +=,etc . eg: x += 2 => x= x + 2; This is very useful short form and also it avoids the need for explicit casting.
+          eg int x = 3 ; x = x + 2.0 gives error while int x += 2.0 works fine
+        * assignment can also be used as part of expression. eg: int f, g; int g = 3 + 5 + (f = 2); is a valid expression where f is assigned 2 and then is used. 
+    * Relational Operators:
+        * The different relational operators in Java are (<, <=, >, >=, == !=). These are also known as comparison operator. 
+        * They compare two expressions and always return a boolean value.
+        * If the variables in expression are of different data type then the numeric promotions occur.The same rules for autopromotions apply. 
+          If they cannot be promoted it will give compilation error. eg true == 5 will give error.because we cannot compare unrelated data types.
+        * The relational operators are used mostly on primitives. When we use == and != with objects it will compare there reference rather than value.
+        * To compare objects we need to .equals() method of objects.
+        * Unique case of Integer comparison :
+            * Integer is wrapper class of int. We can declare Int myInt = 124; Auto boxing happens automaticaaly and internally Integer.valueOf(124) is called
+              and it returns an Integer object with value 124. valueOf method is implemented in such a way that it has a cache array of values from -128 to 127.
+              If we assign value in this range then it return a reference to the correponding element in the array. If we assign a value out of this range then
+              it creates a new Integer object.So 
+                Integer myInt = 127; Integer anotherInt = 127;
+                myInt == anotherInt // will return true
+                myInt = 128; anotherInt = 128
+                myInt == anotherInt // will return false 
+                Ideally we should not use == to compare objects. But this behaviour should be remembered. Also System.identityHashCode(<object>) will give the
+                memory address. When we call == we actually compare this hash values(memory address)           
+    * Conditional or Short circuit logical operators:
+        * The short circuit logical operators are (&&, ||, ^)
+        * They combine two or more boolean expression and result in a boolean based on truth table. 
+        * AND(&&) will be true if both operands are true, OR(||) if either of the operand is true and XOR(^) is true if both operands are different.
+        * They are called short circuit operators because the expression on the right is evaluated only if required eg: boolean b = false && (a++ == 2)
+          i.e a++ will not be evaluated as it not required.
+    * Character Arithematic
+        * characters have value from 0 to 65535.
+        * Character is the wrapper class for char and has useful methods like isLetter(), isDigit() etc
+        * When can use arithmetic, comparison, increment and other operator with char. The char is autopromoted to int and if need to assign the result to char
+          we need to cast it eg: char c= 'A'; char d= (char)(c + 1);, boolean bool = (c++ == d)
+    * ternary operator
+        ?: - It  has three operands and can be used to check a condition and execute
+        (condition) ? (expression 1):(expression 2); // Here if the condition is true expression 1 is evaluted and if false expression 2 is evaluted. The value
+         of expression can also be assigned to a variable. In that case the data type of expressions should be compatible with the variable. The paranthesis 
+         are optional but makes code readable
+         eg: int y = (a > b)? a++ : b++;
+* Comments in Java:
+    * Single line comment - //  -  used to comment a single line
+    * Multi line comment - /*  */ - used for a block
+    * Java Doc comment - /** */ - These comments are mostly used for classes or methods. It is good practice to give java doc comments for user created methods 
+      the comments get displayed while you hover over the method while using it.
+* Java Conditional Statement:
+   * if statement
+	if(condition) {
+		// statements
+	}
+      condition should always evaluate to a boolean (true or false)
+    * if else statement
+	if(condition) {
+		//statements
+	} else if (condition) {
+		//Statements
+	} else {
+		//Statements
+	}
+    * switch statement:
+        switch(expression) {
+            case value1: { //statements } break;
+            case value2: { //statements } break;
+            ...
+            default: { //statements } break;
+        }
+        * The expression in the switch statement should evaluate to one of the 4 primitive types byte, short, int or char. From Java 7, switch statement can also 
+          use String and Enum.
+        * 'break' keyword after each case is important as it will not break out of switch statement without break and fall through to the next case.
+        * The value of case should always be constnts. It cannot be variables.
+
+* Methods in Java:
+   * Methods in Java like other programming languages helps in creating a dry neat code without repetition. Java methods also known as functions. 
+   * 'Main' method 'public static void main(String[] args)' is the entry point for Java program.
+   * It can have no paramaters or have multiple parameters. We can pass command line arguments to main method while executing the program in IDE or command-line.
+   * Methods can either return something or not return any value(void). In Java void method without any return statement are called procedures. All methods 
+     except abstract methods require a body.
+    * Methods can have 0(niladic), 1(monoadic), 2(dyadic), 3(triadic), 4 or more parameters(polyadic). But it is bad practice to have polyadic methods.
+   Syntax:
+	<access_modifier> <optional_specifier> <return_type> <method_name>(parameter_list) { 
+		//statements
+	} 
+    
+	public static int calculateSum(int num1, int num2) {
+		return num1 + num2;
+	}
+
+    * access_modifier - The different access modifiers are private, public . protected and no modifier(default). These are usually specified as first part of
+      method declaration but they can also be specified after optional specifiers. There can only be one access modifier in a single method
+    * optional specifiers- The different optional specifiers are static, final, abstract, synchronised, native(to call methods of other language), strictfp.
+      They should come before return type and there can zero or more optional specifiers in a single method declaration.
+    * In Java the method arguments are usually passed by value. In case of objects the variables usually store the reference to the object in memory. While
+      passing objects to methods, the copy of the reference is passed so calling methods on the objects will change the object value but if we 
+      de-reference within the method, that does not affect original value.
+* Method Overloading:
+    * Methods having same name but different type or number of parameters is called method overloading. (return type does not matter)
+    * Method overloading helps have same method name for performing similar functionality eg: sum of two number, 3 numbers etc. 
+      private static int sum(int a, int b) {
+           return a + b;
+      }
+
+      private static int sum ( int a, int b, int c) {
+            return a + b + c;
+      }
+      //Here sum is a overloaded method. Method overloading is widely used in java e.g ptintln is overloaded with about 10 variations.  
+    * The rules for matching overloaded methods:
+        * First Java searches for the exact match.
+        * If exact match not found, Java tries to promote to larger primitive type eg: int to long/double and try to find a match.
+        * If that is also not found, it tries for autoboxed types, Integer in case of int.
+        * Finally it checks for variable arguments
+        eg: fun(2,3) // first chaecks for fun(int, int) -> If not found chacks for fun(long,long)/fun(ouble,double) etc-> If not found checks for 
+        fun(Integer, Interger) -> If not found checks for fun(int... a)
+* Constants: To define a constant in java we use final keyword. The value contained in a constant cannot be changed.
+  eg: private static final String INVALID_VALUE_MESSAGE = "Invalid Value"; 
+  * It is convention to name a constant in all caps.
+* Loops in Java:
+    * for loop
+            for(initialization;condition;iteration) {
+                // statements
+            }
+            eg:
+            for(int i = 0; i< 10; i++ ) {
+                System.out.println(i);
+            }
+            for(int i = 0,j=0; i <10 && j <15; i++, j+=2) { // For loop can have multiple intialization and increment statements
+                //Statements            
+            }
+    * while loop
+          //init
+          while(condition) {
+            // statements
+            // increment
+          }
+          eg:
+          int i = 0;
+          while(i < 10) {
+            System.out.println(i);
+            i++;
+          }
+
+          while(false) {
+            a++; // will give compiler error as the statement is unreachable
+          }
+    * do - while loop
+        //init
+        do {
+            // statements
+            // increment
+        } while(condition);
+        eg: 
+        int i =0;
+        do {
+            System.out.println(i);
+            i++;
+        } while(i < 10);
+         This loop is executed at least once even if the condition is false   
+* break keyword:
+    * It is used to break out of switch statement
+    * It is also used to break out of a loop. When using break with a loop we can have an optional label. The label is any name followed :. Labels can be given
+      to loop, if, switch, any block of code etc. When no label is specified with break statement, then it breaks out of innermost loop. If label is specified
+      it will break out of specified loop.
+      Outer: for(int i =0; i< 5; i++) {
+            Inner: for(int j = 0;j < 5; j++) {
+                if(a[i][j] == 20) {
+                    break Outer; // It will break out of both the loops and control goes to statement after loop.                
+                }
+             }
+       }
+* continue keyword
+    * It is used to bypass the code following continue keyword and go to the next iteration of the loop. continue can also have optional Label.     
+* Coverting String to other data type:
+    * It is essential to convert String to other data types during programming. Usally we we get data from user from console or file etc. it is of type String. We may need to convert it to other type like int, double etc. Parse methods which are present in the wrapper classes of Primitive types can be used to convert String to
+other data type. eg: Integer.parseInt(<number in string>) - this will convert to int if the string parameter is valid number else it will throw exception. These parse 
+methods are available in all wrapper classes eg: Float.parseFloat(<String>), Double.parseDouble(<String>) etc
+* Reading user input in Java:
+    * Scanner class of java.util can be used to read user input in java. We need to create an instance of scanner class and use methods like nextInt(), nextLine() on
+      that instance to read int, string etc. It is important to note that after reading a number, we may need to use to nextInt without assigning a value to bypass 
+      the enter key press.
+        eg: Scanner scanner = new Scanner(System.in);
+            int num = scanner.nextInt();
+            scanner.nextLine();// This is needed to handle the end of line enter key
+            String name = scanner.nextLine();
+            scanner.hasNextInt() -> // It returns a boolean to indicate if the console has next value as int. It just reads and checks the value and does not 
+                                    // remove the value from the scanner
+* String Class
+    * String is a special class in Java. We can create String objects using String literals without using new operator. When using String literal to create
+      a String we use String Pool to assign String. If the value is already present in the pool the reference is returned. We can also use new operator. In 
+      that case memory is alloted in heap and reference is returned.
+      eg: String myString = "Hello";
+          String newString = "Hello";
+          String anotherString = new String("Hello");
+          Here both myString and newString point to the same reference in String Pool but anotherString is alloted different memory.
+    * + operator can be used to concatenate two String or String and a number etc. If one of the operands of + is String the other is also converted to String.
+      eg: String fun = "fun" + 4 + 1 -> "fun41" and String fun = 1 + 4 + "fun" -> "5fun"
+    * Strings are immutable. They are not changed once created. Everytime we call a method on the String object it does not change the String object but returns 
+      a new String. We need to assign the result somewhere or else it is lost. eg: String s = "fun"; s.toUpperCase(); -> s is still lower case. In order to
+      change it to uppercase we need to assign it. eg: s = s.toUpperCase();
+    * String Pool - As Strings are immutable they take a lot of memory. String Pools were introduced as optimization. So when we use literals to create String.
+      it will first check if the String is present in the pool, if not add String to the pool. This is true only for literals and computation happenning
+      at compile time. Any string computed at runtime, using variables, string methods, new operator etc are stored in heap.
+        eg: String one = "John"; String two = "Jo" + "hn"; String three = one + ""; String four = new String("John"); 
+        Here one & two are created in the pool and point to same address while three and four are created in the heap.
+    *  equals() method is used to compare String content while == to compare reference.    
+    * Method Chaining - As String usally return another String we can call multiple methods one after the other eg: "fun".toUpperCase().charAt(1);  
+* String methods in Java - ( All methods are immutable -  does not change orig String)
+    * length() - returns the length of the String
+    * charAt(<index>) - returns the character at the given index eg: "fun".charAt(1) returns 'u'.
+    * indexOf(<character> or <string>) - returns the index of the first occurance of character or substring. Returns -1 if no match found.
+    * substring(<start>, <end>) - It returns the substring from start to end -1. If end is n ot specified it returns till end of String. If end is greater than
+      String length or less than start exception is thrown.
+    * toUpperCase - Return a string which is uppercase of the given String.
+    * toLowerCase() - Return a string which is lower case of the given String.
+    * equals(<String>) - Checks two Strings are equal and returns  a boolean.
+    * equalsIgnorCase(<String>) - Checks two String are qual ignoring case.
+    * startsWith(<character> or <string>) - Checks if the String starts with the given character or subString.
+    * endsWith(<character> or <string>) - Checks if the String ends with the given character or subString.
+    * contains(<character> or <string>) - Checks if the String contains the given character or subString.
+    * replace(<character> or <string>, <character> or <string>) - replaces the character or substring with another character or substring.
+    * trim - removes white spaces at the beginning and end.
+    * format(<format_specifier>, value) - It is used to forma string eg: String.format("%0.2f",(7.25* 1.8));
+* String Builder    
+    * String Builder is muttable. It is created using new operator. eg: StringBuilder builder = new StringBuilder("fun");
+    * It is used to save memory as String builder modifies the same StringBuilder object and does not create a new StringBuilder when it is modified.
+    * Method chaining can also be used with StringBuilder
+    * Methods in StringBuilder
+        * length()
+        * charAt()
+        * indexOf()
+        * subString(<start>, <end>) - Returns a String object which is the specified substring not a StringBuilder Object.
+        * append - It is used to concatenate or add at the end of StringBuilder object.
+        * insert(index, <String>) - Insert at specific index
+        * delete(<start>, <end>) - delete a substring from  start to end - 1. end should not exceed length or be less than start.
+        * deleteCharAt(<index>) - delete a particular character at given index.
+        * 
+* Class and Objects
+    * Object oriented programming in java is based on classes and objects. 
+    * Classes are templates and consists of:
+        * variables (also known as field) - They are used to define the state or charateristics
+        * methods - They are used to define behaviour or functionality of class.
+    * They are created using 'class' keyword and its name usually starts with a capital letter.
+    * Objects are instance of a class and created using 'new' keyword. When object is created using 'new' keyword, memory is alloted for the object and a reference
+      of the object is stored in a variable
+      eg: Car maruti = new Car();
+    * Class variables usually have 'private' access specifier so that they are accessible from outside the class. The values are accessed using getter and setter
+      methods.
+    * 'this' keyword is used to access class variable within methods inside the class.
+      eg:
+      public class Car {
+            private String model;
+            private String color;
+
+            public void setModel(String model) {
+                this.model = model;
+            }
+
+            public String getModel() {
+                return this.model;
+            } 
+     }
+    * There can only be one public class in a Java file and name of the file should be same as class name. But we can have other default(non-public) 
+      classes within the same file. 
+    * Constructors: constructors are special methods that are part of the class and are used to create objects. They do not have any return type and have the 
+      same name as the name of the class. They are usually public and are used to create an object of the class. If no constructor is specified Java creates an 
+      empty constructor by default. This is called default constructor. Constructors can be overloaded and a class can have more than one constructor. 
+      All initilization should be done in the constructor. As the object is being created in the constructor, it is not recommended to call any class methods
+      from the constructor.
+    * Inside the constructor we use this keyword to refer to the data fields of the class. 'this' is required if the constructor has parameter or local
+      variable with the same name as the field name.
+        eg: public class Dog {
+                private String name;
+                public Dog(String name) {
+                    this.name = name
+                }
+            }
+    * We can call another constructor from within a constructor using 'this()' keyword. But that needs to first statement of the constructor. This is 
+      recommeded practice and is called constructor chaining. this() method should be called only from within a constructor.
+      eg:  public class Point {
+               private int x;
+               private int y;
+
+              public Point() {
+                this(0,0);
+              }
+              
+              public Point(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+          }
+     * Inheritence : Java allows one class to inherit the features of another class using 'extends' keyword. The class we inherit from is called base or parent 
+       class and the class which inherits is called child class.
+            * The constructor of the child class can explicitely call the parent class constructor using 'super()' keyword. This must be first statement of
+              child constructor. If the child class does not explicitely call the super class constructor , the compiler automatically inserts super()
+              as the first statement.If no parameter constructor is not present in the parent class we get compiler error and we need to explicitely call
+              super with arguments.A constructor can have call to either this() or super() but not both and it needs to be first statement.
+            * The child class has access to all protected and public members and methods of the parent class. They can be directly referred within child class.
+            * It does not have access to private varibles or methods of parent class. 
+            * The instance variables and methods of the base class can be overridden by having same named variable/ method in child class. 'overriding' is an
+              important feature of OOP. In case a instance variable/method is overriden 'super' keyword can be used to refer to instance variable/method of 
+              parent class. eg: super.eat(), super.name etc. overriding provides runtime polymorphism. 
+            * Runtime polymorphism is acheived by creating a variabe of base class and making it point to a derived class object. Thus it implements derived 
+              class methods. And method getting implemented depends on the object it points to.
+            * Static methods of the base class and available to derived classes but they cannot be overridden. If derived class contains methods with the 
+              same signature then it hides the base class method instead of overriding it.
+            * All classes in Java inherits from 'Object' class by default.
+            * Inheritance is also known as 'IS-A' relation. eg: if Dog inherits from Animal , it means Dog is a Animal.
+           
+           eg:
+            public class Animal {                                  
+                private String name;
+
+                public Animal(String name) {
+                    this.name = name;
+                }
+
+                public void eat() {
+
+                }
+
+                public void move() {
+
+                }
+
+            } 
+
+            public class Dog extends Animal {
+                private int legs;
+
+                public Dog(String name, int legs) {
+                    super(name); // call to base constructor.needs to first line 
+                    this.legs = legs;
+                }
+                
+                public void run() {
+                    move(); // call to method of class Animal
+                    eat(); // call to eat method of Dog class
+                    super.eat(); // call to dog method of Animal class
+                }
+                @Override // method overriding. This overrides the method of Animal class. It is helpful to add this annotation as it allows compiler to
+                          // do some compile time validations. 
+                public void eat() {
+
+                }
+            }
+        * Runtime polymorphism:
+            * In Java, a class can be referred by the same type, or a superclass type or any interface type that it or its super class implements.
+                eg: Animal -> Dog -> Husky where Dog extends Animal and Husky extends Dog. Dog also implements CanWalk interface. then we can use
+                    Husky husky = new Husky(); // same class reference
+                    Dog dog = husky; // Dog reference to the husky object 
+                    Animal animal = husky;
+                    CanWalk canWalk =  husky; // Interface reference to husky.
+                 * Here husky can access all methods while dog can access only methods defined in dog, but as it refers to husky if a method defined in dog 
+                   is overridden in Husky class, then overridden method is called. Thus the method to call is determined at runttime depending on the type of
+                   object it refers to. This is called runttime polymorphism. 
+                 * No explicit casting is required for superclass reference variable to point to a subclass object.
+                 * We need to explicitely cast if we need subclass refrence variable to point to a superclass object.
+                    eg: Animal animal = new Husky();
+                        Dog dog = (Dog) animal; // Here we need to cast as animal is of type Animalwhich is a super class of Dog.
+                 * We may get classCastException if we try to cast two unrelated classes.
+            * Virtual methods - In Java all methods that are not static or final, that can be overridden by a subclass are virtual methods. Java does not
+              have 'virtual' keyword like C++. The actual method that is getting executed is decided at runtime, hence it is called virtual methods.
+            * Any class that can be reffered by more than two classes(Object and the class itself) without casting are called polymorphic classes. All
+              classes can be referred to by the current class type and Object class type.
+                eg: Dog is polymorphic class as it can have three reference Dog, Animal and Object.
+            * Polymorphic parameter - If we define a superclass type / interface as parameter to a method then we can pass any subclass object, object of class
+              implementing the interface as argument. This is called Polymorphic parameter. eg: Animal is subclassed by Cat, Dog and Rabbit.
+                eg: public void printDetails(Animal animal) {} // This method can accept a Cat, Dog or Rabbit object. Thus this method uses polymorphic parameter.
+            * If we have a superclass type or interface as return type, then we can return an object of any of its sub classes or object of class implementing
+              the interface. This is called polymorphic return type. 
+        * Rules for method overriding:
+            * We can override a super class method in sub class if the method is not private or final
+            * The method signature must be the same. Same return type and parameter list. If type or number of parameters is firrent it is 
+              method overloading not overriding. If parameters are same and return type is different it gives compiler error.
+            * It should have same or higher access than base class method eg: if we override a protected method we can make it public in child class but not private
+        * A constructor can have a call to either 'this()' or 'super()' but not both.
+   * Order of initialization:
+        * When an object is created it followes the following order of initialization:
+            * Initialize the super class if it exists.
+            * Static variables declarations and static initializer blocks if the class is used for the first time in the order they appear in the file.
+            * Instance variable declarations and instance initializer blocks.(these are blocks without any keyword) in the order they appear in the file. This
+              happens everytime an object is created(unlike static which occurs only once).
+            * constructor
+   * Static methods and static variables:
+        * Static methods have 'static' keyword. They cannot use any instance varibles or methods. We can directly access the static method using class name. No need
+          to create an Object of the class to use static methods. They can only use othe static methods or static variable.
+        * Static variables have static keyword. They is only copy of the variable for all instances of the classes. Changes made to static variable by one instance 
+          is reflected everywhere. They are also accessed using the class name. They are useful for constants.
+            eg: public class Print {
+
+p                    private static int count;
+                    public static void printHello() {
+                        count++;
+                        System.out.println("Hello");
+                    }
+                }
+   *Composition:
+        * It is another important part of OOP. It is also known as 'HAS-A' relation. 
+        * Using objects of other classes as fields is called composition. eg: In order to create a computrer class, we can break it into parts and create a case class,
+          monitor class, motherboard class etc. Then we can create computer class with all these fields. This is called composition.
+            eg:
+            public class Case  {            
+                ...
+            }
+
+            public class Monitor {
+                ...
+            }
+
+            public class Computer {
+                private Case theCase;
+                private Monitor monitor;
+                ...
+            }
+        * In order to access the public methods of Case/Monitor class from Computer object we use the 'dot' operator with the getter methods.
+    * Encapsulation: It is a key concept of object oriented programming internal workings of an object is hidden from the outside world. This is achieved by making
+      most of data members and methods private and allowing allowing access to the class using properly designed interfaces.
+        * Access to data variables is available through getter and setter methods.
+        * If we have to make a member read only we do not provide any setter method for that variable.
+        * By convention all setter is named set<variableName> eg: setName(), setAddress() etc and getters are named as get<variableName> eg: getName(). If 
+          the variable is boolean getter is named is<variableName> eg: isOperational().
+    * Polymorphism : In Java, we ahieve run time polymorphism using method overriding. A variable of a superclass can hold object of the subclass. Thus we can create 
+     a superclass variable and it calls the appropriate method at a runtime based on the object it currently holds.
+* Array:
+    * Arrays are used to represent a group of values of same type. 
+    * Array declaration in Java : 
+        int[] myArr = new int[5] -> Here [] after datatype indicates that it is an integer array and we need to specify the size during declaration. In this case
+        the interger array can hold a maximum of 5 values. We can also intialize array during declaration eg: int[] myArr = new int[] {1,2,3,4}; In this case
+        a array of size 4 with values is created we cannot specify both initial values as well as size i.e int[] myArr = new int[3]{1,2,3} gives compilation error.
+    * the size specified should an integer or expression that evaluates to an integer.
+    * We can also specify array as int arr[];
+    * == operator and equals method on the array myArr.equals() both check if the array point to the same reference. To check content equality we need to 
+      use Arrays.equals(arr1, arr2)
+    * Array indexing starts at 0. Index and [](Array accessing operator) is used to access an array element. 
+        eg: myArr[2] = 10; myArr[4] = 15;
+    * If we try to access an element outside the range we will get ArrayIndexOutOfBoundException. 
+    * We can also initialize the array during declaration using {} braces. Such arrays are also called as anonymous arrays.
+        int[] myArr = {1, 2, 3, 4, 5}
+    * Arrays by default have a .length property which retuens the length of the Array. eg: myArr.length gives 5.
+    * By default the array values are initialized to default values for the datatype i.e 0 for int array, false for boolean array , null for String/Object array etc.
+    * We can access array elements using their index myArr[0] etc and we can use loops to loop through an array. Most commonly used loop is for loop.
+        for(int i = 0; i < myArr.length; i++ {
+            myArr[i] = i + 10;
+        }
+    * We can also use foreach loop, to loop through arrays or Collection.
+        String[] pets = {"parrot", "cat", "dog"};        
+        for(String pet: pets) {
+            System.out.println(pet);
+        }
+        the pet is local variable or if we assign it something it will be lost but the Objects in an array are passed by reference hence if we use methods that
+        modify the value, it will have an effect on the array contents.
+    * Multidimensional Array:
+        * We can 2d and 3d array as well. While declaring multi dimensional array we need to first dimensions, only last dimension size is optional.
+        eg int[][] my2dArr = new int[2][3]; int my2dArr[][] = {{1,2},{3,4}}; int[] my2dArr[]; is also valid 2d array. 
+        * We can also 3 dimensional array
+        eg: int[][][] my3dArr = new int[3][3][3]; int[] my3dArr[][] = {{{1,2},{3,4}},{{5,6},{7,8}}}
+    * Arrays class in Java.util has some useful built in functionality for arrays that we can make use of. Some of the useful function:
+        * Arrays.copyOf(<original_arr>, <newLength>); -> makes a copy of the original area to the new length 
+        * Arrays.toString(<arr>) -> Converts the array element to ',' separated string
+        * Arrays.equals(<arr1>, <arr2>) -> Checks if two arrays are equal.
+        * Arrays.sort(<arr>) - It will sort the given array in ascending order.
+        * Arrays.binarySearch(<arr>, <valueToSearch>) - binarySearch method should only be used with a sorted array. If the value is found in the sorted
+          array it returns the index, if value is not found it return the negative value of the index before which the element should be inserted to maintain
+          the sort order. In case of unsorted array it gives unpredictable result. eg: int[] myArr = {1, 3, 5}; Arrays.binarySearch(myArr, 3) return 1,
+          Arrays.binarySearch(myArr, 4) return -3( which means 4 should be inseted at index 2 before 3).
+* Varargs: (Variable arguements)
+    * The methods which can have variable number of arguments is called Varargs. eg: main method can have varargs instead String[]
+    eg: public static void main(String... args) {}
+        ... is the syntax for variable arguements
+    private void print(String... args) {} // Here print method takes variable String arguments, eg: ptint("Hello");, print ("Java", "is", "cool"); etc.
+    args behave like an Array and Array methods can be used on it. We can also pass an Array to varargs.
+    * A method can have only one variable argument and it must be the last argument.
+      eg: void run(int ... a, int b) / void run(int... a, int... b) will not compile
+    * We can pass ay number of args or an array to a method with variable argument
+* Reference vs Value Type:
+    * Value Type:  All the primitive types like int , double, boolean etc are value types. i.e the values are directly stored in memory and variables point
+      to this value. Hence if we assign these to another variable, new copy is created and modifying one does not affect another.
+    * Reference Type: In this case the content is stored in heap and a reference is stored in the variable, hence if we assign reference type to another variable
+      it will point to the same content, hence modifying one will affect the other. Also when we pass reference type like arrays, objects to methods we are passing 
+      a reference, hence any changes inside the method would be reflected outside.
+* ArrayList
+    * It is difficult to resize an Array. In order to overcome resizing issue we can use ArrayList if we do not know the size needed in advance.
+    * ArrayList is a generic class and extends List interface which in turn extends Collection interface. As it is a generic class we need to specify the type 
+      of elements the ArrayList will hold at the time creation within angular braces. We need not specify size during ArrayList Creation. It is automatically 
+      resized internally by Java. 
+      eg: ArrayList<String> newArrayList = new ArrayList<String> ();
+          List<String> list = new ArrayList<>(); // Since Java 5 we need not specify in the second diamond operator.
+          List myList = new ArrayList(); // This is equivalent to List<Object> myList = new ArrayList<>(); But it is not good practice as we can store any 
+                                         // type of object and it leads to errors.    
+    * To print the ArrayList, we can directly print it using sout. It automatically calls toString method eg: System.out.println(myList); // prints the 
+      list contents within []    
+    * ArrayList can only hold objects and not primitive types. In order to have ArrayList of primitive types we need to use object wrapper classes provided by java
+      for these primitive types like Integer, Double etc eg: ArrayList<Double> doubleArrayList = new ArrayList<>();
+    * Converting ArrayList to Arrays:
+        * We can use toArray() method to convert ArrayList to Array. There are two variations of the method:
+            * toArray() -> Returns an array of Objects.
+            * toArray(new T[<num_of_elements]) -> Here it returns an Array of specified type, The type should be same as type of arrayList. We can specify any 
+              size even 0, it will resized automatically. But it is faster and good practice to specify the actual size required eg: 
+              List<String> myList = new ArrayList<>(); myList.add("cat"); myList.add("dog");
+              String[] myArr = myList.toArray(new String[myList.size()]);
+        * The Array and ArrayList now are totally separate and modification to one does not affect the other
+    * Converting Array to ArrayList
+        * We can use asList method of the Arrays class to convert an Array into an ArrayList.
+        * This converts the Array to a fixed size ArrayList. We cannot add/remove elements from the ArrayList. It gives unsupported operation exception.
+          but we can modify the elements.
+        * Any modification in the ArrayList is reflected in the Array and vice versa.
+        eg: Array.asList(myArr) / Array.asList("Cat", "Dog"); // asList takes varArgs 
+    * Searching and Sorting ArrayList
+        * We can use the utility methods of Collections class for searching and sorting.
+            * Collections.sort(<myList>) - It will sort the list
+            * Collections.binarySearch(<myList>, <element>) - It searches the ArrayList and returns the index of the element if found else returns negative value.
+              The ArrayList needs to be sorted to get expected result otherwise it gives unpredictable result.
+    * Iterating through the list
+        * using for and for each loop:
+            for( int i = 0; i < myList.size(); i++) {
+                String temp = myList.get(i);
+            }
+
+            for(String item: myList) {
+                // body
+            }
+            We cannot remove elements from the list while iterating through for or foreach. If we do not need to modify we use either for or foreach to iterate
+             the list
+        * iterator - We can use the iterator if we need to remove elements while iterating
+          Iterator<String> iterator = myList.iterator();
+          while(iterator.hasNext()) {
+            String item = iterator.next();
+            iterator.remove(); // works fine
+          }
+            It has useful methods like:
+            * hasNext() - whether there is a next element
+            * next() - return the list element
+            * remove() - removes current element
+        * listIterator - It can be used if we need to iterate in both direction, modify or add element , iterate from particular index
+            ListIterator<String> listIterator = myList.listIterator(3);// iterate from index 3
+             while(listIterator.hasPrevious()) {
+            String item = iterator.previous();
+            iterator.remove(); // works fine
+          }
+           It has useful methods:   
+            * hasNext()
+            * next()
+            * hasPrevious()
+            * previous()
+            * remove()
+            etc
+    * It has many useful methods. Some of them are:
+        * size() -> It returns the size or length of the ArrayList.
+        * isEmpty() -> Checks if the list is empty.
+        * add(<elem>) -> This method will add an element to the ArrayList.
+        * add(index, <elem>) -> This method will add the element to the specified index in the ArrayList.
+        * get(<index>) -> It returns the element at the specified index.
+        * set(<index>, <elem>) -> It modifies the specified element at the given index. If element is not present in the index it throws IndexOutOfBound exception.
+        * remove(<index>)/ remove(<elem>) -> It removes the element at the given index/ it removes the specified element.
+        * contains(<elem>) -> It returns true/false based on whether the element exists in the ArrayList
+        * indexOf(<elem>) -> It returns the index at which the given element is present. If the element does not exist in the ArrayList, it returns -1. 
+        * clear() - It removes all the elements in the list
+        * equals(<arrList>) - Compares two ArrayList and returns true if the two ArrayList has same elements in same order.
+* LinkedList:
+    * Linked list in Java is the the implementation of linked list data straucture. In Java Internally linked list is implemented as a doubly linked list.
+    * Though ArrayList is very useful in most cases, if we need to add an element in a particular index, then in the ArrayList all the other elements after that index
+      need to be moved to get the space to insert the element. The same is the case for removal. This becomes time consuming if there needs to be lot of 
+      insertion, deletion performed in ArrayList.eg: Dictionary(Words needs to added in sorted manner). Linked list is better suited for such lists.
+    * In Java when we store ArrayList, contiguous memeory of 8 bytes is alloted. As ArrayList contains Objects, Objects are stored in some memory and their address
+      is stored in the ArrayList. Thus it is very easy to access the element when we know the index as intenally it calculates the memory location based on the index
+      and directly retrives the address of Object. But insertion in the middle and deletion is difficult.
+    * In case of linked list, contiguous memory is not alloted. The location of the next and previous element are stored for each Object. Thus we can iterate through
+      it using the link. This makes insertion and deletion easy. But in order to find an element at a particular index we need to traverse the entire list. Thus it 
+      really depends on the type of operation that is commonly performed to decide the list that is best suited.
+    * Iterator and ListIterator can be used to iterate through the linkedList, these objects give more control over the iteration.Iterator allows only forward
+      traversal while ListIterator helps us to traverse the LinkedList in both the direction. We can create a Iterator or ListIterator by calling iterator() 
+      or listIterator() function on the linked list. This will just create the iterator. It will not retreive any element or start traversing the list. The
+      listIterator() has following functions:
+        * hasNext() -> Checks if next element is present
+        * next() -> Goes to the next element and returns the object. When used for first time, it returns the first element.
+        * hasPrevious() -> Checks if previous element is present
+        * previous() ->  Goes to the previous element and returns the object.
+        * add(<elem>) -> Adds an element after the current position.
+    * While using listIterator, we need to monitor the direction we are traversing, and if the direction changes we may need to use next() or previous() twice.
+      Because if we use next() after previous(), it remains in the current element instead of going to next element as we might expect. This is because of the internal 
+      implementation. 
+* Interface:
+    *  Interfaces forms a contract between the class and the outside world, and this contract is enforced at build time by the compiler. If your class claims 
+       to implement an interface, all methods defined by that interface must appear in its source code before the class will successfully compile. Thus implementing 
+       an interface allows a class to become more formal about the behavior it promises to provide.
+    * An interface is defined in Java using 'interface' keyword. No actual implementation is available in the interface. It just contains method signature(arguments
+      and return types). The actual code is present in the class that implements the interface using 'implements' keyword.
+      eg:
+      public interface ISavable {
+          void read(List<String> values);
+          List<String> write();
+      }
+      * Here ISavable is an inteface and any class that implements this interface should provide methods read and write. We can just create interface variables
+        but not actual objects. The interface variables can hold objects of class that implements the interface and call the methods declared in the interface.
+        eg: public class player implements ISavable {
+                ...
+                void read(List<String> values) {
+                    ...
+                }
+
+                List<String> write() {
+                    ...
+                }
+                
+            }  
+    * We cannot create objects for an interface.
+    * All methods are public in an interface. Most of the methods are abstract but after Java 8, interface can contain default and static methods.
+    * All variables are static and final in an interface(i.e it can only hold constants)
+    * From Java 8 interface can contain default method (that is methods with implementation). These methods use the keyword 'default'. They have method body
+      and basic implementation. Only interfaces can have default methods. Classes and abstract classes cannot contain default merthod. They are not static, 
+      abstract or final as they can be overridden by classes implementing the interface. They should be public.
+        eg:
+        public interface  canFly {
+            default void fly(int speed) {
+                //body
+            }
+
+        }
+        * One of the main advatage of adding default methods is to allow addition of new methods to interface. If we simply add abstract method in an existing
+          interface it will break the code for many developers who already used the interface. Default methods prevents this while also providing option for 
+          classes to override them if needed.
+        * Default methods may create mutiple inheritence problem, as two interfaces may contain same method signature and two default implementation. If we
+          try to implement two interfaces containg same method, we get compile time error unless one interface extends the other, in which case method
+          overriding rules apply.
+    * From Java 8, interface can also contain static methods. They are assumed to be public and implementation should be provided in the interface. To 
+      reference a static method we need to use the name of the interface. Thus a class can implement two interfaces have same static method signature
+      It refers to each method by using the corresponding interface name.  
+    * From Java 9 interface can also have private methods. These are mostly used for common code between default method    
+    * Intetface can extend other interfaces. In fact unlike classes interface can extend more than one interface.
+      eg:
+        public interface Carnivore {
+            void eatMeat();        
+        }
+
+        public interface Herbivore {
+            void eatPlants();
+        }
+
+        public interface Omnivore extends Carnivore, Herbivore {
+
+        }
+    * Interfaces are used when two or more unrelated classes has to implement a set of common behaviour while abstract classes are used when a set of
+      closely related classes need to share code.
+* Nested Classes:
+    * In Java we can nest one class within the other. There are four types of nested classes:
+        * Static nested class
+        * Non-Static nested class or InnerClass
+            * These are most widely used. Usually inner classes are private and objects of inner classes are only created in the outer class. But this 
+              need not be always the case. 
+              eg:
+              public class GearBox {
+                Gear currGear;
+                public GearBox () {
+                    this.currGear = new Gear(); // Creating inner class object within outerClass                
+                }
+
+                public class Gear {
+                    ...
+                }                
+
+              }
+
+                GearBox lambda = new GearBox();
+                GearBox.Gear currGear = lambda.new Gear(); // Creating inner class from outside. This is not very common
+        * Local nested Class - Class defined within a block usually a method
+        * Anonymous nested Class - These are mainly used for event handlers.
+* Abstract Classes:
+    * Abstract classes in Java contains zero or more abstract methods. They are declared using abstract keyword. The abstract methods also contain abstract keywords.
+      These are just method declaration without any implementation.
+      eg: public abstract class Animal {
+            private String name;
+            public Animal (String name) {
+                this.name = name;            
+            }
+
+            public abstract void eat();
+            public abstract void breathe();
+          } 
+     * We cannot create objects of the abstract class.
+     * Any class inheriting from an abstract class must provide implementation of all the abstract methods or themselves be declared abstract.
+     * Abstract class cannot be private or final.
+     * Abstract methods cannot be privaye or final as they need to be implemented by derived class.
+     * Abstract class can contain static methods but these static methods cannot be abstract as static methods cannot be overridden in child classes.
+* Java Generics:
+    * The Java Generics programming is introduced in J2SE 5 to deal with type-safe objects. It makes the code stable by detecting the bugs at compile time.Before
+      generics, we can store any type of objects in the collection, i.e., non-generic. Now generics force the java programmer to store a specific type of objects.
+    * Using Generics has the following advantages:
+        * Type-safety: We can hold only a single type of objects in generics. It doesn?t allow to store other objects. Without Generics, we can store any type 
+          of objects.
+             
+             Without Generics:
+             List list = new ArrayList();    
+             list.add(10);  
+             list.add("10");  
+    
+             With Generics, it is required to specify the type of object we need to store.  
+             List<Integer> list = new ArrayList<Integer>();    
+             list.add(10);  
+             list.add("10");// compile-time error  
+        * Type casting is not required: There is no need to typecast the object. Before Generics, we need to type cast.
+
+            List list = new ArrayList();    
+            list.add("hello");    
+            String s = (String) list.get(0);//typecasting    
+    
+            After Generics, we don't need to typecast the object.  
+            List<String> list = new ArrayList<String>();    
+            list.add("hello");    
+            String s = list.get(0);    
+
+        * Compile-Time Checking: It is checked at compile time so problem will not occur at runtime. The good programming strategy says it is far better to 
+          handle the problem at compile time than runtime.
+    * Syntax to use generic collection : ClassOrInterface<Type> eg: ArrayList<String>. T is usually used as type parameter while defining generic classes.
+      While defining generic classes with type parameter T we can have a upperbound where we can restrict T to be subclass of a particular class or implement 
+      certain interfaces. Just like normal Java T can be required to be a subclass of only from a single class but can be required to implement multiple interfaces.
+      The interfaces are specified after the class with '&' sign.
+       eg:
+        class Team<T extends Player & Manager & Coach> {// Where Player is a class while Manager and Coach are interfaces
+            private ArrayList<T> players = new ArrayList<>(); // <> is known as diamond
+        }
+        
+    * In addition to classes and interfaces we can also have generic methods.
+* Java Naming conventions - It is good practice to follow naming conventions to make your code readable to other programmers. Few simple Java naming conventions
+  for different components.
+        * Packages - 
+            * All lower case.
+            * It is usually domain reversed eg http://Single.support.com -> Pacakage name will be com.support.single
+        * Classes -
+            * It is CamelCase and starts with a capital letter. It should also be a noun. eg: String, GearBox etc
+        * Interface -
+            * It is CamelCase and starts with a capital letter. It should indicate the feature that classes that implements it gets eg: Comparable, Serializable etc
+        * Variable -
+            * It is mixedCase and should start with a small letter. It should be meanintful eg: firstNumber, lastName etc
+        * Method names -
+            * It is mixed case and start with a small letter. It should indicate the action performed. eg: addTeam(), getValue() etc
+        * Constants 
+            * It should be all capital and each word should be separatedby '_'. 
+            * It should be declared as final. eg: MAX_VALUE, PI etc
+        * Type Parameters(Generics) - Should be a single capital letter
+            * T - Type
+            * E - Element
+            * V- Value
+            * (S, U) - Second and third type parameters
+
+* Java Packages:
+    * There are over 10 million java developers and it is inevitable that classes and interfaces will have same name. To avoid this name collision java came with 
+      the idea of packages. Packages gives the following advantages:
+        * It organises the all related code together 
+        * It provides new name space so different packages can have same class names.
+        * It allows unrestricted access within the package while restricted access to code outside package.    
+    * There are many built-in  and third party java libraries. They all have their own package. The package naming convention is usually domain name reversed.
+    * com.example and org.example are reserved for testing and non-distribution purposes.
+    * Package name must match the directory structure of the file. Sub-Folder is usually considered as child package.
+    * package <package_name>; should be the first line of your java code.
+    * We can build our own jar file (artifacts) and export it. ( In intellij IDE we go File -> Project Structure -> Artifacts to craete JAR file) 
+* Java Imports:
+    * We can import other classes using import keyword.
+    * We can directly use classes within the same package without importing. We only need to import classes from other packages.
+    * While importing we can either import the entire package using * eg: java.util.* or individual class.
+    * If we do not specify any package while creating a class, it will be created in default package and classes created in default package cannot be imported 
+      in any other package. 
+    * We can also fully specify a class while using instead of importing. This approach is used usually only when we use  a class of same name from different packages.
+    * java.awt.* does not import classes and interfaces from java.awt.event as java.awt and java.awt.event are separate packages.
+* Static imports:
+    * To import static functions and static members within a class. eg: import static java.lang.Math.*;
+    * If we do static import we need not use class names while using the static methods and variables. eg: If we use ' import static java.lang.Math.*' we can
+      directly use PI, min etc instead of Math.PI, Math.min. We can use static imports on user created classes.
+    * It is not good practice to use many static imports in large applications as it will be very clear the classes each method/vaiable belongs to. 
+   
+* Java Scope:
+    * In Java the scope of a variable is within the block it is defined. If another variable of the same name is defined in a inner blocak then outer block 
+      variable will be shadowed. So when we use a variable the Java compiler first checks in the innermost block and goes up till it finds the variable or gives error.
+    * We can have local variable with same name as class variables. In that case we need to use 'this' to access class variables.
+    * Inside a method we cannot declare two variable with same name unless first varable goes out of scope.
+    * Class variables are visible throughout the class. 'this' parameter can be used to refer to the class variable if there are shadowed by a local variable.
+    * All the variables ( including private) are visible to its inner class. Similarly all inner class variables including private variable can be accessed by 
+      creating object of inner class within the outer class.If outer class and inner class have same variable name, then 'this' inside the innerclass will 
+      refer to   innerclass variable. In order to refer the outer class variable we need to use <outerClass>.this.<var_name>
+      eg:
+      class OuterClass {
+        int x;
+
+        class innerClass {
+            int x;
+            printTable() {
+                System.out.println("Inner Class - " + this.x + " Outer Class - " + OuterClass.this.x);
+            }        
+        }
+      }
+* Java Access Modifiers:
+    * At the top level we can only have classes, interfaces and enums and everything else should be contained within only of these. Classes, interfaces and enums
+      can have the following modifiers:
+        * public - visible to all everything within or outside the package. They are specified using 'public' keyword.
+        * package-private - visible within the package only. They are specified by not having any modifier.
+    * The class member variables and methods can have the following access modifiers:
+        * public - visible and accessible to all creating the object of the class
+        * private - visible and accessible only within the class
+        * package-private - It is visible and accessible to all classes within the same package but not to external packages.
+        * protected - It is visible in all classes within the package like package-private but also in subclasses of the class even if they are in another package.
+    * All methods and variables provided in an interface are public.
+* Static:
+    * Static variables and methods belong to the class rather than objects. So only a single instance of the variables exist in memory and is shared by all
+      the instances of the class. So any change to static variable is reflected everywhere since there is only one copy in memory,
+    * We can access static variables and methods using class name. eg: Math.PI, Integer.parseInt() etc. It can also be called using instance variables
+      but it is not good practice. Integer int1 = new Integer(5); int1.parseInt("25")// Compiles but bad practice
+       int1 = null; in1.parseInt("25") // will not throw exception and still works because parseInt() is a static method
+    * Static mathods can have only other static methods and variables. It cannot call non-static methods of the same class. It needs to create an object of 
+      the class to call any instance methods/variable. Instance methods can use and call both static methods/variable and other instance methods/variables.
+    * Static initializer block - 
+        * They are executed only once when the class is loaded. They can be many static initialization blocks. They are declared using static keyword.
+        * They are mostly used to initialize static variables. All static intializer bloacks are called when the class is first used.
+        eg: static{
+                //initialization code
+            }          
+* Final:
+    * They are used to create constants. 
+    * We need to assign values for final variables either during declaration or before class constructor finishes. Once assigned the value of final variable cannot
+      be modified.
+    * In case static final variables the value should be assigned during declaration or before static initializer blocks finishes.
+    * It is general practice to name static final variables in all caps eg: Math.PI
+    * When we specify a class as final, then it prevents the class from being extended(or subclassed) eg: public final class Math{}
+    * When we use final keyword with a method, it prevents the method from being overridden by any sub-class. 
+* Java Date and Time:
+    * Java 8 introduced new APIs for Date and Time to address the shortcomings of the older java.util.Date and java.util.Calendar.
+    * Issues with the Existing Date/Time APIs
+        * Thread Safety – The Date and Calendar classes are not thread safe, leaving developers to deal with the headache of hard to debug concurrency issues and 
+          to write additional code to handle thread safety. On the contrary the new Date and Time APIs introduced in Java 8 are immutable and thread safe, 
+         thus taking that concurrency headache away from developers.
+        * APIs Design and Ease of Understanding – The Date and Calendar APIs are poorly designed with inadequate methods to perform day-to-day operations. 
+          The new Date/Time APIs is ISO centric and follows consistent domain models for date, time, duration and periods. There are a wide variety of
+          utility methods that support the commonest operations.
+        * ZonedDate and Time – Developers had to write additional logic to handle timezone logic with the old APIs, whereas with the new APIs, handling of 
+          timezone can be done with Local and ZonedDate/Time APIs.
+    * We can import the java.time package to work with the date and time API. The package includes many date and time classes. For example:
+          * LocalDate 
+                * Java LocalDate class is an immutable class that represents Date with a default format of yyyy-MM-dd. 
+                * An instance of current date can be created from the system clock as below: LocalDate localDate = LocalDate.now();
+                * The LocalDate representing a specific day, month and year can be obtained using the “of” method or by using the “parse” method. For example 
+                  the below code snippets represents the LocalDate for 20 February 2015:
+                    * LocalDate.of(2015, 02, 20);
+                    * LocalDate.parse("2015-02-20");
+                * It provides various utility methods:
+                    * LocalDate tomorrow = LocalDate.now().plusDays(1)
+                    * LocalDate previousMonthSameDay = LocalDate.now().minus(1, ChronoUnit.MONTHS);
+                    * LocalDate.parse("2016-06-12").getDayOfWeek()
+                    * LocalDate.parse("2016-06-12").getDayOfMonth()
+                    * isBefore - startDate.isBefore(endDate) where both startDate and endDate are objects of LocalDate. It eturns a boolean true/false. 
+                    * We can add days using plusDays, plusYears etc. Subtract days using minusDays minusMonths 
+                    * toEpochDay() -> Returns a long giving number of days since Jan 1st, 1970
+          * LocalTime 	
+                * Represents a time (hour, minute, second and milliseconds (HH-mm-ss-zzz))
+                * The LocalTime represents time without a date. Similar to LocalDate an instance of LocalTime can be created from system clock or by using 
+                  “parse” and “of” method.
+                    * LocalTime now = LocalTime.now();
+                    * LocalTime sixThirty = LocalTime.parse("06:30");
+                    * LocalTime sixThirty = LocalTime.of(6, 30);
+                    * LocalTime sevenThirty = LocalTime.parse("06:30").plus(1, ChronoUnit.HOURS);
+                    * Similar to LocalDate, we can use plusHours(), plusMinutes() etc . We can chain methods in LocalTime similar to LocalDate but both these classes
+                      are immutable. They just return new LocalDate, LocalTime objects and do not modify the current object.
+                    * boolean isbefore = LocalTime.parse("06:30").isBefore(LocalTime.parse("07:30"));
+
+          * LocalDateTime 	
+                * Represents both a date and a time (yyyy-MM-dd-HH-mm-ss.zzz)
+                * The LocalDateTime is used to represent a combination of date and time. This is the most commonly used class when we need a combination of date 
+                  and time. The class offers a variety of APIs and we will look at some of the most commonly used ones.
+                * An instance of LocalDateTime can be obtained from the system clock similar to LocalDate and LocalTime:
+                    * LocalDateTime.now();
+                * The below code samples explain how to create an instance using the factory “of” and “parse” methods. The result would be a LocalDateTime 
+                  instance representing 20 February 2015, 06:30 AM:
+                     * LocalDateTime.of(2015, Month.FEBRUARY, 20, 06, 30);
+                     * LocalDateTime.parse("2015-02-20T06:30:00");
+                 * Some other useful methods:
+                    * localDateTime = localDateTime.plusDays(1);
+                    * localDateTime = localDateTime.minusHours(2);
+                    * toEpochTime() - Number of seconds from Jan 1st, 1970
+          * Period
+                * The Period class uses the units year, month and day to represent a period of time.
+                * We can obtain a Period object as the difference between two dates by using the between() method:
+                    LocalDate startDate = LocalDate.of(2015, 2, 20);
+                    LocalDate endDate = LocalDate.of(2017, 1, 15); 
+                    Period period = Period.between(startDate, endDate);
+                * Then, we can determine the date units of the period using the methods getYears(), getMonths(), getDays():
+                * Another way to create a Period object is based on the number of days, months, weeks or years using dedicated methods:
+                    Period fromUnits = Period.of(3, 10, 10); // period of 3 years, 10 months and 10 days
+                    Period fromDays = Period.ofDays(50);
+                    Period fromMonths = Period.ofMonths(5);
+                    Period fromYears = Period.ofYears(10);
+                    Period fromWeeks = Period.ofWeeks(40);
+                * We can then add the period to a date using plus method of LocalDate, LocalDateTime. Period cannot be added to LocalTime object
+                  as it is not a time unit.
+                * Unlike LocalDate, LocalTime, we cannot chain methods in Priod class. Only the last method is executed.
+                    eg: Period period = Period.ofDays(5).ofYears(2); // Just gives a period of 2 years, ofDays is ignored
+          * DateTimeFormatter 	
+                * Formatter for displaying and parsing date-time objects 
+                * The LocalDate, LocalTime, LocalDateTime has format methods that take DateTimeFormatter object.
+                * We can format it using standard formats
+                    LocalDateTime dateTime = LocalDateTime.now();
+                    dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE) // just gives the date component
+                    dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME) // just gives the time component
+                    dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) // just gives the date and time separated by a T component
+                * We can also create short , medium ,long formatters for date, time etc
+                    * DateTimeFormatter shortDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.Short)
+                        We can also FormatStyle as Medium, Long etc. Short gives only last 2 digits in the year, Medium gives the full year.
+                    * ofLocalizedTime() can be used for Time. But if try to use DateFormatter on time or vise versa we get unsupported exception 
+                      during runtime.
+                * We can also create our own formatter using DateTimeFormatter.ofPattern(<pattern_String>) method. This method takes a String specifying the
+                  format
+                     u       year                        year              2004; 04
+                     y       year-of-era                 year              2004; 04
+                     D       day-of-year                 number            189
+                     M/L     month-of-year               number/text       7; 07; Jul; July; J
+                     d       day-of-month                number            10
+                        ...
+                    eg: DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm")
+            * Parsing data and Time from String:
+                * We use parse() method of LocalDate and LocalTime classes. It takes a String and DateTimeFormatter optionally. It will parse the String
+                  object and create LocalDate and LocalTime objects. We need to specify the formatter if our date/time is not in default format.
+                * DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                  LocalDate ld = LocalDate.parse("03-04-2001");
+    * Before Java 8 we need to use java.util.Date() and java.util.Calendar() classes.
+        * Date now = new Date() // It gives the current timestamp
+        * In order to set a particular date we need to use Calendar class.
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2015, Calendar.JANUARY, 20);
+            calendar.set(Calendar.DATE, 1); // Sets date to 1 
+            calendar.set(Calendar.MONTH, 2); // Sets month to march
+            Date date = calander.getTime();
+        * To format the date we use SimpleDateFormat class
+            SimpleDateFormat sf = new SimpleDateFormat("MMM dd yyyy, hh:mm");
+            sf.format(new Date())
+* Java Exception Handling:
+    * Program or application can fail for many reason like connecting to website without internet, accessing wrong array index etc. In such cases we get exceptions.
+    * Methods can handle the exception themself by returning some error code or throw the exception to the caller. eg: indexOf, binarySearch etc return -1 if the
+      element not found. By throwing exceptio n we force the caller to deal with them.
+    * In Java Exception heirarchy we have Throwable class and it is extended by two child classes:
+        * Exception:
+            * Runtime Exception(Unchecked exception) - All exceptions of type Runtime Exception or any class which is extended from Runtime exceptions
+              are unchecked exception. We can catch them using try/catch blocak and handle them but it is not mandatory. These are unexpected exceptions that
+              occur during runtime but it is not necessarily fatal. So we can gracefully handle the exception and continue program. Code will
+              compile even if we don't handle the Runtime exception.
+            * Checked Exception - All other exception except Runtime exception or subclass of Runtime Exception are Checked exception. The program should handle
+              it using try/catch or explicitly declare it in method declaration. Thus handling of checked exception are mandatory. eg: unab;le to open file, file
+              not existing. Code will not compil eunless we handle them.
+        * Error:
+            * These are fatal errors like running out of stack memory, disk space etc. These are unexpected and program is not expected to handle or recover from
+              these. When error occurs program usually exits.
+    * try/catch
+        try { // curly braces are mandatory
+            // block of code that can cause exception
+        } catch (<Exception_type> var_name) {
+
+            // exception handling code
+        } catch (<Exception_type> var_name){
+            // exception handling
+        } finally {
+            // finally block
+        }
+        * We can have mutiple catch blocks catching different exceptions. But we always need to catch any child class/subclass exception before parent class.
+          If we have superclass catch before sub class the code will not compile, due to unreachable code. Hence the order of catch statement matters.
+        * finally bloack is executed irrespective of whether an exception is thrown or not. If no exception occurs finally is executed after try block.
+          If an exception occurs the finally block is executed after catch block.
+        * We can also have nested try catch statement. We need to remember that finally block is executed before code exits try/catch even if try/catch block 
+          have return statement/ throw other exception. If finally has a return statement that takes precedence. The only case where finally is
+          not executed is if we have System.exit(). In that case the JVM is shut down and no further statement is executed.
+        * If we have methods that throw checked exception, we need to have throws declaration in the method definition. If this method is overridden from 
+          parent class/interface the parent class/ interface method declaration should also have throws declaration. Otherwise code will not compile.
+          In case of unchecked exception(Runtime)  declarations is not mandatory.
+    * We can also throw an exception using throw keyword eg: throw new Exception("Unable to load"). In such a case we need to declare in the method definition 
+      that the method 'throws' exception so that the caller can handle it
+        eg: void readFile() throws Exception {
+                throw new Exception("Unable to load");
+            }  
+    * We can also have Exception as return type of a method. In that case it just returns Exception object and does not throw it. 
+    * We can throw any object of type Throwable/subclass of Throwable. Hence we throw and handle Error, Exception, Runtime Exceptions etc.
+* Java Lambdas
+    * Java lambda expressions are new in Java 8. Java lambda expressions are Java's first step into functional programming. A Java lambda expression is 
+      thus a function which can be created without belonging to any class. A Java lambda expression can be passed around as if it was an object and executed
+      on demand.
+    * Java lambda expressions are commonly used to implement simple event listeners / callbacks.
+    * Syntax:
+        (<Optional_type> <parameter_name>) -> { //code block for function bode }
+    * Functional programming is very often used to implement event listeners. Event listeners in Java are often defined as Java interfaces with a single method
+        eg: public interface StateChangeListener {
+                public void onStateChange(State oldState, State newState);
+            }  
+        * In Java 7 you would have to implement this interface in order to listen for state changes.  If a class StateOwner has addStateListener method, that 
+          takes StateChangeListener interface as parameter you could add an event listener using an anonymous interface implementation, like this:
+            StateOwner stateOwner = new StateOwner();
+            stateOwner.addStateListener(new StateChangeListener() {
+
+                public void onStateChange(State oldState, State newState) {
+                    // do something with the old and new state.
+                }
+            });
+        * In Java 8 you can add an event listener using a Java lambda expression, like this: 
+            StateOwner stateOwner = new StateOwner();
+            stateOwner.addStateListener((oldState, newState) -> System.out.println("State changed"));
+            
+            * The lambda expression is matched against the parameter type of the addStateListener() method's parameter. If the lambda expression matches the
+              parameter type (in this case the StateChangeListener interface) , then the lambda expression is turned into a function that implements the 
+              same interface as that parameter.
+    * Java lambda expressions can only be used where the type they are matched against is a single method interface.  A single method interface is also 
+      sometimes referred to as a functional interface. Matching a Java lambda expression against a functional interface is divided into these steps:
+        * Does the interface have only one abstract (unimplemented) method?
+        * Does the parameters of the lambda expression match the parameters of the single method?
+        * Does the return type of the lambda expression match the return type of the single method?
+        If the answer is yes to these three questions, then the given lambda expression is matched successfully against the interface.
+    * From Java 8 a Java interface can contain both default methods and static methods. Both default methods and static methods have an implementation defined
+      directly in the interface declaration. This means, that a Java lambda expression can implement interfaces with more than one method - as long as the 
+      interface only has a single unimplemented (AKA abstract) method.  
+    * Even though lambda expressions are close to anonymous interface implementations, there are a few differences that are worth noting. The major difference 
+      is, that an anonymous interface implementation can have state (member variables) whereas a lambda expression cannot.
+    * Since Java lambda expressions are effectively just methods, lambda expressions can take parameters just like methods.
+        * Zero Parameters - If the method you are matching your lambda expression against takes no parameters, then you can write your lambda expression like 
+          this:
+          () -> System.out.println("Zero parameter lambda");
+        * One Parameter - If the method you are matching your Java lambda expression against takes one parameter, you can write the lambda expression like this:
+           (param) -> System.out.println("One parameter: " + param);
+           When a lambda expression takes a single parameter, you can also omit the parentheses, like this:
+            param -> System.out.println("One parameter: " + param);
+        * Multiple Parameters - If the method you match your Java lambda expression against takes multiple parameters, the parameters need to be listed
+          inside parentheses. Only when the method takes a single parameter can the parentheses be omitted. Here is how that looks in Java code:
+            (p1, p2) -> System.out.println("Multiple parameters: " + p1 + ", " + p2);
+    *  Specifying parameter types for a lambda expression may sometimes be necessary if the compiler cannot infer the parameter types from the functional 
+       interface method the lambda is matching. Don't worry, the compiler will tell you when that is the case. Here is a Java lambda parameter type example:
+       (Car car) -> System.out.println("The car is: " + car.getName());
+    * Lambda Function Body
+        * The body of a lambda expression, and thus the body of the function / method it represents, is specified to the right of the -> in the lambda 
+          declaration
+        * If your lambda expression needs to consist of multiple lines, you can enclose the lambda function body inside the { } bracket 
+        * You can return values from Java lambda expressions, just like you can from a method.
+             (param) -> {
+                 System.out.println("param: " + param);
+                 return "return value";
+              }
+        *  In case all your lambda expression is doing is to calculate a return value and return it, you can specify the return value in a shorter way. Instead
+           of this: (a1, a2) -> { return a1 > a2; } You can write:  (a1, a2) -> a1 > a2;
+    * Lambdas as Objects
+        * A Java lambda expression is essentially an object. You can assign a lambda expression to a variable and pass it around, like you do with any other 
+          object.
+            eg:  public interface MyComparator {
+                  public boolean compare(int a1, int a2);
+                 }
+             MyComparator myComparator = (a1, a2) -> return a1 > a2;
+             boolean result = myComparator.compare(2, 5); // invokes lambda expression function
+* Predicates:
+    * With predicates, we can create code that is more clean and readable. Predicates also help to create better tests. 
+    * Predicate in general meaning is a statement about something that is either true or false. In programming, predicates represent single argument functions
+      that return a boolean value. 
+    * Predicates in Java are implemented with interfaces. Predicate<T> is a generic functional interface representing a single argument function that returns
+      a boolean value. It is located in the java.util.function package. It contains a test(T t) method that evaluates the predicate on the given argument. 
+        eg:
+        import java.util.function.Predicate; 
+        public class PredicateInterfaceExample1 { 
+            public static void main(String[] args) { 
+              // Creating predicate 
+             Predicate<Integer> lesserthan = i -> (i < 18);  
+  
+             // Calling Predicate method 
+             System.out.println(lesserthan.test(10));  
+          } 
+    } 
+    * We can pass a lambda expression for all functions expeting a Predicate Interface, which makes filtering and testing quite efficient
+        eg: The removeIf() method of ArrayList is used to remove all of the elements of this ArrayList that satisfies a given predicate filter which is passed
+            as a parameter to the method. 
+    
+            ArrayList<Integer> Numbers = new ArrayList<Integer>(); 
+  
+            // Add Number to list 
+            Numbers.add(23); 
+            Numbers.add(32); 
+            Numbers.add(45); 
+
+            // apply removeIf() method 
+            // we are going to remove numbers divisible by 3 
+            Numbers.removeIf(n -> (n % 3 == 0)); 
+
+* Java Collection Framework:
+    * Java collection framework deals with different types of collections. It includes Lists, ArrayLists, Queues, Maps, Tress etc.
+    * The main components of collection framework are interfaces (like Lists) that allow us to extend the collection framework, aggregators (like iterators) that allow
+      to parse collections , concrete class implementation(like ArrayLists, LinkedLists) and reusable algorithms that work on collections.
+    * The main design goal of collections framework is interoperatability. Though Array could not be added to Collections(without changing Java Language), different 
+      Collections could be converted to Array and vise versa.
+    * The interface heirarchy of collections frameworks consits of Collections interface, the following interfaces directly extends Collection interface:
+        * Set 
+            * This interface represents a collection of elements that contains unique elements. i.e, It is used to store the collection of unique elements.
+            * Set interface does not maintain any order while storing elements and while retrieving, we may not get the same order as we put elements.  All the 
+              elements in a set can be in any order.
+            * Set does not allow any duplicate elements.
+            * HashSet, LinkedHashSet classes implements the set interface  eg: Set<String> countrySet = new HashSet<>();
+            * Some useful methods in Set are:
+                * add - Adds elements to a set. They will be added only if thay are not already present in the Set.eg:countrySet.add("India"); 
+                * addAll - This is used to add all the elements in another Set. It performs union operation. It will add all elements from the other set if it
+                  is not already present. eg: countrySet.addAll(europeanCountries) where a europeanCountries is itself a Set<String>
+            * We can have any Object as part of the Set. But when we use Objects as elements of the Set, we need to override both equals and hashCode methods.
+              This is needed because hashCode and equals methods are used to check for equality and it is used to maint the HashSet unique.       
+            * It can be iterated by using Iterator but cannot be iterated using ListIterator.
+            * Set Bulk Operations:
+                * Bulk operations are particularly well suited to Sets; when applied, they perform standard set-algebraic operations. Suppose s1 and s2 are 
+                  sets. Here's what bulk operations do:
+                    * s1.containsAll(s2) — returns true if s2 is a subset of s1. (s2 is a subset of s1 if set s1 contains all of the elements in s2.)
+                    * s1.addAll(s2) — transforms s1 into the union of s1 and s2. (The union of two sets is the set containing all of the elements contained in 
+                      either set.)
+                    * s1.retainAll(s2) — transforms s1 into the intersection of s1 and s2. (The intersection of two sets is the set containing only the 
+                      elements common to both sets.)
+                    * s1.removeAll(s2) — transforms s1 into the (asymmetric) set difference of s1 and s2. (For example, the set difference of s1 minus s2 is the 
+                      set containing all of the elements found in s1 but not in s2.)
+
+                * To calculate the union, intersection, or set difference of two sets nondestructively (without modifying either set), the caller must copy one 
+                  set before calling the appropriate bulk operation. The following are the resulting idioms.
+
+                    Set<Type> union = new HashSet<Type>(s1);
+                    union.addAll(s2);
+
+                    Set<Type> intersection = new HashSet<Type>(s1);
+                    intersection.retainAll(s2);
+
+                    Set<Type> difference = new HashSet<Type>(s1);
+                    difference.removeAll(s2);
+
+            * SortedSet interface extends a Set interface. 
+                * SortedSet
+                    * This interface extends a set whose iterator transverse its elements according to their natural ordering.
+                    * TreeSet implements the sorted interface.
+        * List
+             * This interface represents a collection of elements whose elements are arranged in sequentially ordered.
+             * List maintains an ordered of elements means the order is retained in which we add elements, and the same sequence we will get while retrieving 
+               elements.
+             * We can insert elements into the list at any location. The list allows storing duplicate elements in Java.
+             * ArrayList, vector, and LinkedList are three concrete subclasses which implement list interface.
+        * Queue
+            * A queue is an ordered of the homogeneous group of elements in which new elements are added at one end(rear) and elements are removed from 
+              the other end(front). Just like a queue in a supermarket or any shop.
+            * This interface represents a special type of list whose elements are removed only from the head. 
+            * LinkedList, Priority queue, ArrayQueue, Priority Blocking Queue, and Linked Blocking Queue are the concrete subclasses which implement the
+              queue interface.
+            * Deque
+                * A deque (double-ended queue) is a sub-interface of queue interface. It is usually pronounced "deck".
+                * This interface was added to the collection framework in Java SE 6.
+                * Deque interface extends the queue interface and uses its method to implement deque. 
+                * It is a linear collection of elements in which elements can be inserted and removed from either end. i.e, it supports insertion and removal at 
+                  both ends of an object of a class that implements it.
+                * LinkedList and ArrayDeque classes implement the Deque interface.
+    * Map interface.
+        * Though it is part of Collection Framework, it does not extend Collection Interface.
+        * It represents an object that stores and retrieves elements in the form of a Key/Value pairs and their location within the Map are determined by a Key.
+        * Map uses a hashing technique for storing key-value pairs. 
+        * It doesn't allow to store the duplicate keys but duplicate values are allowed.
+        * HashMap, HashTable, LinkedHashMap classes implements a Map interface.
+        eg: Map<String, String> languages = new HashMap<>(); // Creates a HashMap
+        * Some useful methods in Map are:
+            * put - adds kay/value pair to the map, if the key already exists it does not give error but value is overwritten eg: languages.put("Java", "A OOP");
+            * get - It is used to get values from a Map eg: languages.get("Java");
+            * getOrDefault - It takes two parameters, key and a default value. It retrives the value from the Map if the key is present else it returms default 
+              value eg: languages.get("C++", "Unknown Language");
+            * containsKey - Returns true if the key already exist
+            * containsValue - Return true if the value exist
+            * keySet - Return a Set of all the Keys present. It can be used to iterate over the map. eg: for(String key: languages.keySet()){// Code}
+            * entrySet - It is used to create a set out of the same elements contained in the map. It can also be used to iterate over a map
+              eg:  for (Map.Entry<String, Integer> it: map.entrySet()) {}
+            * remove - It is used to remove key/value pair from the map. There are two variation of this method. eg: languages.remove(<key>); or
+              languages.remove(<key,<value);. In the second case item is removed only if exact key/value pair match is found in the Map.
+            * replace - It is used to replace an already existing value. If the key does not exist already replace does not happen. It also has two variations 
+              like remove. eg: languages.replace(<key>, <new_value>) or languages.replace(<key>, <old_value>, <new_value>);
+        * The values in HashMap are not stored in any particualr order.
+        * The key and value in a map can be any type. The value can also be another Map.
+        * LinkedHashMap - 
+            * LinkedHashMap is just like HashMap with an additional feature of maintaining an order of elements inserted into it. HashMap provided the advantage
+              of quick insertion, search and deletion but it never maintained the track and order of insertion which the LinkedHashMap provides where the
+              elements can be accessed in their insertion order.
+            * LinkedHashMap<Integer, String> lhm = new LinkedHashMap<Integer, String>();
+        * SortedMap Interface
+            * This interface represents a Map whose elements are stored in their natural ordering. 
+            * It extends the Map interface which in turn is implemented by TreeMap classes.
+    *In-built methods in Java Collections Class.It has many in-built methods that can be used:
+        * binarySearch - This method is a static  inbuilt method of Java Collections class which returns the position of the object in a sorted list. It takes 
+          the list, the item to searched and comparator(can be null to use inbuilt comparator) as parameters.
+          The list must be sorted into ascending order according to the specified comparator prior to making the method call.
+        * sort - This method is used to sort a list. The only criteria is the elements of collections/list provided should have implemented Comparable interface(should
+          have compareTo method implemented). This will sort the list by the natural sort order.
+        * reverse - This is used to sort the list in reverse order.
+        * shuffle - This will randomize the elements of the Collection.
+        * min - This will retuen the minimum value of the Collection based on the natural sort order. eg: Collections.min(<list>);
+        * max - This will return maximum value of the Collection based on the natural sort order
+        * swap - This is used to swap the elements in the Collection. eg: Collectons.swap(<list>, index1, index2);
+        * copy - This will create a copy of the source list to the destination. But the destination list should be atleast as big as the source and shouls be
+          initialized already. eg: Collections.copy(<dest list>, <source list>);
+        * unmodifiableCollection - The unmodifiableCollection() method of java.util.Collections class is used to return an unmodifiable view of the 
+          specified collection. This method allows modules to provide users with “read-only” access to internal collections. Query operations on the 
+          returned collection “read through” to the specified collection, and attempts to modify the returned collection, whether direct or via its iterator,
+          result in an UnsupportedOperationException. There are also individual methods for different collections like Collections.unmodifiableMap(<map>),
+          Collections.unmodifiableList(<list>) etc. It is important to note that though we cannot modify the collection iself, we can still modify 
+          the individual underlying elements within the collection. 
+* Comparable Interface:
+    * This interface has a single compareTo method. 
+    * The objects of classes implementing this interface becomes comparable and it is prerequisite for sorting the objects of the class.
+* Comparator Interface:
+    * Comparator interface is used to order the objects of user-defined classes. 
+    * It reuires us to implement compare method, that takes two objects and method should return < 0 if objects are already in correct order, 0 if they are equal
+      and  > 0 if they need to be swapped.
+    * In addition to implementing Comparator interface, a class can have Comparator objects ( that instantiates anonymous classes implementing Comparator interface)
+      Thus a class can have more than Comparator object and thus allow sorting by more than property. 
+    * Comparator can be passed as parameter to sort function. 
+      eg:  public static finale Comparator<Seat> PRICE_ORDER = new Comparator<Seat>() {
+            @override
+            public static int compare(Seat s1, Seat s2) {
+                //comparison code
+            }
+           };
+* Immutable Classes:
+    * Immutable class means that once an object is created, we cannot change its content. In Java, all the wrapper classes (like Integer, Boolean, Byte, Short)
+      and String class is immutable. 
+    * We can create our own immutable class as well. Following are the requirements:
+        * The class must be declared as final (So that child classes can’t be created)
+        * Data members in the class must be declared as final (So that we can’t change the value of it after object creation)
+        * A parameterized constructor. If it contains list or map as a data member we need to populate the data member using a copy of the list or map
+          passed to the constructor. This prevents any modification in the list or map outside the class from affecting the object contents.  
+        * Initialize all the fields via a constructor performing deep copy.
+        * Getter method for all the variables in it. Perform cloning of objects in the getter methods to return a copy rather than returning the actual object
+          reference.
+        * No setters(To not have the option to change the value of the instance variable)
+* equals() and hashCode() methods:
+    * equals() -In java equals() method is used to compare equality of two Objects. Syntax: public boolean equals  (Object obj)
+      The equality can be compared in two ways: 
+        * Shallow comparison: The default implementation of equals method is defined in Java.lang.Object class which simply checks if two Object references 
+          (say x and y) refer to the same Object. i.e. It checks if x == y. Since Object class has no data members that define its state, it is also known as
+           shallow comparison.
+        * Deep Comparison: Suppose a class provides its own implementation of equals() method in order to compare the Objects of that class w.r.t state of the 
+          Objects. That means data members (i.e. fields) of Objects are to be compared with one another. Such Comparison based on data members is known as 
+          deep comparison.
+        eg:
+        public boolean equals(Object obj) {
+            if(this == obj) {
+                return true; // This line checks if the object is being compared to itself and return true
+            }
+
+            if(obj == null ||  this.getClass() != obj.getClass()) {
+                return false; // This is used to check if the objects being compared belong to same class. We can also use instanceOf but instanceOf returns true for 
+                              // subClass objects as well.
+            }
+
+            // code to check equality
+        }
+        * It is good to remember whether we need to have separate equality check in the subClasses and consider it while coding. If not then we can make equals and
+          hashCode as final
+        * If we override equals() then we also need to override hashCode() method, because two equal objects should return same hashCode().      
+    * hashCode() - It returns the hashcode value as an Integer. Hashcode value is mostly used in hashing based collections like HashMap, HashSet, HashTable….etc.
+      This method must be overridden in every class which overrides equals() method. Syntax : public int hashCode()
+      The general contract of hashCode is:
+          * During the execution of the application, if hashCode() is invoked more than once on the same Object then it must consistently return the same 
+            Integer value, provided no information used in equals(Object) comparison on the Object is modified. It is not necessary that this Integer value to 
+            be remained same from one execution of the application to another execution of the same application.
+          * If two Objects are equal, according to the equals(Object) method, then hashCode() method must produce the same Integer on each of the two Objects.
+          * If two Objects are unequal, according to the equals(Object) method, It is not necessary the Integer value produced by hashCode() method on each of the
+            two Objects will be distinct. It can be same but producing the distinct Integer on each of the two Objects is better for improving the performance 
+            of hashing based Collections like HashMap, HashTable…etc. i.e Equal objects must produce the same hash code as long as they are equal, however 
+            unequal objects need not produce distinct hash codes.
+
+            
+* BigInteger 
+    * BigInteger class is used for mathematical operation which involves very big integer calculations that are outside the limit of all available primitive 
+      data types. For example factorial of 100 contains 158 digits in it so we can’t store it in any primitive data type available. We can store as large Integer 
+      as we want in it. 
+    * To create a BigInteger, we need to create objects of the class just like normal java classes and use methods like abs, add, multiply to perform operations.
+* JavaFX
+    * JavaFX is used to create user interface like button, checkboxes, toolbar, menu etc. It is a successor to Swing.
+    * In Java 8, Java FX was bundled as part of JDK, but from Java 11, we need to download and add JavaFX Jars as global library in order to use Java FX. 
+    * For JDK 11, we need download runtime jars of JavaFX and configure IntelliJ IDE(or any other IDE) to add these jars as global library and create
+      a new Java FX project(which is different from Java project and requires JavaFX plugin in the IDE). Once the project is created, we need to right click 
+      on the project defaults and add the JavaFX global library to that module. This will resolve any compile time errors but we may also need to add
+      module-info.java file and properly configure it to resolve any runtime errors. All these are dones automatically in JDK 8.
+    * JavaFX was designed with MVC(Model-View-Controller) design pattern in mind and hence it is good practice to differentiate mode( application date) and 
+      view(user interface). Controller is the middlemen between view and model. Usually it contains events when user interacts with view to trigger changes 
+      to data model.
+    * When we create a Java FX project in IntelliJ, it automatically creates a:
+        * <package_name>.fxml -> Our View 
+        * Controller.java
+        * Main.java
+    * The Main file contains a class which extends Application class, which is required. The 'public static void main' method should call the
+      function launch(), which in turn will launch the application and init and start methods.
+    * The Application has a few very important methods.
+        * init - It is empty method unless overridden and it is the first method called on lauch of the Application.
+        * start - start method is an abstract method in Application Class and must be overridden. It takes a parameter of type Stage. Stage is 
+          basic container that extends the window and is the main window of our application. JavaFX creates uses theater analog, where Stage
+          is basic container and we can have variour Scene which correspond to a specific UI view file and we load the view using FXMLLoader.load()
+          method and use setScene method of Stage class  to create a specific UI view. Some methods commenly used in Stage are:
+            * setScene -> set a particular UI view
+            * setTitle -> set the title of the stage
+            * show -> which will show the Scene which is set on the stage.
+        * stop - It is called when user quits the application. 
+    * We can also create layout and UI components in code directly but it is not advisable. It is good practice to always separate the UI and add UI
+      components in FXML. 
+    * Java FX Layouts
+        * Layouts, in a nutshell, are containers for components. This is useful as you can then position this container as a whole no matter what components 
+          are inside. Moreover, each scene can only hold one component, so you need a layout as a root component for your scene, so you can fit all the 
+          components you need. Of course, one layout is usually not enough, but you can nest layouts. That means you can put one layout inside another.
+        * In addition to that, layouts also organize and position your components inside. Based on the layout used, child components can be positioned for 
+          example:
+            * One after another horizontally
+            * One after another vertically
+            * One on top of each other as a stack
+            * In grid
+        * There are many more options. What's important is that a layout automatically updates the position of its children when it is resized. This way, you
+          can have a consistent layout, even if your user resizes the application window. Layout can be seen as the parent node to all the 
+          other nodes. JavaFX provides various layout panes that support different styles of layouts.
+        * In JavaFX, Layout defines the way in which the components are to be seen on the stage. It basically organizes the scene-graph nodes. 
+        * We have several built-in layout panes in JavaFX that are HBox, VBox, StackPane, FlowBox, AnchorPane, GridPane etc. Each Built-in layout is represented 
+          by a separate class which needs to be instantiated in order to implement that particular layout pane. All these classes belong to
+          javafx.scene.layout package. javafx.scene.layout.Pane class is the base class for all the built-in layout classes in JavaFX.
+        * Built-in Java FX layouts are:
+            * HBox 
+                * This is one of the most straightforward layouts available. It just puts all the items inside horizontally in a row, one after another, from 
+                  left to right. 
+                * In FXML, you can use HBox like this:
+                    <HBox spacing="10">
+                        <padding>
+                            <Insets top="10" bottom="10" left="10" right="10"/>
+                        </padding>
+                          <Button>1</Button>
+                          <Button>2</Button>
+                          <Button>3</Button>
+                          <Button>4</Button>
+                    </HBox>
+                    This adds four buttons horizontally with spacing of 10px. The Padding is then used to set padding attribute is then added to set
+                    padding between the HBox container and buttons.
+            * VBox
+                * VBox is very similar to HBox, but instead of displaying the components inside horizontally in a row, it displays them vertically in a column
+                * You can still set the spacing and padding in the same way as with HBox.In code, VBox is used exactly in the same way as HBox, just the name
+                  is different
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" bottom="10" left="10" right="10"/>
+                        </padding>
+                        <Button>1</Button>
+                        <Button>2</Button>
+                        <Button>3</Button>
+                        <Button>4</Button>
+                    </VBox>
+            * StackPane
+                * This layout is useful for stacking its components one on top of each other. The order of insertion determines the order of the items. 
+                  That means the first item is on the bottom, the next is on top of it and so on.
+                * This can be useful, for example, for having an image and then having some text or button on top of it.
+                  <StackPane>
+                        <ImageView>
+                             <Image url="/image.jpg"/>
+                        </ImageView>
+                        <Button>Click Me!</Button>
+                  </StackPane>
+            * FlowPane:
+                * Flow Pane can work in two modes - either horizontal (the default) or vertical.
+                * In horizontal mode, the items are displayed horizontally, one after another, similar to HBox. The difference is, once there is no more 
+                  horizontal space available, it wraps to the next row under the first one and continues again. This way there can be many rows, not just one 
+                  as with HBox.
+                * The vertical mode is very similar, but (like VBox) it displays items vertically, from top to bottom. Once there is no more space, it adds 
+                  another column and continues.
+                * You can set the internal padding of this layout in the same way as for HBox and VBox. Spacing is a little bit different though. Instead of just
+                  one property for spacing, you need to have separate horizontal and vertical spacing as the items can be rendered in multiple rows/columns. 
+                  For horizontal spacing use hgap, for vertical spacing use vgap instead.
+                  <FlowPane hgap="10" vgap="10" orientation="VERTICAL">
+                    ...
+                  </FlowPane>
+            *  TilePane:
+                * This layout is very similar to FlowPane. The way it displays its components is almost identical. You can still have either horizontal or 
+                  vertical mode and define vgap and hgap.
+                * One crucial difference is in the sizing of the cells. FlowPane assigns only space necessary for each component. TilePane, on the other hand,
+                  makes the size of all cells the same depending on the biggest item. This way, all the controls are nicely aligned in rows/columns.
+                * FlowPane puts controls directly one after another, no extra spacing but TilePane puts controls into cells with the same size based on the
+                  biggest element. Thus the biggest element decides the size of each cell.
+                  <TilePane vgap="10" hgap="10" orientation="VERTICAL" >
+                     ...
+                  </TilePane>
+            * GridPane:
+                * GridPane is a layout that allows you to organize your components into a grid. Unlike TilePane, which is adding components one after another, 
+                  here you need to specify the coordinates of the target location in your grid when adding a new component.
+                * In each component we need to specify GridPane.rowIndex and GridPane.columnIndex
+                * By default, grid cells have no spacing. The components are directly next to each other, with no margins. Spacing can be defined separately
+                  for rows and columns - that is: horizontally and vertically.
+                       * hgap sets horizontal spacing (between columns)
+                       * vgap sets vertical spacing (between rows)
+                * Alignment - 'alignment' property on GridPane can used to align it in the center, left, top_center etc. Also 'GridPane.halignment and 
+                 'GridPane.valignment' properties can be used to align a component inside the GridPane Cell. 
+                    <GridPane hgap="10" vgap="10" alignment="center">
+                        <Label GridPane.halignment="right" GridPane.rowSpan= "2", GridPane.columnSpan="3" GridPane.rowIndex="0" GridPane.columnIndex="0">First</Label>
+                        ...
+                    </GridPane>
+                * Components in GridPane can span multiple rows and/or columns. A component with rowspan is expanding to the bottom from its original cell.
+                  A component with colspan is expanding to the right.
+                * The default sizing of grid cells is the following:
+                    * Height of each row is equal to the highest element in the row
+                    * Width of each column is equal to the widest element in the column
+                * As mentioned, by default, the columns and rows are sized based on the components inside. Fortunately, you can have better control over
+                  how individual columns and rows are sized. There are ColumnContstraints and RowConstraints classes, which are used for this.
+                * You have basically two options. Either set percentage of available space for individual rows and columns, or you set preferred width/height. 
+                  In the latter case you can also define preferred behavior when the columns and rows are resized.
+                        * Percentage: This is quite straightforward. You can set a percentage of the available space to be occupied by the given row or column. 
+                          When the layout is resized, the rows and columns are resized as well to match the new size.
+
+                            <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints percentWidth="50" />
+                                    <ColumnConstraints percentWidth="50" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints percentHeight="50" />
+                                    <RowConstraints percentHeight="50" />
+                                  </rowConstraints>
+                                ...
+                            </GridPane>
+                        * Absolute sizing: Instead of defining percentage size, you can define preferred and minimal size. In addition to that, you can 
+                          specify how the row/column should behave on resize. Columns are using hgrow property, and rows have vgrow. These properties can have
+                          three distinct values.
+                                * NEVER: Never grow or shrink on resizing. The default value.
+                                * ALWAYS: When resized, all the elements with this value are either stretched to fill the available space or shrank.
+                                * SOMETIMES: These elements are resized only if there are no other elements with ALWAYS.
+            
+                            <GridPane>
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="50" prefWidth="100" />
+                                    <ColumnConstraints minWidth="50" prefWidth="100" hgrow="SOMETIMES" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="50" prefHeight="100" />
+                                    <RowConstraints minHeight="50" prefHeight="100" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                ...
+                            </GridPane>
+                            
+                  
+
