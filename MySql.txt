@@ -1,0 +1,431 @@
+* A database is a systematic collection of data. They support electronic storage and manipulation of data. Databases make data management easy. eg:  An online telephone directory uses a 
+  database to store data of people, phone numbers, and other contact details.
+* Database Management System (DBMS) is a collection of programs that enable its users to access databases, manipulate data, report, and represent data. It also helps to control access to
+ the database. 
+* We have four major types of DBMSs namely Hierarchical, Network, Relational, Object-Oriented
+* The most widely used DBMS is the relational model that saves data in table formats. It uses SQL as the standard query language
+* Relational databases defines database relationships in the form of tables. It is also called Relational DBMS, which is the most popular DBMS type in the market. Database example of the 
+  RDBMS system include MySQL, Oracle, and Microsoft SQL Server database.
+* SQL:
+   * SQL stands for Structured Query Language
+   * SQL lets you access and manipulate databases
+   * SQL can execute queries against a database, retrieve data from a database, insert records in a database, delete records from a database, create new databases etc.
+* RDBMS:
+   * RDBMS stands for Relational Database Management System.
+   * RDBMS is the basis for SQL, and for all modern database systems such as MS SQL Server, IBM DB2, Oracle, MySQL, and Microsoft Access.
+   * The data in RDBMS is stored in database objects called tables. A table is a collection of related data entries and it consists of columns and rows.
+   * Consider "Customers" table as an example. Every table is broken up into smaller entities called fields. The fields in the Customers table consist of CustomerID, CustomerName,
+     ContactName, Address, City, PostalCode and Country. A field is a column in a table that is designed to maintain specific information about every record in the table.
+   * A record, also called a row, is each individual entry that exists in a table. For example, there are 91 records in the above Customers table. A record is a horizontal entity in a 
+     table.
+   * A column is a vertical entity in a table that contains all information associated with a specific field in a table.
+* MySQL - It is a RDBMS. We need to intsall MySQL and MySQL workbench (visual IDE to execute queries and maintain DB)
+* SQL Data Types
+  * Each column in a database table is required to have a name and a data type.
+  * An SQL developer must decide what type of data that will be stored inside each column when creating a table. The data type is a guideline for SQL to understand what type of data is 
+    expected inside of each column, and it also identifies how SQL will interact with the stored data.
+  * Most common data types are:
+     * Numeric Data Types:
+	* INT(size) - A medium integer. Signed range is from -2147483648 to 2147483647. Unsigned range is from 0 to 4294967295. The size parameter specifies the maximum 
+                      display width (which is 255)
+	* FLOAT(size, d) - A floating point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter.
+	* DECIMAL(size, d) - An exact fixed-point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter.
+                        The maximum number for size is 65. The maximum number for d is 30. The default value for size is 10. The default value for d is 0.   
+     * Non Numeric Data Type:
+	* CHAR(size) - A FIXED length string (can contain letters, numbers, and special characters). The size parameter specifies the column length in characters - can be from 0 to 255.
+                       Default is 1
+	* VARCHAR(size) - A VARIABLE length string (can contain letters, numbers, and special characters). The size parameter specifies the maximum column length in characters - can be 
+                      from 0 to 65535
+	* ENUM(val1, val2, val3, ...) - A string object that can have only one value, chosen from a list of possible values. You can list up to 65535 values in an ENUM list. If a value is
+                inserted that is not in the list, a blank value will be inserted. The values are sorted in the order you enter them
+	* BOOLEAN - Zero is considered as false, nonzero values are considered as true.
+     * Date and Time types:
+	* DATE - A date. Format: YYYY-MM-DD. The supported range is from '1000-01-01' to '9999-12-31'
+	* DATETIME(fsp) - A date and time combination. Format: YYYY-MM-DD hh:mm:ss. The supported range is from '1000-01-01 00:00:00' to '9999-12-31 23:59:59'. Adding DEFAULT and ON
+          UPDATE in the column definition to get automatic initialization and updating to the current date and time
+	* TIME(fsp) - A time. Format: hh:mm:ss. The supported range is from '-838:59:59' to '838:59:59'
+	* YEAR - A year in four-digit format. Values allowed in four-digit format: 1901 to 2155, and 0000.
+* Primary Key:
+    * A table typically has a column or combination of columns that contain values that uniquely identify each row in the table. This column, or columns, is called the
+      primary key (PK) of the table and enforces the entity integrity of the table. Because primary key constraints guarantee unique data, they are frequently defined on an
+      identity column.
+    * A table can contain only one primary key constraint.
+    * All columns defined within a primary key constraint must be defined as not null. 
+* Foreign Key:
+    * A foreign key (FK) is a column or combination of columns that is used to establish and enforce a link between the data in two tables to control the data that can be stored in 
+      the foreign key table. In a foreign key reference, a link is created between two tables when the column or columns that hold the primary key value for one table are referenced by 
+      the column or columns in another table. This column becomes a foreign key in the second table.
+    * We can have more than one foreign key in a table.
+    * Foreign key can accept multiple null value.
+* SQL DDL ( Data Definition Language)
+   The DDL commands in SQL are used to create database schema and to define the type and structure of the data that will be stored in a database. SQL DDL commands are further divided into
+   the following major categories:
+	* CREATE - The CREATE query is used to create a database or objects such as tables, views, stored procedures, etc.
+	* ALTER - The ALTER command in SQL DDL is used to modify the structure of an already existing table.
+	* DROP - The DROP command is a type of SQL DDL command, that is used to delete an existing database or an object within a database.
+	* TRUNCATE - The TRUNCATE command in SQL DDL is used to remove all the records from a table
+* SQL DML(Data Manipulation Language)
+    The DML Commands in SQL are used to add, update and delete from database tables
+* SQL Commands:
+    * SHOW DATABASES; - It lists all databases in the system.
+    * CREATE DATABASE <db_name> - The CREATE DATABASE statement is used to create a new SQL database
+    * USE <db_name> - Switch to the specified database
+    * DROP DATABASE <db_name> - The DROP DATABASE statement is used to drop an existing SQL database.
+    * SHOW TABLES - This will list all the tables in the current database.
+    * CREATE TABLE - The CREATE TABLE statement is used to create a new table in a database. 
+         CREATE TABLE table_name (
+  	   column1 datatype,
+    	   column2 datatype,
+    	   column3 datatype,
+   	   ....
+	 );
+
+         CREATE TABLE Persons (
+    	    PersonID int AUTO INCREMENT PRIMARY KEY,
+    	    LastName varchar(255),
+            FirstName varchar(255)
+	    addressId INT,
+
+	    FOREIGN KEY (addressId) REFERENCES address(id) // This creaters a link to address table
+
+	);
+    * ALTER TABLE: The ALTER TABLE statement is used to add, delete, or modify columns in an existing table. The ALTER TABLE statement is also used to add and drop various constraints on 
+      an existing table.
+	* Add a column in a table
+      	    ALTER TABLE table_name
+      	    ADD column_name datatype;
+
+            ALTER TABLE Customers
+      	    ADD Email varchar(255);
+
+      	* Remove a column in a table
+ 
+	    ALTER TABLE table_name
+            DROP COLUMN column_name;
+
+	* Add primary key to a table : This sets the primary kay and adds NOT NULL constraint
+	    ALTER TABLE <table_name>
+	    ADD PRIMARY KEY (<column_name>);
+
+	* Remove primary key from a table : This removes the primary key from the table but NOT NULL constraint is still present for the 
+          column
+	    ALTER TABLE <table_name>
+	    DROP PRIMARY KEY;
+
+	* Adding a foreign Key
+	   ALTER TABLE <table_name>
+	   ADD CONSTRAINT <name_of_constraint> // It can be any name of our choosing
+           FOREIGN KEY (<column_name>) REFERENCES <linked_table_name>(<primary_key_of_that_table>);
+
+	   eg:
+           ALTER TABLE people
+	   ADD constraint FK_PopleAddress
+	   FOREIGN KEY (address_id) REFERENCES addresses(id);
+       * Drop foreign Key:
+	    
+	    ALTER TABLE <table_name>
+	    DROP FOREIGN KEY <constrain_name>;
+
+	    ALTER TABLE people
+	    DROP FOREIGN KEY FK_PopleAddress;
+	* Adding a Unique Constraint:
+	    SQL UNIQUE constraint ensures that all values in a column are different. Both the UNIQUE and PRIMARY KEY constraints provide 
+            a guarantee for uniqueness for a column or set of columns. A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+            However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+
+	    ALTER TABLE <table_name>
+	    ADD CONSTRAINT <constraint_name> UNIQUE (<column_name>);
+
+	* Remove Unique Constraint:
+	   ALTER TABLE <table-name>
+	   DROP INDEX <constraint_name>;
+
+	* Renaming a column
+	    ALTER TABLE <table_name> CHANGE `<old_column_name>` `<new_column_name>` <data_type>;
+
+	    ALTER TABLE pets CHANGE `species` `anima_type` VARCHAR(20);
+	* Changing the data type of a column in a table
+
+	    ALTER TABLE <table_name> MODIFY <column_name> <new_data_type>;
+            ALTER TABLE addresses MODIFY city VARCHAR(30);
+	
+            If we are chaning the datatype completely to another like VARCHAR to INT etc, then iot will not allow the operation if table has data. If we are changing from VARCHAR(20)
+            to VARCHAR(30) it will allow, thus if the new data type does not fit the data already present it will prevent the operation.
+	   
+    * DROP TABLE: The DROP TABLE statement is used to drop an existing table in a database. DROP TABLE table_name;
+    * TRUNCATE TABLE: Delete all data friom table. TRUNCATE TABLE table_name;
+    * INSERT INTO: The INSERT INTO statement is used to insert new records in a table.
+	* It is possible to write the INSERT INTO statement in two ways:
+	   1. Specify both the column names and the values to be inserted:
+		INSERT INTO table_name (column1, column2, column3, ...)
+		VALUES (value1, value2, value3, ...);
+	   2. If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. However, make sure the order of the values
+              is in the same order as the columns in the table
+                 INSERT INTO table_name
+		 VALUES (value1, value2, value3, ...);
+	 eg: INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+	     VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+     * UPDATE: The UPDATE statement is used to modify the existing records in a table.
+	
+	UPDATE table_name
+	SET column1 = value1, column2 = value2, ...
+	WHERE condition;
+	
+	*  Be careful when updating records in a table! Notice the WHERE clause in the UPDATE statement. The WHERE clause specifies which record(s) that should be updated. If you omit
+           the WHERE clause, all records in the table will be updated!
+
+	eg: UPDATE Customers
+	    SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+            WHERE CustomerID = 1;
+	* By default mysql enables only safe update, i.e update based on id, we need to turn it off if we want to update based on any other column as condition.
+          SET sql_safe_updates=0; // turn off safe_update
+	  SET sql_safe_updates=1; // turn on safe_update
+     * DELETE: The DELETE statement is used to delete existing records in a table
+        DELETE FROM table_name WHERE condition;
+	* Be careful when deleting records in a table! Notice the WHERE clause in the DELETE statement. The WHERE clause specifies which record(s) should be deleted.
+          If you omit the WHERE clause, all records in the table will be deleted!
+        eg: DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+     * SELECT: The SELECT statement is used to select data from a database. The data returned is stored in a result table, called the result-set.
+	 SELECT column1, column2, ...  FROM table_name;
+	Here, column1, column2, ... are the field names of the table you want to select data from. If you want to select all the fields available in the table, use the following syntax:
+	 SELECT * FROM table_name;
+         eg: SELECT CustomerName, City FROM Customers; SELECT * FROM Customers;
+     * WHERE : The WHERE clause is used to filter records. It is used to extract only those records that fulfill a specified condition.
+	SELECT * FROM table_name WHERE condition;
+	eg: SELECT * FROM Customers WHERE Country='Mexico';
+	* The WHERE clause can be combined with AND, OR, and NOT operators.
+	    * The AND and OR operators are used to filter records based on more than one condition:
+	    * The AND operator displays a record if all the conditions separated by AND are TRUE.
+	    * The OR operator displays a record if any of the conditions separated by OR is TRUE.
+	    * The NOT operator displays a record if the condition(s) is NOT TRUE.
+	eg: SELECT * FROM table_name WHERE condition1 AND condition2 AND condition3 ...; eg: SELECT * FROM Customers WHERE Country='Germany' AND City='Berlin';
+	    SELECT * FROM table_name WHERE condition1 OR condition2 OR condition3 ...;  eg: SELECT * FROM Customers WHERE Country='Germany' OR Country='Spain';
+	    SELECT * FROM table_name WHERE NOT condition;
+	    SELECT * FROM Customers WHERE Country='Germany' AND (City='Berlin' OR City='München') AND NOT name = 'Harry'; 
+	* The following operators can be used in where clause: The inequality operators (>, >= , < and <= are mostly used with numerical data)
+	   =	Equal	
+	   >	Greater than	
+      	   <	Less than	
+	   >=	Greater than or equal	
+	   <=	Less than or equal
+	   <>	Not equal. Note: In some versions of SQL this operator may be written as !=
+     * NULL Values: A field with a NULL value is a field with no value. If a field in a table is optional, it is possible to insert a new record or update a record without adding a 
+       value to this field. Then, the field will be saved with a NULL value.
+       It is not possible to test for NULL values with comparison operators, such as =, <, or <>. We will have to use the IS NULL and IS NOT NULL operators instead.
+       eg: SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NULL;
+	   SELECT * FROM Customers WHERE Address IS NOT NULL;	
+     * IN : To select all values in a given list we can use IN instead of =
+	  SELECT * FROM Customers WHERE first_name IN ('Isa','Raghu', 'Raj');
+          To select all values not in a group we can use NOT IN
+          SELECT * FROM customers WHERE last_name NOT IN ('Smith', 'Lasdr');
+     * BETWEEN: The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+	The BETWEEN operator is inclusive: begin and end values are included.  
+	   SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;
+	To display the products outside the range of the previous example, use NOT BETWEEN.
+     * LIKE: The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+	There are two wildcards often used in conjunction with the LIKE operator:
+	 * The percent sign (%) represents zero, one, or multiple characters
+ 	 * The underscore sign (_) represents one, single character
+	eg: SELECT * FROM Customers WHERE CustomerName LIKE 'a%';
+     * ORDER BY: The ORDER BY keyword is used to sort the result-set in ascending or descending order.(ASC|DESC)
+       The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
+	Syntax: SELECT column1, column2, ... FROM table_name ORDER BY column1, column2, ... ASC|DESC;
+	eg: SELECT * FROM Customers ORDER BY Country DESC;
+     * SELECT DISTINCT: The SELECT DISTINCT statement is used to return only distinct (different) values.
+       Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+       If we have more than one column then combination must be distinct.
+         Syntax: SELECT DISTINCT column1, column2, ...  FROM table_name;
+         eg: SELECT DISTINCT Country FROM Customers;
+     * LIMIT: The LIMIT clause is used in the SELECT statement to constrain the number of rows to return. The LIMIT clause accepts one or two arguments. The values of both arguments 
+       must be zero or positive integers.
+	 Syntax: SELECT select_list FROM table_name LIMIT [offset,] row_count;
+	 The offset specifies the offset of the first row to return. The offset of the first row is 0, not 1. The row_count specifies the maximum number of rows to return.
+         eg: SELECT *  FROM customers ORDER BY customerName LIMIT 10 OFFSET 5; // OFFSET is optional
+     * SQL Aliases: SQL aliases are used to give a table, or a column in a table, a temporary name. Aliases are often used to make column names more readable.
+       An alias only exists for the duration of that query. It does not change in DB but only in result set. An alias is created with the AS keyword.
+         eg: SELECT CustomerID AS ID, CustomerName AS Customer FROM Customers;
+* SQL Joins:
+    * A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+    * There are the different types of the JOINs in SQL:
+	* (INNER) JOIN: Returns records that have matching values in both tables
+	* LEFT JOIN: Returns all records from the left table, and the matched records from the right table
+	* RIGHT JOIN: Returns all records from the right table, and the matched records from the left table
+	* FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table. MySQL does not have full join.
+    * INNER JOIN: The INNER JOIN keyword selects records that have matching values in both tables.
+	 Syntax: SELECT column_name(s) FROM table1 INNER JOIN table2 ON table1.column_name = table2.column_name;
+	 eg: SELECT Orders.OrderID, Customers.CustomerName FROM Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+       * To make the statement easier to write, we can use table aliases and use JOIN instead of INNER JOIN. Thus we can rewrite the above query as
+         eg: SELECT o.OrderID, c.CustomerName FROM Orders o JOIN Customers c ON o.CustomerID = c.CustomerID;
+       * We can join more than two tables. The following SQL statement selects all orders with customer and shipper information:
+	 eg: SELECT o.OrderID, c.CustomerName, s.ShipperName FROM Orders o
+	     JOIN Customers c ON o.CustomerID = c.CustomerID
+	     JOIN Shippers s ON o.ShipperID = s.ShipperID;
+       * We can have Where and order by clause as part of join statement as well.
+       * We need to use <table_name>.<column_name> to refer to a column in JOIN statements.
+    * LEFT JOIN: The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 
+      0 records from the right side, if there is no match.
+        Syntax: SELECT column_name(s) FROM table1 LEFT JOIN table2 ON table1.column_name = table2.column_name;
+	eg:  SELECT c.CustomerName, o.OrderID FROM Customers c LEFT JOIN Orders o  ON c.CustomerID = o.CustomerID ORDER BY c.CustomerName;
+        The LEFT JOIN keyword returns all records from the left table (Customers), even if there are no matches in the right table (Orders).
+    * RIGHT JOIN: The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records from the left table (table1). The result is 0 records 
+      from the left side, if there is no match. 
+	Syntax: SELECT column_name(s) FROM table1 RIGHT JOIN table2 ON table1.column_name = table2.column_name;
+	eg:  SELECT c.CustomerName, o.OrderID FROM Customers c RIGHT JOIN Orders o  ON c.CustomerID = o.CustomerID ORDER BY c.CustomerName;
+* Normalisation:
+    * Normalization is a database design technique that reduces data redundancy and eliminates undesirable characteristics like Insertion, Update and Deletion Anomalies. 
+    * Normalization rules divides larger tables into smaller tables and links them using relationships. 
+    * The purpose of Normalisation in SQL is to eliminate redundant (repetitive) data and ensure data is stored logically.
+    * Benefits of Normalization:
+    	* Normalization reduces storage space as it reduces data redundancy 
+	* It reduces Insertion, Update and Deletion Anomalies.
+	* It improves query performance.
+    * The different levels of Normalization are:
+	* 1NF (First Normal Form)
+	* 2NF (Second Normal Form)
+	* 3NF (Third Normal Form)
+	* BCNF (Boyce-Codd Normal Form)
+	* There are also higher levels like 4NF, 5NF etc. However, in most practical applications, normalization achieves its best in 3rd Normal Form.
+    * First Normal Form Rules:
+	* Each table cell should contain a single value. ( a single cell value should not have multiple values)
+	* Each record needs to be unique. (no repeated rows)
+	* The table should have primary key.
+    * Second Normal Form Rules:
+	* Should be in 1NF
+	* Every column that is not a primary key depends on the whole of the primary key.
+	eg: consider a student table with name, subject, grade and age columns. Here name+subject is primary key. This table is not 2NF as age does not depend on subject.
+            So we need to split it into 2 tables, 1 with name, subject and grade and another with name and age.
+     * Third Normal Form Rules:
+         * Should be in 2NF.
+	 * Every column that is not a primary kay must only be depend on the whole of primary key. i,e no transition dependency exists.
+         eg: consider a  table with subject, year, start_student and star_student_dob with subject+ year as primary key. This will be 2NF. but star_student_dob depends on star_student
+             hence it has transition dependency i.e if we have to change star_student we also need to change star_student_dob. Hence we need to split the table.
+* Database Relationships:
+    * In a relational database, a relationship is formed by correlating rows belonging to different tables.
+    * A table relationship is established when a child table defines a Foreign Key column that references the Primary Key column of its parent table.
+    * Every database table relationship is, therefore, built on top of Foreign Key columns,  
+    * There can be three table relationship types:
+	* one-to-one 
+	    * It requires the child table Primary Key to be associated via a Foreign Key with the parent table Primary Key column.
+	    * It is least commonly used. eg: product and product_details table as each product has only one product_detail and vice versa.
+	* one-to-many 
+	    * It is the most common relationship, and it associates a row from a parent table to multiple rows in a child table.
+            * eg: customer and orders where a customers can make many orders but a single order is associated with only one customer	
+	* many-to-many
+ 	    * It is also very common. eg: orders and products. In this case a single product can be present in mutiple orders an also a single order can have multiple products. 
+	    * Thus it requires a link or junction table containing two Foreign Key columns that reference the two different parent tables.
+* SQL Constrains:
+    * SQL constraints are used to specify rules for data in a table.
+    * Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement.
+	CREATE TABLE table_name (
+   	 column1 datatype constraint,
+   	 column2 datatype constraint,
+    	  ....
+	);
+    * Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any
+      violation between the constraint and the data action, the action is aborted.
+    * Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+    * The following constraints are commonly used in SQL:
+	* NOT NULL - Ensures that a column cannot have a NULL value.
+	    By default, a column can hold NULL values. The NOT NULL constraint enforces a column to NOT accept NULL values.
+	* UNIQUE - Ensures that all values in a column are different
+	   Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+           However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+	* PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+	   The PRIMARY KEY constraint uniquely identifies each record in a table. A table can have only ONE primary key; and in the table, this primary key can consist of single
+           or multiple columns (fields).
+	* FOREIGN KEY - Prevents actions that would destroy links between tables
+            A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+            The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+	* CHECK - Ensures that the values in a column satisfies a specific condition
+            The CHECK constraint is used to limit the value range that can be placed in a column.
+	    If you define a CHECK constraint on a column it will allow only certain values for this column.
+	* DEFAULT - Sets a default value for a column if no value is specified. The default value will be added to all new records, if no other value is specified.
+	   CREATE TABLE Orders (
+    		OrderID int PRIMARY KEY AUTO_INCREMENT,
+    		OrderNumber int NOT NULL UNIQUE,
+    		PersonID int, 
+                Count int,
+                OrderDate date DEFAULT GETDATE(),
+                CHECK (Count>=1)
+	 	FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+	   );
+* Aggregate Functions:
+   * Aggregate function is used to perform calculations on multiple values and return the result in a single value like the average of all values, the sum of all values, 
+     and maximum & minimum value among certain groups of values. We mostly use the aggregate functions with SELECT statements 
+   * Most common aggregate functions are:
+	* count() - The COUNT() function returns the number of rows that matches a specified criterion.
+          Syntax: SELECT COUNT(column_name) FROM table_name WHERE condition;		
+         eg: SELECT COUNT(ProductID) FROM Products; select count(distinct customer_id) from bookings; // to get unique customers
+		* NULL values are not counted.
+		* We can use * instead of column name to count number of rows in the table eg: SELECT COUNT(*) FROM products;
+	* sum() - The SUM() function returns the total sum of a numeric column. 
+	  Syntax: SELECT SUM(column_name) FROM table_name WHERE condition;
+	  eg: SELECT SUM(Quantity) FROM OrderDetails;
+	     	* NULL values are not counted.
+		* Unlinke count() we cannot use sum(*), we need to specify column name
+	* avg() - The AVG() function returns the average value of a numeric column. 
+	  Syntax: SELECT AVG(column_name) FROM table_name WHERE condition;
+	  eg: SELECT AVG(Price) FROM Products;
+		* NULL values are not counted.
+	* max() - The MAX() function returns the largest value of the selected column.
+	  Syntax: SELECT MAX(column_name) FROM table_name WHERE condition;
+	  eg: SELECT MAX(Price) FROM Products;
+	* min() - The MIN() function returns the smallest value of the selected column.
+	  Syntax: SELECT MIN(column_name) FROM table_name WHERE condition;
+	  eg: SELECT MIN(Price) FROM Products;
+    * Group By:
+	* The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+	* The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+	  Syntax: SELECT column_name(s) FROM table_name WHERE condition GROUP BY column_name(s) ORDER BY column_name(s);
+	  eg: SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country ORDER BY COUNT(CustomerID) DESC;
+	* We can have more than one column in group by. It is split into sub groups
+	  eg: select screening_id, customer_id, count(customer_id) from bookings group by customer_id, screening_id;
+	* Any column that we use select table that is not aggregate function must appear in group by clause.
+    * Having: 
+	* The HAVING clause was added to SQL because the WHERE keyword cannot be used with group by.
+	Syntax: SELECT column_name(s) FROM table_name WHERE condition GROUP BY column_name(s) HAVING condition ORDER BY column_name(s);
+        eg: SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country HAVING COUNT(CustomerID) > 5;
+* SubQuery:
+    * A MySQL subquery is a query nested within another query such as SELECT, INSERT, UPDATE or DELETE. In addition, a subquery can be nested inside another subquery.
+    * A MySQL subquery is called an inner query while the query that contains the subquery is called an outer query. A subquery can be used anywhere that expression
+      is used and must be closed in parentheses.
+    * There are two types of sub-queries.
+	* non-correlated sub-queries
+	    * In this type of sub-query, the inner query is run first and can be run independently. It is not dependent on the outer query
+	    * You can use comparison operators e.g., =, >, < to compare a single value returned by the subquery with the expression in the WHERE clause.
+	    eg: SELECT customerNumber, checkNumber,  amount FROM payments
+		WHERE amount = (SELECT MAX(amount) FROM payments);
+	    * If a subquery returns more than one value, you can use other operators such as IN or NOT IN operator in the WHERE clause.
+	    eg: SELECT lastName, firstName FROM employees 
+		WHERE officeCode IN (SELECT officeCode FROM offices WHERE country = 'USA');
+	    * In this example: The subquery returns all office codes of the offices located in the USA. The outer query selects the last name and first name of employees who work in 
+              the offices
+	    * We can also use sub-query after FROM clause.
+	    * When you use a subquery in the FROM clause, the result set returned from a subquery is used as a temporary table. This table is referred to as a derived table
+             or materialized subquery.
+	    eg: SELECT MAX(items), MIN(items) FROM (SELECT orderNumber, COUNT(orderNumber) AS items FROM orderdetails GROUP BY orderNumber) AS lineitems;
+	* correlated sub-queries
+	    * Unlike a standalone subquery, a correlated subquery is a subquery that uses the data from the outer query. In other words, a correlated subquery depends on the outer query.
+	    * A correlated subquery is evaluated once for each row in the outer query.
+	    eg: SELECT productname, buyprice FROM products p1
+		WHERE buyprice > (SELECT AVG(buyprice) FROM products WHERE productline = p1.productline)
+* Functions:
+    * MySQL has many built-in functions.
+    * Some commonly used string functions are:
+	* CONCAT() - Add several strings together
+          eg: SELECT CONCAT("SQL ", "Tutorial ", "is ", "fun!") AS ConcatenatedString;
+              SELECT CONCAT(first_name, " " , last_name) as full_name from customers;
+	* SUBSTRING() -  Extract a substring from a string (start at position 5, extract 3 characters):
+	  eg: SELECT SUBSTRING("SQL Tutorial", 5, 3) AS ExtractString;
+	* LOWER() - Convert the text to lower-case:
+	  eg: SELECT LOWER("SQL Tutorial is FUN!");
+	* UPPER()- Convert the text to upper-case:
+	  eg: SELECT UPPER("SQL Tutorial is FUN!");
+    * Some common Date and Time functions:
+	* DATE() -  Extract the date part:
+	  eg: SELECT DATE("2017-06-15 09:34:21");   will return 2017-06-15
+	* MONTH() - Return the month part of a date:
+	  eg: SELECT MONTH("2017-06-15"); return 6
+          eg: SELECT * from screenings where MONTH(start_time) = '10'; // returns all screenings in october
+	* YEAR() - Return the year part of a date:
+	  eg: SELECT YEAR("2017-06-15"); return 2017
